@@ -1,0 +1,73 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~']
+- clean: ['~/.config/']
+
+- pacman:
+  - ack
+  - docker
+  - docker-compose
+  - htop
+  - mpv
+  - neovim
+  - neovim
+  - networkmanager-openvpn
+  - openvpn
+  - python-neovim
+  - python-pip
+  - python2-neovim
+  - rofi
+  - sshfs
+  - termite
+  - tmux
+  - xclip
+  - zsh
+  - zsh
+
+- pacaur:
+  - google-chrome
+  - upwork
+  - toptracker
+
+
+
+- link:
+    ~/.yaourtrc: .yaourtrc
+    ~/.gitconfig: .gitconfig
+    ~/.tmux.conf: .tmux.conf
+
+    # ZSH
+    ~/.scripts: .scripts
+    ~/.zshrc: .zshrc
+    ~/.inputrc: .inputrc
+
+    ~/.oh-my-zsh:
+      path: .oh-my-zsh
+
+    ~/.config/base16-shell:
+      path: .config/base16-shell
+
+    # JS
+    ~/.tern-config: .tern-config
+
+    # VIM
+    ~/.vim: .config/nvim/
+    ~/.vimrc: .config/nvim/init.vim
+    ~/.config/nvim:
+      path: .config/nvim
+      force: true
+
+
+    # XFCE
+    ~/.config/xfce4/xfconf:
+      path: .config/xfce4/xfconf
+
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - nvim +PlugInstall +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall
+  - touch ~/.secure
+  - source ~/.zshrc && base16_ocean

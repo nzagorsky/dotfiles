@@ -1,0 +1,44 @@
+#!/usr/bin/bash
+# Script to install dependencies for environment.
+
+# Install dependencies.
+printf 'Installing system dependencies...\n'
+sudo pacman -S \
+    ack \
+    docker \
+    docker-compose \
+    htop \
+    neovim \
+    networkmanager-openvpn \
+    openvpn \
+    python-neovim \
+    python-pip \
+    python2-neovim \
+    rofi \
+    tmux \
+    sshfs \
+    termite \
+    xclip \
+    zsh \
+    --needed
+printf '\n\n'
+
+printf 'Installing python dependencies...\n'
+sudo pip install vulture rope ropevim flake8 autopep8 -U
+printf '\n\n'
+
+
+printf '\n\nInstalling tmux plugin manager...\n'
+TPM_FOLDER=~/.tmux/plugins/tpm
+TPM_GIT=https://github.com/tmux-plugins/tpm
+if [ ! -d $TPM_FOLDER ]
+then
+    git clone $TPM_GIT $TPM_FOLDER
+else
+    cd $TPM_FOLDER
+    git pull $TPM_GIT
+fi
+printf '\n\n'
+
+
+echo 'Done!'

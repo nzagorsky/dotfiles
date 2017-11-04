@@ -1,0 +1,8 @@
+.config/nvim/plugged
+.config/nvim/sessions
+.config/nvim/undo
+
+.directory
+backup/
+
+.netrwhist

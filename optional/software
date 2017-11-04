@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+sudo pacman -S redis-desktop-manager mpv --needed
+
+# yaourt -S valentina-studio --needed
+yaourt -S google-chrome --needed
+yaourt -S upwork --needed
+yaourt -S toptracker --needed

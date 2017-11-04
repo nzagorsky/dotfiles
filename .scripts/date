@@ -1,0 +1,11 @@
+#!/bin/python
+import subprocess
+import os
+
+if os.environ.get('BLOCK_BUTTON'):
+    os.system('gnome-calendar')
+
+CURRENT_DATE = subprocess.Popen(
+    "echo `date +'%d %b %H:%M'`", shell=True).communicate()[0]
+
+print(CURRENT_DATE)
