@@ -3,8 +3,9 @@
       create: true
       relink: true
 
-- clean: ['~']
-- clean: ['~/.config/']
+- clean: 
+  - '~'
+  - '~/.config/'
 
 - pacman:
   - ack
@@ -13,7 +14,6 @@
   - htop
   - mpv
   - neovim
-  - neovim
   - networkmanager-openvpn
   - openvpn
   - python-neovim
@@ -21,23 +21,18 @@
   - python2-neovim
   - rofi
   - sshfs
-  - termite
   - tmux
   - xclip
   - zsh
-  - zsh
-
-- pacaur:
-  - google-chrome
-  - upwork
-  - toptracker
-
 
 
 - link:
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
     ~/.tmux.conf: .tmux.conf
+
+    ~/.tmux/plugins/tpm:
+      path: .tmux/plugins/tpm
 
     # ZSH
     ~/.scripts: .scripts
@@ -71,6 +66,5 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - nvim +PlugInstall +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall
   - touch ~/.secure
-  - source ~/.zshrc && base16_ocean
+  - nvim +PlugInstall +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall

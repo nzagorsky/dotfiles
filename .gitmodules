@@ -4,3 +4,6 @@
 [submodule "dotbot-pacaur"]
 	path = dotbot-pacaur
 	url = https://github.com/ajlende/dotbot-pacaur
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
