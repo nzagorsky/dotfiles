@@ -65,6 +65,9 @@
     ~/.config/xfce4/xfconf:
       path: .config/xfce4/xfconf
 
+    ~/.config/xfce4/terminal:
+      path: .config/xfce4/terminal
+
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
