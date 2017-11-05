@@ -7,11 +7,11 @@ export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 
 # Languages setup.
-export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
-export PATH="$PATH:$HOME/.nimble/bin"  # NIM
 export GOPATH="$HOME/.go/packages"  # GO
-export PATH=$PATH:$GOPATH/bin  # GO
 export PATH="$PATH:$HOME/.cargo/bin"  # RUST
+export PATH="$PATH:$HOME/.nimble/bin"  # NIM
+export PATH=$PATH:$GOPATH/bin  # GO
+export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
 
 
 ################################################################################
