@@ -22,7 +22,7 @@ let g:jedi#use_tabs_not_buffers = 0  " current default is 1.
 
 
 "" Neomake setup
-let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'vulture']
+let g:neomake_python_enabled_makers = ['flake8', 'vulture']
 let g:neomake_python_flake8_maker = { 'args': ['--ignore=E115,E266,E501'], } " E501 is line length of 80 characters
 let g:neomake_python_pep8_maker = { 'args': ['--ignore=E115,E266,E501'], }
 
