@@ -4,7 +4,7 @@
 # Basic utility.
 export BROWSER=/usr/bin/google-chrome-stable
 export EDITOR=/usr/bin/nvim
-export ZSH=~/.oh-my-zsh
+export HISTFILE=~/.zsh_history
 
 # Languages setup.
 export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
@@ -30,24 +30,49 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 antigen use oh-my-zsh
 
 antigen bundle gitfast
+antigen bundle git-extras
 antigen bundle pip
 antigen bundle python
 antigen bundle docker
 antigen bundle vi-mode
-antigen bundle web-search
+antigen bundle compleat
 
 antigen bundle z
 antigen bundle command-not-found
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
 
 # Pure prompt
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
 
+# Autsuggest
+antigen bundle zsh-users/zsh-history-substring-search
+
 # Execute
 antigen apply
+
+################################################################################
+# Plugins configuration
+################################################################################
+# Substring autocompletion with arrow keys.
+bindkey -e 
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+  function zle-line-init() {
+    echoti smkx
+  }
+  function zle-line-finish() {
+    echoti rmkx
+  }
+  zle -N zle-line-init
+  zle -N zle-line-finish
+fi
 
 
 #########################################
