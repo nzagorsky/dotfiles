@@ -38,7 +38,6 @@
     ~/.zsh/antigen: .zsh/antigen  # Plugin manager.
     ~/.zshrc: .zshrc
     ~/.config/base16-shell: .config/base16-shell  # Themes
-    ~/.oh-my-zsh: .oh-my-zsh
     ~/.scripts: .scripts
     ~/.inputrc: .inputrc
 
