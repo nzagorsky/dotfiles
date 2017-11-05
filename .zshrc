@@ -29,16 +29,14 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 ################################################################################
 antigen use oh-my-zsh
 
-antigen bundle gitfast
+antigen bundle command-not-found
+antigen bundle compleat
+antigen bundle docker
 antigen bundle git-extras
+antigen bundle gitfast
 antigen bundle pip
 antigen bundle python
-antigen bundle docker
-antigen bundle vi-mode
-antigen bundle compleat
-
 antigen bundle z
-antigen bundle command-not-found
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
