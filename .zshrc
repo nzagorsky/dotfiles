@@ -18,14 +18,36 @@ export PATH="$PATH:$HOME/.cargo/bin"  # RUST
 # Source
 ################################################################################
 source ~/.secure 
+source ~/.zsh/antigen/antigen.zsh
 
-plugins=(git python z)
-ZSH_THEME="pure"
-
-source $ZSH/oh-my-zsh.sh
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+################################################################################
+# Plugins
+################################################################################
+antigen use oh-my-zsh
+
+antigen bundle gitfast
+antigen bundle pip
+antigen bundle python
+antigen bundle docker
+antigen bundle vi-mode
+antigen bundle web-search
+
+antigen bundle z
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Pure prompt
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
+
+# Execute
+antigen apply
 
 
 #########################################

@@ -30,21 +30,17 @@
   - [git submodule update --init --recursive, Installing submodules]
 
 - link:
-    ~/.yaourtrc: .yaourtrc
-    ~/.gitconfig: .gitconfig
+    # Tmux
+    ~/.tmux/plugins/tpm: .tmux/plugins/tpm
     ~/.tmux.conf: .tmux.conf
 
-    ~/.tmux/plugins/tpm:
-      path: .tmux/plugins/tpm
-
     # ZSH
-    ~/.scripts: .scripts
+    ~/.zsh/antigen: .zsh/antigen  # Plugin manager.
     ~/.zshrc: .zshrc
+    ~/.config/base16-shell: .config/base16-shell  # Themes
+    ~/.oh-my-zsh: .oh-my-zsh
+    ~/.scripts: .scripts
     ~/.inputrc: .inputrc
-    ~/.oh-my-zsh:
-      path: .oh-my-zsh
-    ~/.config/base16-shell:
-      path: .config/base16-shell
 
     # JS
     ~/.tern-config: .tern-config
@@ -52,17 +48,14 @@
     # VIM
     ~/.vim: .config/nvim/
     ~/.vimrc: .config/nvim/init.vim
-    ~/.config/nvim:
-      path: .config/nvim
-      force: true
-
+    ~/.config/nvim: .config/nvim
 
     # XFCE
-    ~/.config/xfce4/xfconf:
-      path: .config/xfce4/xfconf
+    ~/.config/xfce4/xfconf: .config/xfce4/xfconf
+    ~/.config/xfce4/terminal: .config/xfce4/terminal
 
-    ~/.config/xfce4/terminal:
-      path: .config/xfce4/terminal
+    ~/.yaourtrc: .yaourtrc
+    ~/.gitconfig: .gitconfig
 
 
 - shell:
