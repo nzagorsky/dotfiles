@@ -89,3 +89,5 @@
         tool = vimdiff3
 [mergetool "vimdiff3"]
         cmd = nvim -f -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+[http "https://gopkg.in"]
+	followRedirects = true

@@ -22,6 +22,8 @@ set undodir=~/.vim/undo
 " Move Backup Files to ~/.vim/sessions
 set backupdir=~/.vim/sessions
 set dir=~/.vim/sessions
+:silent call system('mkdir -p ' . &undodir)
+:silent call system('mkdir -p ' . &dir)
 
 set noswapfile
 
@@ -51,7 +53,24 @@ endif
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 
+"-------------------------------------------------------------------------------
+" Good practicies
+"-------------------------------------------------------------------------------
 
+" Disable arrow keys in normal, visual and operation-pending modes
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+" Disable arrow keys in insert mode
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+
+" Force usage of <jj>
+inoremap <Esc> <Nop>
 
 " ------------------------------------------------------------------------------
 " Plugins
@@ -60,19 +79,17 @@ call plug#begin('~/.vim/plugged')
 
 " Utility.
 Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdcommenter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/nerdcommenter'
 
 " Colors.
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
-Plug 'fneu/breezy'
 
 " Files navigation.
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/denite.nvim'
-
 
 " Code search.
 Plug 'mileszs/ack.vim'
@@ -82,9 +99,7 @@ Plug 'neomake/neomake'
 
 " Auto complete.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript.jsx', 'do': 'sudo npm install -g tern' }
 Plug 'raimondi/delimitmate'
 
 " Routine automation.
@@ -104,11 +119,13 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Python modules.
 Plug 'nvie/vim-flake8', { 'for': 'python' }
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'python-rope/ropevim', { 'for': 'python' }
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
 " JS
-Plug 'jelera/vim-javascript-syntax'
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript.jsx '}
 
 "Nim
 Plug 'baabelfish/nvim-nim', { 'for': 'nim' }
@@ -121,7 +138,6 @@ Plug 'zchee/deoplete-go', {'do': ['make', 'go get -u github.com/nsf/gocode'], 'f
 Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'}
 
 " Vim
-"
 Plug 'Shougo/neco-vim', {'for': 'vim'}
 
 call plug#end()
@@ -140,6 +156,9 @@ nnoremap <leader>A :AckFromSearch<CR>
 
 " Thank you vi
 nnoremap Y y$
+
+" Exit insert mode by pressing <jj>
+inoremap jj <Esc>
 
 " pretty much essential: by default in terminal mode, you have
 " to press ctrl-\-n to get into normal mode ain't nobody got time for that.
@@ -181,12 +200,17 @@ nnoremap <silent> <S-t> :tab split<CR>
 
 
 "" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/"<CR>
+noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/"<CR><CR>
 
 
 "" Buffer nav
 noremap <leader>z :bp<CR>
 noremap <leader>x :bn<CR>
+
+" <Enter> in normal mode will disable highlighting of current search.
+" Note: it will not clear the search, so using <n> will jump to the next
+" occurance and enable search highlighting back
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 " ------------------------------------------------------------------------------
 " Plugins setup.
@@ -194,7 +218,6 @@ noremap <leader>x :bn<CR>
 
 "" Airline
 let g:airline_theme='tomorrow'
-" let g:airline_theme='breezy'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_section_z=''

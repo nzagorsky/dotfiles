@@ -1,12 +1,12 @@
-################################################################################
+#------------------------
 # Variables
-################################################################################
+#------------------------
 # Basic utility.
 export BROWSER=/usr/bin/google-chrome-stable
 export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 
-# Languages setup.
+# Languages
 export GOPATH="$HOME/.go/packages"  # GO
 export PATH="$PATH:$HOME/.cargo/bin"  # RUST
 export PATH="$PATH:$HOME/.nimble/bin"  # NIM
@@ -14,19 +14,18 @@ export PATH=$PATH:$GOPATH/bin  # GO
 export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
 
 
-################################################################################
+#------------------------
 # Source
-################################################################################
-source ~/.secure 
+#------------------------
+source ~/.secure
 source ~/.zsh/antigen/antigen.zsh
-
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-################################################################################
+#------------------------
 # Plugins
-################################################################################
+#------------------------
 antigen use oh-my-zsh
 
 antigen bundle command-not-found
@@ -52,30 +51,31 @@ antigen bundle zsh-users/zsh-history-substring-search
 # Execute
 antigen apply
 
-################################################################################
-# Plugins configuration
-################################################################################
-# Substring autocompletion with arrow keys.
-bindkey -e 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+#------------------------
+# Key bindings
+#------------------------
+bindkey -v
 
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-  function zle-line-init() {
-    echoti smkx
-  }
-  function zle-line-finish() {
-    echoti rmkx
-  }
-  zle -N zle-line-init
-  zle -N zle-line-finish
-fi
+# <jj> to exit Insert mode
+bindkey -M viins "jj" vi-cmd-mode
 
+# Search through history (see 'Completion' section)
+# using <j> and <k> in Normal mode or <^P> and <^N> in Insert mode
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
 
-#########################################
+bindkey -M viins "^P" up-line-or-beginning-search
+bindkey -M viins "^N" down-line-or-beginning-search
+
+# Do not display modes for previously accepted lines
+setopt transient_rprompt
+
+# Ignore command duplicates.
+setopt histignoredups
+
+#------------------------
 # Aliases
-#########################################
+#------------------------
 alias cp="cp -i"                          # confirm before overwriting something
 alias cya='systemctl suspend'
 alias df='df -h'                          # human-readable sizes
@@ -93,9 +93,9 @@ alias upac='sudo pacman -Syu'
 alias v='nvim'
 
 
-################################################################################
+#------------------------
 # Scripts
-################################################################################
+#------------------------
 # ex - archive extractor. usage: ex <file>
 ex ()
 {
@@ -126,7 +126,7 @@ function dutop { du --one-file-system --max-depth=2 -h * | sort -hr | head -20; 
 # Tmux
 t () {
     if [ -z "$1" ]
-        then tmux attach -t default || tmux new -s default 
+        then tmux attach -t default || tmux new -s default
         else tmux attach -t $1 || tmux new -s $1
-    fi 
+    fi
 }
