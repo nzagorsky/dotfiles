@@ -1,8 +1,6 @@
 dotfiles
 ========
 
-Zsh, Neovim, Tmux, XFCE4, Base16, Docker, Git
-
 Installation:
 
 ```
