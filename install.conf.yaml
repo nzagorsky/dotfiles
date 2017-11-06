@@ -2,6 +2,7 @@
     link:
       create: true
       relink: true
+      force: true
 
 - clean: 
   - '~'
@@ -45,6 +46,7 @@
 - shell:
   - mkdir -p ~/.vim/sessions ~/.vim/undo
   - touch ~/.secure
+  - [chmod -R 700 ~/.ssh, Ensuring SSH keys are safe]
   - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
   - [~/.tmux/plugins/tpm/bin/install_plugins, Tmux plugin installation]
   - [sudo pip3 install -r optional/requirements.txt -U, Python dependencies]
