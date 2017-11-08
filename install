@@ -20,7 +20,7 @@ if hash pacman 2>/dev/null; then
     sudo pacman -S archlinux-keyring python3 --needed --noconfirm
     sudo pacman -Syy
     "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
-    -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot-pacaur" "${@}"
+    -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot-pacman" "${@}"
 
 
 # Arch based installation.

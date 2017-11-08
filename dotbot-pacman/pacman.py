@@ -11,11 +11,11 @@ class PkgStatus(Enum):
     NOT_SURE = 'Could not determine'
 
 
-class Pacaur(dotbot.Plugin):
-    _directives = ['pacman', 'pacaur']
+class Pacman(dotbot.Plugin):
+    _directives = ['pacman']
 
     def __init__(self, context):
-        super(Pacaur, self).__init__(self)
+        super(Pacman, self).__init__(self)
         self._context = context
         self._strings = {}
         self._strings[PkgStatus.UP_TO_DATE] = 'nothing to do'
@@ -29,9 +29,9 @@ class Pacaur(dotbot.Plugin):
 
     def handle(self, directive, data):
         if not self.can_handle(directive):
-            raise ValueError('Pacaur cannot handle directive %s' % directive)
-        if not self._bootstrap_pacaur():
-            raise Exception('Pacaur could not be installed on your system')
+            raise ValueError('Pacman cannot handle directive %s' % directive)
+        if not self._bootstrap_pacman():
+            raise Exception('Pacman could not be installed on your system')
         return self._process_packages(directive, data)
 
     def _process_packages(self, directive, packages):
@@ -87,5 +87,5 @@ class Pacaur(dotbot.Plugin):
         self._log.warn('Could not determine what happened with package {}'.format(pkg))
         return PkgStatus.NOT_SURE
 
-    def _bootstrap_pacaur(self):
+    def _bootstrap_pacman(self):
         return True
