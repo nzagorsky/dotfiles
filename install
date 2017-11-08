@@ -12,7 +12,7 @@ cd "${BASEDIR}"
 git submodule update --init --recursive
 
 
-# APT path
+# Debian based installation.
 if hash pacman 2>/dev/null; then
     echo "Found pacman"
     PACKAGES_CONFIG=packages.pacman.yaml
@@ -23,7 +23,7 @@ if hash pacman 2>/dev/null; then
     -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot-pacaur" "${@}"
 
 
-# Pacman path
+# Arch based installation.
 elif hash apt-get 2>/dev/null; then
     echo "Found apt"
     PACKAGES_CONFIG=packages.apt.yaml
