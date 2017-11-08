@@ -21,13 +21,14 @@
       <property name="mode" type="uint" value="0"/>
       <property name="autohide-behavior" type="uint" value="1"/>
       <property name="background-style" type="uint" value="1"/>
-      <property name="background-alpha" type="uint" value="61"/>
+      <property name="background-alpha" type="uint" value="80"/>
       <property name="background-color" type="array">
-        <value type="uint" value="12156"/>
-        <value type="uint" value="12156"/>
-        <value type="uint" value="12156"/>
+        <value type="uint" value="11565"/>
+        <value type="uint" value="11565"/>
+        <value type="uint" value="11565"/>
         <value type="uint" value="65535"/>
       </property>
+      <property name="enter-opacity" type="uint" value="100"/>
     </property>
   </property>
   <property name="plugins" type="empty">
