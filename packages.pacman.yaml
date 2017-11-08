@@ -1,0 +1,3 @@
+- pacman:
+  - ack docker docker-compose htop mpv neovim networkmanager-openvpn openvpn \
+    python-pip rofi sshfs tmux xclip zsh

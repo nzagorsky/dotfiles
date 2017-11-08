@@ -1,0 +1,12 @@
+- aptget:
+  - ack-grep
+  - docker
+  - docker-compose
+  - htop
+  - python3-pip
+  - tmux
+  - zsh
+
+- aptget:
+    nvim:
+      ppa_source: ppa:neovim-ppa/unstable
