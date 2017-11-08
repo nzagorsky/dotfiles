@@ -1,3 +1,7 @@
+- script:
+  - [[ `whoami` == "root" ]] && apt update && apt install sudo
+  - apt install python3-apt
+
 - aptget:
   - ack-grep
   - docker
