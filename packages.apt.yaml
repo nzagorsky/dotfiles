@@ -1,6 +1,7 @@
-- script:
-  - [[ `whoami` == "root" ]] && apt update && apt install sudo
-  - apt install python3-apt
+- shell:
+  - sudo add-apt-repository ppa:neovim-ppa/stable
+  - sudo apt update
+  - sudo apt install neovim
 
 - aptget:
   - ack-grep
@@ -10,7 +11,4 @@
   - python3-pip
   - tmux
   - zsh
-
-- aptget:
-    nvim:
-      ppa_source: ppa:neovim-ppa/unstable
+  - software-properties-common
