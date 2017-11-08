@@ -58,9 +58,7 @@ class Pacaur(dotbot.Plugin):
 
     def _install(self, pkg):
         # Make sure we are sudo so we don't have any problems
-        subprocess.call('sudo --validate', shell=True)
-
-        cmd = 'pacman --needed --noconfirm -S {}'.format(pkg)
+        cmd = 'sudo pacman --needed --noconfirm -S {}'.format(pkg)
 
         self._log.info('Installing {}'.format(pkg))
 
