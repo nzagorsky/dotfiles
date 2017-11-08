@@ -1,5 +1,9 @@
-import sys, os, subprocess, dotbot, time
+import subprocess
+import sys
+
 from enum import Enum
+
+import dotbot
 
 
 class PkgStatus(Enum):
@@ -45,7 +49,8 @@ class Pacman(dotbot.Plugin):
                 self._log.error('Could not install package {}'.format(pkg))
 
         if all([result in successful for result in results.keys()]):
-            self._log.info('All {} packages installed successfully'.format(directive))
+            self._log.info(
+                'All {} packages installed successfully'.format(directive))
             success = True
         else:
             success = False
@@ -84,7 +89,8 @@ class Pacman(dotbot.Plugin):
             if out.find(self._strings[status]) >= 0:
                 return status
 
-        self._log.warn('Could not determine what happened with package {}'.format(pkg))
+        self._log.warn(
+            'Could not determine what happened with package {}'.format(pkg))
         return PkgStatus.NOT_SURE
 
     def _bootstrap_pacman(self):
