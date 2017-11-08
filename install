@@ -9,8 +9,31 @@ DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${BASEDIR}"
-git submodule update --init --recursive "${DOTBOT_DIR}"
+git submodule update --init --recursive
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" \
-  --plugin-dir "${BASEDIR}/dotbot-pacaur" \
-  "${@}"
+
+# APT path
+if hash pacman 2>/dev/null; then
+    echo "Found pacman"
+    PACKAGES_CONFIG=packages.pacman.yaml
+    sudo pacman -S archlinux-keyring
+    sudo pacman -Syy
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
+    -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot-pacaur" "${@}"
+
+
+# Pacman path
+elif hash apt 2>/dev/null; then
+    echo "Found apt"
+    PACKAGES_CONFIG=packages.apt.yaml
+    sudo apt update
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
+    -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot_plugin_aptget" "${@}"
+
+else
+    echo "Warning! Didn't found packet manager, install dependencies manually."
+fi
+
+
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
+-c "${CONFIG}" "${@}"

@@ -8,10 +8,6 @@
   - '~'
   - '~/.config/'
 
-- pacman:
-  - ack docker docker-compose htop mpv neovim networkmanager-openvpn openvpn \
-    python-pip rofi sshfs tmux xclip zsh
-
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
 
