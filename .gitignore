@@ -3,8 +3,11 @@
 .config/nvim/undo
 
 .directory
-backup/
 
 .netrwhist
 
+# Python 
 .ropeproject
+
+# XFCE pointers config
+pointers.xml
