@@ -34,6 +34,8 @@
     # XFCE
     ~/.config/xfce4/xfconf: .config/xfce4/xfconf
     ~/.config/xfce4/terminal: .config/xfce4/terminal
+    ~/.config/compton.conf: .config/compton.conf
+    ~/.xinitrc: .xinitrc
 
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
