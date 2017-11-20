@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rofi -show drun \
+rofi -show run \
 -bw 0 \
 -color-active "#273238, #80cbc4, #273238, #394249, #80cbc4" \
 -color-normal "#273238, #c1c1c1, #273238, #394249, #ffffff" \
