@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Download wallpaper
+wget https://unsplash.it/2560/1080/\?random\&7049 -O ~/.config/wallpaper.jpg
+
+# Set wallpaper
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set ~/.config/wallpaper.jpg
