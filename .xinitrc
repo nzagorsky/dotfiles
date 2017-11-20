@@ -69,8 +69,6 @@ get_session(){
 
 exec $(get_session)
 
-compton -b
-
 
 # twm &
 # xclock -geometry 50x50-1+1 &
