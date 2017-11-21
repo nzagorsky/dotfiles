@@ -39,6 +39,10 @@
     ~/.gitconfig: .gitconfig
     ~/.config/compton.conf: .config/compton.conf
 
+    ~/.xprofile: .xprofile
+    ~/.xbinkeysrc: .xbinkeysrc
+
+
 
 - shell:
   - mkdir -p ~/.vim/sessions ~/.vim/undo
