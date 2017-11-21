@@ -17,9 +17,12 @@ git submodule update --init --recursive
 if hash pacman 2>/dev/null; then
     echo "Found pacman"
     PACKAGES_CONFIG=packages.pacman.yaml
-    [[ `whoami` == "root" ]] && pacman -S sudo --noconfirm
-    sudo pacman -S archlinux-keyring python3 --needed --noconfirm
-    sudo pacman -Syy
+
+    [[ `whoami` == "root" ]] \
+        && pacman -S sudo --noconfirm
+        sudo pacman -S archlinux-keyring python3 --needed --noconfirm
+        sudo pacman -Syy
+
     "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
     -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot-pacman" "${@}"
 
@@ -28,8 +31,10 @@ if hash pacman 2>/dev/null; then
 elif hash apt-get 2>/dev/null; then
     echo "Found apt"
     PACKAGES_CONFIG=packages.apt.yaml
+
     [[ `whoami` == "root" ]] \
-        && apt-get update && apt-get install -y sudo python3-apt \
+        && apt-get update \
+        && apt-get install -y sudo python3-apt \
         || sudo apt-get update && sudo apt-get install -y python3-apt
 
     "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
