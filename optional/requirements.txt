@@ -6,3 +6,6 @@ autopep8
 pep8
 neovim
 trollius
+
+# AWS CLI.
+saws
