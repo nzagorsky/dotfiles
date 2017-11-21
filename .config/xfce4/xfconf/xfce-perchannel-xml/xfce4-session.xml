@@ -37,4 +37,7 @@
       </property>
     </property>
   </property>
+  <property name="shutdown" type="empty">
+    <property name="LockScreen" type="bool" value="false"/>
+  </property>
 </channel>
