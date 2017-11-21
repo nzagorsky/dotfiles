@@ -16,6 +16,11 @@ if len(sys.argv) < 2:
 DIRECTION = sys.argv[1].strip().lower()
 
 
+def _diff(a, b):
+    response = (a - b) / ((a + b) / 2) * 100
+    return response or 1
+
+
 def get_current_screen():
     screens = os.popen('wmctrl -d').read()
     current_screen = None
@@ -55,71 +60,169 @@ def activate_window(window_id):
 def get_windows_on_current_desktop():
     current_screen = get_current_screen()
     current_window = get_current_window(return_name=True)
-    windows = filter(lambda x: x and x['desktop']
-                     == current_screen, get_windows())
+    windows = filter(lambda x: x and x['desktop'] == current_screen, get_windows())
     return list(windows), current_window
 
 
 def _switch_left(window, window_list):
-    x = window['x']
+    """
+    To inverse you have to use > in matching windows and reverse in closest_match
+    """
+    x, y = window['x'], window['y']
     window_to_select = None
-    for item in sorted(window_list, key=lambda x: x['x'], reverse=True):
-        if item['x'] < x:
-            window_to_select = item
-            break
 
-    if window_to_select is None:
-        print('Nothing on the left, using right')
-        window_list.sort(key=lambda x: x['x'])
+    window_list = list(sorted(window_list, key=lambda z: z['x'], reverse=True))
+    matching_windows = list(
+        filter(
+            lambda z: z['x'] <= x and window['id'] != z['id'],
+            window_list
+        )
+    )
+
+    if not matching_windows:
+        print('Nothing on the right, using left')
+        window_list.sort(key=lambda z: z['x'])
         window_to_select = window_list[-1]
+
+    elif len(matching_windows) == 1:
+        # Select only match.
+        print('Found only one match')
+        window_to_select = matching_windows[0]
+
+    else:
+        # Looking for closest windows
+        print('Getting closest match on Y')
+
+        # Should have max diff for X and min diff for Y to ensure moving in a row.
+        # Give additional weight to X to ensure moving in this coordinates.
+        closest_match = sorted(
+            matching_windows,
+            key=lambda z: (_diff(z['x'], x) * 100000) / _diff(z['y'], y),
+        )
+        for match in closest_match:
+            print(match)
+        print(window, x, y)
+        window_to_select = list(closest_match)[0]
 
     activate_window(window_to_select['id'])
 
 
 def _switch_right(window, window_list):
-    x = window['x']
+    x, y = window['x'], window['y']
     window_to_select = None
-    for item in sorted(window_list, key=lambda x: x['x']):
-        if item['x'] > x:
-            window_to_select = item
-            break
 
-    if window_to_select is None:
+    window_list = list(sorted(window_list, key=lambda z: z['x'], reverse=True))
+    matching_windows = list(
+        filter(
+            lambda z: z['x'] >= x and window['id'] != z['id'],
+            window_list
+        )
+    )
+
+    if not matching_windows:
         print('Nothing on the right, using left')
-        window_list.sort(key=lambda x: x['x'])
+        window_list.sort(key=lambda z: z['x'])
         window_to_select = window_list[0]
+
+    elif len(matching_windows) == 1:
+        # Select only match.
+        print('Found only one match')
+        window_to_select = matching_windows[0]
+
+    else:
+        # Looking for closest windows
+        print('Getting closest match on Y')
+
+        # Should have max diff for X and min diff for Y to ensure moving in a row.
+        # Give additional weight to X to ensure moving in this coordinates.
+        closest_match = sorted(
+            matching_windows,
+            key=lambda z: (_diff(z['x'], x) * 100000) / _diff(z['y'], y),
+        )
+        for match in closest_match:
+            print(match)
+        print(window, x, y)
+        window_to_select = list(closest_match)[0]
 
     activate_window(window_to_select['id'])
 
 
 def _switch_down(window, window_list):
-    y = window['y']
+    x, y = window['x'], window['y']
     window_to_select = None
-    for item in sorted(window_list, key=lambda x: x['y']):
-        if item['y'] > y:
-            window_to_select = item
-            break
 
-    if window_to_select is None:
-        print('Nothing on the down, using top')
-        window_list.sort(key=lambda x: x['y'])
+    window_list = list(sorted(window_list, key=lambda z: z['x'], reverse=True))
+    matching_windows = list(
+        filter(
+            lambda z: z['y'] >= y and window['id'] != z['id'],
+            window_list
+        )
+    )
+
+    if not matching_windows:
+        print('Nothing on the right, using left')
+        window_list.sort(key=lambda z: z['y'])
         window_to_select = window_list[0]
+
+    elif len(matching_windows) == 1:
+        # Select only match.
+        print('Found only one match')
+        window_to_select = matching_windows[0]
+
+    else:
+        # Looking for closest windows
+        print('Getting closest match on Y')
+
+        # Should have max diff for X and min diff for Y to ensure moving in a row.
+        # Give additional weight to X to ensure moving in this coordinates.
+        closest_match = sorted(
+            matching_windows,
+            key=lambda z: (_diff(z['y'], y) * 100000) / _diff(z['x'], x),
+        )
+        for match in closest_match:
+            print(match)
+        print(window, x, y)
+        window_to_select = list(closest_match)[0]
 
     activate_window(window_to_select['id'])
 
 
 def _switch_up(window, window_list):
-    y = window['y']
+    x, y = window['x'], window['y']
     window_to_select = None
-    for item in sorted(window_list, key=lambda x: x['y'], reverse=True):
-        if item['y'] < y:
-            window_to_select = item
-            break
 
-    if window_to_select is None:
-        print('Nothing on the down, using top')
-        window_list.sort(key=lambda x: x['y'])
-        window_to_select = window_list[-1]
+    window_list = list(sorted(window_list, key=lambda z: z['x'], reverse=True))
+    matching_windows = list(
+        filter(
+            lambda z: z['y'] <= y and window['id'] != z['id'],
+            window_list
+        )
+    )
+
+    if not matching_windows:
+        print('Nothing on the right, using left')
+        window_list.sort(key=lambda z: z['y'])
+        window_to_select = window_list[0]
+
+    elif len(matching_windows) == 1:
+        # Select only match.
+        print('Found only one match')
+        window_to_select = matching_windows[0]
+
+    else:
+        # Looking for closest windows
+        print('Getting closest match on Y')
+
+        # Should have max diff for X and min diff for Y to ensure moving in a row.
+        # Give additional weight to X to ensure moving in this coordinates.
+        closest_match = sorted(
+            matching_windows,
+            key=lambda z: (_diff(z['y'], y) * 100000) / _diff(z['x'], x),
+        )
+        for match in closest_match:
+            print(match)
+        print(window, x, y)
+        window_to_select = list(closest_match)[0]
 
     activate_window(window_to_select['id'])
 
