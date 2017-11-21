@@ -1,2 +1,21 @@
 - pacman:
-  - ack docker docker-compose htop mpv neovim networkmanager-openvpn openvpn python-pip rofi sshfs tmux xclip zsh iotop glances compton
+  - ack 
+  - compton
+  - docker
+  - docker-compose
+  - glances
+  - htop
+  - iotop
+  - mpv
+  - neovim
+  - networkmanager-openvpn
+  - openvpn
+  - python-pip
+  - rofi
+  - sshfs
+  - tmux
+  - wmctrl
+  - xclip
+  - xdotool
+  - zsh
+

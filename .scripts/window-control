@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+XFCE_CURRENT_DESKTOP=`wmctrl -d | grep \* | cut -c1-1`
+
+watch -n 0.2 "wmctrl -lG | grep $XFCE_CURRENT_DESKTOP"
