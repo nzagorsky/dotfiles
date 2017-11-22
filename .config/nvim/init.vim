@@ -89,7 +89,7 @@ Plug 'chriskempson/base16-vim'
 " Files navigation.
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/denite.nvim'
+Plug 'junegunn/fzf.vim'
 
 " Code search.
 Plug 'mileszs/ack.vim'

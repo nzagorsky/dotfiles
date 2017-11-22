@@ -3,6 +3,7 @@
   - compton
   - docker
   - docker-compose
+  - fzf
   - glances
   - htop
   - iotop
@@ -18,4 +19,3 @@
   - xclip
   - xdotool
   - zsh
-
