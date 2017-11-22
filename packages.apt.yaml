@@ -1,12 +1,12 @@
 - aptget:
-  - ack-grep
   - docker
   - docker-compose
   - htop
   - python3-pip
+  - silversearcher-ag
+  - software-properties-common
   - tmux
   - zsh
-  - software-properties-common
 
 - shell:
   - sudo add-apt-repository ppa:neovim-ppa/stable -y 

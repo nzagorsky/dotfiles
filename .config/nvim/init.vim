@@ -88,11 +88,8 @@ Plug 'chriskempson/base16-vim'
 
 " Files navigation.
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-
-" Code search.
-Plug 'mileszs/ack.vim'
 
 " Code check.
 Plug 'neomake/neomake'
@@ -151,8 +148,9 @@ let mapleader = "\<Space>"
 
 nnoremap <C-e> :NERDTreeToggle<CR>
 noremap <F3> :Autoformat<CR>
-nnoremap <leader>a :Ack<Space>
-nnoremap <leader>A :AckFromSearch<CR>
+
+" FZF keybindings.
+nnoremap <leader>a :Ag<Space>
 
 " Thank you vi
 nnoremap Y y$
@@ -264,21 +262,6 @@ noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
-
-"" Ctrlp
-let g:ctrlp_working_path_mode = 0
-" Speed up ctrlp in git projects.
-let g:ctrlp_use_caching = 0
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
-endif
 
 "" Neomake
 autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operations

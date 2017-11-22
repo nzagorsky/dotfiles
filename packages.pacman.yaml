@@ -1,6 +1,6 @@
 - pacman:
-  - ack 
   - compton
+  - ctags
   - docker
   - docker-compose
   - fzf
@@ -14,6 +14,7 @@
   - python-pip
   - rofi
   - sshfs
+  - the_silver_searcher
   - tmux
   - wmctrl
   - xclip
