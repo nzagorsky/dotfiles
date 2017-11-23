@@ -50,6 +50,7 @@
         <value type="string" value="vlc"/>
         <value type="string" value="redshift-gtk"/>
         <value type="string" value="google-chrome"/>
+        <value type="string" value="gtk-recordmydesktop"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="msm notifier"/>
         <value type="string" value="steam"/>

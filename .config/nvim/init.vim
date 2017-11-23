@@ -57,21 +57,8 @@ nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 " Good practicies
 "-------------------------------------------------------------------------------
 
-" Disable arrow keys in normal, visual and operation-pending modes
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-" Disable arrow keys in insert mode
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-
 " Force usage of <jj>
 inoremap <Esc> <Nop>
-
 " ------------------------------------------------------------------------------
 " Plugins
 " ------------------------------------------------------------------------------
@@ -137,6 +124,9 @@ Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'}
 " Vim
 Plug 'Shougo/neco-vim', {'for': 'vim'}
 
+" Relative numbers when it makes sense
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+
 call plug#end()
 
 
@@ -151,6 +141,11 @@ noremap <F3> :Autoformat<CR>
 
 " FZF keybindings.
 nnoremap <leader>a :Ag<Space>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>c :Commands<CR>
+nnoremap <leader>l :BLines<CR>
+nnoremap <leader>h :Helptags<CR>
+nnoremap <C-p> :Files<CR>
 
 " Thank you vi
 nnoremap Y y$
@@ -168,8 +163,6 @@ nnoremap <Leader>w :w<CR>
 " Quit window on <leader>q
 nnoremap <leader>q :q<CR>
 
-" Quit buffer
-nnoremap <leader>c :bd<CR>
 nmap <Leader><Leader> V
 map q: :q
 
@@ -191,19 +184,15 @@ nnoremap <Up> gk
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
-
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
 
 "" Tabs
 nnoremap <silent> <S-t> :tab split<CR>
 
-
 "" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/"<CR><CR>
 
-
-"" Buffer nav
-noremap <leader>z :bp<CR>
-noremap <leader>x :bn<CR>
 
 " <Enter> in normal mode will disable highlighting of current search.
 " Note: it will not clear the search, so using <n> will jump to the next
@@ -216,30 +205,24 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 "" Airline
 let g:airline_theme='tomorrow'
-let g:airline_left_sep=''
+let g:airline_left_alt_sep = ''
+let g:airline_left_sep = ''
+let g:airline_right_alt_sep = ''
 let g:airline_right_sep=''
-let g:airline_section_z=''
-let g:airline_section_y='' 
 let g:airline_section_warning=''  
+let g:airline_section_y='' 
+let g:airline_section_z=''
 
-
-"
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
+let g:airline_symbols.branch = 'br:'
+let g:airline_symbols.readonly = 'RO:'
+let g:airline_symbols.linenr = 'LN:' 
 
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 
-" powerline symbols
-let g:airline_left_sep = '' "
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = '' "
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '' "
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
 
 "" Deoplete
@@ -250,9 +233,6 @@ let g:deoplete#auto_completion_start_length = 0
 "" Gitgutter
 let g:gitgutter_realtime = 1
 
-"" Nerdtree
-let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
-set updatetime=250  " to update git gutter more frequently
 
 "" Fugitive git.
 noremap <Leader>gc :Gcommit<CR>
@@ -263,6 +243,7 @@ noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
 
+
 "" Neomake
 autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operations
 
@@ -270,6 +251,9 @@ autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operati
 "" Supertab
 " let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
+
+" Vim number toggle
+set number relativenumber
 
 
 " ------------------------------------------------------------------------------
@@ -335,6 +319,9 @@ set foldmethod=indent
 set foldlevel=99
 set noerrorbells " No annoying errors
 set novisualbell
+
+
+set updatetime=250  
 
 
 if exists('$SHELL')
