@@ -74,9 +74,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
 
 " Files navigation.
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-dirvish'
+
+" Distration-free mode
+Plug 'junegunn/goyo.vim'
 
 " Code check.
 Plug 'neomake/neomake'
@@ -136,7 +139,6 @@ call plug#end()
 
 let mapleader = "\<Space>"
 
-nnoremap <C-e> :NERDTreeToggle<CR>
 noremap <F3> :Autoformat<CR>
 
 " FZF keybindings.
@@ -213,16 +215,17 @@ let g:airline_section_warning=''
 let g:airline_section_y='' 
 let g:airline_section_z=''
 
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
 let g:airline_symbols.branch = 'br:'
-let g:airline_symbols.readonly = 'RO:'
-let g:airline_symbols.linenr = 'LN:' 
+let g:airline_symbols.readonly = 'RO'
+let g:airline_symbols.linenr = 'LN' 
 
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
 
 
 "" Deoplete
@@ -255,7 +258,8 @@ autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operati
 " Vim number toggle
 set number relativenumber
 
-
+"" Dirvish
+nnoremap <C-e> :Dirvish<CR>
 " ------------------------------------------------------------------------------
 " Editor setup
 " ------------------------------------------------------------------------------
