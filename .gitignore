@@ -11,3 +11,9 @@
 
 # XFCE pointers config
 pointers.xml
+
+# Ctags
+tags
+
+# Various cache
+*_cache
