@@ -65,21 +65,15 @@ inoremap <Esc> <Nop>
 call plug#begin('~/.vim/plugged')
 
 " Utility.
-Plug 'vim-airline/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'scrooloose/nerdcommenter'
 
 " Colors.
-Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
 
 " Files navigation.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
-
-" Distration-free mode
-Plug 'junegunn/goyo.vim'
 
 " Code check.
 Plug 'neomake/neomake'
@@ -104,6 +98,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'  " Syntax highlightning for all languages.
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
+" Relative numbers when it makes sense
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+
 " Python modules.
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
@@ -127,8 +124,6 @@ Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'}
 " Vim
 Plug 'Shougo/neco-vim', {'for': 'vim'}
 
-" Relative numbers when it makes sense
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 call plug#end()
 
@@ -142,12 +137,13 @@ let mapleader = "\<Space>"
 noremap <F3> :Autoformat<CR>
 
 " FZF keybindings.
+nnoremap <C-p> :Files<CR>
 nnoremap <leader>a :Ag<Space>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
-nnoremap <leader>l :BLines<CR>
+nnoremap <leader>t :Tags<CR>
 nnoremap <leader>h :Helptags<CR>
-nnoremap <C-p> :Files<CR>
+nnoremap <leader>l :BLines<CR>
 
 " Thank you vi
 nnoremap Y y$
@@ -205,32 +201,10 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 " Plugins setup.
 " ------------------------------------------------------------------------------
 
-"" Airline
-let g:airline_theme='tomorrow'
-let g:airline_left_alt_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_right_sep=''
-let g:airline_section_warning=''  
-let g:airline_section_y='' 
-let g:airline_section_z=''
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-let g:airline_symbols.branch = 'br:'
-let g:airline_symbols.readonly = 'RO'
-let g:airline_symbols.linenr = 'LN' 
-
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-
-
-
 "" Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 0
+
 
 
 "" Gitgutter
@@ -260,6 +234,8 @@ set number relativenumber
 
 "" Dirvish
 nnoremap <C-e> :Dirvish<CR>
+let g:dirvish_mode = ':sort ,^.*[\/],'
+
 " ------------------------------------------------------------------------------
 " Editor setup
 " ------------------------------------------------------------------------------
