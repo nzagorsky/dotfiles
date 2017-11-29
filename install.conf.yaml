@@ -31,6 +31,9 @@
     ~/.vimrc: .config/nvim/init.vim
     ~/.config/nvim: .config/nvim
 
+    # Emacs
+    ~/.spacemacs: .spacemacs
+
     # XFCE
     ~/.config/xfce4/xfconf: .config/xfce4/xfconf
     ~/.config/xfce4/terminal: .config/xfce4/terminal

@@ -90,7 +90,9 @@ alias p='ipython'
 alias rm='rm -I'
 alias spac='pacman -Ss'
 alias upac='sudo pacman -Syu'
-alias v='nvim'
+
+alias e='xterm exec emacsclient -nw -c'
+alias v='xterm exec emacsclient -nw -c'
 
 
 #------------------------

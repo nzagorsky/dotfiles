@@ -52,6 +52,7 @@
         <value type="string" value="google-chrome"/>
         <value type="string" value="gtk-recordmydesktop"/>
         <value type="string" value="networkmanager applet"/>
+        <value type="string" value="quicksynergy"/>
         <value type="string" value="msm notifier"/>
         <value type="string" value="steam"/>
         <value type="string" value="odesk team"/>
@@ -63,7 +64,7 @@
         <value type="string" value="clipman"/>
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="skypeforlinux"/>
-        <value type="string" value="tusk-app"/>
+        <value type="string" value="synergy"/>
         <value type="string" value="pa-applet"/>
         <value type="string" value="transmission"/>
         <value type="string" value="not tracking"/>
