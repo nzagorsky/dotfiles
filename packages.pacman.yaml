@@ -1,5 +1,4 @@
 - pacman:
-  - adobe-source-code-pro-fonts 
   - ctags
   - docker
   - docker-compose
