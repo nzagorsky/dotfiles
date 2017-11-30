@@ -132,7 +132,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+                         base16-chalk)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -264,7 +264,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -316,14 +316,10 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
     ;; Vim migration.
-    (setq-default evil-escape-key-sequence "jj")
+    (setq-default evil-escape-key-sequence "jk")
     (setq-default evil-escape-delay 0.2)
 
-    (spacemacs/load-theme 'monokai)
-
-    ;; Colors fix
-    (custom-set-faces
-     '(term ((t (:inherit default)))))
+    (spacemacs/load-theme 'zenburn)
 
   )
 
@@ -334,9 +330,11 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(custom-safe-themes
    (quote
-    ("9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "ffe80c88e3129b2cddadaaf78263a7f896d833a77c96349052ad5b7753c0c5a5" "77a46326228485699b378a8537f9bc5d6b0d087566ac179bec752fab322d814a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "78c1c89192e172436dbf892bd90562bc89e2cc3811b5f9506226e735a953a9c6" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" default)))
+    ("2a739405edf418b8581dcd176aaf695d319f99e3488224a3c495cb0f9fd814e3" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "ffe80c88e3129b2cddadaaf78263a7f896d833a77c96349052ad5b7753c0c5a5" "77a46326228485699b378a8537f9bc5d6b0d087566ac179bec752fab322d814a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "78c1c89192e172436dbf892bd90562bc89e2cc3811b5f9506226e735a953a9c6" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" default)))
  '(evil-escape-mode t)
  '(evil-want-Y-yank-to-eol nil)
  '(linum-format " %5i ")

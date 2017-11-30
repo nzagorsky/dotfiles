@@ -57,7 +57,7 @@ antigen apply
 bindkey -v
 
 # <jj> to exit Insert mode
-bindkey -M viins "jj" vi-cmd-mode
+bindkey -M viins "jk" vi-cmd-mode
 
 # Search through history (see 'Completion' section)
 # using <j> and <k> in Normal mode or <^P> and <^N> in Insert mode
@@ -90,9 +90,7 @@ alias p='ipython'
 alias rm='rm -I'
 alias spac='pacman -Ss'
 alias upac='sudo pacman -Syu'
-
-alias e='xterm exec emacsclient -nw -c'
-alias v='xterm exec emacsclient -nw -c'
+alias v='nvim'
 
 
 #------------------------
