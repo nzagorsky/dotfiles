@@ -319,7 +319,7 @@ you should place your code here."
     (setq-default evil-escape-key-sequence "jk")
     (setq-default evil-escape-delay 0.2)
 
-    (spacemacs/load-theme 'zenburn)
+    (spacemacs/load-theme 'base16-chalk)
 
   )
 
