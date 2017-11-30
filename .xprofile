@@ -18,7 +18,3 @@ compton -b
 
 # Launch bind manager
 xbindkeys
-
-
-# Emacs daemon
-emacs -nw --daemon
