@@ -57,7 +57,7 @@ nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 " Good practicies
 "-------------------------------------------------------------------------------
 
-" Force usage of <jk>
+" Force usage of <jj>
 inoremap <Esc> <Nop>
 " ------------------------------------------------------------------------------
 " Plugins
@@ -148,8 +148,8 @@ nnoremap <leader>l :BLines<CR>
 " Thank you vi
 nnoremap Y y$
 
-" Exit insert mode by pressing <jk>
-inoremap jk <Esc>
+" Exit insert mode by pressing <jj>
+inoremap jj <Esc>
 
 " pretty much essential: by default in terminal mode, you have
 " to press ctrl-\-n to get into normal mode ain't nobody got time for that.

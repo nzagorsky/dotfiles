@@ -57,7 +57,7 @@ antigen apply
 bindkey -v
 
 # <jj> to exit Insert mode
-bindkey -M viins "jk" vi-cmd-mode
+bindkey -M viins "jj" vi-cmd-mode
 
 # Search through history (see 'Completion' section)
 # using <j> and <k> in Normal mode or <^P> and <^N> in Insert mode
