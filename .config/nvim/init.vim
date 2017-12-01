@@ -233,7 +233,7 @@ autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operati
 set number relativenumber
 
 "" Dirvish
-nnoremap <C-e> :Dirvish<CR>
+nnoremap <C-e> :Dirvish %<CR>
 let g:dirvish_mode = ':sort ,^.*[\/],'
 
 " ------------------------------------------------------------------------------
