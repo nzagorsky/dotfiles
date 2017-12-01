@@ -91,6 +91,7 @@ alias rm='rm -I'
 alias spac='pacman -Ss'
 alias upac='sudo pacman -Syu'
 alias v='nvim'
+alias e='emacs -nw'
 
 
 #------------------------
@@ -130,3 +131,6 @@ t () {
         else tmux attach -t $1 || tmux new -s $1
     fi
 }
+
+
+# Kukareku.
