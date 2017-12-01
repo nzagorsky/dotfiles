@@ -8,7 +8,7 @@
       <property name="position" type="string" value="p=6;x=0;y=0"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
-      <property name="size" type="uint" value="22"/>
+      <property name="size" type="uint" value="30"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="9"/>
         <value type="int" value="3"/>
@@ -20,15 +20,16 @@
       </property>
       <property name="mode" type="uint" value="0"/>
       <property name="autohide-behavior" type="uint" value="1"/>
-      <property name="background-style" type="uint" value="1"/>
-      <property name="background-alpha" type="uint" value="80"/>
+      <property name="background-style" type="uint" value="0"/>
+      <property name="background-alpha" type="uint" value="100"/>
       <property name="background-color" type="array">
         <value type="uint" value="11565"/>
         <value type="uint" value="11565"/>
         <value type="uint" value="11565"/>
         <value type="uint" value="65535"/>
       </property>
-      <property name="enter-opacity" type="uint" value="100"/>
+      <property name="enter-opacity" type="uint" value="75"/>
+      <property name="leave-opacity" type="uint" value="76"/>
     </property>
   </property>
   <property name="plugins" type="empty">

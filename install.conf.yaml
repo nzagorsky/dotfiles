@@ -32,7 +32,7 @@
     ~/.config/nvim: .config/nvim
 
     # Emacs
-    ~/.spacemacs: .spacemacs
+    ~/.emacs: .emacs
 
     # XFCE
     ~/.config/xfce4/xfconf: .config/xfce4/xfconf
