@@ -66,7 +66,6 @@
 
 ;; System setup
 (setq vc-follow-symlinks t)
-(setq debug-on-error  t)
 
 ;;----------------------------------------
 ;; Neotree
