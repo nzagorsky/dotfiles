@@ -4,6 +4,3 @@
 # But not these files...
 !init.el
 !.gitignore
-
-# ...even if they are in subdirectories
-!*/
