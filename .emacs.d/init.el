@@ -1,3 +1,7 @@
+;;; package --- Init file
+;;; Commentary:
+;;; Code:
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -10,7 +14,7 @@
  '(git-gutter:update-interval 0.2)
  '(package-selected-packages
    (quote
-    (zenburn-theme zenburn git-gutter magit flycheck elpy material-theme smex helm-descbinds neotree emacs-neotree helm-projectile helm-ag helm-config evil-escape base16-theme helm use-package markdown-mode evil-visual-mark-mode))))
+    (smooth-scroll zenburn-theme zenburn git-gutter magit flycheck elpy material-theme smex helm-descbinds neotree emacs-neotree helm-projectile helm-ag helm-config evil-escape base16-theme helm use-package markdown-mode evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -18,9 +22,9 @@
  ;; If there is more than one, they won't work right.
  )
 
-;;---------------------------------------- 
+;;----------------------------------------
 ;; Initial
-;;---------------------------------------- 
+;;----------------------------------------
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
@@ -33,13 +37,13 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Reload user configuration
 (defun reload-init-file ()
+  "Reload user configuration."
   (interactive)
   (load-file "~/.emacs.d/init.el"))
 
-;; Open user configuration
 (defun open-init-file ()
+  "Open user configuration."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
@@ -49,10 +53,9 @@
   :ensure t
   :config
     (load-theme 'zenburn t)
-
-    (toggle-scroll-bar -1) 
+    (toggle-scroll-bar -1)
     (tool-bar-mode -1)
-    (menu-bar-mode -1) 
+    (menu-bar-mode -1)
     (set-window-fringes nil 0 0)
     (set-face-attribute 'vertical-border
 			nil
@@ -63,14 +66,11 @@
 
 ;; System setup
 (setq vc-follow-symlinks t)
+(setq debug-on-error  t)
 
-;; Show line numbers
-(global-linum-mode 1)
-(setq linum-format "%4d  ")
-
-;;---------------------------------------- 
+;;----------------------------------------
 ;; Neotree
-;;---------------------------------------- 
+;;----------------------------------------
 (use-package neotree
   :ensure t
   :config
@@ -93,14 +93,14 @@
 	(define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
   )
 
-;;---------------------------------------- 
+;;----------------------------------------
 ;; Helm
-;;---------------------------------------- 
+;;----------------------------------------
 (use-package helm
   :ensure t
   :config
   (require 'helm-config)
-  (setq helm-split-window-in-side-p t)
+  (setq helm-split-window-inside-p t)
   (setq helm-autoresize-max-height 0)
   (setq helm-autoresize-min-height 40)
   (helm-mode 1)
@@ -119,9 +119,9 @@
   )
 
 
-;;---------------------------------------- 
+;;----------------------------------------
 ;; Smex
-;;---------------------------------------- 
+;;----------------------------------------
 (use-package smex
   :ensure t
   :config
@@ -130,19 +130,19 @@
   
     (smex-initialize))
 
-;;----------------------------------------  
+;;----------------------------------------
 ;; Projectile
-;;---------------------------------------- 
+;;----------------------------------------
 (use-package projectile
   :ensure t
   :defer t
   :config
-    (projectile-global-mode))
+    (projectile-mode))
 
 
-;;---------------------------------------- 
+;;----------------------------------------
 ;; Evil
-;;---------------------------------------- 
+;;----------------------------------------
 (use-package evil
   :ensure t
   :config
@@ -211,9 +211,9 @@
 
 
 
-;;---------------------------------------- 
+;;----------------------------------------
 ;; Python setup
-;;---------------------------------------- 
+;;----------------------------------------
 (use-package elpy
   :ensure t
   :config
@@ -221,19 +221,17 @@
     (elpy-enable))
 
 
-;;---------------------------------------- 
+;;----------------------------------------
 ;; Checkers setup
-;;---------------------------------------- 
+;;----------------------------------------
 (use-package flycheck
   :ensure t
-  :config
-    (when (require 'flycheck nil t)
-    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-    (add-hook 'elpy-mode-hook 'flycheck-mode)))
+  :init (global-flycheck-mode))
 
-;;---------------------------------------- 
+
+;;----------------------------------------
 ;; Git integration
-;;---------------------------------------- 
+;;----------------------------------------
 ;; TODO set key bindings to move between hunks
 ;; TODO set changed lines count in status bar
 (use-package magit
@@ -243,7 +241,6 @@
   :ensure t
   :config
     (global-git-gutter-mode +1)
-    (git-gutter:linum-setup)
 
     ;; Hide gitgutter in case of no updates
     (custom-set-variables
@@ -252,3 +249,8 @@
     ;; Set update interval
     (custom-set-variables
 	'(git-gutter:update-interval 0.2))
+)
+
+
+(provide 'init)
+;;; init.el ends here
