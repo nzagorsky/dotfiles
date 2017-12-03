@@ -45,6 +45,7 @@
 ;; Style config
 (use-package clues-theme
   :ensure t
+  :defer 0.1
   :init (setq inhibit-startup-message t) ;; hide the startup message
   :config
     (toggle-scroll-bar -1)
@@ -119,6 +120,7 @@
 (use-package counsel
 ;; Brings Swiper and Counsel
   :ensure t
+  :defer 0.1
   :config
     (evil-leader/set-key
 	"l" 'swiper
@@ -313,6 +315,16 @@
 	'(git-gutter:update-interval 0.2))
 )
 
+;;----------------------------------------
+;; Docker
+;;----------------------------------------
+(use-package dockerfile-mode
+  :mode (("Dockerfile\\'" . dockerfile-mode))
+  :ensure t)
+
+(use-package docker-compose-mode
+  :mode (("docker-compose\\'" . dockerfile-mode))
+  :ensure t)
 
 (provide 'init)
 ;;; init.el ends here
