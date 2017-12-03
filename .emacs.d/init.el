@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(setq gc-cons-threshold 100000000)
 ;;----------------------------------------
 ;; Initial
 ;;----------------------------------------
@@ -35,7 +36,7 @@
 ;; Style config
 (use-package zenburn-theme
   :ensure t
-  :config
+  :init
     (load-theme 'zenburn t)
     (toggle-scroll-bar -1)
     (tool-bar-mode -1)
@@ -47,6 +48,11 @@
     (setq inhibit-startup-message t) ;; hide the startup message
 
   )
+
+(use-package esup
+  :ensure t
+  :defer t)
+
 
 ;; System setup
 (setq vc-follow-symlinks t)
@@ -99,8 +105,8 @@
 (use-package counsel
 ;; Brings Swiper and Counsel
   :ensure t
-  :config
-
+  :defer t
+  :init
     (evil-leader/set-key
 	"l" 'swiper
 	"f" 'counsel-fzf
@@ -203,14 +209,15 @@
 ;;----------------------------------------
 (use-package anaconda-mode
   :ensure t
+  :defer t
+  :init (add-hook 'python-mode-hook 'anaconda-mode)
   :config
     (evil-leader/set-key-for-mode 'python-mode
 	"d" 'anaconda-mode-find-definitions
 	"n" 'anaconda-mode-find-references
 	"K" 'anaconda-mode-show-doc
 	)
-
-    (add-hook 'python-mode-hook 'anaconda-mode))
+    )
 
 
 ;;----------------------------------------
@@ -224,17 +231,19 @@
 ;;----------------------------------------
 ;; Autocomplete window (Company)
 ;;----------------------------------------
+;; TODO check why company doesn't load
 (use-package company
   :ensure t
   :config
-    (company-mode 1)
+    (global-company-mode 1)
 )
 
 (use-package company-anaconda
-:ensure t
-:config
-    (eval-after-load "company"
-      '(add-to-list 'company-backends 'company-anaconda))
+    :ensure t
+    :init (add-hook 'python-mode-hook 'company-anaconda)
+    :config
+	(eval-after-load "company"
+	'(add-to-list 'company-backends 'company-anaconda))
 )
 
 
@@ -244,7 +253,9 @@
 ;; TODO set key bindings to move between hunks
 ;; TODO set changed lines count in status bar
 (use-package evil-magit
-  :ensure t)
+  :ensure t
+  :defer 3
+  )
 
 (use-package git-gutter
   :ensure t
