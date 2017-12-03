@@ -11,10 +11,12 @@
    (quote
     ("16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "78c1c89192e172436dbf892bd90562bc89e2cc3811b5f9506226e735a953a9c6" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" default)))
  '(git-gutter:hide-gutter t)
+ '(git-gutter:lighter " GG")
+ '(git-gutter:modified-sign "~")
  '(git-gutter:update-interval 0.2)
  '(package-selected-packages
    (quote
-    (smooth-scroll zenburn-theme zenburn git-gutter magit flycheck elpy material-theme smex helm-descbinds neotree emacs-neotree helm-projectile helm-ag helm-config evil-escape base16-theme helm use-package markdown-mode evil-visual-mark-mode))))
+    (yaml-mode counsel company-anaconda company-mode anaconda-mode smooth-scroll zenburn-theme zenburn git-gutter magit flycheck elpy material-theme smex helm-descbinds neotree emacs-neotree helm-projectile helm-ag helm-config evil-escape base16-theme helm use-package markdown-mode evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -93,48 +95,40 @@
   )
 
 ;;----------------------------------------
-;; Helm
+;; Ivy
 ;;----------------------------------------
-(use-package helm
+(use-package ivy
   :ensure t
   :config
-  (require 'helm-config)
-  (setq helm-split-window-inside-p t)
-  (setq helm-autoresize-max-height 0)
-  (setq helm-autoresize-min-height 40)
-  (helm-mode 1)
-  (helm-autoresize-mode 1)
+    (ivy-mode 1)
 
-  (define-key global-map (kbd "C-p") #'helm-find)
-  (evil-leader/set-key
-    "a" 'helm-ag
-    "b" 'helm-buffers-list)
-  )
+    ;; Human fuzzy search
+    (setq ivy-re-builders-alist
+	'((ivy-switch-buffer . ivy--regex-plus)
+	    (t . ivy--regex-fuzzy)))
 
-(use-package helm-ag
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+)
+
+(use-package counsel
+;; Brings Swiper and Counsel
   :ensure t
   :config
-    (setq-default helm-ag-fuzzy-match 1)
-  )
 
-
-;;----------------------------------------
-;; Smex
-;;----------------------------------------
-(use-package smex
-  :ensure t
-  :config
     (evil-leader/set-key
-	"c" 'smex)
-  
-    (smex-initialize))
+	"l" 'swiper
+	"f" 'counsel-fzf
+	"c" 'counsel-M-x
+	"a" 'counsel-ag
+	"b" 'ivi-switch-buffer)
+)
 
 ;;----------------------------------------
 ;; Projectile
 ;;----------------------------------------
 (use-package projectile
   :ensure t
-  :defer t
   :config
     (projectile-mode))
 
@@ -204,7 +198,7 @@
     :config
     (global-evil-surround-mode))
 
-  ;; TODO
+  ;; TODO describe
   (use-package evil-indent-textobject
     :ensure t))
 
@@ -213,20 +207,40 @@
 ;;----------------------------------------
 ;; Python setup
 ;;----------------------------------------
-(use-package elpy
+(use-package anaconda-mode
   :ensure t
   :config
-    (elpy-use-ipython)
-    (elpy-enable))
+    (evil-leader/set-key-for-mode 'python-mode
+	"d" 'anaconda-mode-find-definition
+	"n" 'anaconda-mode-find-references
+	"K" 'anaconda-mode-show-doc
+	)
+
+    (add-hook 'python-mode-hook 'anaconda-mode))
 
 
 ;;----------------------------------------
-;; Checkers setup
+;; Checkers setup (Flycheck)
 ;;----------------------------------------
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
 
+;;----------------------------------------
+;; Autocomplete window (Company)
+;;----------------------------------------
+(use-package company
+  :ensure t
+  :config
+    (company-mode 1)
+)
+
+(use-package company-anaconda
+:ensure t
+:config
+    (eval-after-load "company"
+      '(add-to-list 'company-backends 'company-anaconda))
+)
 
 ;;----------------------------------------
 ;; Git integration
@@ -244,6 +258,13 @@
     ;; Hide gitgutter in case of no updates
     (custom-set-variables
 	'(git-gutter:hide-gutter t))
+    ;; Color setup
+    (custom-set-variables
+    '(git-gutter:modified-sign "~"))
+
+    ;; Define minor mode name
+    (custom-set-variables
+    '(git-gutter:lighter " GG"))
 
     ;; Set update interval
     (custom-set-variables
