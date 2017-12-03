@@ -2,23 +2,32 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq gc-cons-threshold 100000000)
+;; GC dirty hacks
+(setq gc-cons-threshold 50000000)
+(add-hook 'emacs-startup-hook 'my/set-gc-threshold)
+(defun my/set-gc-threshold ()
+  "Reset `gc-cons-threshold' to its default value."
+  (setq gc-cons-threshold 800000))
+
 ;;----------------------------------------
 ;; Initial
 ;;----------------------------------------
 ;; Set custom file in separate
 (setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
-(require 'package)
-(setq package-enable-at-startup nil)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
-
-(package-initialize)
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;; Bootstrap `use-package'
+(require 'package)
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")))
+
+(setq package-enable-at-startup nil)
+
+(package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -34,25 +43,30 @@
   (find-file "~/.emacs.d/init.el"))
 
 ;; Style config
-(use-package zenburn-theme
+(use-package clues-theme
   :ensure t
-  :init
-    (load-theme 'zenburn t)
+  :init (setq inhibit-startup-message t) ;; hide the startup message
+  :config
     (toggle-scroll-bar -1)
     (tool-bar-mode -1)
     (menu-bar-mode -1)
     (set-window-fringes nil 0 0)
     (set-face-attribute 'vertical-border
 			nil
-			:foreground "#282a2e")
-    (setq inhibit-startup-message t) ;; hide the startup message
+			:foreground "#282a2e"))
 
-  )
+(use-package auto-complete
+  :ensure t)
+
+(use-package auto-compile
+  :ensure t
+  :config
+    (auto-compile-on-load-mode)
+    (auto-compile-on-save-mode))
 
 (use-package esup
   :ensure t
   :defer t)
-
 
 ;; System setup
 (setq vc-follow-symlinks t)
@@ -105,15 +119,13 @@
 (use-package counsel
 ;; Brings Swiper and Counsel
   :ensure t
-  :defer t
-  :init
+  :config
     (evil-leader/set-key
 	"l" 'swiper
 	"f" 'counsel-fzf
 	"c" 'counsel-M-x
 	"a" 'counsel-ag
-	"b" 'ivi-switch-buffer)
-)
+	"b" 'ivi-switch-buffer))
 
 
 ;;----------------------------------------
@@ -131,76 +143,74 @@
 (use-package evil
   :ensure t
   :config
+    (evil-mode 1)
+    (define-key global-map (kbd "C-h") #'evil-window-left)
+    (define-key global-map (kbd "C-j") #'evil-window-down)
+    (define-key global-map (kbd "C-k") #'evil-window-up)
+    (define-key global-map (kbd "C-l") #'evil-window-right)
 
-  (define-key global-map (kbd "C-h") #'evil-window-left)
-  (define-key global-map (kbd "C-j") #'evil-window-down)
-  (define-key global-map (kbd "C-k") #'evil-window-up)
-  (define-key global-map (kbd "C-l") #'evil-window-right)
-
-  ;; Fix C-u
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
-  (define-key evil-insert-state-map (kbd "C-u")
-  (lambda ()
-      (interactive)
-      (evil-delete (point-at-bol) (point))))
+    ;; Fix C-u
+    (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+    (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+    (define-key evil-insert-state-map (kbd "C-u")
+    (lambda ()
+	(interactive)
+	(evil-delete (point-at-bol) (point))))
 
 
-  ;; Unbind key for neotree
-  (define-key evil-motion-state-map (kbd "C-e") nil)
+    ;; Unbind key for neotree
+    (define-key evil-motion-state-map (kbd "C-e") nil)
 
-  ;; Unbind key for neotree
-  (define-key evil-normal-state-map (kbd "C-p") nil)
+    ;; Unbind key for neotree
+    (define-key evil-normal-state-map (kbd "C-p") nil))
 
-  ;; Configure vim leader keys
-  (use-package evil-leader
+;; Configure vim leader keys
+(use-package evil-leader
     :ensure t
     :config
-    (evil-leader/set-key
-    "<SPC>" 'evil-visual-line
-    "b" 'switch-to-buffer
-    "e" 'find-file
-    "gev" 'open-init-file
-    "gsv" 'reload-init-file
-    "q" 'evil-quit
-    "w" 'save-buffer
+	(setq evil-leader/leader "<SPC>")
+	(global-evil-leader-mode))
+	(evil-leader/set-key
+	    "<SPC>" 'evil-visual-line
+	    "b" 'switch-to-buffer
+	    "e" 'find-file
+	    "gev" 'open-init-file
+	    "gsv" 'reload-init-file
+	    "q" 'evil-quit
+	    "w" 'save-buffer
     )
 
-    ;; TODO
-    ;; jnnoremap <leader>t :Tags<CR>
-    ;; jnnoremap <leader>h :Helptags<CR>
+;; TODO
+;; jnnoremap <leader>t :Tags<CR>
+;; jnnoremap <leader>h :Helptags<CR>
 
-    (setq evil-leader/leader "<SPC>")
-    (evil-mode 1)
-    (global-evil-leader-mode))
 
-  ;; Configure `jj`
-  (use-package evil-escape
+;; Configure `jj`
+(use-package evil-escape
     :ensure t
     :config
-    (evil-escape-mode)
-    (setq evil-escape-inhibit-functions '(evil-visual-state-p))
-    (setq-default evil-escape-key-sequence "jj")
-    (setq-default evil-escape-delay 0.3))
+	(evil-escape-mode)
+	(setq evil-escape-inhibit-functions '(evil-visual-state-p))
+	(setq-default evil-escape-key-sequence "jj")
+	(setq-default evil-escape-delay 0.3))
 
-  ;; Vim surround config
-  (use-package evil-surround
+;; Vim surround config
+(use-package evil-surround
     :ensure t
     :config
-    (global-evil-surround-mode))
+	(global-evil-surround-mode))
 
-  (use-package evil-indent-textobject
+(use-package evil-indent-textobject
     :ensure t)
 
-  (use-package vimish-fold
+(use-package vimish-fold
     :ensure t
     :config
-	(vimish-fold-global-mode 1)
-  ))
+	(vimish-fold-global-mode 1))
 
 
+;; Tmux navigation
 (use-package navigate
-  ;; Tmux navigation
   :ensure t)
 
 
@@ -211,6 +221,9 @@
   :ensure t
   :defer t
   :init (add-hook 'python-mode-hook 'anaconda-mode)
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+
   :config
     (evil-leader/set-key-for-mode 'python-mode
 	"d" 'anaconda-mode-find-definitions
@@ -218,6 +231,24 @@
 	"K" 'anaconda-mode-show-doc
 	)
     )
+
+
+(use-package company-anaconda
+    :ensure t
+    :mode ("\\.py\\'" . python-mode)
+    :interpreter ("python" . python-mode)
+    :init (add-hook 'python-mode-hook 'anaconda-mode))
+	  (eval-after-load "company"
+	    '(add-to-list 'company-backends 'company-anaconda))
+
+
+;;----------------------------------------
+;; Markdown
+;;----------------------------------------
+(use-package markdown-mode
+  :mode (("\\`README\\.md\\'" . gfm-mode)
+         ("\\.md\\'"          . markdown-mode)
+         ("\\.markdown\\'"    . markdown-mode)))
 
 
 ;;----------------------------------------
@@ -234,17 +265,21 @@
 ;; TODO check why company doesn't load
 (use-package company
   :ensure t
-  :config
-    (global-company-mode 1)
+  :bind (:map company-active-map
+	      ("C-p" . company-select-previous)
+	      ("C-n" . company-select-next))
+  :init
+    (add-hook 'after-init-hook 'global-company-mode)
+    (setq company-tooltip-limit 10
+          company-idle-delay 0.1
+	  company-echo-delay 0
+	  company-require-match nil
+	  company-selection-wrap-around t
+	  company-tooltip-align-annotations t
+	  company-tooltip-flip-when-above t
+          company-transformers '(company-sort-by-occurrence))
 )
 
-(use-package company-anaconda
-    :ensure t
-    :init (add-hook 'python-mode-hook 'company-anaconda)
-    :config
-	(eval-after-load "company"
-	'(add-to-list 'company-backends 'company-anaconda))
-)
 
 
 ;;----------------------------------------

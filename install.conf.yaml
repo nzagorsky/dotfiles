@@ -54,3 +54,4 @@
   - [sudo pip3 install -r optional/requirements.txt -U, Python dependencies]
   - [~/.tmux/plugins/tpm/bin/install_plugins, Tmux plugin installation]
   - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
+  - [emacs --batch --load ~/.emacs.d/init.el, Installing emacs files]
