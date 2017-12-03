@@ -19,11 +19,9 @@
 
 ;; Bootstrap `use-package'
 (require 'package)
-(setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ("melpa-stable" . "https://stable.melpa.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
 (setq package-enable-at-startup nil)
 
@@ -45,7 +43,6 @@
 ;; Style config
 (use-package clues-theme
   :ensure t
-  :defer 0.1
   :init (setq inhibit-startup-message t) ;; hide the startup message
   :config
     (toggle-scroll-bar -1)
@@ -55,15 +52,6 @@
     (set-face-attribute 'vertical-border
 			nil
 			:foreground "#282a2e"))
-
-(use-package auto-complete
-  :ensure t)
-
-(use-package auto-compile
-  :ensure t
-  :config
-    (auto-compile-on-load-mode)
-    (auto-compile-on-save-mode))
 
 (use-package esup
   :ensure t
@@ -221,7 +209,6 @@
 ;;----------------------------------------
 (use-package anaconda-mode
   :ensure t
-  :defer t
   :init (add-hook 'python-mode-hook 'anaconda-mode)
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
