@@ -9,6 +9,11 @@
   "Reset `gc-cons-threshold' to its default value."
   (setq gc-cons-threshold 800000))
 
+
+;; Disable auto-save and auto-backup
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+
 ;;----------------------------------------
 ;; Initial
 ;;----------------------------------------
@@ -60,13 +65,30 @@
 ;; System setup
 (setq vc-follow-symlinks t)
 
+;; Popup quick docs
+(use-package eldoc
+  :ensure t
+  :config
+    (global-eldoc-mode))
+
+;; TODO management
+(use-package org
+  :defer t
+  :ensure t)
+
+;; Parens autocompletion
+(use-package smartparens
+  :ensure t
+  :config
+    (smartparens-global-mode))
+
 
 ;;----------------------------------------
 ;; Neotree
 ;;----------------------------------------
 (use-package neotree
   :ensure t
-  :demand
+  :defer t
   :bind (("C-e" . neotree-toggle))
   :config
     ;; Release C-e for neotree
@@ -159,7 +181,11 @@
     (define-key evil-motion-state-map (kbd "C-e") nil)
 
     ;; Unbind key for neotree
-    (define-key evil-normal-state-map (kbd "C-p") nil))
+    (define-key evil-normal-state-map (kbd "C-p") nil)
+
+    ;; Replace with system clipboard
+    (fset 'evil-visual-update-x-selection 'ignore)
+    )
 
 ;; Configure vim leader keys
 (use-package evil-leader
@@ -197,18 +223,16 @@
     :config
 	(global-evil-surround-mode))
 
-(use-package evil-indent-textobject
-    :ensure t)
+(use-package evil-indent-textobject :ensure t)
 
 (use-package vimish-fold
     :ensure t
     :config
-	(vimish-fold-global-mode 1))
+	(vimish-fold-global-mode))
 
 
 ;; Tmux navigation
-(use-package navigate
-  :ensure t)
+(use-package navigate :ensure t)
 
 
 ;;----------------------------------------
@@ -221,13 +245,12 @@
   :interpreter ("python" . python-mode)
 
   :config
+    (anaconda-eldoc-mode)
     (evil-leader/set-key-for-mode 'python-mode
 	"d" 'anaconda-mode-find-definitions
 	"G" 'anaconda-mode-find-assignments
 	"n" 'anaconda-mode-find-references
-	"K" 'anaconda-mode-show-doc
-	)
-    )
+	"K" 'anaconda-mode-show-doc))
 
 
 (use-package company-anaconda
@@ -237,6 +260,20 @@
     :init (add-hook 'python-mode-hook 'anaconda-mode))
 	  (eval-after-load "company"
 	    '(add-to-list 'company-backends 'company-anaconda))
+
+;; TODO mode
+(use-package pip-requirements
+  :ensure t)
+
+(use-package py-isort
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :ensure t)
+
+(use-package yapfify
+  :ensure t
+  :defer t
+)
 
 
 ;;----------------------------------------
