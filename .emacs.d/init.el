@@ -2,59 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("2a739405edf418b8581dcd176aaf695d319f99e3488224a3c495cb0f9fd814e3" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "78c1c89192e172436dbf892bd90562bc89e2cc3811b5f9506226e735a953a9c6" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" default)))
- '(fci-rule-color "#383838")
- '(git-gutter:hide-gutter t)
- '(git-gutter:lighter " GG")
- '(git-gutter:modified-sign "~")
- '(git-gutter:update-interval 0.2)
- '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
- '(package-selected-packages
-   (quote
-    (origami navigate term+mux yaml-mode counsel company-anaconda company-mode anaconda-mode smooth-scroll zenburn-theme zenburn git-gutter magit flycheck elpy material-theme smex helm-descbinds neotree emacs-neotree helm-projectile helm-ag helm-config evil-escape base16-theme helm use-package markdown-mode evil-visual-mark-mode)))
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(vc-annotate-background "#2B2B2B")
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#BC8383")
-     (40 . "#CC9393")
-     (60 . "#DFAF8F")
-     (80 . "#D0BF8F")
-     (100 . "#E0CF9F")
-     (120 . "#F0DFAF")
-     (140 . "#5F7F5F")
-     (160 . "#7F9F7F")
-     (180 . "#8FB28F")
-     (200 . "#9FC59F")
-     (220 . "#AFD8AF")
-     (240 . "#BFEBBF")
-     (260 . "#93E0E3")
-     (280 . "#6CA0A3")
-     (300 . "#7CB8BB")
-     (320 . "#8CD0D3")
-     (340 . "#94BFF3")
-     (360 . "#DC8CC3"))))
- '(vc-annotate-very-old-color "#DC8CC3"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
 ;;----------------------------------------
 ;; Initial
 ;;----------------------------------------
+;; Set custom file in separate
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -214,9 +168,6 @@
     (evil-mode 1)
     (global-evil-leader-mode))
 
-    ;; Folding
-    (hs-minor-mode 1)
-
   ;; Configure `jj`
   (use-package evil-escape
     :ensure t
@@ -233,7 +184,14 @@
     (global-evil-surround-mode))
 
   (use-package evil-indent-textobject
-    :ensure t))
+    :ensure t)
+
+  (use-package vimish-fold
+    :ensure t
+    :config
+	(vimish-fold-global-mode 1)
+  ))
+
 
 (use-package navigate
   ;; Tmux navigation
@@ -279,12 +237,13 @@
       '(add-to-list 'company-backends 'company-anaconda))
 )
 
+
 ;;----------------------------------------
 ;; Git integration
 ;;----------------------------------------
 ;; TODO set key bindings to move between hunks
 ;; TODO set changed lines count in status bar
-(use-package magit
+(use-package evil-magit
   :ensure t)
 
 (use-package git-gutter
