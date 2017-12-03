@@ -108,7 +108,6 @@
 (use-package counsel
 ;; Brings Swiper and Counsel
   :ensure t
-  :defer 0.1
   :config
     (evil-leader/set-key
 	"l" 'swiper
