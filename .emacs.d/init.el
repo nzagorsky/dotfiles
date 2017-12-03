@@ -93,9 +93,7 @@
 ;;----------------------------------------
 (use-package ivy
   :ensure t
-  :config
-    (ivy-mode 1)
-
+  :init
     ;; Human fuzzy search
     (setq ivy-re-builders-alist
 	'((ivy-switch-buffer . ivy--regex-plus)
@@ -103,6 +101,10 @@
 
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
+
+  :config
+    (ivy-mode 1)
+
 )
 
 (use-package counsel
@@ -113,8 +115,14 @@
 	"l" 'swiper
 	"f" 'counsel-fzf
 	"c" 'counsel-M-x
-	"a" 'counsel-ag
+	"a" 'counsel-projectile-ag
 	"b" 'ivi-switch-buffer))
+
+(use-package counsel-projectile
+  :ensure t
+  :after counsel
+  :config
+    (counsel-projectile-on))
 
 
 ;;----------------------------------------
@@ -262,7 +270,6 @@
     (add-hook 'after-init-hook 'global-company-mode)
     (setq company-tooltip-limit 10
           company-idle-delay 0.1
-	  company-echo-delay 0
 	  company-require-match nil
 	  company-selection-wrap-around t
 	  company-tooltip-align-annotations t
