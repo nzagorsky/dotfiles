@@ -216,6 +216,7 @@
   :config
     (evil-leader/set-key-for-mode 'python-mode
 	"d" 'anaconda-mode-find-definitions
+	"G" 'anaconda-mode-find-assignments
 	"n" 'anaconda-mode-find-references
 	"K" 'anaconda-mode-show-doc
 	)
