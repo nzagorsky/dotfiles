@@ -101,6 +101,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Snippets
     call dein#add('SirVer/ultisnips')
+    call dein#add('honza/vim-snippets')
 
     " Python modules.
     call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
