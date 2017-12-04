@@ -153,6 +153,7 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>h :Helptags<CR>
+nnoremap <leader>s :Snippets<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>T :AsyncRun ctags -R .<CR> :echo "Tags generated"<CR>
 
