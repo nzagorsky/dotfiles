@@ -98,6 +98,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Snippets
     call dein#add('SirVer/ultisnips')
+    call dein#add('honza/vim-snippets')
 
     " Python modules.
     call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
@@ -150,6 +151,7 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>h :Helptags<CR>
+nnoremap <leader>s :Snippets<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>T :AsyncRun ctags -R .<CR> :echo "Tags generated"<CR>
 
