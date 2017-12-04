@@ -32,26 +32,10 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
-
-" Install Vim Plug.
-let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
-if !filereadable(vimplug_exists)
-  if !executable("curl")
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  echo "Installing Vim-Plug..."
-  echo ""
-  silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  let g:not_finish_vimplug = "yes"
-
-  autocmd VimEnter * PlugInstall
-endif
-
-
 " Quickly edit and source vimrc, udpating all buffers.
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
+nnoremap geft :Dirvish ~/.vim/ftplugin<CR>
 
 "-------------------------------------------------------------------------------
 " Good practicies
@@ -59,73 +43,99 @@ nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 
 " Force usage of <jj>
 inoremap <Esc> <Nop>
+
 " ------------------------------------------------------------------------------
 " Plugins
 " ------------------------------------------------------------------------------
-call plug#begin('~/.vim/plugged')
+" Setup dein
+if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
+    call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
+    call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
+endif
+set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
-" Utility.
-Plug 'christoomey/vim-tmux-navigator'
+" Setup plugins
+if dein#load_state(expand('~/.config/nvim'))
+    call dein#begin(expand('~/.config/nvim'))
 
-" Colors.
-Plug 'chriskempson/base16-vim'
+    " Manage dein
+    call dein#add('Shougo/dein.vim')
 
-" Files navigation.
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
+    " Utility.
+    call dein#add('christoomey/vim-tmux-navigator')
 
-" Code check.
-Plug 'neomake/neomake'
+    " Colors.
+    call dein#add('chriskempson/base16-vim')
 
-" Auto complete.
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript.jsx', 'do': 'sudo npm install -g tern' }
-Plug 'raimondi/delimitmate'
+    " Files navigation.
+    call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
+    call dein#add('junegunn/fzf.vim')
+    call dein#add('justinmk/vim-dirvish')
 
-" Routine automation.
-Plug 'Chiel92/vim-autoformat'
-Plug 'tpope/vim-surround'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
+    " Code check.
+    call dein#add('neomake/neomake')
 
-" Git integration.
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+    " Auto complete.
+    call dein#add('Shougo/deoplete.nvim', { 'build': ':UpdateRemotePlugins' })
+    call dein#add('raimondi/delimitmate')
 
-" Syntax.
-Plug 'sheerun/vim-polyglot'  " Syntax highlightning for all languages.
-Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+    " Routine automation.
+    call dein#add('Chiel92/vim-autoformat')
+    call dein#add('tpope/vim-surround')
+    call dein#add('ervandew/supertab')
+    call dein#add('tpope/vim-repeat')
+    call dein#add('tpope/vim-commentary')
 
-" Relative numbers when it makes sense
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
+    " Async command execution
+    call dein#add('skywind3000/asyncrun.vim')
 
-" Python modules.
-Plug 'nvie/vim-flake8', { 'for': 'python' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'python-rope/ropevim', { 'for': 'python' }
-Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+    " Git integration.
+    call dein#add('tpope/vim-fugitive')
+    call dein#add('airblade/vim-gitgutter')
 
-" JS
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript.jsx '}
+    " Syntax highlightning for all languages.
+    call dein#add('sheerun/vim-polyglot')
 
-"Nim
-Plug 'baabelfish/nvim-nim', { 'for': 'nim' }
+    " Relative numbers when it makes sense
+    call dein#add('jeffkreeftmeijer/vim-numbertoggle')
 
-" Go
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'zchee/deoplete-go', {'do': ['make', 'go get -u github.com/nsf/gocode'], 'for': 'go'}
+    " Snippets
+    call dein#add('SirVer/ultisnips')
 
-" Rust
-Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'}
+    " Python modules.
+    call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
+    call dein#add('zchee/deoplete-jedi', { 'on_ft': 'python' })
+    call dein#add('davidhalter/jedi-vim', { 'on_ft': 'python' })
+    call dein#add('python-rope/ropevim', { 'on_ft': 'python' })
+    call dein#add('raimon49/requirements.txt.vim', {'on_ft': 'requirements'})
+    call dein#add('Vimjas/vim-python-pep8-indent', { 'on_ft': 'python' })
 
-" Vim
-Plug 'Shougo/neco-vim', {'for': 'vim'}
+    " JS
+    call dein#add('elzr/vim-json', { 'on_ft': 'json' })
+    call dein#add('pangloss/vim-javascript', { 'on_ft': 'javascript.jsx' })
+    call dein#add('mxw/vim-jsx', { 'on_ft': 'javascript.jsx' })
 
+    "Nim
+    call dein#add('baabelfish/nvim-nim', { 'on_ft': 'nim' })
 
-call plug#end()
+    " Go
+    call dein#add('zchee/deoplete-go', {'build': ['make', 'go get -u github.com/nsf/gocode'], 'on_ft': 'go'})
+    call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
+
+    " Rust
+    call dein#add('sebastianmarkow/deoplete-rust', {'on_ft': 'rust'})
+
+    " Vim
+    call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+
+    if dein#check_install()
+      call dein#install()
+      let pluginsExist=1
+    endif
+
+    call dein#end()
+
+endif
 
 
 " ------------------------------------------------------------------------------
@@ -144,6 +154,7 @@ nnoremap <leader>c :Commands<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>h :Helptags<CR>
 nnoremap <leader>l :BLines<CR>
+nnoremap <leader>T :AsyncRun ctags -R .<CR> :echo "Tags generated"<CR>
 
 " Thank you vi
 nnoremap Y y$
