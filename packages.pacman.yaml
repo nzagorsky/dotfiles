@@ -21,6 +21,5 @@
   - zsh
 
 - shell:
-  - mkdir -p ~/.vim/sessions ~/.vim/undo
   - touch ~/.secure
   - pacaur -S compton-git --noconfirm --needed --silent --ignore
