@@ -96,9 +96,6 @@ if dein#load_state(expand('~/.config/nvim'))
     " Syntax highlightning for all languages.
     call dein#add('sheerun/vim-polyglot')
 
-    " Relative numbers when it makes sense
-    call dein#add('jeffkreeftmeijer/vim-numbertoggle')
-
     " Snippets
     call dein#add('SirVer/ultisnips')
 
@@ -161,10 +158,8 @@ nnoremap Y y$
 
 " Exit insert mode by pressing <jj>
 inoremap jj <Esc>
-
-" pretty much essential: by default in terminal mode, you have
-" to press ctrl-\-n to get into normal mode ain't nobody got time for that.
-tnoremap <Esc> <C-\><C-n>
+" Exit for term mode
+tnoremap jj <C-\><C-n>
 
 " Save on <leader>w
 nnoremap <Leader>w :w<CR>
@@ -216,6 +211,8 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 0
 
+"" FZF
+autocmd! FileType fzf tnoremap <buffer> jj <c-c>
 
 
 "" Gitgutter
@@ -240,11 +237,8 @@ autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operati
 " let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 
-" Vim number toggle
-set number relativenumber
-
 "" Dirvish
-nnoremap <C-e> :Dirvish %<CR>
+nnoremap <C-e> :Dirvish<CR>
 let g:dirvish_mode = ':sort ,^.*[\/],'
 
 " ------------------------------------------------------------------------------
@@ -281,7 +275,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " Make it obvious where 80 characters is
 set textwidth=80
 set colorcolumn=+1
-set number " Numbers
 
 set nostartofline " Don’t reset cursor to start of line when moving around.
 set showcmd " Show the (partial) command as it’s being typed

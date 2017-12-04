@@ -54,7 +54,7 @@ antigen apply
 #------------------------
 # Key bindings
 #------------------------
-bindkey -v
+bindkey -e
 
 # <jj> to exit Insert mode
 bindkey -M viins "jj" vi-cmd-mode
