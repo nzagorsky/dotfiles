@@ -13,6 +13,12 @@ export PATH="$PATH:$HOME/.nimble/bin"  # NIM
 export PATH=$PATH:$GOPATH/bin  # GO
 export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
 
+# added by Miniconda3 installer
+export PATH="/home/toltenos/.conda/bin:$PATH"
+
+export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+export LIBRARY_PATH=/opt/cuda/lib64:$LIBRARY_PATH
+export CPATH=/opt/cuda/include:$CPATH
 
 #------------------------
 # Source

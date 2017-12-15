@@ -18,6 +18,7 @@
   - wmctrl
   - xclip
   - xdotool
+  - xorg-xrandr  # For Java OpenGL
   - zsh
 
 - shell:
