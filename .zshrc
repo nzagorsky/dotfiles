@@ -98,6 +98,7 @@ alias spac='pacman -Ss'
 alias upac='sudo pacman -Syu'
 alias v='nvim'
 alias e='emacs -nw'
+alias ctop='docker run --rm -ti --name=ctop -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 
 
 #------------------------
