@@ -107,6 +107,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('python-rope/ropevim', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', {'on_ft': 'requirements'})
     call dein#add('Vimjas/vim-python-pep8-indent', { 'on_ft': 'python' })
+    call dein#add('mindriot101/vim-yapf', { 'on_ft': 'python' })
 
     " JS
     call dein#add('elzr/vim-json', { 'on_ft': 'json' })
@@ -125,6 +126,8 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+
+    call dein#add('mhinz/vim-startify')
 
     if dein#check_install()
       call dein#install()
@@ -204,6 +207,11 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/"<CR><CR>
 " Note: it will not clear the search, so using <n> will jump to the next
 " occurance and enable search highlighting back
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+" Sessions
+nnoremap <leader>ss :SSave!<CR>
+nnoremap <leader>sl :SLoad<CR>
+nnoremap <leader>sc :SClose<CR>
 
 " ------------------------------------------------------------------------------
 " Plugins setup.
