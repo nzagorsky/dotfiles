@@ -40,7 +40,6 @@
 
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
-    ~/.config/compton.conf: .config/compton.conf
 
     ~/.xprofile: .xprofile
     ~/.xbindkeysrc: .xbindkeysrc

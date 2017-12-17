@@ -23,4 +23,3 @@
 
 - shell:
   - touch ~/.secure
-  - pacaur -S compton-git --noconfirm --needed --silent --ignore

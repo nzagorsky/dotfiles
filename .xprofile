@@ -13,8 +13,5 @@
 [[ -f ~/.extend.xprofile ]] && . ~/.extend.xprofile
 
 
-# Launch compositor.
-compton -b
-
 # Launch bind manager
 xbindkeys
