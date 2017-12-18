@@ -127,7 +127,6 @@ if dein#load_state(expand('~/.config/nvim'))
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
 
-    call dein#add('mhinz/vim-startify')
 
     if dein#check_install()
       call dein#install()

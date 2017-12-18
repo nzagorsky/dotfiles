@@ -10,7 +10,8 @@ export HISTFILE=~/.zsh_history
 export GOPATH="$HOME/.go/packages"  # GO
 export PATH="$PATH:$HOME/.cargo/bin"  # RUST
 export PATH="$PATH:$HOME/.nimble/bin"  # NIM
-export PATH=$PATH:$GOPATH/bin  # GO
+export PATH="$PATH:$HOME/.scripts"  # NIM
+export PATH="$PATH:$GOPATH/bin"  # GO
 export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
 
 # added by Miniconda3 installer
