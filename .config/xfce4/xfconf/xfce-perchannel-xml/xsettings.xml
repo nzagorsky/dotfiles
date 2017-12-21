@@ -3,7 +3,7 @@
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
     <property name="ThemeName" type="string" value="Vertex-Maia-Dark"/>
-    <property name="IconThemeName" type="string" value="Vertex-Maia"/>
+    <property name="IconThemeName" type="string" value="Vibrancy-Dark-Graphite"/>
     <property name="DoubleClickTime" type="empty"/>
     <property name="DoubleClickDistance" type="empty"/>
     <property name="DndDragThreshold" type="empty"/>
@@ -31,7 +31,7 @@
     <property name="MenuImages" type="bool" value="true"/>
     <property name="ButtonImages" type="bool" value="true"/>
     <property name="MenuBarAccel" type="empty"/>
-    <property name="CursorThemeName" type="empty"/>
+    <property name="CursorThemeName" type="string" value="Simple-and-Soft"/>
     <property name="CursorThemeSize" type="empty"/>
     <property name="DecorationLayout" type="string" value=":minimize,close"/>
   </property>

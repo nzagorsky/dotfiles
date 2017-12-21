@@ -85,6 +85,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('ervandew/supertab')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
+    call dein#add('easymotion/vim-easymotion')
 
     " Async command execution
     call dein#add('skywind3000/asyncrun.vim')
