@@ -41,7 +41,7 @@ nnoremap geft :Dirvish ~/.vim/ftplugin<CR>
 " Good practicies
 "-------------------------------------------------------------------------------
 
-" Force usage of <jj>
+" Force usage of <jk>
 inoremap <Esc> <Nop>
 
 " ------------------------------------------------------------------------------
@@ -161,10 +161,12 @@ nnoremap <leader>T :AsyncRun ctags -R .<CR> :echo "Tags generated"<CR>
 " Thank you vi
 nnoremap Y y$
 
-" Exit insert mode by pressing <jj>
-inoremap jj <Esc>
+" Exit insert mode by pressing <jk>
+inoremap jk <Esc>
 " Exit for term mode
-tnoremap jj <C-\><C-n>
+tnoremap jk <C-\><C-n>
+" Exit for command mode
+cnoremap jk <Esc>
 
 " Save on <leader>w
 nnoremap <Leader>w :w<CR>
@@ -222,7 +224,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 0
 
 "" FZF
-autocmd! FileType fzf tnoremap <buffer> jj <c-c>
+autocmd! FileType fzf tnoremap <buffer> jk <c-c>
 
 
 "" Gitgutter

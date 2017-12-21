@@ -208,13 +208,13 @@
 ;; jnnoremap <leader>h :Helptags<CR>
 
 
-;; Configure `jj`
+;; Configure `jk`
 (use-package evil-escape
     :ensure t
     :config
 	(evil-escape-mode)
 	(setq evil-escape-inhibit-functions '(evil-visual-state-p))
-	(setq-default evil-escape-key-sequence "jj")
+	(setq-default evil-escape-key-sequence "jk")
 	(setq-default evil-escape-delay 0.3))
 
 ;; Vim surround config

@@ -63,8 +63,8 @@ antigen apply
 #------------------------
 bindkey -e
 
-# <jj> to exit Insert mode
-bindkey -M viins "jj" vi-cmd-mode
+# <jk> to exit Insert mode
+bindkey -M viins "jk" vi-cmd-mode
 
 # Search through history (see 'Completion' section)
 # using <j> and <k> in Normal mode or <^P> and <^N> in Insert mode
