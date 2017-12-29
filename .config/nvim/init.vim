@@ -89,6 +89,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Async command execution
     call dein#add('skywind3000/asyncrun.vim')
+    call dein#add('tpope/vim-dispatch')
 
     " Git integration.
     call dein#add('tpope/vim-fugitive')
@@ -96,10 +97,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Syntax highlightning for all languages.
     call dein#add('sheerun/vim-polyglot')
-
-    " Snippets
-    call dein#add('SirVer/ultisnips')
-    call dein#add('honza/vim-snippets')
 
     " Python modules.
     call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
@@ -149,14 +146,17 @@ noremap <F3> :Autoformat<CR>
 
 " FZF keybindings.
 nnoremap <C-p> :Files<CR>
+"search word under cursor
+nnoremap <leader>A :Ag <C-r><C-w><CR>   
 nnoremap <leader>a :Ag<Space>
+
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>h :Helptags<CR>
 nnoremap <leader>s :Snippets<CR>
 nnoremap <leader>l :BLines<CR>
-nnoremap <leader>T :AsyncRun ctags -R .<CR> :echo "Tags generated"<CR>
+nnoremap <leader>T :Start! ctags -R .<CR>
 
 " Thank you vi
 nnoremap Y y$
@@ -261,8 +261,10 @@ let g:dirvish_mode = ':sort ,^.*[\/],'
 set background=dark
 let base16colorspace=256
 colorscheme base16-ocean
-" set termguicolors " if you want to run vim in a terminal
 syntax on
+
+" Showcase comments in italics
+highlight Comment cterm=italic gui=italic
 
 filetype indent on
 filetype plugin on
@@ -281,6 +283,17 @@ set shiftwidth=4
 set expandtab
 set softtabstop=4
 
+" Statusline
+set statusline=%f         " Path to the file
+set statusline+=%m       " Modified flag
+set statusline+=\ \      " Separator
+set statusline+=%y        " Filetype of the file
+set statusline+=\ \      " Separator
+set statusline+=%l    " Current line
+set statusline+=/   " Separator
+set statusline+=%L   " Total lines
+
+
 "omnicompletion settings
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
@@ -297,18 +310,15 @@ set hlsearch
 set ignorecase
 set smartcase
 set infercase
+set showmatch
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
 
-set ai " auto indent
-set wrap " wrap lines
-
 set cursorline
 set wildmenu
 set lazyredraw
-set showmatch
 
 set foldenable
 set foldmethod=indent
