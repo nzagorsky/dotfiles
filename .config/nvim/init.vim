@@ -85,7 +85,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('ervandew/supertab')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
-    call dein#add('easymotion/vim-easymotion')
 
     " Async command execution
     call dein#add('skywind3000/asyncrun.vim')
@@ -214,6 +213,9 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 nnoremap <leader>ss :SSave!<CR>
 nnoremap <leader>sl :SLoad<CR>
 nnoremap <leader>sc :SClose<CR>
+
+" Visual line selection.
+nnoremap <leader><leader> V
 
 " ------------------------------------------------------------------------------
 " Plugins setup.

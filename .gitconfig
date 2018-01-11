@@ -91,3 +91,5 @@
         cmd = nvim -f -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 [http "https://gopkg.in"]
 	followRedirects = true
+[http]
+	postBuffer = 157286400

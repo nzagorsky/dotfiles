@@ -2,7 +2,7 @@
 # Variables
 #------------------------
 # Basic utility.
-export BROWSER=/usr/bin/google-chrome-stable
+export BROWSER="/usr/bin/opera"
 export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 
