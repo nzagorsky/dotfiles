@@ -44,6 +44,9 @@ nnoremap geft :Dirvish ~/.vim/ftplugin<CR>
 " Force usage of <jk>
 inoremap <Esc> <Nop>
 
+" Remap command
+nnoremap ; :
+
 " ------------------------------------------------------------------------------
 " Plugins
 " ------------------------------------------------------------------------------
@@ -254,6 +257,7 @@ autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operati
 "" Dirvish
 nnoremap <C-e> :Dirvish<CR>
 let g:dirvish_mode = ':sort ,^.*[\/],'
+" let g:dirvish_mode = ':silent keeppatterns g@\v/\.[^\/]+/?$@d _'
 
 " ------------------------------------------------------------------------------
 " Editor setup
