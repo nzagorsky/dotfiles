@@ -208,8 +208,6 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/"<CR><CR>
 
 
 " <Enter> in normal mode will disable highlighting of current search.
-" Note: it will not clear the search, so using <n> will jump to the next
-" occurance and enable search highlighting back
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 " Sessions
@@ -219,6 +217,9 @@ nnoremap <leader>sc :SClose<CR>
 
 " Visual line selection.
 nnoremap <leader><leader> V
+
+" Sudo hack
+cmap w!! w !sudo tee % >/dev/null
 
 " ------------------------------------------------------------------------------
 " Plugins setup.
