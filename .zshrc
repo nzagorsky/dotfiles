@@ -135,8 +135,12 @@ function dutop { du --one-file-system --max-depth=2 -h * | sort -hr | head -20; 
 # Tmux
 t () {
     if [ -z "$1" ]
-        then tmux attach -t default || tmux new -s default
-        else tmux attach -t $1 || tmux new -s $1
+    then
+        tmux attach -t default || tmux new -s default
+
+    else
+        tmux attach -t $1 || tmux new -s $1
+
     fi
 }
 
