@@ -140,11 +140,11 @@
 	"a" 'counsel-projectile-ag
 	"b" 'ivi-switch-buffer))
 
-(use-package counsel-projectile
-  :ensure t
-  :after counsel
-  :config
-    (counsel-projectile-on))
+;; (use-package counsel-projectile
+  ;; :ensure t
+  ;; :after counsel
+  ;; :config
+    ;; (counsel-projectile-on))
 
 
 ;;----------------------------------------
