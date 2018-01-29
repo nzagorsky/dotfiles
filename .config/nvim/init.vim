@@ -258,7 +258,20 @@ autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operati
 "" Dirvish
 nnoremap <C-e> :Dirvish<CR>
 let g:dirvish_mode = ':sort ,^.*[\/],'
-" let g:dirvish_mode = ':silent keeppatterns g@\v/\.[^\/]+/?$@d _'
+
+augroup dirvish_events
+  autocmd!
+
+  " Map `t` to open in new tab.
+  autocmd FileType dirvish
+    \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+    \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+
+  " Map `gh` to hide dot-prefixed files.  Press `R` to "toggle" (reload).
+  autocmd FileType dirvish nnoremap <silent><buffer>
+    \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>
+
+augroup END
 
 " ------------------------------------------------------------------------------
 " Editor setup
@@ -342,3 +355,8 @@ if exists('$SHELL')
 else
     set shell=/bin/sh
 endif
+
+"
+" Disable vim background
+" hi Normal ctermbg=none
+
