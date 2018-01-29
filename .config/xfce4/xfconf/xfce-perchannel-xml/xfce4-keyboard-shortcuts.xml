@@ -42,6 +42,10 @@
       <property name="&lt;Super&gt;h" type="string" value="./.scripts/window-control left"/>
       <property name="&lt;Super&gt;k" type="string" value="./.scripts/window-control up"/>
       <property name="&lt;Super&gt;j" type="string" value="./.scripts/window-control down"/>
+      <property name="XF86AudioPlay" type="string" value="playerctl play-pause"/>
+      <property name="XF86AudioNext" type="string" value="playerctl next"/>
+      <property name="XF86AudioPrev" type="string" value="playerctl previous"/>
+      <property name="XF86AudioStop" type="string" value="playerctl stop"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
