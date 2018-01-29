@@ -1,26 +1,27 @@
 - pacman:
-  - ark-gtk-theme
-  - ctags
+  - ark-gtk-theme  # XFCE theme
+  - ctags  # Tags for Vim
+  - deja-dup  # Backups
   - docker
   - docker-compose
-  - fzf
-  - glances
-  - htop
-  - iotop
-  - mpv
+  - fzf  # File navigation and utility with fuzzy power
+  - glances  # System overview
+  - htop  # System overview
+  - iotop  # Disk activity
+  - mpv  # Video player
   - neovim
   - networkmanager-openvpn
   - openvpn
   - python-pip
-  - rofi
-  - sshfs
-  - the_silver_searcher
+  - rofi  # App launcher
+  - sshfs  # Mount folders using SSH
+  - the_silver_searcher  # AG searcher
   - tmux
-  - wmctrl
-  - xclip
+  - wmctrl  # Control X windows
+  - xclip  # For screenshots
   - xdotool
   - xorg-xrandr  # For Java OpenGL
   - zsh
 
 - shell:
-  - touch ~/.secure
+  - mkdir -p ~/.credentials; touch ~/.credentials/secure
