@@ -48,7 +48,7 @@
 
 - shell:
   - mkdir -p ~/.vim/sessions ~/.vim/undo
-  - touch ~/.secure
+  - mkdir -p ~/.credentials; touch ~/.credentials/secure
   - mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
   - [sudo pip3 install -r optional/requirements.txt -U, Python dependencies]
   - [sudo npm install -g neovim, Optional Node provider for neovim]

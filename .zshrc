@@ -24,7 +24,7 @@ export CPATH=/opt/cuda/include:$CPATH
 #------------------------
 # Source
 #------------------------
-source ~/.secure
+source ~/.credentials/secure
 source ~/.zsh/antigen/antigen.zsh
 
 BASE16_SHELL=$HOME/.config/base16-shell/
