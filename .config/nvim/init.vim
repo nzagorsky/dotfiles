@@ -66,6 +66,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Utility.
     call dein#add('christoomey/vim-tmux-navigator')
+    call dein#add('junegunn/goyo.vim')
 
     " Colors.
     call dein#add('chriskempson/base16-vim')
@@ -152,13 +153,19 @@ nnoremap <C-p> :Files<CR>
 nnoremap <leader>A :Ag <C-r><C-w><CR>   
 nnoremap <leader>a :Ag<Space>
 
+" Fzf-related keybindings
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
-nnoremap <leader>t :Tags<CR>
 nnoremap <leader>h :Helptags<CR>
-nnoremap <leader>s :Snippets<CR>
 nnoremap <leader>l :BLines<CR>
+
+" Tags
+" TODO polish tags generation and exclude litter
+nnoremap <leader>t :Tags<CR>
 nnoremap <leader>T :Start! ctags -R .<CR>
+
+" Zen mode
+nnoremap <leader>f :Goyo<CR>
 
 " Thank you vi
 nnoremap Y y$
