@@ -43,6 +43,7 @@
 
     ~/.xprofile: .xprofile
     ~/.xbindkeysrc: .xbindkeysrc
+    ~/.ctags: .ctags
 
 
 

@@ -172,8 +172,10 @@ nnoremap Y y$
 
 " Exit insert mode by pressing <jk>
 inoremap jk <Esc>
+
 " Exit for term mode
 tnoremap jk <C-\><C-n>
+
 " Exit for command mode
 cnoremap jk <Esc>
 
