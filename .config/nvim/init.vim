@@ -212,10 +212,6 @@ inoremap <Right> <Nop>
 "" Tabs
 nnoremap <silent> <S-t> :tab split<CR>
 
-"" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/"<CR><CR>
-
-
 " <Enter> in normal mode will disable highlighting of current search.
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
