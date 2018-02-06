@@ -20,3 +20,6 @@ saws
 
 # Interactive shell
 ptpython
+
+# Env management
+pipenv
