@@ -14,6 +14,7 @@
   - openvpn
   - python-pip
   - playerctl  # Control media players from keyboard
+  - ranger
   - rofi  # App launcher
   - sshfs  # Mount folders using SSH
   - the_silver_searcher  # AG searcher
