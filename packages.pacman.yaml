@@ -1,5 +1,5 @@
 - pacman:
-  - ark-gtk-theme  # XFCE theme
+  - arc-gtk-theme  # XFCE theme
   - ctags  # Tags for Vim
   - deja-dup  # Backups
   - docker

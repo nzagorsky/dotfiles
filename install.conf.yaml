@@ -30,6 +30,7 @@
     ~/.vim: .config/nvim/
     ~/.vimrc: .config/nvim/init.vim
     ~/.config/nvim: .config/nvim
+    ~/.ctags: .ctags
 
     # Emacs
     ~/.emacs.d: .emacs.d
@@ -38,12 +39,13 @@
     ~/.config/xfce4/xfconf: .config/xfce4/xfconf
     ~/.config/xfce4/terminal: .config/xfce4/terminal
 
+    # Python
+    ~/.ptpython/config.py: .ptpython/config.py
+
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
-
     ~/.xprofile: .xprofile
     ~/.xbindkeysrc: .xbindkeysrc
-    ~/.ctags: .ctags
 
 
 

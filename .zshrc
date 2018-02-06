@@ -63,16 +63,9 @@ antigen apply
 #------------------------
 bindkey -e
 
-# <jk> to exit Insert mode
-bindkey -M viins "jk" vi-cmd-mode
-
-# Search through history (see 'Completion' section)
-# using <j> and <k> in Normal mode or <^P> and <^N> in Insert mode
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
-
-bindkey -M viins "^P" up-line-or-beginning-search
-bindkey -M viins "^N" down-line-or-beginning-search
+# Search through history
+bindkey "^P" up-line-or-beginning-search
+bindkey "^N" down-line-or-beginning-search
 
 # Do not display modes for previously accepted lines
 setopt transient_rprompt
