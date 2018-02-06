@@ -1,10 +1,14 @@
 - aptget:
+  - ctags
   - docker
   - docker-compose
   - htop
+  - iotop
+  - openvpn
   - python3-pip
   - silversearcher-ag
   - software-properties-common
+  - sshfs
   - tmux
   - zsh
 
@@ -12,4 +16,3 @@
   - sudo add-apt-repository ppa:neovim-ppa/stable -y 
   - sudo apt-get update
   - sudo apt-get install neovim -y
-

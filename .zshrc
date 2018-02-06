@@ -137,5 +137,9 @@ t () {
     fi
 }
 
+# Source FZF for optional keybindings and shell improvement:
+# C-r search commands
+# C-t for file search
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Kukareku.
