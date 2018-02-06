@@ -1,15 +1,22 @@
+
+# Neovim support
+neovim
+trollius
+
+# Code style libs.
 vulture 
 rope 
 ropevim 
 flake8 
 autopep8
 pep8
-neovim
-trollius
-
-# AWS CLI.
-saws
 
 # Format & Sort
 yapf
 isort
+
+# AWS CLI.
+saws
+
+# Interactive shell
+ptpython
