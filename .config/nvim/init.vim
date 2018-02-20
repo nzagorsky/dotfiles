@@ -116,7 +116,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('mxw/vim-jsx', { 'on_ft': 'javascript.jsx' })
 
     "Nim
-    call dein#add('baabelfish/nvim-nim', { 'on_ft': 'nim' })
+    " call dein#add('baabelfish/nvim-nim', { 'on_ft': 'nim' })
 
     " Go
     call dein#add('zchee/deoplete-go', {'build': ['make', 'go get -u github.com/nsf/gocode'], 'on_ft': 'go'})
