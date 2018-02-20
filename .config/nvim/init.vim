@@ -375,4 +375,3 @@ endif
 "
 " Disable vim background
 " hi Normal ctermbg=none
-

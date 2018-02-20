@@ -21,6 +21,9 @@ export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 export LIBRARY_PATH=/opt/cuda/lib64:$LIBRARY_PATH
 export CPATH=/opt/cuda/include:$CPATH
 
+# FZF config
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_OPTS="--inline-info"
 #------------------------
 # Source
 #------------------------
@@ -143,3 +146,4 @@ t () {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Kukareku.
+# base16_phd

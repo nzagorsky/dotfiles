@@ -5,6 +5,7 @@
   - docker
   - docker-compose
   - fzf  # File navigation and utility with fuzzy power
+  - fd  # Faster `find`
   - glances  # System overview
   - htop  # System overview
   - iotop  # Disk activity
