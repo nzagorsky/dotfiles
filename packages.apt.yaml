@@ -2,6 +2,7 @@
   - exuberant-ctags
   - docker
   - docker-compose
+  - golang
   - htop
   - iotop
   - openvpn
