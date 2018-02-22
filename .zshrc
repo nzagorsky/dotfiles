@@ -23,7 +23,9 @@ export CPATH=/opt/cuda/include:$CPATH
 
 # FZF config
 export FZF_DEFAULT_COMMAND='git ls-tree -r --name-only HEAD || 
-    fd --type f --hidden --exclude=.git'
+    fd --type f --hidden --exclude=.git ||
+    find * -type f'
+
 export FZF_DEFAULT_OPTS="--inline-info"
 #------------------------
 # Source
