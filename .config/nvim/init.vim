@@ -1,9 +1,7 @@
 " ------------------------------------------------------------------------------
 " Basic settings.
 " ------------------------------------------------------------------------------
-
-" use vim settings, rather than vi settings
-" must be first, because it changes other options as a side effect
+" use vim settings, rather than vi settings must be first, because it changes other options as a side effect
 set nocompatible
 
 " Optimize for fast terminal connections
@@ -37,15 +35,8 @@ nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 nnoremap geft :Dirvish ~/.vim/ftplugin<CR>
 
-"-------------------------------------------------------------------------------
-" Good practicies
-"-------------------------------------------------------------------------------
-
-" Force usage of <jk>
-inoremap <Esc> <Nop>
-
-" Remap command
-nnoremap ; :
+" Don't show the intro message when starting Vim
+set shortmess=aoOtIWcFs
 
 " ------------------------------------------------------------------------------
 " Plugins
@@ -55,6 +46,7 @@ if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
     call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
     call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
 endif
+
 set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
 " Setup plugins
@@ -65,7 +57,11 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('Shougo/dein.vim')
 
     " Utility.
-    call dein#add('christoomey/vim-tmux-navigator')
+    if executable('tmux')
+        call dein#add('christoomey/vim-tmux-navigator')
+    endif
+
+    " Zen mode
     call dein#add('junegunn/goyo.vim')
 
     " Colors.
@@ -122,12 +118,11 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('zchee/deoplete-go', {'build': ['make', 'go get -u github.com/nsf/gocode'], 'on_ft': 'go'})
     call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
 
-    " Rust
-    call dein#add('sebastianmarkow/deoplete-rust', {'on_ft': 'rust'})
+    " " Rust
+    " call dein#add('sebastianmarkow/deoplete-rust', {'on_ft': 'rust'})
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
-
 
     if dein#check_install()
       call dein#install()
@@ -135,46 +130,22 @@ if dein#load_state(expand('~/.config/nvim'))
     endif
 
     call dein#end()
-
 endif
 
 
 " ------------------------------------------------------------------------------
 " Key bindings
 " ------------------------------------------------------------------------------
-
 let mapleader = "\<Space>"
 
-noremap <F3> :Autoformat<CR>
-
-" FZF keybindings.
-nnoremap <C-p> :Files<CR>
-"search word under cursor
-nnoremap <leader>A :Ag <C-r><C-w><CR>   
-nnoremap <leader>a :Ag<Space>
-
-" Fzf-related keybindings
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>c :Commands<CR>
-nnoremap <leader>h :Helptags<CR>
-nnoremap <leader>l :BLines<CR>
-
-" Tags
-" TODO polish tags generation and exclude litter
-nnoremap <leader>t :Tags<CR>
+" Generate tags
 nnoremap <leader>T :Start! ctags -R .<CR>
-
-" Zen mode
-nnoremap <leader>f :Goyo<CR>
 
 " Thank you vi
 nnoremap Y y$
 
 " Exit insert mode by pressing <jk>
 inoremap jk <Esc>
-
-" Exit for term mode
-tnoremap jk <C-\><C-n>
 
 " Exit for command mode
 cnoremap jk <Esc>
@@ -196,16 +167,22 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-" Same for terminal
-tnoremap <C-h> <c-\><c-n><c-w>h
-tnoremap <C-j> <c-\><c-n><c-w>j
-tnoremap <C-k> <c-\><c-n><c-w>k
-tnoremap <C-l> <c-\><c-n><c-w>l
 
-" Automatic insert mode entering for terminal
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
+if exists(':tnoremap')
+    " Allow movement seamlessly with terminals
+    tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-j> <C-\><C-n><C-w>j
+    tnoremap <C-k> <C-\><C-n><C-w>k
+    tnoremap <C-l> <C-\><C-n><C-w>l
 
+    " Exit for term mode
+    tnoremap jk <C-\><C-n>
+
+    " Automatic insert mode entering for terminal
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+
+endif
 
 
 " arrow keys move visible lines
@@ -214,22 +191,11 @@ inoremap <Up> <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
 nnoremap <Down> gj
 nnoremap <Up> gk
 
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-
 "" Tabs
 nnoremap <silent> <S-t> :tab split<CR>
 
 " <Enter> in normal mode will disable highlighting of current search.
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
-
-" Sessions
-nnoremap <leader>ss :SSave!<CR>
-nnoremap <leader>sl :SLoad<CR>
-nnoremap <leader>sc :SClose<CR>
 
 " Visual line selection.
 nnoremap <leader><leader> V
@@ -241,53 +207,74 @@ cmap w!! w !sudo tee % >/dev/null
 " Plugins setup.
 " ------------------------------------------------------------------------------
 
-"" Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_completion_start_length = 0
-
-"" FZF
-autocmd! FileType fzf tnoremap <buffer> jk <c-c>
+if g:dein#tap('deoplete.nvim')
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#auto_completion_start_length = 0
+endif
 
 
-"" Gitgutter
-let g:gitgutter_realtime = 1
+if g:dein#tap('fzf.vim')
+    autocmd! FileType fzf tnoremap <buffer> jk <c-c>
+    
+    "search word under cursor
+    nnoremap <leader>A :Ag <C-r><C-w><CR>   
+
+    nnoremap <C-p> :Files<CR>
+    nnoremap <leader>a :Ag<Space>
+    nnoremap <leader>b :Buffers<CR>
+    nnoremap <leader>c :Commands<CR>
+    nnoremap <leader>h :Helptags<CR>
+    nnoremap <leader>l :BLines<CR>
+    nnoremap <leader>t :Tags<CR>
+endif
+
+if g:dein#tap('goyo.vim')
+    nnoremap <leader>f :Goyo<CR>
+endif
 
 
-"" Fugitive git.
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
+if g:dein#tap('vim-gitgutter')
+    let g:gitgutter_realtime = 1
+endif
+
+if g:dein#tap('vim-autoformat')
+    noremap <F3> :Autoformat<CR>
+endif
+
+if g:dein#tap('vim-fugitive')
+    noremap <Leader>gc :Gcommit<CR>
+    noremap <Leader>gsh :Gpush<CR>
+    noremap <Leader>gll :Gpull<CR>
+    noremap <Leader>gs :Gstatus<CR>
+    noremap <Leader>gb :Gblame<CR>
+    noremap <Leader>gd :Gvdiff<CR>
+    noremap <Leader>gr :Gremove<CR>
+endif
 
 
-"" Neomake
-autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operations
+if g:dein#tap('neomake')
+    autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operations
+endif
 
+if g:dein#tap('vim-dirvish')
+    nnoremap <C-e> :Dirvish<CR>
+    let g:dirvish_mode = ':sort ,^.*[\/],'
 
-"" Supertab
-" let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+    augroup dirvish_events
+        autocmd!
 
+      " Map `t` to open in new tab.
+        autocmd FileType dirvish
+            \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+            \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
 
-"" Dirvish
-nnoremap <C-e> :Dirvish<CR>
-let g:dirvish_mode = ':sort ,^.*[\/],'
+      " Map `gh` to hide dot-prefixed files.  Press `R` to "toggle" (reload).
+        autocmd FileType dirvish nnoremap <silent><buffer>
+            \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>
 
-augroup dirvish_events
-  autocmd!
+    augroup END
 
-  " Map `t` to open in new tab.
-  autocmd FileType dirvish
-    \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-    \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-
-  " Map `gh` to hide dot-prefixed files.  Press `R` to "toggle" (reload).
-  autocmd FileType dirvish nnoremap <silent><buffer>
-    \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>
-
-augroup END
+endif
 
 " ------------------------------------------------------------------------------
 " Editor setup
@@ -328,7 +315,6 @@ set statusline+=\ \      " Separator
 set statusline+=%l    " Current line
 set statusline+=/   " Separator
 set statusline+=%L   " Total lines
-
 
 "omnicompletion settings
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
