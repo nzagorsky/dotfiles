@@ -6,6 +6,7 @@
   - htop
   - iotop
   - openvpn
+  - python-pip
   - python3-pip
   - ranger
   - silversearcher-ag
