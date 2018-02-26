@@ -73,7 +73,8 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('justinmk/vim-dirvish')
 
     " Code check.
-    call dein#add('neomake/neomake')
+    " call dein#add('neomake/neomake')
+    call dein#add('w0rp/ale')
 
     " Auto complete.
     call dein#add('Shougo/deoplete.nvim', { 'build': ':UpdateRemotePlugins' })
@@ -232,6 +233,9 @@ if g:dein#tap('goyo.vim')
     nnoremap <leader>f :Goyo<CR>
 endif
 
+if g:dein#tap('vim-polyglot')
+    let g:polyglot_disabled = ['yaml', 'python']
+endif
 
 if g:dein#tap('vim-gitgutter')
     let g:gitgutter_realtime = 1
@@ -252,8 +256,20 @@ if g:dein#tap('vim-fugitive')
 endif
 
 
-if g:dein#tap('neomake')
-    autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operations
+" if g:dein#tap('neomake')
+"     autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operations
+"     let g:neomake_javascript_enabled_makers = ['standard']
+" endif
+
+if g:dein#tap('ale')
+    let g:ale_sign_error = 'x'
+    let g:ale_sign_warning = '~'
+
+    let g:ale_linters = {}
+    let g:ale_linters.javascript = ['standard']
+
+    let g:ale_fixers = {}
+    let g:ale_fixers.javascript = ['standard']
 endif
 
 if g:dein#tap('vim-dirvish')
@@ -292,7 +308,7 @@ highlight Comment cterm=italic gui=italic
 filetype indent on
 filetype plugin on
 filetype plugin indent on " Enable filetype plugins and indention
-set autoindent " enable auto indentation
+" set autoindent " enable auto indentation
 
 set scrolloff=3 " keep some more lines for scope
 set laststatus=2
