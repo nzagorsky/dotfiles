@@ -60,3 +60,4 @@
   - git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install --all
   - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
     # - [emacs --batch --load ~/.emacs.d/init.el, Installing emacs files]
+  - [sudo npm install -g standard, Linting for JS]
