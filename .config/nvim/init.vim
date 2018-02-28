@@ -242,7 +242,7 @@ if g:dein#tap('vim-gitgutter')
 endif
 
 if g:dein#tap('vim-autoformat')
-    noremap <F3> :Autoformat<CR>
+    noremap <F3> :ALEFix<CR>
 endif
 
 if g:dein#tap('vim-fugitive')
@@ -359,7 +359,7 @@ set wildmenu
 set lazyredraw
 
 set foldenable
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=99
 set noerrorbells " No annoying errors
 set novisualbell
