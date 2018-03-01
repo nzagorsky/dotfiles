@@ -266,10 +266,13 @@ if g:dein#tap('ale')
     let g:ale_sign_warning = '~'
 
     let g:ale_linters = {}
-    let g:ale_linters.javascript = ['standard']
-
     let g:ale_fixers = {}
+
+    let g:ale_linters.javascript = ['standard']
     let g:ale_fixers.javascript = ['standard']
+
+    let g:ale_linters.python = ['pylint']
+    let g:ale_fixers.python = ['yapf']
 endif
 
 if g:dein#tap('vim-dirvish')
