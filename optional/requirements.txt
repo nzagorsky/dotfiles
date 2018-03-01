@@ -19,7 +19,7 @@ isort
 saws
 
 # Interactive shell
-ptpython
+ipython
 
 # Env management
 pipenv
