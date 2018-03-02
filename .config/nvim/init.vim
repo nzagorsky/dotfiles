@@ -268,6 +268,8 @@ if g:dein#tap('ale')
     let g:ale_linters = {}
     let g:ale_fixers = {}
 
+    let g:ale_fixers.go = ['gofmt']
+
     let g:ale_linters.javascript = ['standard']
     let g:ale_fixers.javascript = ['standard']
 
