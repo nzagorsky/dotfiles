@@ -42,12 +42,9 @@
     ~/.config/openbox: .config/openbox
 
     # Python
-    ~/.ptpython/config.py: .ptpython/config.py
-
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
     ~/.xprofile: .xprofile
-    ~/.xbindkeysrc: .xbindkeysrc
 
 
 
