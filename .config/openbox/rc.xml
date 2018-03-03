@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
   <resistance>
     <strength>10</strength>
@@ -381,6 +380,24 @@
         <desktop>10</desktop>
         <follow>no</follow>
       </action>
+    </keybind>
+    <keybind key="W-f">
+      <action name="ToggleMaximizeFull"/>
+    </keybind>
+    <keybind key="S-W-f">
+      <action name="ToggleFullscreen"/>
+    </keybind>
+    <keybind key="S-W-l">
+      <action name="GrowToEdgeEast"/>
+    </keybind>
+    <keybind key="S-W-h">
+      <action name="GrowToEdgeWest"/>
+    </keybind>
+    <keybind key="S-W-j">
+      <action name="GrowToEdgeSouth"/>
+    </keybind>
+    <keybind key="S-W-k">
+      <action name="GrowToEdgeNorth"/>
     </keybind>
   </keyboard>
   <mouse>
