@@ -13,5 +13,5 @@
 [[ -f ~/.extend.xprofile ]] && . ~/.extend.xprofile
 
 
-# Launch bind manager
-xbindkeys
+# Launch Openbox
+openbox --replace
