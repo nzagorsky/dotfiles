@@ -78,15 +78,15 @@
     <property name="wrap_workspaces" type="bool" value="false"/>
     <property name="zoom_desktop" type="bool" value="true"/>
     <property name="workspace_names" type="array">
-      <value type="string" value="console"/>
-      <value type="string" value="browser"/>
-      <value type="string" value="docs"/>
+      <value type="string" value="code"/>
+      <value type="string" value="browse"/>
+      <value type="string" value="notes"/>
       <value type="string" value="game"/>
-      <value type="string" value="Workspace 5"/>
-      <value type="string" value="Workspace 6"/>
-      <value type="string" value="tools"/>
-      <value type="string" value="track"/>
-      <value type="string" value="talk"/>
+      <value type="string" value="desktop 5"/>
+      <value type="string" value="desktop 6"/>
+      <value type="string" value="desktop 7"/>
+      <value type="string" value="(Unnamed desktop)"/>
+      <value type="string" value="desktop 9"/>
       <value type="string" value="music"/>
     </property>
     <property name="margin_top" type="int" value="0"/>

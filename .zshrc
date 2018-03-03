@@ -7,7 +7,7 @@ export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 
 # Languages
-export GOPATH="$HOME/.go/packages"  # GO
+export GOPATH="$HOME/go"  # GO
 export PATH="$PATH:$HOME/.cargo/bin"  # RUST
 export PATH="$PATH:$HOME/.nimble/bin"  # NIM
 export PATH="$PATH:$HOME/.scripts"  # NIM

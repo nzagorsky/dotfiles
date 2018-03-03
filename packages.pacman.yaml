@@ -1,31 +1,38 @@
 - pacman:
-  - arc-gtk-theme  # XFCE theme
+    # Development
   - ctags  # Tags for Vim
-  - deja-dup  # Backups
   - docker
   - docker-compose
-  - fzf  # File navigation and utility with fuzzy power
-  - fd  # Faster `find`
-  - glances  # System overview
   - go
-  - htop  # System overview
-  - iotop  # Disk activity
-  - mpv  # Video player
   - neovim
-  - networkmanager-openvpn
-  - openvpn
   - python-pip
-  - playerctl  # Control media players from keyboard
+  - the_silver_searcher  # AG searcher
+
+    # Desktop config
+  - arc-gtk-theme
+  - obconf
+  - openbox
+
+    # System 
+  - deja-dup  # Backups
+  - fd  # Faster `find`
+  - fzf  # File navigation and utility with fuzzy power
+  - glances
+  - gtop
+  - htop
+  - iotop
   - ranger
   - rofi  # App launcher
   - sshfs  # Mount folders using SSH
-  - the_silver_searcher  # AG searcher
   - tmux
-  - wmctrl  # Control X windows
   - xclip  # For screenshots
-  - xdotool
   - xorg-xrandr  # For Java OpenGL
   - zsh
 
-- shell:
-  - mkdir -p ~/.credentials; touch ~/.credentials/secure
+    # Multimedia
+  - mpv  # Video player
+  - playerctl  # Control media players from keyboard
+
+    # Network
+  - networkmanager-openvpn
+  - openvpn
