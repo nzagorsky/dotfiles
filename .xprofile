@@ -12,6 +12,3 @@
 
 [[ -f ~/.extend.xprofile ]] && . ~/.extend.xprofile
 
-
-# Launch Openbox
-openbox --replace

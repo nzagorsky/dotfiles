@@ -41,6 +41,8 @@
     ~/.config/xfce4/terminal: .config/xfce4/terminal
     ~/.config/openbox: .config/openbox
     ~/.themes: .themes
+    ~/.config/autostart/compton.desktop: .config/autostart/compton.desktop
+    ~/.config/autostart/openbox.desktop: .config/autostart/openbox.desktop
 
     # Python
     ~/.yaourtrc: .yaourtrc
