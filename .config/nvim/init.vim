@@ -316,7 +316,6 @@ filetype plugin indent on " Enable filetype plugins and indention
 " set autoindent " enable auto indentation
 
 set scrolloff=3 " keep some more lines for scope
-set laststatus=2
 
 set smarttab
 set tabstop=4
@@ -328,14 +327,27 @@ set expandtab
 set softtabstop=4
 
 " Statusline
-set statusline=%f         " Path to the file
-set statusline+=%m       " Modified flag
-set statusline+=\ \      " Separator
-set statusline+=%y        " Filetype of the file
-set statusline+=\ \      " Separator
-set statusline+=%l    " Current line
-set statusline+=/   " Separator
-set statusline+=%L   " Total lines
+function! LinterStatus() abort
+   let l:counts = ale#statusline#Count(bufnr(''))
+   let l:all_errors = l:counts.error + l:counts.style_error
+   let l:all_non_errors = l:counts.total - l:all_errors
+   return l:counts.total == 0 ? '' : printf(
+   \ 'W:%d E:%d',
+   \ l:all_non_errors,
+   \ l:all_errors
+   \)
+endfunction
+
+set laststatus=2
+set statusline=
+set statusline+=\ [%l  " Line numbers
+set statusline+=\ \|\ %L]
+set statusline+=\ %*  " Separator
+set statusline+=\ %f\ %*  " Path
+set statusline+=\ %m
+set statusline+=%=
+set statusline+=\ %{LinterStatus()}
+set statusline+=\ %{fugitive#statusline()}
 
 "omnicompletion settings
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
