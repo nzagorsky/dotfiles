@@ -25,4 +25,5 @@ MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
 MiscNewTabAdjacent=TRUE
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
+FontName=Monospace 10
 
