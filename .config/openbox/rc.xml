@@ -855,5 +855,9 @@
 
   # end of the example
 -->
+     <application class="*">
+         <decor>no</decor>
+         <focus>yes</focus>
+    </application>
   </applications>
 </openbox_config>
