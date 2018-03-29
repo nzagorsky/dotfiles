@@ -73,7 +73,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('justinmk/vim-dirvish')
 
     " Code check.
-    " call dein#add('neomake/neomake')
     call dein#add('w0rp/ale')
 
     " Auto complete.
@@ -256,11 +255,6 @@ if g:dein#tap('vim-fugitive')
 endif
 
 
-" if g:dein#tap('neomake')
-"     autocmd! BufWritePost,BufEnter * Neomake " Run NeoMake on read and write operations
-"     let g:neomake_javascript_enabled_makers = ['standard']
-" endif
-
 if g:dein#tap('ale')
     let g:ale_sign_error = 'x'
     let g:ale_sign_warning = '~'
@@ -376,7 +370,7 @@ set wildmenu
 set lazyredraw
 
 set foldenable
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=99
 set noerrorbells " No annoying errors
 set novisualbell
