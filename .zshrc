@@ -10,7 +10,8 @@ export HISTFILE=~/.zsh_history
 export GOPATH="$HOME/go"  # GO
 export PATH="$PATH:$HOME/.cargo/bin"  # RUST
 export PATH="$PATH:$HOME/.nimble/bin"  # NIM
-export PATH="$PATH:$HOME/.scripts"  # NIM
+export PATH="$PATH:$HOME/.scripts"  
+export PATH="$PATH:$HOME/.bin" 
 export PATH="$PATH:$GOPATH/bin"  # GO
 export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
 
