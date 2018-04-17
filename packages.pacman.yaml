@@ -29,6 +29,7 @@
   - xorg-xrandr  # For Java OpenGL
   - zsh
   - npm
+  - xfce4-whiskermenu-plugin
 
     # Multimedia
   - mpv  # Video player
