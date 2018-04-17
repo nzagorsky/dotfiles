@@ -300,6 +300,8 @@ set background=dark
 let base16colorspace=256
 colorscheme base16-ocean
 syntax on
+" Disable vim background
+hi Normal ctermbg=none
 
 " Showcase comments in italics
 highlight Comment cterm=italic gui=italic
@@ -386,5 +388,3 @@ else
 endif
 
 "
-" Disable vim background
-" hi Normal ctermbg=none
