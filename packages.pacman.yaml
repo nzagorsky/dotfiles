@@ -28,6 +28,7 @@
   - xclip  # For screenshots
   - xorg-xrandr  # For Java OpenGL
   - zsh
+  - npm
 
     # Multimedia
   - mpv  # Video player
