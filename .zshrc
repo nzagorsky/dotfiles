@@ -98,7 +98,6 @@ alias spac='pacman -Ss'
 alias upac='sudo pacman -Syu'
 alias v='nvim'
 alias e='emacs -nw'
-alias ctop='docker run --rm -ti --name=ctop -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 
 
 #------------------------
@@ -147,6 +146,12 @@ t () {
 # C-r search commands
 # C-t for file search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+ctop () {
+    docker run \
+        --rm -it --name=ctop_`date +%s` \
+        -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest
+}
 
 # Kukareku.
 # base16_phd
