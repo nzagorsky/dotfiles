@@ -33,15 +33,15 @@
       <property name="&lt;Primary&gt;Escape" type="string" value="xfdesktop --menu"/>
       <property name="override" type="bool" value="true"/>
       <property name="Print" type="string" value="./.scripts/screenshot"/>
-      <property name="&lt;Super&gt;d" type="string" value="./.scripts/launch_menu"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;e" type="string" value="xflock4"/>
       <property name="&lt;Super&gt;Return" type="string" value="xfce4-terminal"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;Return" type="string" value="thunar"/>
-      <property name="&lt;Super&gt;a" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="XF86AudioPlay" type="string" value="playerctl play-pause"/>
       <property name="XF86AudioNext" type="string" value="playerctl next"/>
       <property name="XF86AudioPrev" type="string" value="playerctl previous"/>
       <property name="XF86AudioStop" type="string" value="playerctl stop"/>
+      <property name="&lt;Super&gt;d" type="string" value="./.scripts/launch_menu run"/>
+      <property name="&lt;Super&gt;a" type="string" value="./.scripts/launch_menu drun"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

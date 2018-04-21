@@ -1,15 +1,37 @@
 #!/usr/bin/env bash
 
-rofi -show run \
--bw 0 \
--color-active "#273238, #80cbc4, #273238, #394249, #80cbc4" \
--color-normal "#273238, #c1c1c1, #273238, #394249, #ffffff" \
--color-urgent "#273238, #ff1844, #273238, #394249, #ff1844" \
--color-window "#273238, #273238, #1e2529" \
--fullscreen \
--lines 10 \
--matching fuzzy \
--opacity "30" \
--padding 300 \
--separator-style none \
--width 1920 \
+MENU_MODE=$1  # [drun, run]
+
+# If no arg is passed then it's run.
+if [ -z $MENU_MODE ]
+  then
+    MENU_MODE="run"
+fi
+
+# Colors
+BACKGROUND="212121"
+FOREGROUND="bdbdbd"
+
+# Visibility variables. NOTE: Alpha: From 00 to FF
+VISIBLE="CC"
+TRANSPARENT="00"
+
+# Define combinations.
+ACTIVETEXTCOLOR=$BACKGROUND
+TEXTCOLOR=$FOREGROUND
+ACTIVEROW=$VISIBLE$FOREGROUND
+USELESS="$TRANSPARENT$FOREGROUND"
+
+
+rofi \
+    -modi "run,drun" \
+    -show $MENU_MODE \
+    -color-normal "#$TRANSPARENT$BACKGROUND, #$TEXTCOLOR, #$USELESS, #$ACTIVEROW, #$ACTIVETEXTCOLOR" \
+    -color-window "#$VISIBLE$BACKGROUND, #$BACKGROUND, #$BACKGROUND" \
+    -matching fuzzy \
+    -lines 7 \
+    -width 800 \
+    -padding 100 \
+    -no-show-match \   # Disable underlining
+    -font "Ubuntu 12" \
+    -bw 0 \  

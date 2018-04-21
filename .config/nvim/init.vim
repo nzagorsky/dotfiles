@@ -13,6 +13,9 @@ set clipboard+=unnamedplus
 " hide buffers, not close them
 set hidden
 
+" do not wrap lines
+set nowrap
+
 " maintain undo history between sessions
 set undofile
 set undodir=~/.vim/undo
