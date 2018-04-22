@@ -4,4 +4,4 @@ BLUR_SIZE=15
 BLUR_SIGMA=4
 
 compton --blur-background \
-        --blur-kern=$(python compton-convgen.py gaussian $BLUR_SIZE -f sigma=$BLUR_SIGMA --dump-compton)
+        --blur-kern=$(python ~/.scripts/compton-convgen.py gaussian $BLUR_SIZE -f sigma=$BLUR_SIGMA --dump-compton)

@@ -27,6 +27,6 @@ MiscNewTabAdjacent=TRUE
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 FontName=Monospace 10
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0.900000
+BackgroundDarkness=0.800000
 MiscShowRelaunchDialog=TRUE
 

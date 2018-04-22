@@ -23,10 +23,9 @@ set undodir=~/.vim/undo
 " Move Backup Files to ~/.vim/sessions
 set backupdir=~/.vim/sessions
 set dir=~/.vim/sessions
+set noswapfile
 :silent call system('mkdir -p ' . &undodir)
 :silent call system('mkdir -p ' . &dir)
-
-set noswapfile
 
 " enable automatic title setting for terminals
 set title
@@ -36,7 +35,7 @@ set titlestring=%F
 " Quickly edit and source vimrc, udpating all buffers.
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
-nnoremap geft :Dirvish ~/.vim/ftplugin<CR>
+nnoremap geft :Explore ~/.vim/ftplugin<CR>
 
 " Don't show the intro message when starting Vim
 set shortmess=aoOtIWcFs
@@ -73,7 +72,7 @@ if dein#load_state(expand('~/.config/nvim'))
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
     call dein#add('junegunn/fzf.vim')
-    call dein#add('justinmk/vim-dirvish')
+    call dein#add('tpope/vim-vinegar')
 
     " Code check.
     call dein#add('w0rp/ale')
@@ -83,7 +82,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('raimondi/delimitmate')
 
     " Routine automation.
-    call dein#add('Chiel92/vim-autoformat')
+    " call dein#add('Chiel92/vim-autoformat')
     call dein#add('tpope/vim-surround')
     call dein#add('ervandew/supertab')
     call dein#add('tpope/vim-repeat')
@@ -126,6 +125,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+    call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
     if dein#check_install()
       call dein#install()
@@ -188,12 +188,6 @@ if exists(':tnoremap')
 endif
 
 
-" arrow keys move visible lines
-inoremap <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
-inoremap <Up> <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
-nnoremap <Down> gj
-nnoremap <Up> gk
-
 "" Tabs
 nnoremap <silent> <S-t> :tab split<CR>
 
@@ -207,94 +201,6 @@ nnoremap <leader><leader> V
 cmap w!! w !sudo tee % >/dev/null
 
 " ------------------------------------------------------------------------------
-" Plugins setup.
-" ------------------------------------------------------------------------------
-
-if g:dein#is_sourced('deoplete.nvim')
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#auto_completion_start_length = 0
-endif
-
-
-if g:dein#is_sourced('fzf.vim')
-    autocmd! FileType fzf tnoremap <buffer> jk <c-c>
-    
-    "search word under cursor
-    nnoremap <leader>A :Ag <C-r><C-w><CR>   
-
-    nnoremap <C-p> :Files<CR>
-    nnoremap <leader>a :Ag<Space>
-    nnoremap <leader>b :Buffers<CR>
-    nnoremap <leader>c :Commands<CR>
-    nnoremap <leader>h :Helptags<CR>
-    nnoremap <leader>l :BLines<CR>
-    nnoremap <leader>t :Tags<CR>
-endif
-
-if g:dein#is_sourced('goyo.vim')
-    nnoremap <leader>f :Goyo<CR>
-endif
-
-if g:dein#is_sourced('vim-polyglot')
-    let g:polyglot_disabled = ['yaml', 'python']
-endif
-
-if g:dein#is_sourced('vim-gitgutter')
-    let g:gitgutter_realtime = 1
-endif
-
-if g:dein#is_sourced('vim-autoformat')
-    noremap <F3> :ALEFix<CR>
-endif
-
-if g:dein#is_sourced('vim-fugitive')
-    noremap <Leader>gc :Gcommit<CR>
-    noremap <Leader>gsh :Gpush<CR>
-    noremap <Leader>gll :Gpull<CR>
-    noremap <Leader>gs :Gstatus<CR>
-    noremap <Leader>gb :Gblame<CR>
-    noremap <Leader>gd :Gvdiff<CR>
-    noremap <Leader>gr :Gremove<CR>
-endif
-
-
-if g:dein#is_sourced('ale')
-    let g:ale_sign_error = 'x'
-    let g:ale_sign_warning = '~'
-
-    let g:ale_linters = {}
-    let g:ale_fixers = {}
-
-    let g:ale_fixers.go = ['gofmt']
-
-    let g:ale_linters.javascript = ['standard']
-    let g:ale_fixers.javascript = ['standard']
-
-    let g:ale_linters.python = ['pylint']
-    let g:ale_fixers.python = ['yapf']
-endif
-
-if g:dein#is_sourced('vim-dirvish')
-    nnoremap <C-e> :Dirvish<CR>
-    let g:dirvish_mode = ':sort ,^.*[\/],'
-
-    augroup dirvish_events
-        autocmd!
-
-      " Map `t` to open in new tab.
-        autocmd FileType dirvish
-            \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-            \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-
-      " Map `gh` to hide dot-prefixed files.  Press `R` to "toggle" (reload).
-        autocmd FileType dirvish nnoremap <silent><buffer>
-            \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>
-
-    augroup END
-
-endif
-
-" ------------------------------------------------------------------------------
 " Editor setup
 " ------------------------------------------------------------------------------
 
@@ -306,17 +212,17 @@ syntax on
 "
 " Disable vim background
 hi Normal ctermbg=none
+hi StatusLineNC ctermbg=none cterm=none
 hi StatusLine ctermbg=none cterm=none
 
 " Disable linenr on the left
 hi LineNr ctermbg=none cterm=none
 
-" Disable BG for gitgutter signs # TODO move to proper closure of a plugin
-hi GitGutterAdd ctermbg=none
-hi GitGutterChange ctermbg=none
-hi GitGutterDelete ctermbg=none
+" Change split separator appearance to be less distracting
+set fillchars+=vert:│
+hi VertSplit ctermbg=NONE guibg=NONE
 
-" 8 Equal to comment color
+" `8` == comment color
 hi StatusLine ctermfg=8   
 
 " Showcase comments in italics
@@ -338,7 +244,47 @@ set shiftwidth=4
 set expandtab
 set softtabstop=4
 
+"omnicompletion settings
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+" Make it obvious where 80 characters is
+set textwidth=80
+" set colorcolumn=+1
+
+set nostartofline " Don’t reset cursor to start of line when moving around.
+set showcmd " Show the (partial) command as it’s being typed
+
+" Search settings
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set infercase
+set showmatch
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+set wildmenu
+set lazyredraw
+
+set foldenable
+set foldmethod=indent
+set foldlevel=99
+set noerrorbells  " No annoying errors
+set novisualbell
+set updatetime=250  
+
+if exists('$SHELL')
+    set shell=$SHELL
+else
+    set shell=/bin/sh
+endif
+
+" ------------------------------------------------------------------------------
 " Statusline
+" ------------------------------------------------------------------------------
 function! LinterStatus() abort
    let l:counts = ale#statusline#Count(bufnr(''))
    let l:all_errors = l:counts.error + l:counts.style_error
@@ -377,46 +323,87 @@ set statusline+=%1*
 set statusline+=\ %{GitBranch()}
 set statusline+=%*
 
-"omnicompletion settings
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
+" ------------------------------------------------------------------------------
+" Plugins setup.
+" ------------------------------------------------------------------------------
 
-set nostartofline " Don’t reset cursor to start of line when moving around.
-set showcmd " Show the (partial) command as it’s being typed
-
-" Search settings
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-set infercase
-set showmatch
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
-set cursorline
-set wildmenu
-set lazyredraw
-
-set foldenable
-set foldmethod=indent
-set foldlevel=99
-set noerrorbells " No annoying errors
-set novisualbell
-
-
-set updatetime=250  
-
-
-if exists('$SHELL')
-    set shell=$SHELL
-else
-    set shell=/bin/sh
+if g:dein#is_sourced('deoplete.nvim')
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#auto_completion_start_length = 0
 endif
 
-"
+if g:dein#is_sourced('fzf.vim')
+    autocmd! FileType fzf tnoremap <buffer> jk <c-c>
+    
+    "search word under cursor
+    nnoremap <leader>A :Ag <C-r><C-w><CR>   
+
+    nnoremap <C-p> :Files<CR>
+    nnoremap <leader>a :Ag<Space>
+    nnoremap <leader>b :Buffers<CR>
+    nnoremap <leader>c :Commands<CR>
+    nnoremap <leader>h :Helptags<CR>
+    nnoremap <leader>l :BLines<CR>
+    nnoremap <leader>t :Tags<CR>
+endif
+
+if g:dein#is_sourced('goyo.vim')
+    nnoremap <leader>f :Goyo<CR>
+endif
+
+if g:dein#is_sourced('vim-polyglot')
+    let g:polyglot_disabled = ['yaml', 'python']
+endif
+
+if g:dein#is_sourced('vim-gitgutter')
+    let g:gitgutter_realtime = 1
+    " Disable BG for gitgutter signs
+    hi GitGutterAdd ctermbg=none
+    hi GitGutterChange ctermbg=none
+    hi GitGutterDelete ctermbg=none
+endif
+
+if g:dein#is_sourced('vim-fugitive')
+    noremap <Leader>gc :Gcommit<CR>
+    noremap <Leader>gsh :Gpush<CR>
+    noremap <Leader>gll :Gpull<CR>
+    noremap <Leader>gs :Gstatus<CR>
+    noremap <Leader>gb :Gblame<CR>
+    noremap <Leader>gd :Gvdiff<CR>
+    noremap <Leader>gr :Gremove<CR>
+endif
+
+
+if g:dein#is_sourced('ale')
+    noremap <F3> :ALEFix<CR>
+
+    let g:ale_sign_error = 'x'
+    let g:ale_sign_warning = '~'
+
+    hi ALEError ctermbg=none
+    hi ALEErrorLine ctermbg=none
+    hi ALEErrorSign ctermbg=none ctermfg=1 " Red
+
+    hi ALEWarning ctermbg=none
+    hi ALEWarningLine ctermbg=none
+    hi ALEWarningSign ctermbg=none ctermfg=3 " Yellow
+
+    let g:ale_linters = {}
+    let g:ale_fixers = {}
+
+    let g:ale_fixers.go = ['gofmt']
+
+    let g:ale_linters.javascript = ['standard']
+    let g:ale_linters.python = ['pylint']
+
+    let g:ale_linters.vim = ['vint']
+
+    let g:ale_fixers.javascript = ['standard']
+    let g:ale_fixers.python = ['yapf']
+endif
+
+if g:dein#is_sourced('vim-vinegar')
+    nnoremap <C-e> :Explore<CR>
+endif
+
