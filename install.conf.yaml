@@ -42,6 +42,7 @@
     ~/.config/openbox: .config/openbox
     ~/.themes: .themes
     ~/.config/autostart/compton.desktop: .config/autostart/compton.desktop
+    ~/.config/compton.conf: .config/compton.conf
     ~/.config/autostart/openbox.desktop: .config/autostart/openbox.desktop
 
     # Python
