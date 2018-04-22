@@ -210,13 +210,13 @@ cmap w!! w !sudo tee % >/dev/null
 " Plugins setup.
 " ------------------------------------------------------------------------------
 
-if g:dein#tap('deoplete.nvim')
+if g:dein#is_sourced('deoplete.nvim')
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#auto_completion_start_length = 0
 endif
 
 
-if g:dein#tap('fzf.vim')
+if g:dein#is_sourced('fzf.vim')
     autocmd! FileType fzf tnoremap <buffer> jk <c-c>
     
     "search word under cursor
@@ -231,23 +231,23 @@ if g:dein#tap('fzf.vim')
     nnoremap <leader>t :Tags<CR>
 endif
 
-if g:dein#tap('goyo.vim')
+if g:dein#is_sourced('goyo.vim')
     nnoremap <leader>f :Goyo<CR>
 endif
 
-if g:dein#tap('vim-polyglot')
+if g:dein#is_sourced('vim-polyglot')
     let g:polyglot_disabled = ['yaml', 'python']
 endif
 
-if g:dein#tap('vim-gitgutter')
+if g:dein#is_sourced('vim-gitgutter')
     let g:gitgutter_realtime = 1
 endif
 
-if g:dein#tap('vim-autoformat')
+if g:dein#is_sourced('vim-autoformat')
     noremap <F3> :ALEFix<CR>
 endif
 
-if g:dein#tap('vim-fugitive')
+if g:dein#is_sourced('vim-fugitive')
     noremap <Leader>gc :Gcommit<CR>
     noremap <Leader>gsh :Gpush<CR>
     noremap <Leader>gll :Gpull<CR>
@@ -258,7 +258,7 @@ if g:dein#tap('vim-fugitive')
 endif
 
 
-if g:dein#tap('ale')
+if g:dein#is_sourced('ale')
     let g:ale_sign_error = 'x'
     let g:ale_sign_warning = '~'
 
@@ -274,7 +274,7 @@ if g:dein#tap('ale')
     let g:ale_fixers.python = ['yapf']
 endif
 
-if g:dein#tap('vim-dirvish')
+if g:dein#is_sourced('vim-dirvish')
     nnoremap <C-e> :Dirvish<CR>
     let g:dirvish_mode = ':sort ,^.*[\/],'
 
@@ -303,8 +303,21 @@ set background=dark
 let base16colorspace=256
 colorscheme base16-ocean
 syntax on
+"
 " Disable vim background
 hi Normal ctermbg=none
+hi StatusLine ctermbg=none cterm=none
+
+" Disable linenr on the left
+hi LineNr ctermbg=none cterm=none
+
+" Disable BG for gitgutter signs # TODO move to proper closure of a plugin
+hi GitGutterAdd ctermbg=none
+hi GitGutterChange ctermbg=none
+hi GitGutterDelete ctermbg=none
+
+" 8 Equal to comment color
+hi StatusLine ctermfg=8   
 
 " Showcase comments in italics
 highlight Comment cterm=italic gui=italic
@@ -337,16 +350,32 @@ function! LinterStatus() abort
    \)
 endfunction
 
+function! GitBranch() abort
+    let l:stripped_git_status = matchstr(fugitive#statusline(), '(.*)')[1:-2]
+    return l:stripped_git_status
+endfunction
+
+hi User1 ctermfg=15  " White
+
+" To format status line wrap with `%#* and %*` where # is User number.
 set laststatus=2
 set statusline=
-set statusline+=\ [%l  " Line numbers
-set statusline+=\ \|\ %L]
+
+" hi User 1
+set statusline+=%1*
+set statusline+=\ [%l\ \|\ %L] " Line numbers colored with User1
+set statusline+=%*
+
 set statusline+=\ %*  " Separator
 set statusline+=\ %f\ %*  " Path
 set statusline+=\ %m
 set statusline+=%=
 set statusline+=\ %{LinterStatus()}
-set statusline+=\ %{fugitive#statusline()}
+
+" hi User 1
+set statusline+=%1*
+set statusline+=\ %{GitBranch()}
+set statusline+=%*
 
 "omnicompletion settings
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
