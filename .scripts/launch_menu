@@ -27,7 +27,7 @@ rofi \
     -modi "run,drun" \
     -show $MENU_MODE \
     -color-normal "#$TRANSPARENT$BACKGROUND, #$TEXTCOLOR, #$USELESS, #$ACTIVEROW, #$ACTIVETEXTCOLOR" \
-    -color-window "#$VISIBLE$BACKGROUND, #$BACKGROUND, #$BACKGROUND" \
+    -color-window "#$VISIBLE$BACKGROUND, #$BACKGROUND, #$USELESS" \
     -matching fuzzy \
     -lines 7 \
     -width 800 \
