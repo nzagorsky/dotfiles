@@ -142,7 +142,7 @@ endif
 let mapleader = "\<Space>"
 
 " Generate tags
-nnoremap <leader>T :Start! ctags -R .<CR>
+nnoremap <leader>T :Start! ctags .<CR>
 
 " Thank you vi
 nnoremap Y y$

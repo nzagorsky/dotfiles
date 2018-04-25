@@ -1,3 +1,4 @@
+--recurse=yes
 --languages=python,javascript
 
 --python-kinds=-iv
