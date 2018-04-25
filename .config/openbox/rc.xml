@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
+
   <resistance>
     <strength>10</strength>
     <screen_edge_strength>20</screen_edge_strength>
   </resistance>
+
   <focus>
     <focusNew>yes</focusNew>
     <!-- always try to focus new windows when they appear. other rules do
@@ -22,6 +24,7 @@
     <!-- when followMouse is enabled, and a window is given focus by moving the
        mouse into it, also raise the window -->
   </focus>
+
   <placement>
     <policy>Smart</policy>
     <!-- 'Smart' or 'UnderMouse' -->
@@ -39,6 +42,7 @@
        following: 'Mouse' - where the mouse is, or
                   'Active' - where the active window is -->
   </placement>
+
   <theme>
     <name>Arc-Dark</name>
     <titleLayout>LC</titleLayout>
@@ -51,7 +55,7 @@
       C: close
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
-  -->
+      -->
     <keepBorder>no</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
@@ -109,6 +113,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
   </theme>
+
   <desktops>
     <!-- this stuff is only used at startup, pagers allow you to change them
        during a session
@@ -136,6 +141,7 @@
     <!-- The number of milliseconds to show the popup for when switching
        desktops.  Set this to 0 to disable the popup. -->
   </desktops>
+
   <resize>
     <drawContents>yes</drawContents>
     <popupShow>NonPixel</popupShow>
@@ -152,16 +158,18 @@
          distance from bottom edge, or 'Center' -->
     </popupFixedPosition>
   </resize>
-  <!-- You can reserve a portion of your screen where windows will not cover when
+
+  <margins>
+    <!-- You can reserve a portion of your screen where windows will not cover when
      they are maximized, or when they are initially placed.
      Many programs reserve space automatically, but you can use this in other
      cases. -->
-  <margins>
     <top>0</top>
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
   </margins>
+
   <dock>
     <position>Bottom</position>
     <!-- (Top|Bottom)(Left|Right|)|Top|Bottom|Left|Right|Floating -->
@@ -180,6 +188,7 @@
     <moveButton>Middle</moveButton>
     <!-- 'Left', 'Middle', 'Right' -->
   </dock>
+
   <keyboard>
     <chainQuitKey>A-F4</chainQuitKey>
     <keybind key="C-A-Left">
@@ -225,6 +234,15 @@
     </keybind>
     <keybind key="S-W-q">
       <action name="Close"/>
+    </keybind>
+    <keybind key="S-W-r">
+      <action name="Execute">
+        <command>openbox --reconfigure</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+          <name>Reload conf file</name>
+        </startupnotify>
+      </action>
     </keybind>
     <keybind key="A-F4">
       <action name="Close"/>
@@ -401,6 +419,7 @@
       <action name="GrowToEdgeNorth"/>
     </keybind>
   </keyboard>
+
   <mouse>
     <dragThreshold>1</dragThreshold>
     <!-- number of pixels the mouse must move before a drag begins -->
@@ -735,6 +754,7 @@
       </mousebind>
     </context>
   </mouse>
+
   <menu>
     <!-- You can specify more than one menu file in here and they are all loaded,
        just don't make menu ids clash or, well, it'll be kind of pointless -->
@@ -760,104 +780,107 @@
     <manageDesktops>yes</manageDesktops>
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
+
   <applications>
-    <!--
-  # this is an example with comments through out. use these to make your
-  # own rules, but without the comments of course.
-  # you may use one or more of the name/class/role/title/type rules to specify
-  # windows to match
+        <!--
+      # this is an example with comments through out. use these to make your
+      # own rules, but without the comments of course.
+      # you may use one or more of the name/class/role/title/type rules to specify
+      # windows to match
 
-  <application name="the window's _OB_APP_NAME property (see obxprop)"
-              class="the window's _OB_APP_CLASS property (see obxprop)"
-          groupname="the window's _OB_APP_GROUP_NAME property (see obxprop)"
-         groupclass="the window's _OB_APP_GROUP_CLASS property (see obxprop)"
-               role="the window's _OB_APP_ROLE property (see obxprop)"
-              title="the window's _OB_APP_TITLE property (see obxprop)"
-               type="the window's _OB_APP_TYPE property (see obxprob)..
-                      (if unspecified, then it is 'dialog' for child windows)">
-  # you may set only one of name/class/role/title/type, or you may use more
-  # than one together to restrict your matches.
+      <application name="the window's _OB_APP_NAME property (see obxprop)"
+                  class="the window's _OB_APP_CLASS property (see obxprop)"
+              groupname="the window's _OB_APP_GROUP_NAME property (see obxprop)"
+             groupclass="the window's _OB_APP_GROUP_CLASS property (see obxprop)"
+                   role="the window's _OB_APP_ROLE property (see obxprop)"
+                  title="the window's _OB_APP_TITLE property (see obxprop)"
+                   type="the window's _OB_APP_TYPE property (see obxprob)..
+                          (if unspecified, then it is 'dialog' for child windows)">
+      # you may set only one of name/class/role/title/type, or you may use more
+      # than one together to restrict your matches.
 
-  # the name, class, role, and title use simple wildcard matching such as those
-  # used by a shell. you can use * to match any characters and ? to match
-  # any single character.
+      # the name, class, role, and title use simple wildcard matching such as those
+      # used by a shell. you can use * to match any characters and ? to match
+      # any single character.
 
-  # the type is one of: normal, dialog, splash, utility, menu, toolbar, dock,
-  #    or desktop
+      # the type is one of: normal, dialog, splash, utility, menu, toolbar, dock,
+      #    or desktop
 
-  # when multiple rules match a window, they will all be applied, in the
-  # order that they appear in this list
+      # when multiple rules match a window, they will all be applied, in the
+      # order that they appear in this list
 
 
-    # each rule element can be left out or set to 'default' to specify to not 
-    # change that attribute of the window
+        # each rule element can be left out or set to 'default' to specify to not 
+        # change that attribute of the window
 
-    <decor>yes</decor>
-    # enable or disable window decorations
+        <decor>yes</decor>
+        # enable or disable window decorations
 
-    <shade>no</shade>
-    # make the window shaded when it appears, or not
+        <shade>no</shade>
+        # make the window shaded when it appears, or not
 
-    <position force="no">
-      # the position is only used if both an x and y coordinate are provided
-      # (and not set to 'default')
-      # when force is "yes", then the window will be placed here even if it
-      # says you want it placed elsewhere.  this is to override buggy
-      # applications who refuse to behave
-      <x>center</x>
-      # a number like 50, or 'center' to center on screen. use a negative number
-      # to start from the right (or bottom for <y>), ie -50 is 50 pixels from
-      # the right edge (or bottom). use 'default' to specify using value
-      # provided by the application, or chosen by openbox, instead.
-      <y>200</y>
-      <monitor>1</monitor>
-      # specifies the monitor in a xinerama setup.
-      # 1 is the first head, or 'mouse' for wherever the mouse is
-    </position>
+        <position force="no">
+          # the position is only used if both an x and y coordinate are provided
+          # (and not set to 'default')
+          # when force is "yes", then the window will be placed here even if it
+          # says you want it placed elsewhere.  this is to override buggy
+          # applications who refuse to behave
+          <x>center</x>
+          # a number like 50, or 'center' to center on screen. use a negative number
+          # to start from the right (or bottom for <y>), ie -50 is 50 pixels from
+          # the right edge (or bottom). use 'default' to specify using value
+          # provided by the application, or chosen by openbox, instead.
+          <y>200</y>
+          <monitor>1</monitor>
+          # specifies the monitor in a xinerama setup.
+          # 1 is the first head, or 'mouse' for wherever the mouse is
+        </position>
 
-    <size>
-      # the size to make the window.
-      <width>20</width>
-      # a number like 20, or 'default' to use the size given by the application.
-      # you can use fractions such as 1/2 or percentages such as 75% in which
-      # case the value is relative to the size of the monitor that the window
-      # appears on.
-      <height>30%</height>
-    </size>
+        <size>
+          # the size to make the window.
+          <width>20</width>
+          # a number like 20, or 'default' to use the size given by the application.
+          # you can use fractions such as 1/2 or percentages such as 75% in which
+          # case the value is relative to the size of the monitor that the window
+          # appears on.
+          <height>30%</height>
+        </size>
 
-    <focus>yes</focus>
-    # if the window should try be given focus when it appears. if this is set
-    # to yes it doesn't guarantee the window will be given focus. some
-    # restrictions may apply, but Openbox will try to
+        <focus>yes</focus>
+        # if the window should try be given focus when it appears. if this is set
+        # to yes it doesn't guarantee the window will be given focus. some
+        # restrictions may apply, but Openbox will try to
 
-    <desktop>1</desktop>
-    # 1 is the first desktop, 'all' for all desktops
+        <desktop>1</desktop>
+        # 1 is the first desktop, 'all' for all desktops
 
-    <layer>normal</layer>
-    # 'above', 'normal', or 'below'
+        <layer>normal</layer>
+        # 'above', 'normal', or 'below'
 
-    <iconic>no</iconic>
-    # make the window iconified when it appears, or not
+        <iconic>no</iconic>
+        # make the window iconified when it appears, or not
 
-    <skip_pager>no</skip_pager>
-    # asks to not be shown in pagers
+        <skip_pager>no</skip_pager>
+        # asks to not be shown in pagers
 
-    <skip_taskbar>no</skip_taskbar>
-    # asks to not be shown in taskbars. window cycling actions will also
-    # skip past such windows
+        <skip_taskbar>no</skip_taskbar>
+        # asks to not be shown in taskbars. window cycling actions will also
+        # skip past such windows
 
-    <fullscreen>yes</fullscreen>
-    # make the window in fullscreen mode when it appears
+        <fullscreen>yes</fullscreen>
+        # make the window in fullscreen mode when it appears
 
-    <maximized>true</maximized>
-    # 'Horizontal', 'Vertical' or boolean (yes/no)
-  </application>
+        <maximized>true</maximized>
+        # 'Horizontal', 'Vertical' or boolean (yes/no)
+      </application>
 
-  # end of the example
--->
+      # end of the example
+    -->
+     <!-- Do not decorate windows at all and focus them from the very beginning -->
      <application class="*">
          <decor>no</decor>
          <focus>yes</focus>
     </application>
   </applications>
+
 </openbox_config>
