@@ -42,6 +42,7 @@
 --exclude=*.bundle.*
 --exclude=*bundle.*
 --exclude=.git
+--exclude=.tox
 --exclude=.hg
 --exclude=.svn
 --exclude=.tmp
