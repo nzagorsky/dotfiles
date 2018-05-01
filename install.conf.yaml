@@ -36,14 +36,19 @@
     # Emacs
     ~/.emacs.d: .emacs.d
 
-    # XFCE and Openbox
+    # Window managers
     ~/.config/xfce4/xfconf: .config/xfce4/xfconf
-    ~/.config/xfce4/terminal: .config/xfce4/terminal
-    ~/.config/openbox: .config/openbox
-    ~/.themes: .themes
     ~/.config/autostart/compton.desktop: .config/autostart/compton.desktop
-    ~/.config/compton.conf: .config/compton.conf
     ~/.config/autostart/openbox.desktop: .config/autostart/openbox.desktop
+    ~/.config/openbox: .config/openbox
+    ~/.config/awesome: .config/awesome
+
+    # Terminal settings
+    ~/.config/xfce4/terminal: .config/xfce4/terminal
+
+    # Appearance
+    ~/.config/compton.conf: .config/compton.conf
+    ~/.themes: .themes
 
     # Python
     ~/.yaourtrc: .yaourtrc

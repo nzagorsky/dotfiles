@@ -32,6 +32,4 @@ rofi \
     -lines 7 \
     -width 800 \
     -padding 100 \
-    -no-show-match \   # Disable underlining
-    -font "Ubuntu 12" \
-    -bw 0 \  
+    -no-show-match  \  

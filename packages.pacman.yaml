@@ -1,4 +1,5 @@
 - pacman:
+ 
     # Development
   - ctags  # Tags for Vim
   - docker
@@ -7,13 +8,18 @@
   - neovim
   - python-pip
   - the_silver_searcher  # AG searcher
+  - python-neovim
+  - python2-neovim
+  - xfce4-terminal
 
     # Desktop config
   - arc-gtk-theme
-  - obconf
-  - openbox
+  - obconf  # TODO
+  - awesome  # TODO
+  - openbox  # TODO
 
     # System 
+  # - xfce4-whiskermenu-plugin
   - deja-dup  # Backups
   - fd  # Faster `find`
   - fzf  # File navigation and utility with fuzzy power
@@ -21,6 +27,7 @@
   - gtop
   - htop
   - iotop
+  - npm
   - pacui  # Package managment and simple CLI GUI for Yaourt and Pacman
   - ranger
   - rofi  # App launcher
@@ -29,8 +36,6 @@
   - xclip  # For screenshots
   - xorg-xrandr  # For Java OpenGL
   - zsh
-  - npm
-  - xfce4-whiskermenu-plugin
 
     # Multimedia
   - mpv  # Video player
@@ -39,3 +44,8 @@
     # Network
   - networkmanager-openvpn
   - openvpn
+
+
+  # Customization
+  - lxappearance
+  - nitrogen
