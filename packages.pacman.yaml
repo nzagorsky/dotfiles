@@ -12,14 +12,17 @@
   - python2-neovim
   - xfce4-terminal
 
+    # Window managers.
+  - awesome
+  - openbox 
+
     # Desktop config
   - arc-gtk-theme
-  - obconf  # TODO
-  - awesome  # TODO
-  - openbox  # TODO
+  - obconf
+
 
     # System 
-  # - xfce4-whiskermenu-plugin
+  - xfce4-whiskermenu-plugin
   - deja-dup  # Backups
   - fd  # Faster `find`
   - fzf  # File navigation and utility with fuzzy power
