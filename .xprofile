@@ -12,3 +12,8 @@
 
 [[ -f ~/.extend.xprofile ]] && . ~/.extend.xprofile
 
+
+sh ~/.scripts/internet-share &
+openbox --replace &
+compton -b &
+
