@@ -41,6 +41,9 @@
     ~/.config/openbox: .config/openbox
     ~/.config/awesome: .config/awesome
 
+    # Network
+    ~/.config/proxychains.conf: .config/proxychains.conf
+
     # Terminal settings
     ~/.config/xfce4/terminal: .config/xfce4/terminal
 
