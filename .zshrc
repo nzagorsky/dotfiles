@@ -153,5 +153,9 @@ ctop () {
         -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest
 }
 
+torify () {
+    proxychains -f ~/.config/proxychains.conf $*
+}
+
 # Kukareku.
 # base16_phd

@@ -38,8 +38,6 @@
 
     # Window managers
     ~/.config/xfce4/xfconf: .config/xfce4/xfconf
-    ~/.config/autostart/compton.desktop: .config/autostart/compton.desktop
-    ~/.config/autostart/openbox.desktop: .config/autostart/openbox.desktop
     ~/.config/openbox: .config/openbox
     ~/.config/awesome: .config/awesome
 

@@ -47,8 +47,13 @@
     # Network
   - networkmanager-openvpn
   - openvpn
+  - proxychains-ng
+  - tor
 
 
   # Customization
   - lxappearance
   - nitrogen
+
+- shell:
+    - sudo systemctl enable tor && sudo systemctl start tor
