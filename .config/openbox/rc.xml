@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
-
   <resistance>
     <strength>10</strength>
     <screen_edge_strength>20</screen_edge_strength>
   </resistance>
-
   <focus>
     <focusNew>yes</focusNew>
     <!-- always try to focus new windows when they appear. other rules do
@@ -24,7 +22,6 @@
     <!-- when followMouse is enabled, and a window is given focus by moving the
        mouse into it, also raise the window -->
   </focus>
-
   <placement>
     <policy>Smart</policy>
     <!-- 'Smart' or 'UnderMouse' -->
@@ -42,7 +39,6 @@
        following: 'Mouse' - where the mouse is, or
                   'Active' - where the active window is -->
   </placement>
-
   <theme>
     <name>Arc-Dark</name>
     <titleLayout>LC</titleLayout>
@@ -56,7 +52,7 @@
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
       -->
-    <keepBorder>no</keepBorder>
+    <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
       <name>Sans</name>
@@ -113,7 +109,6 @@
       <!-- 'italic' or 'normal' -->
     </font>
   </theme>
-
   <desktops>
     <!-- this stuff is only used at startup, pagers allow you to change them
        during a session
@@ -141,7 +136,6 @@
     <!-- The number of milliseconds to show the popup for when switching
        desktops.  Set this to 0 to disable the popup. -->
   </desktops>
-
   <resize>
     <drawContents>yes</drawContents>
     <popupShow>NonPixel</popupShow>
@@ -158,7 +152,6 @@
          distance from bottom edge, or 'Center' -->
     </popupFixedPosition>
   </resize>
-
   <margins>
     <!-- You can reserve a portion of your screen where windows will not cover when
      they are maximized, or when they are initially placed.
@@ -169,7 +162,6 @@
     <left>0</left>
     <right>0</right>
   </margins>
-
   <dock>
     <position>Bottom</position>
     <!-- (Top|Bottom)(Left|Right|)|Top|Bottom|Left|Right|Floating -->
@@ -188,7 +180,6 @@
     <moveButton>Middle</moveButton>
     <!-- 'Left', 'Middle', 'Right' -->
   </dock>
-
   <keyboard>
     <chainQuitKey>A-F4</chainQuitKey>
     <keybind key="C-A-Left">
@@ -419,7 +410,6 @@
       <action name="GrowToEdgeNorth"/>
     </keybind>
   </keyboard>
-
   <mouse>
     <dragThreshold>1</dragThreshold>
     <!-- number of pixels the mouse must move before a drag begins -->
@@ -754,7 +744,6 @@
       </mousebind>
     </context>
   </mouse>
-
   <menu>
     <!-- You can specify more than one menu file in here and they are all loaded,
        just don't make menu ids clash or, well, it'll be kind of pointless -->
@@ -780,9 +769,8 @@
     <manageDesktops>yes</manageDesktops>
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
-
   <applications>
-        <!--
+    <!--
       # this is an example with comments through out. use these to make your
       # own rules, but without the comments of course.
       # you may use one or more of the name/class/role/title/type rules to specify
@@ -876,11 +864,10 @@
 
       # end of the example
     -->
-     <!-- Do not decorate windows at all and focus them from the very beginning -->
-     <application class="*">
-         <decor>no</decor>
-         <focus>yes</focus>
+    <!-- Do not decorate windows at all and focus them from the very beginning -->
+    <application class="*">
+      <decor>no</decor>
+      <focus>yes</focus>
     </application>
   </applications>
-
 </openbox_config>
