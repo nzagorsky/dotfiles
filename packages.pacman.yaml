@@ -21,7 +21,6 @@
   - iotop
   - npm
   - pacui  # Package managment and simple CLI GUI for Yaourt and Pacman
-  - ranger
   - rofi  # App launcher
   - sshfs  # Mount folders using SSH
   - tmux
