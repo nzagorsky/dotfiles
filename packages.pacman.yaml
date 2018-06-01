@@ -12,18 +12,7 @@
   - python2-neovim
   - xfce4-terminal
 
-    # Window managers.
-  - awesome
-  - openbox 
-
-    # Desktop config
-  - arc-gtk-theme
-  - obconf
-
-
     # System 
-  - xfce4-whiskermenu-plugin
-  - deja-dup  # Backups
   - fd  # Faster `find`
   - fzf  # File navigation and utility with fuzzy power
   - glances
@@ -49,11 +38,6 @@
   - openvpn
   - proxychains-ng
   - tor
-
-
-  # Customization
-  - lxappearance
-  - nitrogen
 
 - shell:
     - sudo systemctl enable tor && sudo systemctl start tor
