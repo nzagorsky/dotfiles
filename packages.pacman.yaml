@@ -13,6 +13,7 @@
   - xfce4-terminal
 
     # System 
+  - binutils  # For yaourt builds
   - fd  # Faster `find`
   - fzf  # File navigation and utility with fuzzy power
   - glances
