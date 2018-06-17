@@ -395,12 +395,12 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers.go = ['gofmt']
 
     let g:ale_linters.javascript = ['standard']
-    let g:ale_linters.python = ['pylint']
+    let g:ale_linters.python = ['flake8']
 
     let g:ale_linters.vim = ['vint']
 
     let g:ale_fixers.javascript = ['standard']
-    let g:ale_fixers.python = ['yapf']
+    let g:ale_fixers.python = ['black']
 endif
 
 if g:dein#is_sourced('vim-vinegar')
