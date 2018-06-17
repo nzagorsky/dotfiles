@@ -17,6 +17,9 @@
   - fd  # Faster `find`
   - fzf  # File navigation and utility with fuzzy power
   - glances
+  - snapd  # Package manager
+  - flashplugin
+  - pepper-flash
   - gtop
   - htop
   - iotop
@@ -41,3 +44,4 @@
 
 - shell:
     - sudo systemctl enable tor && sudo systemctl start tor
+    - sudo systemctl enable snapd && sudo systemctl start snapd

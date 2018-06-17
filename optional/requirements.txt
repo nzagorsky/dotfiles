@@ -10,6 +10,8 @@ ropevim
 flake8 
 autopep8
 pep8
+pylint
+black # Code format
 pycodestyle
 
 # Format & Sort
