@@ -28,6 +28,7 @@
   - rofi  # App launcher
   - sshfs  # Mount folders using SSH
   - tmux
+  - yaourt
   - xclip  # For screenshots
   - xorg-xrandr  # For Java OpenGL
   - zsh
