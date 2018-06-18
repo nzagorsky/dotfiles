@@ -6,13 +6,13 @@ export BROWSER="/usr/bin/opera"
 export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 
-# Languages
-export GOPATH="$HOME/go"  # GO
 export PATH="$PATH:$HOME/.cargo/bin"  # RUST
 export PATH="$PATH:$HOME/.nimble/bin"  # NIM
 export PATH="$PATH:$HOME/.scripts"  
 export PATH="$PATH:$HOME/.bin" 
+export GOPATH="$HOME/go"  # GO
 export PATH="$PATH:$GOPATH/bin"  # GO
+export PATH="$PATH:/var/lib/snapd/snap/bin"  # Snap packages
 export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
 
 # added by Miniconda3 installer
