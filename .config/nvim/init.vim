@@ -78,13 +78,12 @@ if dein#load_state(expand('~/.config/nvim'))
     " Code check.
     call dein#add('w0rp/ale')
 
-    " Auto complete.
+    " Auto complete pairs.
     call dein#add('raimondi/delimitmate')
 
     " Routine automation.
-    " call dein#add('Chiel92/vim-autoformat')
-    call dein#add('tpope/vim-surround')
     call dein#add('ervandew/supertab')
+    call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
 
@@ -122,9 +121,10 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
     " LSP
-
-    call dein#add('prabirshrestha/async.vim')
-    call dein#add('prabirshrestha/vim-lsp')
+    call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'next',
+    \ 'build': 'bash install.sh',
+    \ })
 
     if dein#check_install()
       call dein#install()
@@ -371,9 +371,9 @@ endif
 if g:dein#is_sourced('ale')
     let g:ale_completion_enabled = 1
     noremap <F3> :ALEFix<CR>
-    noremap <leader>d :ALEGoToDefinition<CR>
-    noremap <leader>n :ALEFindReferences<CR>
-    noremap K :ALEHover<CR>
+    " noremap <leader>d :ALEGoToDefinition<CR>
+    " noremap <leader>n :ALEFindReferences<CR>
+    " noremap K :ALEHover<CR>
 
     let g:ale_sign_error = 'x'
     let g:ale_sign_warning = '~'
@@ -399,14 +399,26 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers.javascript = ['standard']
     let g:ale_fixers.python = ['black']
 
+    if executable('pyls')
+        let g:ale_linters.python = ['pyls']
+    endif
+
+endif
+
+if g:dein#is_sourced('LanguageClient-neovim')
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> <leader>n :call LanguageClient#textDocument_references()<CR>
+    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
+    set completefunc=LanguageClient#complete
+    let g:LanguageClient_diagnosticsEnable = 0
 
     if executable('pyls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'pyls',
-            \ 'cmd': {server_info->['pyls']},
-            \ 'whitelist': ['python'],
-            \ })
-        let g:ale_linters.python = ['pyls']
+        let g:LanguageClient_serverCommands = {
+            \ 'python': ['pyls'],
+            \ }
     endif
 endif
 
