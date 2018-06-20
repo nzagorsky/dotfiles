@@ -1,22 +1,10 @@
-
 # Neovim support
 neovim
 trollius
 
 # Code style libs.
-vulture 
-rope 
-ropevim 
-flake8 
-autopep8
-pep8
-pylint
 black # Code format
-pycodestyle
-
-# Format & Sort
-yapf
-isort
+python-language-server[all]
 
 # AWS CLI.
 saws

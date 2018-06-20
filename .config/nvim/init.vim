@@ -1,7 +1,8 @@
 " ------------------------------------------------------------------------------
 " Basic settings.
 " ------------------------------------------------------------------------------
-" use vim settings, rather than vi settings must be first, because it changes other options as a side effect
+" use vim settings, rather than vi settings.
+" Must be first, because it changes other options as a side effect
 set nocompatible
 
 " Optimize for fast terminal connections
@@ -32,7 +33,7 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
-" Quickly edit and source vimrc, udpating all buffers.
+" Quickly edit and source vimrc, updating all buffers.
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 nnoremap geft :Explore ~/.vim/ftplugin<CR>
@@ -78,7 +79,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('w0rp/ale')
 
     " Auto complete.
-    call dein#add('Shougo/deoplete.nvim', { 'build': ':UpdateRemotePlugins' })
     call dein#add('raimondi/delimitmate')
 
     " Routine automation.
@@ -101,8 +101,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Python modules.
     call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
-    call dein#add('zchee/deoplete-jedi', { 'on_ft': 'python' })
-    call dein#add('davidhalter/jedi-vim', { 'on_ft': 'python' })
     call dein#add('python-rope/ropevim', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', {'on_ft': 'requirements'})
     call dein#add('Vimjas/vim-python-pep8-indent', { 'on_ft': 'python' })
@@ -117,15 +115,16 @@ if dein#load_state(expand('~/.config/nvim'))
     " call dein#add('baabelfish/nvim-nim', { 'on_ft': 'nim' })
 
     " Go
-    call dein#add('zchee/deoplete-go', {'build': ['make', 'go get -u github.com/nsf/gocode'], 'on_ft': 'go'})
     call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
-
-    " " Rust
-    " call dein#add('sebastianmarkow/deoplete-rust', {'on_ft': 'rust'})
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
+
+    " LSP
+
+    call dein#add('prabirshrestha/async.vim')
+    call dein#add('prabirshrestha/vim-lsp')
 
     if dein#check_install()
       call dein#install()
@@ -186,7 +185,6 @@ if exists(':tnoremap')
     autocmd BufLeave term://* stopinsert
 
 endif
-
 
 "" Tabs
 nnoremap <silent> <S-t> :tab split<CR>
@@ -328,11 +326,6 @@ set statusline+=%*
 " Plugins setup.
 " ------------------------------------------------------------------------------
 
-if g:dein#is_sourced('deoplete.nvim')
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#auto_completion_start_length = 0
-endif
-
 if g:dein#is_sourced('fzf.vim')
     autocmd! FileType fzf tnoremap <buffer> jk <c-c>
     
@@ -376,7 +369,11 @@ endif
 
 
 if g:dein#is_sourced('ale')
+    let g:ale_completion_enabled = 1
     noremap <F3> :ALEFix<CR>
+    noremap <leader>d :ALEGoToDefinition<CR>
+    noremap <leader>n :ALEFindReferences<CR>
+    noremap K :ALEHover<CR>
 
     let g:ale_sign_error = 'x'
     let g:ale_sign_warning = '~'
@@ -401,9 +398,18 @@ if g:dein#is_sourced('ale')
 
     let g:ale_fixers.javascript = ['standard']
     let g:ale_fixers.python = ['black']
+
+
+    if executable('pyls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'pyls',
+            \ 'cmd': {server_info->['pyls']},
+            \ 'whitelist': ['python'],
+            \ })
+        let g:ale_linters.python = ['pyls']
+    endif
 endif
 
 if g:dein#is_sourced('vim-vinegar')
     nnoremap <C-e> :Explore<CR>
 endif
-
