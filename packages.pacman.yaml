@@ -17,6 +17,7 @@
   - fd  # Faster `find`
   - fzf  # File navigation and utility with fuzzy power
   - glances
+  - rust
   - snapd  # Package manager
   - flashplugin
   - pepper-flash
