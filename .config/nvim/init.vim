@@ -406,19 +406,19 @@ if g:dein#is_sourced('ale')
 endif
 
 if g:dein#is_sourced('LanguageClient-neovim')
+    set completefunc=LanguageClient#complete
+
+    let g:LanguageClient_diagnosticsEnable = 0
+    let g:LanguageClient_serverCommands = {}
+
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
     nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
     nnoremap <silent> <leader>n :call LanguageClient#textDocument_references()<CR>
     nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
-    set completefunc=LanguageClient#complete
-    let g:LanguageClient_diagnosticsEnable = 0
-
     if executable('pyls')
-        let g:LanguageClient_serverCommands = {
-            \ 'python': ['pyls'],
-            \ }
+        let g:LanguageClient_serverCommands.python = ['pyls']
     endif
 endif
 
