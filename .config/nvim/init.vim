@@ -1,6 +1,6 @@
-" ------------------------------------------------------------------------------
+" --------------------
 " Basic settings.
-" ------------------------------------------------------------------------------
+" --------------------
 " use vim settings, rather than vi settings.
 " Must be first, because it changes other options as a side effect
 set nocompatible
@@ -41,9 +41,9 @@ nnoremap geft :Explore ~/.vim/ftplugin<CR>
 " Don't show the intro message when starting Vim
 set shortmess=aoOtIWcFs
 
-" ------------------------------------------------------------------------------
+" --------------------
 " Plugins
-" ------------------------------------------------------------------------------
+" --------------------
 " Setup dein
 if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
     call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
@@ -80,6 +80,13 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Auto complete pairs.
     call dein#add('raimondi/delimitmate')
+
+    " Autocompletion
+    call dein#add('Shougo/deoplete.nvim')
+    if !has('nvim')
+      call dein#add('roxma/nvim-yarp')
+      call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
 
     " Routine automation.
     call dein#add('ervandew/supertab')
@@ -135,9 +142,9 @@ if dein#load_state(expand('~/.config/nvim'))
 endif
 
 
-" ------------------------------------------------------------------------------
+" --------------------
 " Key bindings
-" ------------------------------------------------------------------------------
+" --------------------
 let mapleader = "\<Space>"
 
 " Generate tags
@@ -198,9 +205,9 @@ nnoremap <leader><leader> V
 " Sudo hack
 cmap w!! w !sudo tee % >/dev/null
 
-" ------------------------------------------------------------------------------
+" --------------------
 " Editor setup
-" ------------------------------------------------------------------------------
+" --------------------
 
 " Color setup
 set background=dark
@@ -280,9 +287,9 @@ else
     set shell=/bin/sh
 endif
 
-" ------------------------------------------------------------------------------
+" --------------------
 " Statusline
-" ------------------------------------------------------------------------------
+" --------------------
 function! LinterStatus() abort
    let l:counts = ale#statusline#Count(bufnr(''))
    let l:all_errors = l:counts.error + l:counts.style_error
@@ -322,9 +329,9 @@ set statusline+=\ %{GitBranch()}
 set statusline+=%*
 
 
-" ------------------------------------------------------------------------------
+" --------------------
 " Plugins setup.
-" ------------------------------------------------------------------------------
+" --------------------
 
 if g:dein#is_sourced('fzf.vim')
     autocmd! FileType fzf tnoremap <buffer> jk <c-c>
@@ -367,13 +374,12 @@ if g:dein#is_sourced('vim-fugitive')
     noremap <Leader>gr :Gremove<CR>
 endif
 
+if g:dein#is_sourced('deoplete.nvim')
+    let g:deoplete#enable_at_startup = 1
+endif
 
 if g:dein#is_sourced('ale')
-    let g:ale_completion_enabled = 1
     noremap <F3> :ALEFix<CR>
-    " noremap <leader>d :ALEGoToDefinition<CR>
-    " noremap <leader>n :ALEFindReferences<CR>
-    " noremap K :ALEHover<CR>
 
     let g:ale_sign_error = 'x'
     let g:ale_sign_warning = '~'
@@ -406,8 +412,7 @@ if g:dein#is_sourced('ale')
 endif
 
 if g:dein#is_sourced('LanguageClient-neovim')
-    set completefunc=LanguageClient#complete
-
+    " set completefunc=LanguageClient#complete
     let g:LanguageClient_diagnosticsEnable = 0
     let g:LanguageClient_serverCommands = {}
 
