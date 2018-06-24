@@ -22,6 +22,7 @@
   - flashplugin
   - pepper-flash
   - gtop
+  - gcc
   - htop
   - iotop
   - npm

@@ -122,6 +122,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Go
     call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
+    call dein#add('zchee/deoplete-go', {'build': 'make'})
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
@@ -395,15 +396,13 @@ if g:dein#is_sourced('ale')
     let g:ale_linters = {}
     let g:ale_fixers = {}
 
-    let g:ale_fixers.go = ['gofmt']
-
     let g:ale_linters.javascript = ['standard']
     let g:ale_linters.python = ['flake8']
-
     let g:ale_linters.vim = ['vint']
 
     let g:ale_fixers.javascript = ['standard']
     let g:ale_fixers.python = ['black']
+    let g:ale_fixers.go = ['gofmt']
 
     if executable('pyls')
         let g:ale_linters.python = ['pyls']
@@ -412,7 +411,6 @@ if g:dein#is_sourced('ale')
 endif
 
 if g:dein#is_sourced('LanguageClient-neovim')
-    " set completefunc=LanguageClient#complete
     let g:LanguageClient_diagnosticsEnable = 0
     let g:LanguageClient_serverCommands = {}
 
