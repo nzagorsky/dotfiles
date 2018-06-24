@@ -98,6 +98,9 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('skywind3000/asyncrun.vim')
     call dein#add('tpope/vim-dispatch')
 
+    " Tags
+    call dein#add('ludovicchabant/vim-gutentags')
+
     " Git integration.
     call dein#add('tpope/vim-fugitive')
     call dein#add('airblade/vim-gitgutter')
@@ -144,12 +147,36 @@ endif
 
 
 " --------------------
+"  Functions
+" --------------------
+function! LinterStatus() abort
+   let l:counts = ale#statusline#Count(bufnr(''))
+   let l:all_errors = l:counts.error + l:counts.style_error
+   let l:all_non_errors = l:counts.total - l:all_errors
+   return l:counts.total == 0 ? '' : printf(
+   \ 'W:%d E:%d',
+   \ l:all_non_errors,
+   \ l:all_errors
+   \)
+endfunction
+
+function! GitBranch() abort
+    let l:stripped_git_status = matchstr(fugitive#statusline(), '(.*)')[1:-2]
+    return l:stripped_git_status
+endfunction
+
+function! UpdateTags() abort
+    :Start! ctags .<CR>
+endfunction
+
+
+" --------------------
 " Key bindings
 " --------------------
 let mapleader = "\<Space>"
 
 " Generate tags
-nnoremap <leader>T :Start! ctags .<CR>
+nnoremap <leader>T :call UpdateTags()<CR>
 
 " Thank you vi
 nnoremap Y y$
@@ -291,21 +318,6 @@ endif
 " --------------------
 " Statusline
 " --------------------
-function! LinterStatus() abort
-   let l:counts = ale#statusline#Count(bufnr(''))
-   let l:all_errors = l:counts.error + l:counts.style_error
-   let l:all_non_errors = l:counts.total - l:all_errors
-   return l:counts.total == 0 ? '' : printf(
-   \ 'W:%d E:%d',
-   \ l:all_non_errors,
-   \ l:all_errors
-   \)
-endfunction
-
-function! GitBranch() abort
-    let l:stripped_git_status = matchstr(fugitive#statusline(), '(.*)')[1:-2]
-    return l:stripped_git_status
-endfunction
 
 hi User1 ctermfg=15  " White
 
