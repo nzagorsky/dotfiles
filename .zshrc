@@ -42,6 +42,7 @@ antigen use oh-my-zsh
 antigen bundle command-not-found
 antigen bundle compleat
 antigen bundle docker
+antigen bundle kubectl
 antigen bundle git-extras
 antigen bundle gitfast
 antigen bundle pip
@@ -96,6 +97,7 @@ alias spac='pacman -Ss'
 alias upac='sudo pacman -Syu'
 alias v='nvim'
 alias e='emacs -nw'
+alias k='kubectl'
 
 
 #------------------------
