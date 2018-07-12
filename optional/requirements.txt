@@ -5,6 +5,7 @@ trollius
 # Code style libs.
 black # Code format
 python-language-server[all]
+yamllint
 
 # AWS CLI.
 saws
@@ -14,3 +15,5 @@ ipython
 
 # Env management
 pipenv
+
+

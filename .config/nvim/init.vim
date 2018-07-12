@@ -137,6 +137,10 @@ if dein#load_state(expand('~/.config/nvim'))
     \ 'build': 'bash install.sh',
     \ })
 
+    " Snippets
+    call dein#add('Shougo/neosnippet.vim')
+    call dein#add('Shougo/neosnippet-snippets')
+
     if dein#check_install()
       call dein#install()
       let pluginsExist=1
@@ -357,7 +361,7 @@ if g:dein#is_sourced('fzf.vim')
     nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>c :Commands<CR>
     nnoremap <leader>h :Helptags<CR>
-    nnoremap <leader>l :BLines<CR>
+    nnoremap <leader>l :Lines<CR>
     nnoremap <leader>t :Tags<CR>
 endif
 
@@ -411,15 +415,22 @@ if g:dein#is_sourced('ale')
     let g:ale_linters.javascript = ['standard']
     let g:ale_linters.python = ['flake8']
     let g:ale_linters.vim = ['vint']
+    let g:ale_linters.yaml = ['yamllint']
 
     let g:ale_fixers.javascript = ['standard']
     let g:ale_fixers.python = ['black']
     let g:ale_fixers.go = ['gofmt']
+    let g:ale_fixers.yaml = ['yamllint']
 
     if executable('pyls')
         let g:ale_linters.python = ['pyls']
     endif
+endif
 
+if g:dein#is_sourced('neosnippet.vim')
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
 endif
 
 if g:dein#is_sourced('LanguageClient-neovim')
@@ -440,3 +451,17 @@ endif
 if g:dein#is_sourced('vim-vinegar')
     nnoremap <C-e> :Explore<CR>
 endif
+
+" Creating parent folders if they doesn't exist on buffer save.
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
