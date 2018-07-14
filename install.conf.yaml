@@ -18,7 +18,7 @@
     ~/.tmux.conf: .tmux.conf
 
     # ZSH
-    ~/.zsh/antigen: .zsh/antigen  # Plugin manager.
+    ~/.zsh: .zsh
     ~/.zshrc: .zshrc
     ~/.config/base16-shell: .config/base16-shell  # Themes
     ~/.scripts: .scripts
