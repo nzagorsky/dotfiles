@@ -1,6 +1,3 @@
-#------------------------
-# Key bindings
-#------------------------
 bindkey -e
 
 # Search through history

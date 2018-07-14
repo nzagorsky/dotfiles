@@ -14,7 +14,6 @@ antigen bundle z
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-history-substring-search
 
 # Pure prompt
 antigen bundle mafredri/zsh-async
