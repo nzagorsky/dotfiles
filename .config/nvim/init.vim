@@ -216,6 +216,10 @@ if exists(':tnoremap')
     tnoremap <C-k> <C-\><C-n><C-w>k
     tnoremap <C-l> <C-\><C-n><C-w>l
 
+    " Switch tab properly
+    tnoremap gt <C-\><C-n>gt 
+    tnoremap gT <C-\><C-n>gT 
+
     " Exit for term mode
     tnoremap jk <C-\><C-n>
 
@@ -249,8 +253,6 @@ syntax on
 "
 " Disable vim background
 hi Normal ctermbg=none
-hi StatusLineNC ctermbg=none cterm=none
-hi StatusLine ctermbg=none cterm=none
 
 " Disable linenr on the left
 hi LineNr ctermbg=none cterm=none
@@ -259,8 +261,6 @@ hi LineNr ctermbg=none cterm=none
 set fillchars+=vert:│
 hi VertSplit ctermbg=NONE guibg=NONE
 
-" `8` == comment color
-hi StatusLine ctermfg=8   
 
 " Showcase comments in italics
 highlight Comment cterm=italic gui=italic
@@ -268,7 +268,6 @@ highlight Comment cterm=italic gui=italic
 filetype indent on
 filetype plugin on
 filetype plugin indent on " Enable filetype plugins and indention
-" set autoindent " enable auto indentation
 
 set scrolloff=3 " keep some more lines for scope
 
@@ -284,9 +283,8 @@ set softtabstop=4
 "omnicompletion settings
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-" Make it obvious where 80 characters is
-set textwidth=80
-" set colorcolumn=+1
+" Prevent line breaking
+set textwidth=0
 
 set nostartofline " Don’t reset cursor to start of line when moving around.
 set showcmd " Show the (partial) command as it’s being typed
@@ -324,27 +322,34 @@ endif
 " --------------------
 
 hi User1 ctermfg=15  " White
+hi User2 ctermfg=8  " Dark gray
+hi StatusLine ctermfg=8   " `8` == comment color
 
 " To format status line wrap with `%#* and %*` where # is User number.
 set laststatus=2
 set statusline=
 
-" hi User 1
-set statusline+=%1*
-set statusline+=\ [%l\ \|\ %L] " Line numbers colored with User1
-set statusline+=%*
-
 set statusline+=\ %*  " Separator
 set statusline+=\ %f\ %*  " Path
 set statusline+=\ %m
 set statusline+=%=
-set statusline+=\ %{LinterStatus()}
+set statusline+=\ %{LinterStatus()}\ 
 
-" hi User 1
-set statusline+=%1*
-set statusline+=\ %{GitBranch()}
-set statusline+=%*
+" Filetype
+set statusline+=\ %y\  
 
+" Git branch data
+" set statusline+=%1*
+set statusline+=⎇\ %{GitBranch()}
+" set statusline+=%*
+
+" Line numbers
+" set statusline+=%1*
+set statusline+=\ %l\/%L
+" set statusline+=%*
+
+hi StatusLineNC ctermbg=none cterm=none
+hi StatusLine ctermbg=none cterm=none
 
 " --------------------
 " Plugins setup.
@@ -453,7 +458,7 @@ if g:dein#is_sourced('vim-vinegar')
 endif
 
 " Creating parent folders if they doesn't exist on buffer save.
-function s:MkNonExDir(file, buf)
+function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
@@ -461,7 +466,15 @@ function s:MkNonExDir(file, buf)
         endif
     endif
 endfunction
+
 augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
+" Enable syntax highlighting when buffers were loaded through :bufdo, which
+" disables the Syntax autocmd event to speed up processing.
+augroup EnableSyntaxHighlighting
+    autocmd! BufWinEnter * nested if exists('syntax_on') && ! exists('b:current_syntax') && ! empty(&l:filetype) | syntax enable | endif
+    autocmd! BufRead * if exists('syntax_on') && exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') != -1 | unlet! b:current_syntax | endif
 augroup END

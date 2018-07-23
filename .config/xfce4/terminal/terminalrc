@@ -25,10 +25,11 @@ MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
 MiscNewTabAdjacent=TRUE
 MiscShowRelaunchDialog=TRUE
-FontUseSystem=TRUE
 ScrollingUnlimited=TRUE
 TitleMode=TERMINAL_TITLE_REPLACE
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=0,900000
+FontName=Monospace 11.5
+FontUseSystem=TRUE
 
