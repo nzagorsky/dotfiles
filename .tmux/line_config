@@ -6,7 +6,7 @@ set -g status-attr dim
 set -g status-bg default
 set -g status-fg colour137
 set -g status-justify "left"
-set -g status-position top
+set -g status-position "bottom"
 
 # Left status line part
 # set -g status-left "#[fg=colour243] #S #[fg=colour2,nobold,nounderscore,noitalics]"
