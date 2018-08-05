@@ -32,4 +32,5 @@ BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=0,900000
 FontName=Monospace 11.5
 FontUseSystem=TRUE
+ScrollingOnOutput=FALSE
 
