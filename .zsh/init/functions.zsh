@@ -23,7 +23,9 @@ ex ()
 
 
 # Disk usage
-function dutop { du --one-file-system --max-depth=2 -h * | sort -hr | head -20; }
+function dutop {
+    du --one-file-system --max-depth=2 -h / | sort -hr | head -20;
+}
 
 # Tmux
 t () {

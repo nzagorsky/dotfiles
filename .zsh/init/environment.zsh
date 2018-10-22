@@ -2,14 +2,22 @@ export BROWSER="/usr/bin/opera"
 export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 
-export PATH="$PATH:$HOME/.cargo/bin"  # RUST
+# Nim
 export PATH="$PATH:$HOME/.nimble/bin"  # NIM
+
+# Utils
 export PATH="$PATH:$HOME/.scripts"  
 export PATH="$PATH:$HOME/.bin" 
-export GOPATH="$HOME/go"  # GO
-export PATH="$PATH:$GOPATH/bin"  # GO
+
+# Go
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# Snaps
 export PATH="$PATH:/var/lib/snapd/snap/bin"  # Snap packages
-export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.6/site-packages"  # Python
+
+# Python
+# export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.7/site-packages"  # Python
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || find * -type f'
