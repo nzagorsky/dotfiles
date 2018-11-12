@@ -110,7 +110,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Python modules.
     call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
-    call dein#add('python-rope/ropevim', { 'on_ft': 'python' })
+    " call dein#add('python-rope/ropevim', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', {'on_ft': 'requirements'})
     call dein#add('Vimjas/vim-python-pep8-indent', { 'on_ft': 'python' })
     call dein#add('mindriot101/vim-yapf', { 'on_ft': 'python' })
@@ -417,19 +417,28 @@ if g:dein#is_sourced('ale')
     let g:ale_linters = {}
     let g:ale_fixers = {}
 
+    " JS
     let g:ale_linters.javascript = ['standard']
-    let g:ale_linters.python = ['flake8']
-    let g:ale_linters.vim = ['vint']
-    let g:ale_linters.yaml = ['yamllint']
-
     let g:ale_fixers.javascript = ['standard']
-    let g:ale_fixers.python = ['black']
-    let g:ale_fixers.go = ['gofmt']
-    let g:ale_fixers.yaml = ['yamllint']
 
+    " Python
+    let g:ale_linters.python = ['flake8']
+    let g:ale_fixers.python = ['black']
     if executable('pyls')
         let g:ale_linters.python = ['pyls']
     endif
+
+    " Yaml
+    let g:ale_fixers.yaml = ['prettier']
+    let g:ale_linters.yaml = ['yamllint']
+
+    " Rest
+    let g:ale_linters.vim = ['vint']
+    let g:ale_fixers.go = ['gofmt']
+    let g:ale_fixers.html = ['prettier']
+    let g:ale_fixers.json = ['prettier']
+    let g:ale_fixers.markdown = ['prettier']
+
 endif
 
 if g:dein#is_sourced('neosnippet.vim')

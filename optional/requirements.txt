@@ -3,17 +3,13 @@ neovim
 trollius
 
 # Code style libs.
-black # Code format
+black
+vim-vint
 python-language-server[all]
 yamllint
-
-# AWS CLI.
-saws
 
 # Interactive shell
 ipython
 
 # Env management
 pipenv
-
-

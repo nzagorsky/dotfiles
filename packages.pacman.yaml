@@ -1,51 +1,49 @@
 - pacman:
- 
     # Development
-  - ctags  # Tags for Vim
-  - docker
-  - docker-compose
-  - go
-  - neovim
-  - python-pip
-  - the_silver_searcher  # AG searcher
-  - python-neovim
-  - python2-neovim
-  - xfce4-terminal
+    - ctags # Tags for Vim
+    - docker
+    - docker-compose
+    - go
+    - neovim
+    - python-pip
+    - the_silver_searcher # AG searcher
+    - python-neovim
+    - python2-neovim
+    - xfce4-terminal
 
-  # System
-  - binutils  # For yaourt builds
-  - fd  # Faster `find`
-  - fzf  # File navigation and utility with fuzzy power
-  - glances
-  - patch
-  - autoconf
-  - rust
-  - snapd  # Package manager
-  - flashplugin
-  - pepper-flash
-  - gtop
-  - gcc
-  - htop
-  - iotop
-  - npm
-  - pacui  # Package managment and simple CLI GUI for Yaourt and Pacman
-  - rofi  # App launcher
-  - sshfs  # Mount folders using SSH
-  - tmux
-  - yaourt
-  - xclip  # For screenshots
-  - xorg-xrandr  # For Java OpenGL
-  - zsh
+    # System
+    - binutils # For yaourt builds
+    - fd # Faster `find`
+    - fzf # File navigation and utility with fuzzy power
+    - glances
+    - patch
+    - autoconf
+    - rust
+    - snapd # Package manager
+    - flashplugin
+    - pepper-flash
+    - gtop
+    - gcc
+    - htop
+    - iotop
+    - npm
+    - pacui # Package managment and simple CLI GUI for Yaourt and Pacman
+    - rofi # App launcher
+    - sshfs # Mount folders using SSH
+    - tmux
+    - yaourt
+    - xclip # For screenshots
+    - xorg-xrandr # For Java OpenGL
+    - zsh
+      # Multimedia
+    - mpv # Video player
+    - playerctl # Control media players from keyboard
 
-    # Multimedia
-  - mpv  # Video player
-  - playerctl  # Control media players from keyboard
-
-    # Network
-  - networkmanager-openvpn
-  - openvpn
-  - proxychains-ng
-  - tor
+      # Network
+    - networkmanager-openvpn
+    - openvpn
+    - proxychains-ng
+    - tor
 
 - shell:
     - sudo systemctl enable tor && sudo systemctl start tor
