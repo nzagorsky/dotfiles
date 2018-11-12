@@ -54,8 +54,7 @@
     - [sudo pip3 install -r optional/requirements.txt -U, Python dependencies]
     # - [sudo npm install -g neovim, Optional Node provider for neovim]
     - [~/.tmux/plugins/tpm/bin/install_plugins, Tmux plugin installation]
-    - git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; |
-      ~/.fzf/install --all
+    - "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install --all"
     - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
     # - [emacs --batch --load ~/.emacs.d/init.el, Installing emacs files]
     - [sudo npm install -g standard prettier, Linting for JS and autoformat]
