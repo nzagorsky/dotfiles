@@ -120,8 +120,8 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('pangloss/vim-javascript', { 'on_ft': 'javascript.jsx' })
     call dein#add('mxw/vim-jsx', { 'on_ft': 'javascript.jsx' })
 
-    "Nim
-    " call dein#add('baabelfish/nvim-nim', { 'on_ft': 'nim' })
+    " Nim
+    call dein#add('zah/nim.vim', { 'on_ft': 'nim' })
 
     " Go
     call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
@@ -459,6 +459,10 @@ if g:dein#is_sourced('LanguageClient-neovim')
 
     if executable('pyls')
         let g:LanguageClient_serverCommands.python = ['pyls']
+    endif
+
+    if executable('nimlsp')
+        let g:LanguageClient_serverCommands.nim = ['nimlsp']
     endif
 endif
 

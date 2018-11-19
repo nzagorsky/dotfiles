@@ -10,11 +10,15 @@ export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin" 
 
 # Go
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 
 # Snaps
 export PATH="$PATH:/var/lib/snapd/snap/bin"  # Snap packages
+
+# Nim
+export NIMPATH="~/.nimble"
+export PATH="$PATH:$NIMPATH/bin"
 
 # Python
 # export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.7/site-packages"  # Python
