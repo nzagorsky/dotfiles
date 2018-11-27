@@ -157,8 +157,18 @@ function! LinterStatus() abort
    let l:counts = ale#statusline#Count(bufnr(''))
    let l:all_errors = l:counts.error + l:counts.style_error
    let l:all_non_errors = l:counts.total - l:all_errors
+
+   " TODO set colors based on errors
+   " set statusline+=%1*
+   " if l:all_errors > 0
+   "     hi StatusLine ctermfg=red
+   " else
+   "     hi StatusLine ctermfg=none ctermbg=none cterm=none
+   " endif
+   " set statusline+=%*
+   "
    return l:counts.total == 0 ? '' : printf(
-   \ 'W:%d E:%d',
+   \ 'W:%d E:%s',
    \ l:all_non_errors,
    \ l:all_errors
    \)
