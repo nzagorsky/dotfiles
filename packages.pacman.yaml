@@ -43,5 +43,5 @@
     - proxychains-ng
     - tor
 
-- shell:
-    - sudo systemctl enable tor && sudo systemctl start tor
+# - shell:
+#     - sudo systemctl enable tor && sudo systemctl start tor
