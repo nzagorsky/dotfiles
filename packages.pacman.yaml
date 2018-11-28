@@ -19,7 +19,6 @@
     - patch
     - autoconf
     - rust
-    - snapd # Package manager
     - flashplugin
     - pepper-flash
     - gtop
@@ -27,7 +26,6 @@
     - htop
     - iotop
     - npm
-    - pacui # Package managment and simple CLI GUI for Yaourt and Pacman
     - rofi # App launcher
     - sshfs # Mount folders using SSH
     - tmux
@@ -47,4 +45,3 @@
 
 - shell:
     - sudo systemctl enable tor && sudo systemctl start tor
-    - sudo systemctl enable snapd && sudo systemctl start snapd
