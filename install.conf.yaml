@@ -31,7 +31,7 @@
     ~/.vim: .config/nvim/
     ~/.vimrc: .config/nvim/init.vim
     ~/.config/nvim: .config/nvim
-    ~/.ctags: .ctags
+    ~/.ctags.d: .ctags.d
 
     # Emacs
     ~/.emacs.d: .emacs.d
