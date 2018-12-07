@@ -1,38 +1,33 @@
 - pacman:
+
     # Development
     - ctags # Tags for Vim
     - docker
     - docker-compose
-    - go
     - neovim
     - python-pip
     - the_silver_searcher # AG searcher
     - python-neovim
-    - python2-neovim
     - xfce4-terminal
 
     # System
+    - autoconf
     - binutils # For yaourt builds
     - fd # Faster `find`
-    - fzf # File navigation and utility with fuzzy power
-    - glances
-    - patch
-    - autoconf
-    - rust
-    - flashplugin
-    - pepper-flash
-    - gtop
+    - fzf
     - gcc
     - htop
     - iotop
     - npm
+    - patch
     - rofi # App launcher
-    - sshfs # Mount folders using SSH
+    - sshfs
     - tmux
-    - yaourt
-    - xclip # For screenshots
+    - xclip
     - xorg-xrandr # For Java OpenGL
+    - yaourt
     - zsh
+
       # Multimedia
     - mpv # Video player
     - playerctl # Control media players from keyboard
@@ -40,8 +35,3 @@
       # Network
     - networkmanager-openvpn
     - openvpn
-    - proxychains-ng
-    - tor
-
-# - shell:
-#     - sudo systemctl enable tor && sudo systemctl start tor
