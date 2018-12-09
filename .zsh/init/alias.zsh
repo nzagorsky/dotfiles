@@ -15,3 +15,5 @@ alias upac='sudo pacman -Syu'
 alias v='nvim'
 alias e='emacs -nw'
 alias k='kubectl'
+
+alias scw="docker run -it --rm --volume=$HOME/.scwrc:/.scwrc scaleway/cli"
