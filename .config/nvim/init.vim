@@ -67,8 +67,6 @@ if dein#load_state(expand('~/.config/nvim'))
     " Zen mode
     call dein#add('junegunn/goyo.vim')
 
-    " Colors.
-    call dein#add('chriskempson/base16-vim')
 
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -82,7 +80,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('raimondi/delimitmate')
 
     " Autocompletion
-    call dein#add('Shougo/deoplete.nvim')
+    " call dein#add('Shougo/deoplete.nvim')
     if !has('nvim')
       call dein#add('roxma/nvim-yarp')
       call dein#add('roxma/vim-hug-neovim-rpc')
@@ -110,10 +108,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Python modules.
     call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
-    " call dein#add('python-rope/ropevim', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', {'on_ft': 'requirements'})
-    call dein#add('Vimjas/vim-python-pep8-indent', { 'on_ft': 'python' })
-    call dein#add('mindriot101/vim-yapf', { 'on_ft': 'python' })
 
     " JS
     call dein#add('elzr/vim-json', { 'on_ft': 'json' })
@@ -125,17 +120,17 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Go
     call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
-    call dein#add('zchee/deoplete-go', {'build': 'make'})
+    " call dein#add('zchee/deoplete-go', {'build': 'make'})
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
-    " LSP
-    call dein#add('autozimu/LanguageClient-neovim', {
-    \ 'rev': 'next',
-    \ 'build': 'bash install.sh',
-    \ })
+    " " LSP
+    " call dein#add('autozimu/LanguageClient-neovim', {
+    " \ 'rev': 'next',
+    " \ 'build': 'bash install.sh',
+    " \ })
 
     " Snippets
     call dein#add('Shougo/neosnippet.vim')
@@ -158,20 +153,14 @@ function! LinterStatus() abort
    let l:all_errors = l:counts.error + l:counts.style_error
    let l:all_non_errors = l:counts.total - l:all_errors
 
-   " TODO set colors based on errors
-   " set statusline+=%1*
-   " if l:all_errors > 0
-   "     hi StatusLine ctermfg=red
-   " else
-   "     hi StatusLine ctermfg=none ctermbg=none cterm=none
-   " endif
-   " set statusline+=%*
-   "
-   return l:counts.total == 0 ? '' : printf(
-   \ 'W:%d E:%s',
-   \ l:all_non_errors,
-   \ l:all_errors
-   \)
+   let l:return_value=""
+   if l:all_errors > 0
+       let l:return_value=l:all_errors
+
+   endif
+
+   return l:return_value
+
 endfunction
 
 function! GitBranch() abort
@@ -254,13 +243,10 @@ cmap w!! w !sudo tee % >/dev/null
 " --------------------
 " Editor setup
 " --------------------
-
 " Color setup
 set background=dark
-let base16colorspace=256
-colorscheme base16-ocean
 syntax on
-"
+
 " Disable vim background
 hi Normal ctermbg=none
 
@@ -331,8 +317,9 @@ endif
 " Statusline
 " --------------------
 
-hi User1 ctermfg=15  " White
+hi User1 ctermfg=white
 hi User2 ctermfg=8  " Dark gray
+hi User3 ctermfg=red
 hi StatusLine ctermfg=8   " `8` == comment color
 
 " To format status line wrap with `%#* and %*` where # is User number.
@@ -340,17 +327,21 @@ set laststatus=2
 set statusline=
 
 set statusline+=\ %*  " Separator
-set statusline+=\ %f\ %*  " Path
+" set statusline+=\ %10.50f\ %*  " Path
+set statusline+=\ %t\ %*  " Path
 set statusline+=\ %m
 set statusline+=%=
+
+set statusline+=%3*
 set statusline+=\ %{LinterStatus()}\ 
+set statusline+=%*
 
 " Filetype
-set statusline+=\ %y\  
+" set statusline+=\ %3.3Y\  
 
 " Git branch data
 " set statusline+=%1*
-set statusline+=⎇\ %{GitBranch()}
+" set statusline+=⎇\ %{GitBranch()}
 " set statusline+=%*
 
 " Line numbers
@@ -406,12 +397,19 @@ if g:dein#is_sourced('vim-fugitive')
     noremap <Leader>gr :Gremove<CR>
 endif
 
-if g:dein#is_sourced('deoplete.nvim')
-    let g:deoplete#enable_at_startup = 1
-endif
+" if g:dein#is_sourced('deoplete.nvim')
+"     let g:deoplete#enable_at_startup = 1
+" endif
 
 if g:dein#is_sourced('ale')
     noremap <F3> :ALEFix<CR>
+    nnoremap <silent> <leader>d :ALEGoToDefinition<CR>
+    nnoremap <silent> <leader>n :ALEFindReferences<CR>
+    nnoremap <silent> K :ALEHover<CR>
+
+    let g:ale_completion_enabled = 1
+    let g:ale_completion_max_suggestions = 20
+    let g:ale_completion_delay = 0
 
     let g:ale_sign_error = 'x'
     let g:ale_sign_warning = '~'
@@ -432,11 +430,8 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers.javascript = ['standard']
 
     " Python
-    let g:ale_linters.python = ['flake8']
+    let g:ale_linters.python = ['pyls']
     let g:ale_fixers.python = ['black']
-    if executable('pyls')
-        let g:ale_linters.python = ['pyls']
-    endif
 
     " Yaml
     let g:ale_fixers.yaml = ['prettier']
@@ -455,25 +450,6 @@ if g:dein#is_sourced('neosnippet.vim')
     imap <C-k>     <Plug>(neosnippet_expand_or_jump)
     smap <C-k>     <Plug>(neosnippet_expand_or_jump)
     xmap <C-k>     <Plug>(neosnippet_expand_target)
-endif
-
-if g:dein#is_sourced('LanguageClient-neovim')
-    let g:LanguageClient_diagnosticsEnable = 0
-    let g:LanguageClient_serverCommands = {}
-
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
-    nnoremap <silent> <leader>n :call LanguageClient#textDocument_references()<CR>
-    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-    if executable('pyls')
-        let g:LanguageClient_serverCommands.python = ['pyls']
-    endif
-
-    if executable('nimlsp')
-        let g:LanguageClient_serverCommands.nim = ['nimlsp']
-    endif
 endif
 
 if g:dein#is_sourced('vim-vinegar')

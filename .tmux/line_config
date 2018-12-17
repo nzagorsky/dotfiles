@@ -30,10 +30,9 @@ set -g pane-border-fg "colour240"
 set -g pane-active-border-bg default
 set -g pane-active-border-fg "colour245"
 
-
 # Current (active) window setting
 setw -g window-status-current-fg colour1
-setw -g window-status-current-bg colour19
+setw -g window-status-current-bg colour119
 setw -g window-status-current-format "#[fg=colour0,nobold,nounderscore,noitalics] #[fg=colour1]#W #[fg=colour0,nobold,nounderscore,noitalics]"
 
 # Inactive window setting

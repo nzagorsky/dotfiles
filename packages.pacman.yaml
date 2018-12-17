@@ -1,16 +1,16 @@
 - pacman:
 
     # Development
-    - ctags # Tags for Vim
+    - ctags
     - docker
     - docker-compose
     - neovim
     - python-pip
-    - the_silver_searcher # AG searcher
+    - the_silver_searcher
     - python-neovim
-    - xfce4-terminal
 
     # System
+    - zsh
     - autoconf
     - binutils # For yaourt builds
     - fd # Faster `find`
@@ -20,18 +20,6 @@
     - iotop
     - npm
     - patch
-    - rofi # App launcher
-    - sshfs
     - tmux
     - xclip
-    - xorg-xrandr # For Java OpenGL
     - yaourt
-    - zsh
-
-      # Multimedia
-    - mpv # Video player
-    - playerctl # Control media players from keyboard
-
-      # Network
-    - networkmanager-openvpn
-    - openvpn

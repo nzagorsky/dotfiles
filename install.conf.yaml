@@ -20,12 +20,7 @@
     # ZSH
     ~/.zsh: .zsh
     ~/.zshrc: .zshrc
-    ~/.config/base16-shell: .config/base16-shell # Themes
     ~/.scripts: .scripts
-    ~/.inputrc: .inputrc
-
-    # JS
-    ~/.tern-config: .tern-config
 
     # VIM
     ~/.vim: .config/nvim/
@@ -33,16 +28,7 @@
     ~/.config/nvim: .config/nvim
     ~/.ctags.d: .ctags.d
 
-    # Emacs
     ~/.emacs.d: .emacs.d
-
-    # Network
-    ~/.config/proxychains.conf: .config/proxychains.conf
-
-    # Terminal settings
-    ~/.config/xfce4/terminal: .config/xfce4/terminal
-
-    # Python
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
 
@@ -51,11 +37,8 @@
     - mkdir -p ~/.credentials; touch ~/.credentials/secure
     - mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
     - [sudo chsh $USER -s /bin/zsh, Changing shell for user]
-    - [sudo pip3 install -r optional/requirements.txt -U, Python dependencies]
-    # - [sudo npm install -g neovim, Optional Node provider for neovim]
+    - [pip3 install -r optional/requirements.txt -U --user, Python dependencies]
     - [~/.tmux/plugins/tpm/bin/install_plugins, Tmux plugin installation]
-    - "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install --all"
     - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
     # - [emacs --batch --load ~/.emacs.d/init.el, Installing emacs files]
-    - [sudo npm install -g standard prettier, Linting for JS and autoformat]
-    - [dconf load / < ~/dotfiles/dconf.conf, Restore Gnome settings]
+    - [sudo npm install -g standard prettier neovim, Linting for JS and autoformat]
