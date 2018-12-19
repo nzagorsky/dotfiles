@@ -6,14 +6,16 @@ Width 1366=700
 ShowMenuBarByDefault=false
 
 [MainWindow]
-Height 1080=467
+Height 1080=661
 Height 720=720
 Height 768=428
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAAAABVYAAALjAAAABAAAAAQAAAAIAAAACPwAAAAA
+State=AAAA/wAAAAD9AAAAAAAAB4AAAAQ4AAAABAAAAAQAAAAIAAAACPwAAAAA
 Width 1280=1280
 Width 1366=820
+Width 1920=1280
 Width 2560=918
+Window-Maximized 1080x1920=true
 
 [Notification Messages]
 CloseAllTabs=true
