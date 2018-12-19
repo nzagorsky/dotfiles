@@ -35,7 +35,7 @@
     # KDE
     ~/.config/breezerc: .config/breezerc
     ~/.config/kdeglobals: .config/kdeglobals
-    ~/.config/kglobalshortcutrc: .config/kglobalshortcutrc
+    ~/.config/kglobalshortcutsrc: .config/kglobalshortcutsrc
     ~/.config/khotkeysrc: .config/khotkeysrc
     ~/.config/konsolerc: .config/konsolerc
     ~/.config/kwinrc: .config/kwinrc
