@@ -32,6 +32,15 @@
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
 
+    # KDE
+    ~/.config/breezerc: .config/breezerc
+    ~/.config/kdeglobals: .config/kdeglobals
+    ~/.config/kglobalshortcutrc: .config/kglobalshortcutrc
+    ~/.config/khotkeysrc: .config/khotkeysrc
+    ~/.config/konsolerc: .config/konsolerc
+    ~/.config/kwinrc: .config/kwinrc
+    ~/.config/kxbrc: .config/kxbrc
+
 - shell:
     - mkdir -p ~/.vim/sessions ~/.vim/undo
     - mkdir -p ~/.credentials; touch ~/.credentials/secure
