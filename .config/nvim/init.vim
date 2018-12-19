@@ -23,10 +23,10 @@ set undodir=~/.vim/undo
 
 " Move Backup Files to ~/.vim/sessions
 set backupdir=~/.vim/sessions
-set dir=~/.vim/sessions
+set directory=~/.vim/sessions
 set noswapfile
 :silent call system('mkdir -p ' . &undodir)
-:silent call system('mkdir -p ' . &dir)
+:silent call system('mkdir -p ' . &directory)
 
 " enable automatic title setting for terminals
 set title
@@ -45,9 +45,9 @@ set shortmess=aoOtIWcFs
 " Plugins
 " --------------------
 " Setup dein
-if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
-    call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
-    call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
+if (!isdirectory(expand('$HOME/.config/nvim/repos/github.com/Shougo/dein.vim')))
+    call system(expand('mkdir -p $HOME/.config/nvim/repos/github.com'))
+    call system(expand('git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim'))
 endif
 
 set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
@@ -67,6 +67,8 @@ if dein#load_state(expand('~/.config/nvim'))
     " Zen mode
     call dein#add('junegunn/goyo.vim')
 
+    " Colorscheme
+    call dein#add('morhetz/gruvbox')
 
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -153,7 +155,7 @@ function! LinterStatus() abort
    let l:all_errors = l:counts.error + l:counts.style_error
    let l:all_non_errors = l:counts.total - l:all_errors
 
-   let l:return_value=""
+   let l:return_value=''
    if l:all_errors > 0
        let l:return_value=l:all_errors
 
@@ -244,11 +246,15 @@ cmap w!! w !sudo tee % >/dev/null
 " Editor setup
 " --------------------
 " Color setup
+colorscheme gruvbox
 set background=dark
 syntax on
 
 " Disable vim background
 hi Normal ctermbg=none
+
+" Disable coloring of sign column on the left.
+hi SignColumn ctermbg=none
 
 " Disable linenr on the left
 hi LineNr ctermbg=none cterm=none
@@ -269,14 +275,15 @@ set scrolloff=3 " keep some more lines for scope
 
 set smarttab
 set tabstop=4
-"
+
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
+
 " On pressing tab, insert 4 spaces
 set expandtab
 set softtabstop=4
 
-"omnicompletion settings
+" omnicompletion settings
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " Prevent line breaking
@@ -382,9 +389,9 @@ endif
 if g:dein#is_sourced('vim-gitgutter')
     let g:gitgutter_realtime = 1
     " Disable BG for gitgutter signs
-    hi GitGutterAdd ctermbg=none
-    hi GitGutterChange ctermbg=none
-    hi GitGutterDelete ctermbg=none
+    hi GitGutterAdd ctermbg=none ctermfg=green
+    hi GitGutterChange ctermbg=none ctermfg=yellow
+    hi GitGutterDelete ctermbg=none ctermfg=red
 endif
 
 if g:dein#is_sourced('vim-fugitive')
@@ -416,7 +423,7 @@ if g:dein#is_sourced('ale')
 
     hi ALEError ctermbg=none
     hi ALEErrorLine ctermbg=none
-    hi ALEErrorSign ctermbg=none ctermfg=1 " Red
+    hi ALEErrorSign ctermbg=none ctermfg=red " Red
 
     hi ALEWarning ctermbg=none
     hi ALEWarningLine ctermbg=none

@@ -22,6 +22,7 @@ export PATH="$PATH:$NIMPATH/bin"
 
 # Python
 # export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.7/site-packages"  # Python
+export PATH="$PATH:$HOME/.local/bin"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || find * -type f'
