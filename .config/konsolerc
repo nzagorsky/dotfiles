@@ -3,19 +3,23 @@ Height 768=510
 Width 1366=700
 
 [KonsoleWindow]
+SaveGeometryOnExit=false
 ShowMenuBarByDefault=false
 
 [MainWindow]
 Height 1080=661
 Height 720=720
 Height 768=428
+Height 831=502
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAAAAB4AAAAQ4AAAABAAAAAQAAAAIAAAACPwAAAAA
+State=AAAA/wAAAAD9AAAAAAAAA9kAAAH2AAAABAAAAAQAAAAIAAAACPwAAAAA
 Width 1280=1280
 Width 1366=820
+Width 1477=985
 Width 1920=1280
 Width 2560=918
 Window-Maximized 1080x1920=true
+Window-Maximized 831x1477=false
 
 [Notification Messages]
 CloseAllTabs=true
