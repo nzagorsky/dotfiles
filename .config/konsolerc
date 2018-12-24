@@ -7,19 +7,19 @@ SaveGeometryOnExit=false
 ShowMenuBarByDefault=false
 
 [MainWindow]
-Height 1080=661
-Height 720=720
-Height 768=428
-Height 831=502
+Height 1080[$d]
+Height 720[$d]
+Height 768[$d]
+Height 831[$d]
 MenuBar=Disabled
 State=AAAA/wAAAAD9AAAAAAAAA9kAAAH2AAAABAAAAAQAAAAIAAAACPwAAAAA
-Width 1280=1280
-Width 1366=820
-Width 1477=985
-Width 1920=1280
-Width 2560=918
+Width 1280[$d]
+Width 1366[$d]
+Width 1477[$d]
+Width 1920[$d]
+Width 1969[$d]
+Width 2560[$d]
 Window-Maximized 1080x1920=true
-Window-Maximized 831x1477=false
 
 [Notification Messages]
 CloseAllTabs=true
