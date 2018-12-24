@@ -3,3 +3,11 @@ OutlineCloseButton=false
 
 [Windeco]
 DrawBackgroundGradient=false
+
+[Windeco Exception 0]
+BorderSize=1
+Enabled=true
+ExceptionPattern=konsole
+ExceptionType=0
+HideTitleBar=true
+Mask=0
