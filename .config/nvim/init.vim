@@ -1,13 +1,6 @@
 " --------------------
 " Basic settings.
 " --------------------
-" use vim settings, rather than vi settings.
-" Must be first, because it changes other options as a side effect
-set nocompatible
-
-" Optimize for fast terminal connections
-set ttyfast
-
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard+=unnamedplus
 
@@ -24,6 +17,7 @@ set undodir=~/.vim/undo
 " Move Backup Files to ~/.vim/sessions
 set backupdir=~/.vim/sessions
 set directory=~/.vim/sessions
+
 set noswapfile
 :silent call system('mkdir -p ' . &undodir)
 :silent call system('mkdir -p ' . &directory)
@@ -80,13 +74,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Auto complete pairs.
     call dein#add('raimondi/delimitmate')
-
-    " Autocompletion
-    " call dein#add('Shougo/deoplete.nvim')
-    if !has('nvim')
-      call dein#add('roxma/nvim-yarp')
-      call dein#add('roxma/vim-hug-neovim-rpc')
-    endif
 
     " Routine automation.
     call dein#add('ervandew/supertab')

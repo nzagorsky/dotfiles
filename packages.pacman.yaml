@@ -22,4 +22,5 @@
     - patch
     - tmux
     - xclip
+    - xf86-input-libinput  # Mouse drivers
     - yaourt
