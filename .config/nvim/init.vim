@@ -234,6 +234,7 @@ cmap w!! w !sudo tee % >/dev/null
 " --------------------
 " Color setup
 colorscheme gruvbox
+let g:gruvbox_contrast_dark='dark'
 set background=dark
 syntax on
 
