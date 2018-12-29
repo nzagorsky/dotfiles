@@ -6,6 +6,12 @@
 (setq ring-bell-function 'ignore)
 
 
+; Disable pointless stuff
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1) 
+
+
 ; TODO move to custom
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
