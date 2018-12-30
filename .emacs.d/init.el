@@ -78,24 +78,25 @@
     (smartparens-global-mode))
 
 ;; Configure vim leader keys
-(use-package evil-leader
-    :ensure t
-    :config
-	(setq evil-leader/leader "<SPC>")
-	(global-evil-leader-mode)
-	(evil-leader/set-key
-	    "<SPC>" 'evil-visual-line
-	    "b" 'switch-to-buffer
-	    "e" 'find-file
-	    "gev" 'open-init-file
-	    "gsv" 'reload-init-file
-	    "q" 'evil-quit
-	    "w" 'save-buffer
-	    "l" 'swiper
-	    "c" 'counsel-M-x
-	    "a" 'counsel-projectile-ag
-	    )
-    )
+; (use-package evil-leader
+;     :ensure t
+;     :config
+; 	(setq evil-leader/leader "<SPC>")
+; 	(global-evil-leader-mode)
+; 	(evil-leader/set-key
+; 	    "<SPC>" 'evil-visual-line
+; 	    "b" 'switch-to-buffer
+; 	    "e" 'find-file
+; 	    "gev" 'open-init-file
+; 	    "gsv" 'reload-init-file
+; 	    "q" 'evil-quit
+; 	    "w" 'save-buffer
+; 	    "l" 'swiper
+; 	    "c" 'counsel-M-x
+; 	    "a" 'counsel-projectile-ag
+; 	    "p" 'counsel-fzf
+; 	    )
+;     )
 
 (use-package projectile
   :ensure t
@@ -125,63 +126,54 @@
 (use-package counsel
 ;; Brings Swiper and Counsel
   :ensure t
-  :config
-    (define-key evil-normal-state-map (kbd "C-p") 'counsel-fzf)
-  )
+)
+(define-key global-map (kbd "C-c g e v") 'open-init-file)
+(define-key global-map (kbd "C-c g s v") 'reload-init-file)
 
 ;;----------------------------------------
 ;; Evil
 ;;----------------------------------------
-(use-package evil
-  :ensure t
-  :config
-    (evil-mode 1)
+; (use-package evil
+;   :ensure t
+;   :config
+;     (evil-mode 1)
+; 
+;     ;; Fix C-u
+;     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+;     (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+;     (define-key evil-insert-state-map (kbd "C-u")
+;     (lambda ()
+; 	(interactive)
+; 	(evil-delete (point-at-bol) (point))))
+; 
+;     ;; Replace with system clipboard
+;     (fset 'evil-visual-update-x-selection 'ignore)
+; 
+; )
 
-    (define-key global-map (kbd "C-h") #'evil-window-left)
-    (define-key global-map (kbd "C-j") #'evil-window-down)
-    (define-key global-map (kbd "C-k") #'evil-window-up)
-    (define-key global-map (kbd "C-l") #'evil-window-right)
-
-    ;; Fix C-u
-    (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-    (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
-    (define-key evil-insert-state-map (kbd "C-u")
-    (lambda ()
-	(interactive)
-	(evil-delete (point-at-bol) (point))))
-
-    ;; Replace with system clipboard
-    (fset 'evil-visual-update-x-selection 'ignore)
-
-)
-
-
-;; TODO
-;; jnnoremap <leader>t :Tags<CR>
-;; jnnoremap <leader>h :Helptags<CR>
 
 
 ;; Configure `jk`
-(use-package evil-escape
-    :ensure t
-    :config
-	(evil-escape-mode)
-	(setq evil-escape-inhibit-functions '(evil-visual-state-p))
-	(setq-default evil-escape-key-sequence "jk")
-	(setq-default evil-escape-delay 0.3))
-
-;; Vim surround config
-(use-package evil-surround
-    :ensure t
-    :config
-	(global-evil-surround-mode))
-
-(use-package evil-indent-textobject :ensure t)
-
-(use-package vimish-fold
-    :ensure t
-    :config
-	(vimish-fold-global-mode))
+; (use-package evil-escape
+;     :ensure t
+;     :config
+; 	(evil-escape-mode)
+; 	(setq evil-escape-inhibit-functions '(evil-visual-state-p))
+; 	(setq-default evil-escape-key-sequence "jk")
+; 	(setq-default evil-escape-delay 0.3))
+; 
+; ;; Vim surround config
+; (use-package evil-surround
+;     :ensure t
+;     :config
+; 	(global-evil-surround-mode))
+; 
+; (use-package evil-indent-textobject :ensure t)
+; 
+; (use-package vimish-fold
+;     :ensure t
+;     :config
+; 	(vimish-fold-global-mode))
 
 
 ;;----------------------------------------
@@ -208,13 +200,6 @@
 ;;----------------------------------------
 ;; Git integration
 ;;----------------------------------------
-;; TODO set key bindings to move between hunks
-;; TODO set changed lines count in status bar
-(use-package evil-magit
-  :ensure t
-  :defer 3
-  )
-
 (use-package git-gutter
   :ensure t
   :config
