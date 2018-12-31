@@ -11,3 +11,11 @@ ExceptionPattern=konsole
 ExceptionType=0
 HideTitleBar=true
 Mask=0
+
+[Windeco Exception 1]
+BorderSize=1
+Enabled=true
+ExceptionPattern=Emacs
+ExceptionType=0
+HideTitleBar=true
+Mask=0

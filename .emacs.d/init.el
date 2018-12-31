@@ -112,15 +112,29 @@
 (use-package ivy
   :ensure t
   :init
-    ;; Human fuzzy search
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")
-    (setq ivy-re-builders-alist
-	'((ivy-switch-buffer . ivy--regex-plus)
-	    (t . ivy--regex-fuzzy)))
-  :config
-    (ivy-mode 1)
 
+  ;; Human fuzzy search
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-virtual-buffers t)
+
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-re-builders-alist
+	'((ivy-switch-buffer . ivy--regex-plus)
+	  (t . ivy--regex-fuzzy)))
+
+  :config
+  (ivy-mode 1)
+  
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+
+  ; (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 )
 
 (use-package counsel
@@ -232,5 +246,22 @@
 (use-package docker-compose-mode
   :mode (("docker-compose\\'" . dockerfile-mode))
   :ensure t)
+
+
+;;----------------------------------------
+;; LSP mode
+;;----------------------------------------
+(use-package lsp-mode
+  :commands lsp
+  :init
+  (require 'lsp-clients)
+  (add-hook 'python-mode-hook 'lsp)
+  :config
+  (lsp-mode)
+ )
+
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
 
 (provide 'init)
