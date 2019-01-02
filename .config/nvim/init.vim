@@ -352,15 +352,23 @@ if g:dein#is_sourced('fzf.vim')
     autocmd! FileType fzf tnoremap <buffer> jk <c-c>
     
     "search word under cursor
-    nnoremap <leader>A :Ag <C-r><C-w><CR>   
+    nnoremap <leader>A :Rg <C-r><C-w><CR>   
 
     nnoremap <leader>f :Files<CR>
-    nnoremap <leader>a :Ag<Space>
+    nnoremap <leader>a :Rg<Space>
     nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>c :Commands<CR>
     nnoremap <leader>h :Helptags<CR>
     nnoremap <leader>l :Lines<CR>
     nnoremap <leader>t :Tags<CR>
+
+    " Use ripgrep
+    command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
 endif
 
 if g:dein#is_sourced('vim-polyglot')
