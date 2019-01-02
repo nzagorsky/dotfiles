@@ -2,6 +2,8 @@ export BROWSER="/usr/bin/opera"
 export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 
+export ESHELL=$SHELL
+
 # Nim
 export PATH="$PATH:$HOME/.nimble/bin"  # NIM
 

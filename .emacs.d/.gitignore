@@ -4,3 +4,4 @@
 # But not these files...
 !init.el
 !.gitignore
+!custom.el

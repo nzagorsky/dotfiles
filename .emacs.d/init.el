@@ -34,6 +34,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+; Bindings for configuration update
 (defun reload-init-file ()
   "Reload user configuration."
   (interactive)
@@ -44,6 +45,10 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(define-key global-map (kbd "C-c g e v") 'open-init-file)
+(define-key global-map (kbd "C-c g s v") 'reload-init-file)
+
+
 ;; Style/Theme config 
 (use-package gruvbox-theme
   :ensure t
@@ -53,6 +58,13 @@
     (tool-bar-mode -1)
     (menu-bar-mode -1)
     (set-window-fringes nil 0 0)
+
+    ; Setup transparent background for terminal.
+    (defun on-after-init ()
+      (unless (display-graphic-p (selected-frame))
+	(set-face-background 'default "unspecified-bg" (selected-frame))))
+    (add-hook 'window-setup-hook 'on-after-init)
+
     (set-face-attribute 'vertical-border
 			nil
 			:foreground "#282a2e"))
@@ -98,11 +110,27 @@
 ; 	    )
 ;     )
 
+(use-package magit
+  :ensure t
+  )
+
+
+(use-package flycheck
+  :ensure t
+  :config
+  (global-flycheck-mode)  
+  )
+
+
 (use-package projectile
   :ensure t
   :config
-    (projectile-mode +1)
-)
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  )
+
+(use-package ripgrep
+  :ensure t)
 
 
 
@@ -128,21 +156,16 @@
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
-  ; (global-set-key (kbd "C-c g") 'counsel-git)
-  (global-set-key (kbd "C-c j") 'counsel-git-grep)
-  (global-set-key (kbd "C-c k") 'counsel-ag)
-  (global-set-key (kbd "C-x l") 'counsel-locate)
-  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-  
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  (global-set-key (kbd "C-c c g") 'counsel-git-grep)
+  (global-set-key (kbd "C-c c a") 'counsel-ag)
+  (global-set-key (kbd "C-x c l") 'counsel-locate)
+
 )
 
 (use-package counsel
 ;; Brings Swiper and Counsel
   :ensure t
 )
-(define-key global-map (kbd "C-c g e v") 'open-init-file)
-(define-key global-map (kbd "C-c g s v") 'reload-init-file)
 
 ;;----------------------------------------
 ;; Evil
@@ -193,7 +216,6 @@
 ;;----------------------------------------
 ;; Autocomplete window (Company)
 ;;----------------------------------------
-;; TODO check why company doesn't load
 (use-package company
   :ensure t
   :bind (:map company-active-map
@@ -252,16 +274,26 @@
 ;; LSP mode
 ;;----------------------------------------
 (use-package lsp-mode
+  :ensure t
   :commands lsp
   :init
   (require 'lsp-clients)
   (add-hook 'python-mode-hook 'lsp)
+  
   :config
   (lsp-mode)
  )
 
 
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package company-lsp :commands company-lsp)
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp
+  :config
+  (push 'company-lsp company-backends)
+)
 
 (provide 'init)
