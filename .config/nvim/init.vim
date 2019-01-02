@@ -58,9 +58,6 @@ if dein#load_state(expand('~/.config/nvim'))
         call dein#add('christoomey/vim-tmux-navigator')
     endif
 
-    " Zen mode
-    call dein#add('junegunn/goyo.vim')
-
     " Colorscheme
     call dein#add('morhetz/gruvbox')
 
@@ -357,17 +354,13 @@ if g:dein#is_sourced('fzf.vim')
     "search word under cursor
     nnoremap <leader>A :Ag <C-r><C-w><CR>   
 
-    nnoremap <C-p> :Files<CR>
+    nnoremap <leader>f :Files<CR>
     nnoremap <leader>a :Ag<Space>
     nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>c :Commands<CR>
     nnoremap <leader>h :Helptags<CR>
     nnoremap <leader>l :Lines<CR>
     nnoremap <leader>t :Tags<CR>
-endif
-
-if g:dein#is_sourced('goyo.vim')
-    nnoremap <leader>f :Goyo<CR>
 endif
 
 if g:dein#is_sourced('vim-polyglot')
@@ -383,12 +376,14 @@ if g:dein#is_sourced('vim-gitgutter')
 endif
 
 if g:dein#is_sourced('vim-fugitive')
-    noremap <Leader>gc :Gcommit<CR>
-    noremap <Leader>gsh :Gpush<CR>
-    noremap <Leader>gll :Gpull<CR>
     noremap <Leader>gs :Gstatus<CR>
+    noremap <Leader>gc :Gcommit<CR>
+    noremap <Leader>gpush :Gpush<CR>
+    noremap <Leader>gpull :Gpull<CR>
+
     noremap <Leader>gb :Gblame<CR>
     noremap <Leader>gd :Gvdiff<CR>
+
     noremap <Leader>gr :Gremove<CR>
 endif
 
