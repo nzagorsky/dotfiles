@@ -112,12 +112,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
-    " " LSP
-    " call dein#add('autozimu/LanguageClient-neovim', {
-    " \ 'rev': 'next',
-    " \ 'build': 'bash install.sh',
-    " \ })
-
     " Snippets
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neosnippet-snippets')
