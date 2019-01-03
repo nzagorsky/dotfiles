@@ -61,6 +61,7 @@
      (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
      (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
      (define-key evil-insert-state-map (kbd "C-u")
+
      (lambda ()
  	(interactive)
  	(evil-delete (point-at-bol) (point))))
@@ -97,23 +98,28 @@
 (use-package evil-leader
     :ensure t
     :config
-	(setq evil-leader/leader "<SPC>")
 	(global-evil-leader-mode)
+	(setq evil-leader/leader "<SPC>")
 	(evil-leader/set-key
 	    "<SPC>" 'evil-visual-line
 	    "b" 'switch-to-buffer
 	    "gev" 'open-init-file
 	    "gsv" 'reload-init-file
+	    "gst" 'magit-status
 	    "q" 'evil-quit
 	    "w" 'save-buffer
+	    "d" 'lsp-find-definition
 	    "l" 'swiper  ; Lines in current buffer
 	    "c" 'counsel-M-x
 	    "a" 'projectile-ripgrep
-	    "f" 'counsel-fzf
-	    )
-    )
+	    "f" 'counsel-fzf))
 
-;; Style/Theme config 
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
+;; Style/Theme config
 (use-package gruvbox-theme
   :ensure t
   :init (setq inhibit-startup-message t) ;; hide the startup message
@@ -162,7 +168,7 @@
 (use-package flycheck
   :ensure t
   :config
-  (global-flycheck-mode)  
+  (global-flycheck-mode)
   )
 
 
@@ -294,3 +300,4 @@
 )
 
 (provide 'init)
+;;; init.el ends here
