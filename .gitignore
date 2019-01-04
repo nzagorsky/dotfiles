@@ -18,3 +18,4 @@ tags
 # Various cache
 *_cache
 *.zsh.zwc
+Session.vim
