@@ -51,7 +51,7 @@ torify () {
 
 v () {
     if [ ! -f Session.vim ]; then
-        nvim
+        nvim $*
     else
         nvim $* -S
     fi
