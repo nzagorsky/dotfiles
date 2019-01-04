@@ -83,7 +83,7 @@ if dein#load_state(expand('~/.config/nvim'))
     " Python modules.
     " call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
     call dein#add('zchee/deoplete-jedi', { 'on_ft': 'python' })
-    call dein#add('raimon49/requirements.txt.vim', {'on_ft': 'requirements'})
+    call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
     " JS
     call dein#add('elzr/vim-json', { 'on_ft': 'json' })
@@ -213,8 +213,9 @@ set wildmenu
 set lazyredraw
 
 set foldenable
-set foldmethod=syntax
-set foldlevel=3
+set foldmethod=indent
+set foldlevel=0
+set foldnestmax=2
 set noerrorbells  " No annoying errors
 set novisualbell
 set updatetime=250  
@@ -261,7 +262,10 @@ if g:dein#is_sourced('fzf.vim')
         :Start! ctags .<CR>
     endfunction
 
-    autocmd! FileType fzf tnoremap <buffer> jk <c-c>
+    augroup FzfSettings
+        autocmd! FileType fzf tnoremap <buffer> jk <c-c>
+    augroup END
+
     
     "search word under cursor
     nnoremap <leader>A :Rg <C-r><C-w><CR>   
