@@ -2,10 +2,12 @@
 black
 vim-vint
 python-language-server[all]
+jedi
+flake8
 yamllint
 
 # Interactive shell
-ipython==6.5.0
+ipython
 
 # Env management
 pipenv
