@@ -32,3 +32,7 @@ export FZF_DEFAULT_OPTS="--inline-info"
 
 # Source FZF for optional keybindings and shell improvement: C-r search commands; C-t for file search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# TODO move to separate modules file
+# Autocompletion
+zmodload zsh/zpty

@@ -49,4 +49,8 @@ torify () {
     proxychains -f ~/.config/proxychains.conf $*
 }
 
+v () {
+    nvim $* -S
+}
+
 # Kukareku.
