@@ -179,7 +179,6 @@ endfunction
 augroup EditorAppearance
     autocmd!
     autocmd ColorScheme * call UpdatedHighlights()
-
 augroup END
 " }}}
 " Editor setup {{{
@@ -227,8 +226,6 @@ else
 endif
 " }}}
 " Statusline {{{
-
-
 " To format status line wrap with `%#* and %*` where # is User number.
 set laststatus=2
 set statusline=
@@ -318,8 +315,6 @@ endif
 if g:dein#is_sourced('deoplete.nvim')
     let g:deoplete#enable_at_startup = 1
 
-    call deoplete#custom#option('ignore_sources', {'_': ['buffer']})
-
     " 223 white, 8 blue, 0 black
 	hi Pmenu ctermbg=8 ctermfg=223
 	hi PmenuSel ctermbg=0 ctermfg=8
@@ -371,13 +366,6 @@ if g:dein#is_sourced('ale')
     endfunction
 
     noremap <F3> :ALEFix<CR>
-    " nnoremap <silent> <leader>d :ALEGoToDefinition<CR>
-    " nnoremap <silent> <leader>n :ALEFindReferences<CR>
-    " nnoremap <silent> K :ALEHover<CR>
-
-    " let g:ale_completion_enabled = 1
-    " let g:ale_completion_max_suggestions = 20
-    " let g:ale_completion_delay = 0
 
     let g:ale_sign_error = 'x'
     hi ALEError ctermbg=none
