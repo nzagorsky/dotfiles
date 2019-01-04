@@ -1,5 +1,5 @@
 " vim:foldmethod=marker:foldlevel=0
-" Basic settings.  {{{
+" Basic settings.  {{{1
 set clipboard+=unnamedplus  " system clipboard
 set hidden  " buffers
 set nowrap
@@ -22,7 +22,7 @@ nnoremap geft :Explore ~/.vim/ftplugin<CR>
 
 set shortmess=aoOtIWcFs
 " }}}
-" Plugins {{{
+" Plugins {{{1
 if (!isdirectory(expand('$HOME/.config/nvim/repos/github.com/Shougo/dein.vim')))
     call system(expand('mkdir -p $HOME/.config/nvim/repos/github.com'))
     call system(expand('git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim'))
@@ -112,13 +112,13 @@ if dein#load_state(expand('~/.config/nvim'))
 endif
 
 " }}}
-" Key bindings {{{
+" Key bindings {{{1
 let mapleader = "\<Space>"
 nnoremap Y y$
 inoremap jk <Esc>
 cnoremap jk <Esc>
 nnoremap <Leader>w :w<CR>
-nnoremap <leader>q :q<CR>
+nnoremap <leader>q :close<CR>
 nnoremap <leader>k :bd<CR>
 nmap <Leader><Leader> V
 
@@ -152,7 +152,7 @@ nnoremap <leader><leader> V
 cmap w!! w !sudo tee % >/dev/null
 
 " }}}
-" Color setup {{{
+" Color setup {{{1
 colorscheme gruvbox
 let g:gruvbox_contrast_dark='dark'
 set background=dark
@@ -172,6 +172,7 @@ function! UpdatedHighlights() abort
     hi StatusLineNC ctermbg=none cterm=none
     hi StatusLine ctermbg=none cterm=none
     hi TabLineFill ctermbg=none
+    hi TabLineSel ctermbg=none
 
     set fillchars+=vert:│
 endfunction
@@ -181,7 +182,7 @@ augroup EditorAppearance
     autocmd ColorScheme * call UpdatedHighlights()
 augroup END
 " }}}
-" Editor setup {{{
+" Editor setup {{{1
 syntax on
 filetype indent on
 filetype plugin on
@@ -226,7 +227,7 @@ else
     set shell=/bin/sh
 endif
 " }}}
-" Statusline {{{
+" Statusline {{{1
 " To format status line wrap with `%#* and %*` where # is User number.
 set laststatus=2
 set statusline=
@@ -256,14 +257,21 @@ set statusline+=\ %l\/%L
 
 
 " }}}
-" Plugins setup.  {{{
+" Plugins setup.  {{{1
 if g:dein#is_sourced('fzf.vim')
     function! UpdateTags() abort
         :Start! ctags .<CR>
     endfunction
 
+    function! s:FzfHighlights()
+      highlight fzf1 ctermbg=none
+      highlight fzf2 ctermbg=none
+      highlight fzf3 ctermbg=none
+    endfunction
+
     augroup FzfSettings
         autocmd! FileType fzf tnoremap <buffer> jk <c-c>
+        autocmd! User FzfStatusLine call <SID>FzfHighlights()
     augroup END
 
     
@@ -413,7 +421,7 @@ if g:dein#is_sourced('vim-vinegar')
 endif
 
 " }}}
-" Utility {{{
+" Utility {{{1
 " Creating parent folders if they doesn't exist on buffer save.
 function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
