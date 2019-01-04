@@ -50,7 +50,11 @@ torify () {
 }
 
 v () {
-    nvim $* -S
+    if [ ! -f Session.vim ]; then
+        nvim
+    else
+        nvim $* -S
+    fi
 }
 
 # Kukareku.
