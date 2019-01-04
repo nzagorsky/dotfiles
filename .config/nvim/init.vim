@@ -332,13 +332,13 @@ if g:dein#is_sourced('deoplete.nvim')
 	hi PmenuSel ctermbg=0 ctermfg=8
 	hi PmenuSbar ctermbg=0
 
+    call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
     call deoplete#custom#option({
     \ 'auto_complete_delay': 0,
     \ 'smart_case': v:true,
     \ 'max_list': 20,
     \ 'min_pattern_length': 1,
     \ })
-
     call deoplete#custom#option('sources', {
     \ '_': ['buffer', 'tag'],
     \ 'python': ['jedi'],
@@ -348,6 +348,7 @@ if g:dein#is_sourced('deoplete.nvim')
 
     augroup AutoComplete
         autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
+        autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     augroup END
 
    " call deoplete#custom#option('profile', v:true)
