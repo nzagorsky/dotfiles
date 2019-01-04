@@ -89,10 +89,10 @@
  (use-package evil-indent-textobject
       :ensure t)
  
- (use-package vimish-fold
+ (use-package evil-vimish-fold
      :ensure t
      :config
- 	(vimish-fold-global-mode))
+ 	(evil-vimish-fold-mode 1))
 
 ;; Configure vim leader keys
 (use-package evil-leader
@@ -113,6 +113,11 @@
 	    "c" 'counsel-M-x
 	    "a" 'projectile-ripgrep
 	    "f" 'counsel-fzf))
+
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode))
 
 (use-package which-key
   :ensure t
@@ -276,7 +281,7 @@
 
 
 ;;----------------------------------------
-;; LSP mode
+;; LSP mode {{{
 ;;----------------------------------------
 (use-package lsp-mode
   :ensure t
@@ -300,4 +305,6 @@
 )
 
 (provide 'init)
+; }}}
+;; vim:foldmethod=marker:foldlevel=0
 ;;; init.el ends here

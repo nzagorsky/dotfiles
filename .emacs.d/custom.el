@@ -19,7 +19,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (flycheck ripgrep company-lsp lsp-ui lsp-mode docker gruvbox-theme gruvbox-dark-hard-theme gruvbox-dark-hard zenburn-theme zenburn docker-compose-mode dockerfile-mode git-gutter evil-magit company navigate vimish-fold evil-indent-textobject evil-surround evil-escape evil-leader evil projectile counsel ivy smartparens esup use-package clues-theme)))
+    (evil-commentary evil-vimish-fold flycheck ripgrep company-lsp lsp-ui lsp-mode docker gruvbox-theme gruvbox-dark-hard-theme gruvbox-dark-hard zenburn-theme zenburn docker-compose-mode dockerfile-mode git-gutter evil-magit company navigate vimish-fold evil-indent-textobject evil-surround evil-escape evil-leader evil projectile counsel ivy smartparens esup use-package clues-theme)))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
    (quote
