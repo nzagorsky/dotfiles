@@ -65,6 +65,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
+    call dein#add('ervandew/supertab')
 
     " Async command execution
     call dein#add('skywind3000/asyncrun.vim')
@@ -188,6 +189,8 @@ filetype indent on
 filetype plugin on
 filetype plugin indent on " Enable filetype plugins and indention
 
+set completeopt-=preview
+set lazyredraw
 set scrolloff=3
 set textwidth=0  " Do not break the line while typing
 set showcmd " Show the (partial) command as it’s being typed
@@ -211,14 +214,15 @@ set splitbelow
 set splitright
 
 set wildmenu
-set lazyredraw
 
 set foldenable
 set foldmethod=indent
-set foldlevel=0
-set foldnestmax=2
+set foldlevel=99
+set foldnestmax=1
+
 set noerrorbells  " No annoying errors
 set novisualbell
+
 set updatetime=250  
 
 if exists('$SHELL')
@@ -346,10 +350,10 @@ if g:dein#is_sourced('deoplete.nvim')
     \ 'zsh': ['zsh'],
     \})
 
-    augroup AutoComplete
-        autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
-        autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-    augroup END
+    " augroup AutoComplete
+    "     autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
+    "     autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
+    " augroup END
 
    " call deoplete#custom#option('profile', v:true)
    " call deoplete#enable_logging('DEBUG', 'deoplete.log')
@@ -421,6 +425,9 @@ if g:dein#is_sourced('vim-vinegar')
     nnoremap <C-e> :Explore<CR>
 endif
 
+if g:dein#is_sourced('supertab')
+    let g:SuperTabDefaultCompletionType='<c-n>'
+endif
 " }}}
 " Utility {{{1
 " Creating parent folders if they doesn't exist on buffer save.
