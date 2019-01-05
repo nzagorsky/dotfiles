@@ -1,5 +1,6 @@
 " vim:foldmethod=marker:foldlevel=0
 " Basic settings.  {{{1
+scriptencoding utf-8
 set clipboard+=unnamedplus  " system clipboard
 set hidden  " buffers
 set nowrap
@@ -42,6 +43,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Colorscheme
     call dein#add('morhetz/gruvbox')
+    call dein#add('junegunn/goyo.vim')
 
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -82,7 +84,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('sheerun/vim-polyglot')
 
     " Python modules.
-    " call dein#add('nvie/vim-flake8', { 'on_ft': 'python' })
     call dein#add('zchee/deoplete-jedi', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
@@ -106,7 +107,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     if dein#check_install()
       call dein#install()
-      let pluginsExist=1
     endif
 
     call dein#end()
@@ -160,22 +160,27 @@ set background=dark
 
 function! UpdatedHighlights() abort
     hi Normal ctermbg=none
-    hi SignColumn ctermbg=none
     hi LineNr ctermbg=none cterm=none
-    hi VertSplit ctermbg=NONE guibg=NONE
+    hi SignColumn ctermbg=none
+    hi VertSplit ctermbg=none guibg=none
     hi Comment cterm=italic gui=italic
 
     hi User1 ctermfg=white
-    hi User2 ctermfg=8  " Dark gray
+    hi User2 ctermfg=8
     hi User3 ctermfg=red
-    hi StatusLine ctermfg=8  " 8 == comment color
+
+    " hi StatusLine ctermfg=7
+    " hi StatusLineNC ctermfg=240
 
     hi StatusLineNC ctermbg=none cterm=none
     hi StatusLine ctermbg=none cterm=none
     hi TabLineFill ctermbg=none
     hi TabLineSel ctermbg=none
+    hi Folded ctermbg=none
 
     set fillchars+=vert:│
+    " set fillchars+=stlnc:_
+    " set fillchars+=stl:_
 endfunction
 
 augroup EditorAppearance
@@ -234,6 +239,7 @@ endif
 " Statusline {{{1
 " To format status line wrap with `%#* and %*` where # is User number.
 set laststatus=2
+
 set statusline=
 
 set statusline+=\ %*  " Separator
@@ -243,11 +249,11 @@ set statusline+=\ %m
 set statusline+=%=
 
 set statusline+=%3*
-set statusline+=\ %{LinterStatus()}\ 
+set statusline+=\ %{LinterStatus()}
 set statusline+=%*
 
 " Filetype
-" set statusline+=\ %3.3Y\  
+set statusline+=\ %Y\  
 
 " Git branch data
 " set statusline+=%1*
@@ -306,11 +312,14 @@ endif
 
 if g:dein#is_sourced('vim-gitgutter')
     let g:gitgutter_realtime = 1
-    
-    hi GitGutterAdd ctermbg=none ctermfg=green
-    hi GitGutterChange ctermbg=none ctermfg=yellow
-    hi GitGutterDelete ctermbg=none ctermfg=red
-    hi GitGutterChangeDelete ctermbg=none
+    function! GitGutterStyleUpdate() abort
+        hi GitGutterAdd ctermbg=none ctermfg=green
+        hi GitGutterChange ctermbg=none ctermfg=yellow
+        hi GitGutterDelete ctermbg=none ctermfg=red
+        hi GitGutterChangeDelete ctermbg=none
+    endfunction
+    autocmd EditorAppearance BufEnter * call GitGutterStyleUpdate()
+
 endif
 
 if g:dein#is_sourced('vim-fugitive')
@@ -330,11 +339,13 @@ endif
 
 if g:dein#is_sourced('deoplete.nvim')
     let g:deoplete#enable_at_startup = 1
-
-    " 223 white, 8 blue, 0 black
-	hi Pmenu ctermbg=8 ctermfg=223
-	hi PmenuSel ctermbg=0 ctermfg=8
-	hi PmenuSbar ctermbg=0
+    function! DeopleteStyleUpdate() abort
+        " 223 white, 8 blue, 0 black
+        hi Pmenu ctermbg=8 ctermfg=223
+        hi PmenuSel ctermbg=0 ctermfg=8
+        hi PmenuSbar ctermbg=0
+    endfunction
+    autocmd EditorAppearance BufEnter * call DeopleteStyleUpdate()
 
     call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
     call deoplete#custom#option({
@@ -382,17 +393,22 @@ if g:dein#is_sourced('ale')
        return l:return_value
     endfunction
 
+    function! AleStyleUpdate() abort
+        hi ALEError ctermbg=none
+        hi ALEErrorLine ctermbg=none
+        hi ALEErrorSign ctermbg=none ctermfg=red " Red
+
+        hi ALEWarning ctermbg=none
+        hi ALEWarningLine ctermbg=none
+        hi ALEWarningSign ctermbg=none ctermfg=3 " Yellow
+    endfunction
+
+    autocmd EditorAppearance BufEnter * call AleStyleUpdate()
+
     noremap <F3> :ALEFix<CR>
 
-    let g:ale_sign_error = 'x'
-    hi ALEError ctermbg=none
-    hi ALEErrorLine ctermbg=none
-    hi ALEErrorSign ctermbg=none ctermfg=red " Red
-
     let g:ale_sign_warning = '~'
-    hi ALEWarning ctermbg=none
-    hi ALEWarningLine ctermbg=none
-    hi ALEWarningSign ctermbg=none ctermfg=3 " Yellow
+    let g:ale_sign_error = 'x'
 
     let g:ale_linters = {}
     let g:ale_fixers = {}
@@ -413,12 +429,6 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers.json = ['prettier']
     let g:ale_fixers.markdown = ['prettier']
 
-endif
-
-if g:dein#is_sourced('neosnippet.vim')
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
 endif
 
 if g:dein#is_sourced('vim-vinegar')
