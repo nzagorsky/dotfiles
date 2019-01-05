@@ -84,7 +84,7 @@
         required = true
 [user]
         email = toltenos@gmail.com
-	    name = Nikita
+	    name = Nikita Zagorsky
 [merge]
         tool = vimdiff3
 [mergetool "vimdiff3"]
