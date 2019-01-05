@@ -1,4 +1,4 @@
-alias cp="cp -i"                          # confirm before overwriting something
+alias cp='cp -i'                          # confirm before overwriting something
 alias cya='systemctl suspend'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
@@ -16,4 +16,8 @@ alias e='emacs -nw'
 alias k='kubectl'
 alias rng='ranger'
 
-alias scw="docker run -it --rm --volume=$HOME/.scwrc:/.scwrc scaleway/cli"
+alias ping='grc --colour=auto ping'
+alias make='grc --colour=auto make'
+alias diff='grc --colour=auto diff'
+
+alias scw='docker run -it --rm --volume=$HOME/.scwrc:/.scwrc scaleway/cli'

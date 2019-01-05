@@ -1,26 +1,31 @@
 - pacman:
-
     # Development
     - ctags
     - docker
     - docker-compose
     - neovim
-    - python-pip
-    - the_silver_searcher
     - python-neovim
+    - python-pip
 
-    # System
-    - zsh
-    - autoconf
-    - binutils # For yaourt builds
+    # System administration
     - fd # Faster `find`
     - fzf
-    - gcc
+    - grc
     - htop
     - iotop
+    - ranger
+    - ripgrep
+    - tmux
+    - zsh
+
+    # Utils
+    - xclip
+    - xf86-input-libinput # Mouse drivers
+
+    # Build dependencies
+    - autoconf
+    - binutils
+    - gcc
     - npm
     - patch
-    - tmux
-    - xclip
-    - xf86-input-libinput  # Mouse drivers
     - yaourt
