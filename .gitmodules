@@ -13,3 +13,6 @@
 [submodule ".config/nvim/dein"]
 	path = .config/nvim/dein
 	url = https://github.com/Shougo/dein.vim
+[submodule ".config/fish/plugins/fisher"]
+	path = .config/fish/plugins/fisher
+	url = https://github.com/jorgebucaran/fisher

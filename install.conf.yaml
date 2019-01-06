@@ -22,6 +22,9 @@
     ~/.zshrc: .zshrc
     ~/.scripts: .scripts
 
+    # Fish
+    ~/.config/fish: .config/fish
+
     # VIM
     ~/.vim: .config/nvim/
     ~/.vimrc: .config/nvim/init.vim
