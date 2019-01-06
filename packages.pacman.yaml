@@ -16,7 +16,7 @@
     - ranger
     - ripgrep
     - tmux
-    - zsh
+    - fish
 
     # Utils
     - xclip

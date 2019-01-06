@@ -18,6 +18,7 @@ alias upac='sudo pacman -Syu'
 alias e='emacs -nw'
 alias k='kubectl'
 alias rng='ranger'
+alias gst='git status'
 
 alias ping='grc --colour=auto ping'
 alias make='grc --colour=auto make'

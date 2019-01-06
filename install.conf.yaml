@@ -18,9 +18,9 @@
     ~/.tmux.conf: .tmux.conf
 
     # ZSH
-    ~/.zsh: .zsh
-    ~/.zshrc: .zshrc
-    ~/.scripts: .scripts
+    # ~/.zsh: .zsh
+    # ~/.zshrc: .zshrc
+    # ~/.scripts: .scripts
 
     # Fish
     ~/.config/fish: .config/fish
@@ -48,7 +48,6 @@
     - mkdir -p ~/.vim/sessions ~/.vim/undo
     - mkdir -p ~/.credentials; touch ~/.credentials/secure
     - mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
-    - [sudo chsh $USER -s /bin/zsh, Changing shell for user]
     - [pip3 install -r optional/requirements.txt -U --user, Python dependencies]
     - [~/.tmux/plugins/tpm/bin/install_plugins, Tmux plugin installation]
     - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
