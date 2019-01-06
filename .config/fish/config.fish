@@ -90,8 +90,9 @@ set -x FZF_DEFAULT_OPTS "--inline-info"
 #   fi
 # }   
 
+function fish_greeting
+end
 
-# Disk usage
 function dutop 
     du --one-file-system --max-depth=2 -h $argv[1] | sort -hr | head -20;
 end
