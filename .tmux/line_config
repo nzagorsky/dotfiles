@@ -44,5 +44,5 @@ setw -g window-status-format "#[fg=colour0,nobold,nounderscore,noitalics] #[defa
 
 # Activity setting
 setw -g window-status-activity-attr "none"
-setw -g window-status-activity-fg "colour2"
+setw -g window-status-activity-fg yellow
 
