@@ -132,10 +132,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 if exists(':tnoremap')
-    " augroup TerminalConfiguration
-    "     autocmd BufWinEnter,WinEnter term://* startinsert
-    "     autocmd BufLeave term://* stopinsert
-    " augroup END
+    augroup TerminalConfiguration
+        autocmd BufWinEnter,WinEnter term://* startinsert
+        autocmd BufLeave term://* stopinsert
+    augroup END
 
     tnoremap <C-h> <C-\><C-n><C-w>h
     tnoremap <C-j> <C-\><C-n><C-w>j
@@ -220,9 +220,8 @@ set splitright
 set wildmenu
 
 set foldenable
-set foldmethod=indent
-set foldlevel=99
-set foldnestmax=1
+set foldmethod=marker
+set foldlevel=0
 
 set noerrorbells  " No annoying errors
 set novisualbell
@@ -242,8 +241,8 @@ set laststatus=2
 set statusline=
 
 set statusline+=\ %*  " Separator
-" set statusline+=\ %10.50f\ %*  " Path
-set statusline+=\ %t\ %*  " Path
+set statusline+=\ %f\ %*  " Path
+" set statusline+=\ %t\ %*  " Path
 set statusline+=\ %m
 set statusline+=%=
 
@@ -438,7 +437,7 @@ if g:dein#is_sourced('supertab')
     let g:SuperTabDefaultCompletionType='<c-n>'
 endif
 " }}}
-" Utility {{{1
+" Utility functions {{{1
 " Creating parent folders if they doesn't exist on buffer save.
 function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
