@@ -1,4 +1,7 @@
 # vim:foldmethod=marker:foldlevel=0
+# Initial {{{
+source ~/.config/fish/prompt.fish
+# }}}
 # Alias {{{
 alias cp='cp -i'                          # confirm before overwriting something
 alias g='git'                          # confirm before overwriting something
