@@ -70,7 +70,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('ervandew/supertab')
 
     " Async command execution
-    call dein#add('skywind3000/asyncrun.vim')
+    " call dein#add('skywind3000/asyncrun.vim')
     call dein#add('tpope/vim-dispatch')
 
     " Tags
@@ -132,11 +132,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 if exists(':tnoremap')
-    " Automatic insert mode entering for terminal
-    augroup TerminalConfiguration
-        autocmd BufWinEnter,WinEnter term://* startinsert
-        autocmd BufLeave term://* stopinsert
-    augroup END
+    " augroup TerminalConfiguration
+    "     autocmd BufWinEnter,WinEnter term://* startinsert
+    "     autocmd BufLeave term://* stopinsert
+    " augroup END
 
     tnoremap <C-h> <C-\><C-n><C-w>h
     tnoremap <C-j> <C-\><C-n><C-w>j

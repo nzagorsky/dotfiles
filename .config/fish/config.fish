@@ -93,6 +93,9 @@ else
 end
 end
 
+function fish_greeting
+end
+
 function dutop
     du --one-file-system --max-depth=2 -h $argv[1] | sort -hr | head -20;
 end
