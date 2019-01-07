@@ -24,7 +24,6 @@ alias rng='ranger'
 alias gst='git status'
 
 alias ping='grc --colour=auto ping'
-alias make='grc --colour=auto make'
 alias diff='grc --colour=auto diff'
 
 alias scw='docker run -it --rm --volume=$HOME/.scwrc:/.scwrc scaleway/cli'
