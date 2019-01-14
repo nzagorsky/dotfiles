@@ -220,8 +220,8 @@ set splitright
 set wildmenu
 
 set foldenable
-set foldmethod=marker
-set foldlevel=0
+set foldmethod=indent
+set foldlevel=99
 
 set noerrorbells  " No annoying errors
 set novisualbell
@@ -425,6 +425,7 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers.go = ['gofmt']
     let g:ale_fixers.html = ['prettier']
     let g:ale_fixers.json = ['prettier']
+    let g:ale_fixers.sh = ['shfmt']
     let g:ale_fixers.markdown = ['prettier']
 
 endif

@@ -33,6 +33,7 @@
         wshow = show --word-diff=color
         lasttag = describe --tags --abbrev=0
         branches = branch -vv
+        pr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
         getbranch = "!x() { git co origin/$1 -b $1; }; x"
         fixbranch = "!x() { b=`git symbolic-ref -q --short HEAD` && git rebase --onto $b master $1 && git diff --stat $b && git checkout $b; }; x"
         autotrack = "!x() { b=`git symbolic-ref -q --short HEAD` && git branch -u \"origin/$b\" || echo \"error: not a branch\"; }; x"

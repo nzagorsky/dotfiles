@@ -100,7 +100,7 @@ function dutop
 end
 
 # Tmux
-function t
+function t --wraps tmux
     if set -q $argv[1]
         tmux -u attach -t default; or tmux -u new -s default
     else
@@ -114,11 +114,11 @@ function ctop
         -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest
 end
 
-function torify
+function torify --wraps proxychains
     proxychains -f ~/.config/proxychains.conf $argv
 end
 
-function v
+function v --wraps nvim
     if test -e Session.vim
         nvim $argv -S
     else
