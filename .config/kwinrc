@@ -17,6 +17,9 @@ XRenderSmoothScale=false
 Number=10
 Rows=1
 
+[ModifierOnlyShortcuts]
+Meta=
+
 [MouseBindings]
 CommandActiveTitlebar1=Raise
 CommandActiveTitlebar2=Start window tab drag
