@@ -3,7 +3,7 @@
 scriptencoding utf-8
 set clipboard+=unnamedplus  " system clipboard
 set hidden  " buffers
-set nowrap
+set wrap
 set noswapfile
 set undofile
 set undodir=~/.vim/undo
@@ -122,6 +122,8 @@ nnoremap <Leader>w :w<CR>
 nnoremap <leader>q :close<CR>
 nnoremap <leader>k :bd<CR>
 nmap <Leader><Leader> V
+nmap j gj
+nmap k gk
 
 " Remove trailing whitespaces
 nnoremap<leader>S :%s/\s\+$//<cr>:let @/=''<CR>
@@ -233,6 +235,13 @@ if exists('$SHELL')
 else
     set shell=/bin/sh
 endif
+
+" augroup BufferOptions
+"     autocmd!
+"     autocmd WinEnter * set cursorline
+"     autocmd WinLeave * set nocursorline
+" augroup END
+
 " }}}
 " Statusline {{{1
 " To format status line wrap with `%#* and %*` where # is User number.
@@ -343,6 +352,7 @@ if g:dein#is_sourced('deoplete.nvim')
         hi PmenuSel ctermbg=0 ctermfg=8
         hi PmenuSbar ctermbg=0
     endfunction
+
     autocmd EditorAppearance BufEnter * call DeopleteStyleUpdate()
 
     call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
