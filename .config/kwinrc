@@ -1,12 +1,12 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js
 
 [Compositing]
 AnimationSpeed=1
 Backend=OpenGL
 Enabled=true
-GLCore=false
-GLPreferBufferSwap=a
+GLCore=true
+GLPreferBufferSwap=p
 GLTextureFilter=2
 HiddenPreviews=5
 OpenGLIsUnsafe=false
@@ -14,6 +14,16 @@ WindowsBlockCompositing=true
 XRenderSmoothScale=false
 
 [Desktops]
+Id_1=860d7837-c30e-4418-9b5c-fa826f678c39
+Id_10=411220b7-3bb5-4452-9c09-98aaf48de044
+Id_2=51a55cc7-6a01-4732-8b1f-31c5dd0ae176
+Id_3=a4fd9a00-b50b-4f30-a9f2-9886a52a412f
+Id_4=9ee80803-bd5a-4ff8-a16b-eb1934a03565
+Id_5=8341cb62-0a02-49ac-b65d-706f9760e786
+Id_6=b26ac74e-56c5-47c2-b611-1d6b0b22c0f4
+Id_7=1b68b701-5b07-42b7-8aa8-c774ed6bce24
+Id_8=95e5aa70-a9ed-4136-8b5b-67aa2a425021
+Id_9=024f2f06-2cc7-49dd-a98a-95bf2dc6c846
 Number=10
 Rows=1
 

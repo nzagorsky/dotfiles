@@ -109,6 +109,7 @@ ForegroundVisited=127,140,141
 BrowserApplication=chromium.desktop
 ColorScheme=Breeze Dark
 Name=Breeze Dark
+XftAntialias=true
 XftHintStyle=hintfull
 XftSubPixel=rgb
 dbfile=/home/toltenos/.mozilla/firefox/lbsgepyi.default/places.sqlite
@@ -145,7 +146,7 @@ Sort directories first=true
 Sort reversed=false
 Speedbar Width=107
 View Style=Simple
-listViewIconSize=90
+listViewIconSize=100
 
 [KScreen]
 ScaleFactor=1
