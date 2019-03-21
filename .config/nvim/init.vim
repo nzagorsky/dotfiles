@@ -41,9 +41,10 @@ if dein#load_state(expand('~/.config/nvim'))
         call dein#add('christoomey/vim-tmux-navigator')
     endif
 
-    " Colorscheme
+    " Style
     call dein#add('morhetz/gruvbox')
     call dein#add('junegunn/goyo.vim')
+    call dein#add('drewtempelmeyer/palenight.vim')
 
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -70,7 +71,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('ervandew/supertab')
 
     " Async command execution
-    " call dein#add('skywind3000/asyncrun.vim')
     call dein#add('tpope/vim-dispatch')
 
     " Tags
@@ -85,6 +85,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Python modules.
     call dein#add('zchee/deoplete-jedi', { 'on_ft': 'python' })
+    call dein#add('numirias/semshi', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
     " JS
@@ -155,9 +156,9 @@ cmap w!! w !sudo tee % >/dev/null
 
 " }}}
 " Color setup {{{1
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='dark'
+colorscheme palenight
 set background=dark
+" let g:gruvbox_contrast_dark='dark'
 
 function! UpdatedHighlights() abort
     hi Normal ctermbg=none
@@ -170,9 +171,6 @@ function! UpdatedHighlights() abort
     hi User2 ctermfg=8
     hi User3 ctermfg=red
 
-    " hi StatusLine ctermfg=7
-    " hi StatusLineNC ctermfg=240
-
     hi StatusLineNC ctermbg=none cterm=none
     hi StatusLine ctermbg=none cterm=none
     hi TabLineFill ctermbg=none
@@ -180,8 +178,12 @@ function! UpdatedHighlights() abort
     hi Folded ctermbg=none
 
     set fillchars+=vert:│
+
+    " hi StatusLine ctermfg=7
+    " hi StatusLineNC ctermfg=240
     " set fillchars+=stlnc:_
     " set fillchars+=stl:_
+
 endfunction
 
 augroup EditorAppearance
@@ -342,6 +344,13 @@ if g:dein#is_sourced('vim-fugitive')
     noremap <Leader>gb :Gblame<CR>
     noremap <Leader>gd :Gvdiff<CR>
     noremap <Leader>gr :Gremove<CR>
+endif
+
+if g:dein#is_sourced('semshi')
+    function! SemshiStyleUpdate() abort
+        hi semshiSelected ctermfg=none ctermbg=none
+    endfunction
+    autocmd EditorAppearance BufEnter * call SemshiStyleUpdate()
 endif
 
 if g:dein#is_sourced('deoplete.nvim')
