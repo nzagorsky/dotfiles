@@ -97,4 +97,5 @@ BorderSize=None
 ButtonsOnLeft=
 ButtonsOnRight=X
 CloseOnDoubleClickOnMenu=false
-library=org.kde.breeze
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Sweet-Dark
