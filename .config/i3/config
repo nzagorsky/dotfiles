@@ -1,0 +1,232 @@
+set $mod Mod4
+set $mod2 Control
+
+# Font for window titles.
+font pango:Hack 14
+
+# border pixel 0
+smart_gaps on
+smart_borders on
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+set $base00 #2b303b
+set $base01 #343d46
+set $base02 #4f5b66
+set $base03 #65737e
+set $base04 #a7adba
+set $base05 #c0c5ce
+set $base06 #dfe1e8
+set $base07 #eff1f5
+
+set $base08 #bf616a
+set $base09 #d08770
+set $base0A #ebcb8b
+set $base0B #a3be8c
+set $base0C #96b5b4
+set $base0D #8fa1b3
+set $base0E #b48ead
+set $base0F #ab7967
+
+# Disable focus on mouse
+focus_follows_mouse no
+
+# Back and forth enabling. Press mod+4 for example and you will broing yourself back to previous worspace
+# If you're already on 4.
+workspace_auto_back_and_forth yes
+bindsym $mod+z workspace back_and_forth
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# start a filemanager
+bindsym $mod+Shift+Return exec --no-startup-id nautilus
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi (a program launcher)
+bindsym $mod+d exec ~/.scripts/launch_menu
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+v split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod2+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod2+space focus mode_toggle
+
+bindsym $mod+a focus parent
+
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10"
+
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Window settings
+for_window [class="Telegram"] floating enable
+for_window [window_role="pop-up"] floating enable
+
+for_window [class="^.*"] border pixel 0
+
+assign [class="Chromium"] $workspace2
+# assign [class="Firefox"] $workspace2
+# assign [class="QuiteRss"] $workspace5
+# assign [class="Synergy"] $workspace8
+# assign [class="Franz"] $workspace9
+# assign [class="Spotify"] $workspace10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart WM
+bindsym $mod+Shift+r restart
+# logout
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3-msg exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Widow Colours
+#                       border  background text    indicator
+client.focused          $base02 $base02    $base07 $base0F
+client.focused_inactive $base02 $base02    $base03 $base0F
+client.unfocused        $base01 $base01    $base03 $base0F
+client.urgent           $base02 $base08    $base00 $base0F
+
+
+# Status bar configuration
+bar {
+        status_command i3blocks
+        font pango: Hack 12
+        position top
+        colors {
+                        separator $base03
+                        background $base01
+                        statusline $base05
+                        #                  border  background text
+                        focused_workspace  $base01 $base01    $base08
+                        active_workspace   $base01 $base02    $base03
+                        inactive_workspace $base01 $base01    $base05
+                        urgent_workspace   $base01 $base01    $base08
+                }
+}
+
+
+
+########################## USER SETTINGS ##################################
+# Pulse Audio controls
+# use 'pkill -RTMIN+1 i3blocks' after changing the volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && pkill -RTMIN+1 i3blocks #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && pkill -RTMIN+1 i3blocks #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && pkill -RTMIN+1 i3blocks # mute sound
+
+# Media player controls
+bindcode 124 exec systemctl suspend
+bindcode 172 exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
+
+# Disable window header.
+new_window pixel 4
+new_float pixel 4
+
+# Take screenshot of the area and paste it to clipboard.
+bindsym --release Print exec import png:- | xclip -selection c -t image/png
+
+
+############## Startup section ############################################
+# Start system applications
+# exec --no-startup-id dunst -config ~/.dunstrc
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # password prompt
+# exec_always --no-startup-id xset -b # Turn fucking bell off.
+# exec_always --no-startup-id xrandr --output DP-2 --rate 74.99 --mode 2560x1080 # Set proper refresh.
+# exec --no-startup-id nm-applet # Networking applet.
+exec --no-startup-id nitrogen --restore # Restore wallpaper
+# exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle  # Language switcher.

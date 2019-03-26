@@ -111,16 +111,15 @@ ForegroundVisited=179,13,191
 BrowserApplication=chromium.desktop
 ColorScheme=Sweet
 Name=Sweet
-XftAntialias=true
 XftHintStyle=
 XftSubPixel=
 dbfile=/home/toltenos/.mozilla/firefox/lbsgepyi.default/places.sqlite
-fixed=Hack,9,-1,5,50,0,0,0,0,0,Regular
-font=Noto Sans,10,-1,5,50,0,0,0,0,0,Regular
-menuFont=Noto Sans,10,-1,5,50,0,0,0,0,0,Regular
+fixed=Hack,11,-1,5,50,0,0,0,0,0,Regular
+font=Noto Sans,12,-1,5,50,0,0,0,0,0,Regular
+menuFont=Noto Sans,12,-1,5,50,0,0,0,0,0,Regular
 shadeSortColumn=true
-smallestReadableFont=Noto Sans,8,-1,5,50,0,0,0,0,0,Regular
-toolBarFont=Noto Sans,10,-1,5,50,0,0,0,0,0,Regular
+smallestReadableFont=Noto Sans,10,-1,5,50,0,0,0,0,0,Regular
+toolBarFont=Noto Sans,12,-1,5,50,0,0,0,0,0,Regular
 
 [Icons]
 Theme=breeze-dark
@@ -166,7 +165,7 @@ FullScreen=Meta+F
 [WM]
 activeBackground=47,52,63
 activeBlend=47,52,63
-activeFont=Noto Sans,10,-1,5,50,0,0,0,0,0,Regular
+activeFont=Noto Sans,12,-1,5,50,0,0,0,0,0,Regular
 activeForeground=211,218,227
 inactiveBackground=47,52,63
 inactiveBlend=47,52,63

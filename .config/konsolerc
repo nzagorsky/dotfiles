@@ -1,12 +1,12 @@
 [Desktop Entry]
-DefaultProfile=Profile 3.profile
+DefaultProfile=Shell.profile
 
 [DownloadDialog Settings]
 Height 768=510
 Width 1366=700
 
 [Favorite Profiles]
-Favorites=
+Favorites=Shell.profile
 
 [KonsoleWindow]
 SaveGeometryOnExit=false

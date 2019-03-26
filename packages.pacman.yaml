@@ -1,4 +1,5 @@
 - pacman:
+
     # Development
     - ctags
     - docker
@@ -6,6 +7,15 @@
     - neovim
     - python-neovim
     - python-pip
+
+    # Env
+    - rxvt-unicode
+    - i3blocks
+    - dmenu
+    - i3-gaps
+    - playerctl
+    - network_manager
+    - nitrogen
 
     # System administration
     - fd # Faster `find`

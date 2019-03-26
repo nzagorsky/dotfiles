@@ -35,6 +35,9 @@
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
 
+    # I3
+    ~/.config/i3: .config/i3
+
     # KDE
     ~/.config/breezerc: .config/breezerc
     ~/.config/kdeglobals: .config/kdeglobals
