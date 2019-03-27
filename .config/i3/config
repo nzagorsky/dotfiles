@@ -2,7 +2,7 @@ set $mod Mod4
 set $mod2 Control
 
 # Font for window titles.
-font pango:Hack 14
+font pango:Hack 13
 
 # Set up gaps
 bindsym $mod+Shift+minus gaps inner current minus 5
@@ -132,6 +132,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [class="^.*"] border pixel 0
 
 assign [class="Chromium"] $workspace2
+assign [class="Urxvt"] $workspace1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -162,10 +163,10 @@ bindsym $mod+r mode "resize"
 # }}}
 # Widow Colors {{{
 #                       border  background  text    indicator
-client.focused          $color2 $color2     $color7 $color5
-client.focused_inactive $color2 $color2     $color3 $color5
-client.unfocused        $color1 $color1     $color3 $color5
-client.urgent           $color2 $color8     $color0 $color5
+client.focused          $color0 $color0     $color3 $color5
+client.focused_inactive $color0 $color0     $color7 $color5
+client.unfocused        $color0 $color0     $color7 $color5
+client.urgent           $color0 $color0     $color1 $color5
 # }}}
 # Status bar {{{
 bar {
