@@ -18,6 +18,7 @@
     - nitrogen
     - rofi
     - ttf-hack  # font
+    - light
 
     # System administration
     - fd # Faster `find`

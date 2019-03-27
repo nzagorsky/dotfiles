@@ -10,31 +10,22 @@ smart_borders on
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-set_from_resource $base00 color0
-set_from_resource $base01 color1
-set_from_resource $base02 color2
-set_from_resource $base03 color3
-set_from_resource $base04 color4
-set_from_resource $base05 color5
-set_from_resource $base06 color6
-set_from_resource $base07 color7
-set_from_resource $base08 color8
-set_from_resource $base09 color9
-set_from_resource $base10 color10
-set_from_resource $base11 color11
-set_from_resource $base12 color12
-set_from_resource $base13 color13
-set_from_resource $base14 color14
-set_from_resource $base15 color15
-
-# set $base08 #bf616a
-# set $base09 #d08770
-# set $base0A #ebcb8b
-# set $base0B #a3be8c
-# set $base0C #96b5b4
-# set $base0D #8fa1b3
-# set $base0E #b48ead
-# set $base0F #ab7967
+set_from_resource $color0 color0
+set_from_resource $color1 color1
+set_from_resource $color2 color2
+set_from_resource $color3 color3
+set_from_resource $color4 color4
+set_from_resource $color5 color5
+set_from_resource $color6 color6
+set_from_resource $color7 color7
+set_from_resource $color8 color8
+set_from_resource $color9 color9
+set_from_resource $color10 color10
+set_from_resource $color11 color11
+set_from_resource $color12 color12
+set_from_resource $color13 color13
+set_from_resource $color14 color14
+set_from_resource $color15 color15
 
 # Disable focus on mouse
 focus_follows_mouse no
@@ -178,11 +169,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Widow Colours
-#                       border  background text    indicator
-client.focused          $base02 $base02    $base07 $base0F
-client.focused_inactive $base02 $base02    $base03 $base0F
-client.unfocused        $base01 $base01    $base03 $base0F
-client.urgent           $base02 $base08    $base00 $base0F
+#                       border  background  text    indicator
+client.focused          $color2 $color2     $color7 $color5
+client.focused_inactive $color2 $color2     $color3 $color5
+client.unfocused        $color1 $color1     $color3 $color5
+client.urgent           $color2 $color8     $color0 $color5
 
 
 # Status bar configuration
@@ -191,14 +182,14 @@ bar {
         font pango: Hack 12
         position top
         colors {
-                        separator $base00
-                        background $base00
-                        statusline $base08
-                        #                  border  background text
-                        focused_workspace  $base00 $base00    $base10
-                        active_workspace   $base00 $base00    $base10
-                        inactive_workspace $base00 $base00    $base08
-                        urgent_workspace   $base00 $base00    $base01
+                        separator $color0
+                        background $color0
+                        statusline $color8
+                        #                  border  background  text
+                        focused_workspace  $color0 $color0     $color7
+                        active_workspace   $color0 $color0     $color7
+                        inactive_workspace $color0 $color0     $color8
+                        urgent_workspace   $color0 $color0     $color1
                 }
 }
 
@@ -206,10 +197,9 @@ bar {
 
 ########################## USER SETTINGS ##################################
 # Pulse Audio controls
-# use 'pkill -RTMIN+1 i3blocks' after changing the volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && pkill -RTMIN+1 i3blocks #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && pkill -RTMIN+1 i3blocks #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && pkill -RTMIN+1 i3blocks # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && pkill -RTMIN+10 i3blocks #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && pkill -RTMIN+10 i3blocks #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle && pkill -RTMIN+10 i3blocks # mute sound
 
 # Media player controls
 bindcode 124 exec systemctl suspend
