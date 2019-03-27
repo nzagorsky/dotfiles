@@ -4,11 +4,11 @@ set $mod2 Control
 # Font for window titles.
 font pango:Hack 14
 
-# border pixel 0
-smart_gaps on
-smart_borders on
+# Set up gaps
+bindsym $mod+Shift+minus gaps inner current minus 5
+bindsym $mod+Shift+plus gaps inner current plus 5
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+# Use Mouse+mod to drag floating windows to their wanted position
 floating_modifier $mod
 set_from_resource $color0 color0
 set_from_resource $color1 color1
@@ -27,11 +27,8 @@ set_from_resource $color13 color13
 set_from_resource $color14 color14
 set_from_resource $color15 color15
 
-# Disable focus on mouse
-focus_follows_mouse no
+focus_follows_mouse yes
 
-# Back and forth enabling. Press mod+4 for example and you will broing yourself back to previous worspace
-# If you're already on 4.
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 
