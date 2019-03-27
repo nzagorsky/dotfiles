@@ -18,9 +18,9 @@
     ~/.tmux.conf: .tmux.conf
 
     # ZSH
-    # ~/.zsh: .zsh
-    # ~/.zshrc: .zshrc
-    # ~/.scripts: .scripts
+    ~/.zsh: .zsh
+    ~/.zshrc: .zshrc
+    ~/.scripts: .scripts
 
     # Fish
     ~/.config/fish: .config/fish
@@ -34,6 +34,7 @@
     ~/.emacs.d: .emacs.d
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
+    ~/.Xresources: .Xresources
 
     # I3
     ~/.config/i3: .config/i3

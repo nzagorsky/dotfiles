@@ -14,7 +14,7 @@
     - dmenu
     - i3-gaps
     - playerctl
-    - network_manager
+    - networkmanager
     - nitrogen
 
     # System administration
