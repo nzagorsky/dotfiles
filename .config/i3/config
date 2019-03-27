@@ -10,23 +10,31 @@ smart_borders on
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-set $base00 #2b303b
-set $base01 #343d46
-set $base02 #4f5b66
-set $base03 #65737e
-set $base04 #a7adba
-set $base05 #c0c5ce
-set $base06 #dfe1e8
-set $base07 #eff1f5
+set_from_resource $base00 color0
+set_from_resource $base01 color1
+set_from_resource $base02 color2
+set_from_resource $base03 color3
+set_from_resource $base04 color4
+set_from_resource $base05 color5
+set_from_resource $base06 color6
+set_from_resource $base07 color7
+set_from_resource $base08 color8
+set_from_resource $base09 color9
+set_from_resource $base10 color10
+set_from_resource $base11 color11
+set_from_resource $base12 color12
+set_from_resource $base13 color13
+set_from_resource $base14 color14
+set_from_resource $base15 color15
 
-set $base08 #bf616a
-set $base09 #d08770
-set $base0A #ebcb8b
-set $base0B #a3be8c
-set $base0C #96b5b4
-set $base0D #8fa1b3
-set $base0E #b48ead
-set $base0F #ab7967
+# set $base08 #bf616a
+# set $base09 #d08770
+# set $base0A #ebcb8b
+# set $base0B #a3be8c
+# set $base0C #96b5b4
+# set $base0D #8fa1b3
+# set $base0E #b48ead
+# set $base0F #ab7967
 
 # Disable focus on mouse
 focus_follows_mouse no
@@ -40,7 +48,7 @@ bindsym $mod+z workspace back_and_forth
 bindsym $mod+Return exec urxvt
 
 # start a filemanager
-bindsym $mod+Shift+Return exec --no-startup-id nautilus
+bindsym $mod+Shift+Return exec --no-startup-id thunar
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -183,14 +191,14 @@ bar {
         font pango: Hack 12
         position top
         colors {
-                        separator $base03
-                        background $base01
-                        statusline $base05
+                        separator $base00
+                        background $base00
+                        statusline $base08
                         #                  border  background text
-                        focused_workspace  $base01 $base01    $base08
-                        active_workspace   $base01 $base02    $base03
-                        inactive_workspace $base01 $base01    $base05
-                        urgent_workspace   $base01 $base01    $base08
+                        focused_workspace  $base00 $base00    $base10
+                        active_workspace   $base00 $base00    $base10
+                        inactive_workspace $base00 $base00    $base08
+                        urgent_workspace   $base00 $base00    $base01
                 }
 }
 

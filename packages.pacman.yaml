@@ -16,6 +16,8 @@
     - playerctl
     - networkmanager
     - nitrogen
+    - rofi
+    - ttf-hack  # font
 
     # System administration
     - fd # Faster `find`

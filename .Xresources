@@ -39,8 +39,9 @@
 *.color15:      #ffffff
 
 ! }}}
+! Urxvt {{{
 !
-URxvt.font: xft:Mono:pixelsize=16
+URxvt.font: xft:Hack:pixelsize=16
 URxvt*scrollBar: false
 
 ! Font setup
@@ -50,10 +51,13 @@ Xft*hinting: true
 Xft*hintstyle: hintfull
 Xft*rgba: none
 URxvt.letterSpace: -1
-URxvt.boldFont:
 
 URxvt*cursorUnderline:  true
 URxvt*geometry: 85x20
 URxvt*fading: 30
 URxvt*transparent: true
 URxvt*shading: 15
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+! }}}

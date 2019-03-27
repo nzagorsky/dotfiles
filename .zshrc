@@ -1,3 +1,5 @@
+export TERM=xterm-256color
+
 # Source configs
 for f in ~/.zsh/init/*.zsh; do source $f; done
 
