@@ -14,7 +14,7 @@ alias spac='pacman -Ss'
 alias upac='sudo pacman -Syu'
 alias e='emacs -nw'
 alias k='kubectl'
-alias rng='ranger'
+alias r='ranger'
 
 alias ping='grc --colour=auto ping'
 alias diff='grc --colour=auto diff'
