@@ -132,25 +132,20 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # Window settings
 for_window [class="Telegram"] floating enable
 for_window [window_role="pop-up"] floating enable
-
 for_window [class="^.*"] border pixel 0
 
 assign [class="Chromium"] $workspace2
-# assign [class="Firefox"] $workspace2
-# assign [class="QuiteRss"] $workspace5
-# assign [class="Synergy"] $workspace8
-# assign [class="Franz"] $workspace9
-# assign [class="Spotify"] $workspace10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart WM
 bindsym $mod+Shift+r restart
+
 # logout
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec i3-msg exit
 
-# resize window (you can also use the mouse for that)
+# Resize window {{{
 mode "resize" {
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
@@ -167,16 +162,15 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-# Widow Colours
+# }}}
+# Widow Colors {{{
 #                       border  background  text    indicator
 client.focused          $color2 $color2     $color7 $color5
 client.focused_inactive $color2 $color2     $color3 $color5
 client.unfocused        $color1 $color1     $color3 $color5
 client.urgent           $color2 $color8     $color0 $color5
-
-
-# Status bar configuration
+# }}}
+# Status bar {{{
 bar {
         status_command i3blocks
         font pango: Hack 12
@@ -193,9 +187,8 @@ bar {
                 }
 }
 
-
-
-########################## USER SETTINGS ##################################
+# }}}
+# User settings {{{
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && pkill -RTMIN+10 i3blocks #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && pkill -RTMIN+10 i3blocks #decrease sound volume
@@ -217,14 +210,13 @@ new_float pixel 4
 
 # Take screenshot of the area and paste it to clipboard.
 bindsym --release Print exec import png:- | xclip -selection c -t image/png
-
-
-############## Startup section ############################################
+# }}}
+# Startup {{{
 # Start system applications
-# exec --no-startup-id dunst -config ~/.dunstrc
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # password prompt
-# exec_always --no-startup-id xset -b # Turn fucking bell off.
-# exec_always --no-startup-id xrandr --output DP-2 --rate 74.99 --mode 2560x1080 # Set proper refresh.
-# exec --no-startup-id nm-applet # Networking applet.
+exec_always --no-startup-id xset -b # Turn fucking bell off.
+exec --no-startup-id nm-applet # Networking applet.
 exec --no-startup-id nitrogen --restore # Restore wallpaper
-# exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle  # Language switcher.
+exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle  # Language switcher.
+exec_always --no-startup-id xfce4-power-manager
+# }}}
+# vim:foldmethod=marker:foldlevel=0
