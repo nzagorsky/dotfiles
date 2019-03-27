@@ -19,6 +19,7 @@
     - rofi
     - ttf-hack  # font
     - light
+    - w3m
 
     # System administration
     - fd # Faster `find`
