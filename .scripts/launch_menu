@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# i3-dmenu-desktop
+
 MENU_MODE=$1  # [drun, run]
 
 # If no arg is passed then it's run.
@@ -9,8 +11,10 @@ if [ -z $MENU_MODE ]
 fi
 
 # Colors
-BACKGROUND="212121"
-FOREGROUND="bdbdbd"
+BACKGROUND=$(xgetres background)
+BACKGROUND="${BACKGROUND:1}"
+FOREGROUND=$(xgetres foreground)
+FOREGROUND="${FOREGROUND:1}"
 
 # Visibility variables. NOTE: Alpha: From 00 to FF
 VISIBLE="CC"

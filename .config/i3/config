@@ -1,12 +1,13 @@
+# Main settings {{{
 set $mod Mod4
 set $mod2 Control
 
+focus_follows_mouse yes
+workspace_auto_back_and_forth yes
+# }}}
+# Color and font setup {{{
 # Font for window titles.
 font pango:Hack 13
-
-# Set up gaps
-bindsym $mod+Shift+minus gaps inner current minus 5
-bindsym $mod+Shift+plus gaps inner current plus 5
 
 # Use Mouse+mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -26,25 +27,47 @@ set_from_resource $color12 color12
 set_from_resource $color13 color13
 set_from_resource $color14 color14
 set_from_resource $color15 color15
-
-focus_follows_mouse yes
-
-workspace_auto_back_and_forth yes
-bindsym $mod+z workspace back_and_forth
-
-# start a terminal
-bindsym $mod+Return exec urxvt
-
-# start a filemanager
-bindsym $mod+Shift+Return exec --no-startup-id thunar
-
-# kill focused window
-bindsym $mod+Shift+q kill
-
-# start rofi (a program launcher)
+# }}}
+# Custom binds {{{
 bindsym $mod+d exec ~/.scripts/launch_menu
+bindsym $mod+Return exec urxvt
+bindsym $mod+Shift+Return exec --no-startup-id thunar
+# }}}
+# Workspace controls {{{
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10"
 
-# change focus
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+# }}}
+# Window navigation {{{
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -67,83 +90,26 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+Shift+v split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
+# }}}
+# Window controls {{{
 bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
+bindsym $mod+Shift+v split h
+bindsym $mod+v split v
 bindsym $mod2+Shift+space floating toggle
-
-# change focus between tiling / floating windows
 bindsym $mod2+space focus mode_toggle
-
 bindsym $mod+a focus parent
 
-set $workspace1 "1"
-set $workspace2 "2"
-set $workspace3 "3"
-set $workspace4 "4"
-set $workspace5 "5"
-set $workspace6 "6"
-set $workspace7 "7"
-set $workspace8 "8"
-set $workspace9 "9"
-set $workspace10 "10"
+bindsym $mod+Shift+q kill
+bindsym $mod+z workspace back_and_forth
 
+gaps inner 10
+gaps outer 15
+bindsym $mod+Shift+minus gaps inner current minus 5
+bindsym $mod+Shift+plus gaps inner current plus 5
 
-# switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
-
-# Window settings
-for_window [class="Telegram"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [class="^.*"] border pixel 0
-
-assign [class="Chromium"] $workspace2
-assign [class="Urxvt"] $workspace1
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart WM
-bindsym $mod+Shift+r restart
-
-# logout
-bindsym $mod+Shift+e exec i3-msg exit
-
-# Resize window {{{
 mode "resize" {
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
@@ -161,6 +127,20 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 # }}}
+# Window settings {{{
+for_window [window_role="pop-up"] floating enable
+for_window [class="^.*"] border pixel 0
+
+assign [window_role="browser"] $workspace2
+assign [class="Telegram"] $workspace4
+assign [class="Telegram"] $workspace4
+# assign [class="URxvt"] $workspace1
+# }}}
+# i3 controls {{{
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec i3-msg exit
+# }}}
 # Widow Colors {{{
 #                       border  background  text    indicator
 client.focused          $color0 $color0     $color3 $color5
@@ -169,24 +149,25 @@ client.unfocused        $color0 $color0     $color7 $color5
 client.urgent           $color0 $color0     $color1 $color5
 # }}}
 # Status bar {{{
-bar {
-        status_command i3blocks
-        font pango: Hack 12
-        position top
-        colors {
-                        separator $color0
-                        background $color0
-                        statusline $color8
-                        #                  border  background  text
-                        focused_workspace  $color0 $color0     $color7
-                        active_workspace   $color0 $color0     $color7
-                        inactive_workspace $color0 $color0     $color8
-                        urgent_workspace   $color0 $color0     $color1
-                }
-}
+# bar {
+#         status_command i3blocks
+#         font pango: Hack 12
+#         position bottom
+#         colors {
+#                         separator $color0
+#                         background $color0
+#                         statusline $color8
+#                         #                  border  background  text
+#                         focused_workspace  $color0 $color0     $color7
+#                         active_workspace   $color0 $color0     $color7
+#                         inactive_workspace $color0 $color0     $color8
+#                         urgent_workspace   $color0 $color0     $color1
+#                 }
+# }
 
 # }}}
-# User settings {{{
+# Media controls {{{
+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && pkill -RTMIN+10 i3blocks #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && pkill -RTMIN+10 i3blocks #decrease sound volume
@@ -202,19 +183,23 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec light -A 5
 bindsym XF86MonBrightnessDown exec light -U 5
 
-# Disable window header.
-new_window pixel 4
-new_float pixel 4
-
 # Take screenshot of the area and paste it to clipboard.
 bindsym --release Print exec import png:- | xclip -selection c -t image/png
 # }}}
 # Startup {{{
 # Start system applications
-exec_always --no-startup-id xset -b # Turn fucking bell off.
-exec --no-startup-id nm-applet # Networking applet.
-exec --no-startup-id nitrogen --restore # Restore wallpaper
-exec_always --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle  # Language switcher.
-exec_always --no-startup-id xfce4-power-manager
+exec_always   --no-startup-id xrdb ~/.Xresources
+exec_always   --no-startup-id ~/.scripts/launch_bar  # polybar
+exec_always   --no-startup-id xset -b  # Turn fucking bell off.
+exec          --no-startup-id nm-applet  # Networking applet.
+exec          --no-startup-id nitrogen --restore  # Restore wallpaper
+exec_always   --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle
+
+exec_always   --no-startup-id xfce4-power-manager
+exec          --no-startup-id chromium
+exec          --no-startup-id compton -b
+exec          --no-startup-id unclutter
+exec_always   --no-startup-id xset r rate 280 40  # Speedup keyboard
+
 # }}}
 # vim:foldmethod=marker:foldlevel=0

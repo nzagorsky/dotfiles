@@ -8,18 +8,19 @@
     - python-neovim
     - python-pip
 
-    # Env
-    - rxvt-unicode
-    - i3blocks
-    - dmenu
+    # Desktop env
     - i3-gaps
-    - playerctl
+    - i3blocks
+    - light
     - networkmanager
     - nitrogen
+    - playerctl
     - rofi
+    - rxvt-unicode
     - ttf-hack  # font
-    - light
     - w3m
+    - compton
+    - polybar
 
     # System administration
     - fd # Faster `find`
@@ -30,11 +31,10 @@
     - ranger
     - ripgrep
     - tmux
-    - fish
 
     # Utils
     - xclip
-    - xf86-input-libinput # Mouse drivers
+    - xf86-input-libinput  # Mouse drivers
 
     # Build dependencies
     - autoconf
@@ -43,3 +43,8 @@
     - npm
     - patch
     - yaourt
+
+- shell:
+    - yaourt -S xgetres
+    - yaourt -S nerd-fonts-hack
+    - yaourt -S nerd-fonts-terminus

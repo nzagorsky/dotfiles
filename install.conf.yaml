@@ -40,6 +40,9 @@
     # I3
     ~/.config/i3: .config/i3
 
+    ~/.config/polybar: .config/polybar
+    ~/.config/compton: .config/compton
+
     # KDE
     ~/.config/breezerc: .config/breezerc
     ~/.config/kdeglobals: .config/kdeglobals

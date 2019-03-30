@@ -1,5 +1,5 @@
 ! vim:foldmethod=marker:foldlevel=0
-! Theme {{{
+! Colors {{{
 ! Tomorrow Dark
 ! special
 *.foreground:   #c5c8c6
@@ -41,7 +41,7 @@
 ! }}}
 ! Urxvt {{{
 !
-URxvt.font: xft:Hack:pixelsize=16
+URxvt.font: xft:Hack Nerd Font:size=12
 URxvt*scrollBar: false
 
 ! Font setup
@@ -58,6 +58,12 @@ URxvt*fading: 50
 URxvt*transparent: true
 URxvt*shading: 15
 
+URxvt.perl-ext-common: default,selection-to-clipboard,pasta,matcher,keyboard-select
+URxvt.url-launcher:   /usr/bin/chromium
+URxvt.underlineURLs:  True
+URxvt.matcher.button: 1
+
+URxvt.iso14755: false
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! }}}
