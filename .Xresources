@@ -53,13 +53,12 @@ Xft*rgba: none
 URxvt.letterSpace: -1
 
 URxvt*cursorUnderline:  true
-URxvt*geometry: 85x20
-URxvt*fading: 50
+! URxvt*fading: 50
 URxvt*transparent: true
 URxvt*shading: 15
 
 URxvt.perl-ext-common: default,selection-to-clipboard,pasta,matcher,keyboard-select
-URxvt.url-launcher:   /usr/bin/chromium
+URxvt.url-launcher:   chromium
 URxvt.underlineURLs:  True
 URxvt.matcher.button: 1
 

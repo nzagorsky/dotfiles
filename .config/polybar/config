@@ -1,0 +1,83 @@
+[bar/base]
+    modules-right = alsa battery date
+    modules-center = workspaces
+    ; modules-left = cpu
+
+    background = #bc000000
+    foreground = ${xrdb:foreground}
+
+    bottom = false
+
+    tray-position = left
+    tray-padding = 1
+
+    font-0 = Hack Nerd Font:size=12
+
+[module/date]
+    type = internal/date
+    interval = 1.0
+    date =  %Y-%m-%d
+    time = %H:%M
+    label-foreground = ${xrdb:color10}
+    label = %date% %time%
+
+[module/workspaces]
+	type = internal/i3
+    label-focused-foreground = ${xrdb:color3}
+    label-focused-padding = 1
+    label-unfocused-foreground = ${xrdb:color8}
+    label-unfocused-padding = 1
+    label-urgent-foreground = ${xrdb:color1}
+    label-urgent-padding = 1
+    label-mode-foreground = ${xrdb:color1}
+    label-mode-padding = 1
+    pin-workspaces = true
+
+[module/alsa]
+    type = internal/alsa
+    label-muted = muted 0%
+    label-volume = %percentage%% vol
+    label-volume-foreground = ${xrdb:color5}
+    label-muted-foreground = ${xrdb:color5}
+
+[module/battery]
+	type          = internal/battery
+	full-at       = 90
+	battery       = BAT0
+	adapter       = AC0
+	poll-interval = 5
+    time-format = %H:%M
+
+
+    label-discharging = %time%
+    label-discharging-foreground = ${xrdb:color4}
+    format-discharging = <ramp-capacity> <label-discharging>
+    format-discharging-padding = 1
+    ramp-capacity-foreground = ${xrdb:color12}
+    ramp-capacity-0 = 
+    ramp-capacity-1 = 
+    ramp-capacity-2 = 
+    ramp-capacity-3 = 
+    ramp-capacity-4 = 
+
+    label-charging = %time%
+    label-charging-foreground = ${xrdb:color4}
+    format-charging = <animation-charging> <label-charging>
+    format-charging-padding = 1
+    animation-charging-foreground = ${xrdb:color12}
+    animation-charging-0 = 
+    animation-charging-1 = 
+    animation-charging-2 = 
+    animation-charging-3 = 
+    animation-charging-4 = 
+    animation-charging-framerate = 750
+
+[module/cpu]
+	type             = internal/cpu
+	interval         = 2
+	format           = <label>
+	label            = %percentage%% CPU
+	label-foreground = ${xrdb:color7}
+	label-padding    = 1
+
+; vim:ft=cfg
