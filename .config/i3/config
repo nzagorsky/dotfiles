@@ -200,6 +200,9 @@ exec          --no-startup-id chromium
 exec          --no-startup-id compton -b
 exec          --no-startup-id unclutter
 exec_always   --no-startup-id xset r rate 280 40  # Speedup keyboard
+# Hack for xfce settings manager 
+# TODO debug error for missing pannel when manager is running
+exec_always   --no-startup-id timeout 1s xfsettingsd --no-daemon
 
 # }}}
 # vim:foldmethod=marker:foldlevel=0
