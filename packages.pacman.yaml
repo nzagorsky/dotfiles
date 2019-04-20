@@ -42,9 +42,7 @@
     - gcc
     - npm
     - patch
-    - yaourt
+    - pacaur
 
 - shell:
-    - yaourt -S xgetres
-    - yaourt -S nerd-fonts-hack
-    - yaourt -S nerd-fonts-terminus
+    - pacaur -S xgetres nerd-fonts-terminus nerd-fonts-hack --noconfirm

@@ -8,10 +8,12 @@
 
     bottom = false
 
+    height = 50
+
     tray-position = left
     tray-padding = 1
 
-    font-0 = Hack Nerd Font:size=12
+    font-0 = Hack Nerd Font:size=19
 
 [module/date]
     type = internal/date

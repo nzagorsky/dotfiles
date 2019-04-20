@@ -48,7 +48,7 @@ Xft*hinting: true
 Xft*hintstyle: hintfull
 Xft*rgba: none
 
-URxvt.font: xft:Hack Nerd Font:size=12
+URxvt.font: xft:Hack Nerd Font:size=19
 URxvt*scrollBar: false
 URxvt.letterSpace: -1
 
