@@ -188,21 +188,18 @@ bindsym --release Print exec import png:- | xclip -selection c -t image/png
 # }}}
 # Startup {{{
 # Start system applications
-exec_always   --no-startup-id xrdb ~/.Xresources
+exec_always   --no-startup-id xfsettingsd  # xfce settings manager.
+exec_always   --no-startup-id xfce4-power-manager
+exec_always   --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle
+exec_always   --no-startup-id nitrogen --restore  # Restore wallpaper
+exec_always   --no-startup-id xset r rate 280 40  # Speedup keyboard
+exec          --no-startup-id nm-applet  # Networking applet.
+
+exec          --no-startup-id compton -b
+exec          --no-startup-id unclutter
 exec_always   --no-startup-id ~/.scripts/launch_bar  # polybar
 exec_always   --no-startup-id xset -b  # Turn fucking bell off.
-exec          --no-startup-id nm-applet  # Networking applet.
-exec          --no-startup-id nitrogen --restore  # Restore wallpaper
-exec_always   --no-startup-id setxkbmap -model pc105 -layout us,ru -option grp:win_space_toggle
-
-exec_always   --no-startup-id xfce4-power-manager
-exec          --no-startup-id chromium
-# exec          --no-startup-id compton -b
-exec          --no-startup-id unclutter
-exec_always   --no-startup-id xset r rate 280 40  # Speedup keyboard
-# Hack for xfce settings manager 
-# TODO debug error for missing pannel when manager is running
-exec_always   --no-startup-id timeout 1s xfsettingsd --no-daemon
+exec_always   --no-startup-id xrdb ~/.Xresources
 
 # }}}
 # vim:foldmethod=marker:foldlevel=0

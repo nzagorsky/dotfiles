@@ -39,16 +39,15 @@
 
 ! }}}
 ! Urxvt {{{
-!
-
 ! Font setup
-Xft*dpi: 96
+Xft*dpi: 196
 Xft*antialias: true
 Xft*hinting: true
 Xft*hintstyle: hintfull
 Xft*rgba: none
 
-URxvt.font: xft:Hack Nerd Font:size=19
+URxvt.internalBorder:  5
+URxvt.font: xft:Hack Nerd Font:size=10
 URxvt*scrollBar: false
 URxvt.letterSpace: -1
 

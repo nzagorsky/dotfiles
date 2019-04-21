@@ -3,7 +3,8 @@
     modules-center = workspaces
     ; modules-left = cpu
 
-    background = #bc000000
+    background = #30000000
+
     foreground = ${xrdb:foreground}
 
     bottom = false

@@ -34,6 +34,7 @@ rofi \
     -color-window "#$VISIBLE$BACKGROUND, #$BACKGROUND, #$USELESS" \
     -matching fuzzy \
     -lines 7 \
-    -width 800 \
-    -padding 100 \
-    -no-show-match  \  
+    -width 1200 \
+    -padding 120 \
+    -font "hack 19" \
+    -no-show-match
