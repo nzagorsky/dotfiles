@@ -7,7 +7,7 @@ workspace_auto_back_and_forth yes
 # }}}
 # Color and font setup {{{
 # Font for window titles.
-font pango:Hack 19
+font pango:Hack 10
 
 # Use Mouse+mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -195,7 +195,7 @@ exec_always   --no-startup-id nitrogen --restore  # Restore wallpaper
 exec_always   --no-startup-id xset r rate 280 40  # Speedup keyboard
 exec          --no-startup-id nm-applet  # Networking applet.
 
-exec          --no-startup-id compton -b
+# exec          --no-startup-id compton -b
 exec          --no-startup-id unclutter
 exec_always   --no-startup-id ~/.scripts/launch_bar  # polybar
 exec_always   --no-startup-id xset -b  # Turn fucking bell off.

@@ -3,9 +3,9 @@
     modules-center = workspaces
     ; modules-left = cpu
 
-    background = #30000000
-
+    ; background = #30000000
     foreground = ${xrdb:foreground}
+    pseudo-transparency = true
 
     bottom = false
 
@@ -14,7 +14,9 @@
     tray-position = left
     tray-padding = 1
 
-    font-0 = Hack Nerd Font:size=19
+    tray-maxsize = 32
+    dpi = 196
+    font-0 = Hack Nerd Font:size=10
 
 [module/date]
     type = internal/date
@@ -52,7 +54,7 @@
     time-format = %H:%M
 
 
-    label-discharging = %time%
+    label-discharging = %consumption%W
     label-discharging-foreground = ${xrdb:color4}
     format-discharging = <ramp-capacity> <label-discharging>
     format-discharging-padding = 1
@@ -63,7 +65,7 @@
     ramp-capacity-3 = 
     ramp-capacity-4 = 
 
-    label-charging = %time%
+    label-charging = %consumption%W
     label-charging-foreground = ${xrdb:color4}
     format-charging = <animation-charging> <label-charging>
     format-charging-padding = 1
