@@ -17,6 +17,8 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
+set cmdheight=2
+
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 nnoremap geft :Explore ~/.vim/ftplugin<CR>
@@ -53,13 +55,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Code check.
     call dein#add('w0rp/ale')
-
-    " Sessions
-    call dein#add('tpope/vim-obsession')
-
-    " Autocomplete
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('autozimu/LanguageClient-neovim', {'build': 'sh install.sh'})
+    call dein#add('neoclide/coc.nvim', {'build': './install.sh'})
 
     " Auto complete pairs.
     call dein#add('raimondi/delimitmate')
@@ -84,23 +80,17 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('sheerun/vim-polyglot')
 
     " Python modules.
-    call dein#add('zchee/deoplete-jedi', { 'on_ft': 'python' })
     call dein#add('numirias/semshi', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
     " JS
     call dein#add('elzr/vim-json', { 'on_ft': 'json' })
-    call dein#add('pangloss/vim-javascript', { 'on_ft': 'javascript.jsx' })
-    call dein#add('mxw/vim-jsx', { 'on_ft': 'javascript.jsx' })
 
     " Nim
     call dein#add('zah/nim.vim', { 'on_ft': 'nim' })
 
     " Go
     call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
-
-    " Zsh
-    call dein#add('zchee/deoplete-zsh', { 'on_ft': 'zsh' })
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
@@ -353,45 +343,42 @@ if g:dein#is_sourced('semshi')
     autocmd EditorAppearance BufEnter * call SemshiStyleUpdate()
 endif
 
-if g:dein#is_sourced('deoplete.nvim')
-    let g:deoplete#enable_at_startup = 1
-    function! DeopleteStyleUpdate() abort
-        " 223 white, 8 blue, 0 black
-        hi Pmenu ctermbg=8 ctermfg=223
-        hi PmenuSel ctermbg=0 ctermfg=8
-        hi PmenuSbar ctermbg=0
+if g:dein#is_sourced('coc.nvim')
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
     endfunction
 
-    autocmd EditorAppearance BufEnter * call DeopleteStyleUpdate()
+    let g:coc_global_extensions = [
+        \ 'coc-css',
+        \ 'coc-html',
+        \ 'coc-json',
+        \ 'coc-python',
+        \ 'coc-tsserver',
+        \ 'coc-vetur',
+        \ 'coc-yaml'
+    \ ]
 
-    call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-    call deoplete#custom#option({
-    \ 'auto_complete_delay': 0,
-    \ 'smart_case': v:true,
-    \ 'max_list': 20,
-    \ 'min_pattern_length': 1,
-    \ })
-    call deoplete#custom#option('sources', {
-    \ '_': ['buffer', 'tag'],
-    \ 'python': ['jedi'],
-    \ 'vim': ['vim'],
-    \ 'zsh': ['zsh'],
-    \})
+    nmap <silent> <leader>g <Plug>(coc-type-definition)
+    nmap <silent> <leader>d <Plug>(coc-definition)
+    nmap <silent> <leader>i <Plug>(coc-implementation)
+    nmap <silent> <leader>n <Plug>(coc-references)
 
-    " augroup AutoComplete
-    "     autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
-    "     autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
-    " augroup END
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-   " call deoplete#custom#option('profile', v:true)
-   " call deoplete#enable_logging('DEBUG', 'deoplete.log')
 endif
 
 if g:dein#is_sourced('LanguageClient-neovim')
     let g:LanguageClient_serverCommands = {
         \ 'python': ['pyls'],
+        \ 'javascript.jsx': ['javascript-typescript-stdio'],
+        \ 'vue': ['vls']
         \ }
     let g:LanguageClient_diagnosticsEnable = 0
+
 
     nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
