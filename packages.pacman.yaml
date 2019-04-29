@@ -1,5 +1,4 @@
 - pacman:
-
     # Development
     - ctags
     - docker
@@ -9,18 +8,11 @@
     - python-pip
 
     # Desktop env
-    - i3-gaps
-    - i3blocks
-    - light
-    - networkmanager
-    - nitrogen
     - playerctl
-    - rofi
-    - rxvt-unicode
-    - ttf-hack  # font
-    - w3m
-    - compton
-    - polybar
+    - ttf-hack # font
+    - xfce4-screenshooter
+    - xfce4-terminal
+    - dmenu
 
     # System administration
     - fd # Faster `find`
@@ -34,7 +26,7 @@
 
     # Utils
     - xclip
-    - xf86-input-libinput  # Mouse drivers
+    - xf86-input-libinput # Mouse drivers
 
     # Build dependencies
     - autoconf
