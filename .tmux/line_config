@@ -7,7 +7,8 @@ set -g status-justify "left"
 set -g status-position "bottom"
 
 # Left status line part
-set -g status-left ""
+set -g status-left " "
+set -g status-left-style "bg=default"
 set -g status-left-length 100
 
 # Right status line part
@@ -24,17 +25,11 @@ set -g pane-border-style "bg=default,fg=colour240"
 set -g pane-active-border-style "bg=default,fg=colour245"
 
 # Current (active) window setting
-# setw -g window-status-current-fg colour6
-setw -g window-status-current-style "bg=default"
-
-setw -g window-status-current-format "#[fg=colour0,nobold,nounderscore,noitalics] #[fg=colour6]#W #[fg=colour0,nobold,nounderscore,noitalics]"
-
-# Inactive window setting
-setw -g window-status-style "bg=default,fg=colour243"
-
-setw -g window-status-style "none"
-setw -g window-status-separator ""
-setw -g window-status-format "#[fg=colour0,nobold,nounderscore,noitalics] #[default]#W #[fg=colour0,nobold,nounderscore,noitalics]"
+setw -g window-status-current-format "#W"
+setw -g window-status-current-style "bg=default,fg=blue"
+setw -g window-status-style "bg=default,fg=colour240"
+setw -g window-status-format "#W"
+setw -g window-status-separator " "
 
 # Activity setting
 setw -g window-status-activity-style "fg=yellow, none"
