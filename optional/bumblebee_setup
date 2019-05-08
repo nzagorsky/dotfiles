@@ -1,0 +1,1 @@
+sudo gpasswd -a $USER bumblebee
