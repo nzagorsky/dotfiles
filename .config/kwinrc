@@ -2,12 +2,12 @@
 update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js
 
 [Compositing]
-AnimationSpeed=3
+AnimationSpeed=1
 Backend=OpenGL
 Enabled=true
-GLCore=false
+GLCore=true
 GLPreferBufferSwap=a
-GLTextureFilter=2
+GLTextureFilter=0
 HiddenPreviews=5
 OpenGLIsUnsafe=false
 WindowsBlockCompositing=true
