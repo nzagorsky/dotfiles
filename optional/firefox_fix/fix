@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+cd ~/.mozilla/firefox/*.default
+TARGETDIR=$(pwd)
+mkdir -p $TARGETDIR/chrome
+cd $TARGETDIR/chrome
+
+echo "Copying CSS styling from $BASEDIR -> $TARGETDIR"
+cp $BASEDIR/userContent.css $TARGETDIR/chrome/userContent.css
