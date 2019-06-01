@@ -44,7 +44,7 @@
 
     # KDE
     ~/.config/breezerc: .config/breezerc
-    ~/.config/kdeglobals: .config/kdeglobals
+    # ~/.config/kdeglobals: .config/kdeglobals
     ~/.config/kglobalshortcutsrc: .config/kglobalshortcutsrc
     ~/.config/khotkeysrc: .config/khotkeysrc
     ~/.config/konsolerc: .config/konsolerc
