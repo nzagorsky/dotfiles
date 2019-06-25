@@ -21,3 +21,4 @@ alias ping='grc --colour=auto ping'
 alias diff='grc --colour=auto diff'
 
 alias scw='docker run -it --rm --volume=$HOME/.scwrc:/.scwrc scaleway/cli'
+alias getmirrors='sudo pacman-mirrors -c Russia,Belarus,Ukraine,Poland,Netherlands'
