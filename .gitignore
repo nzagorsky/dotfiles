@@ -4,6 +4,8 @@
 
 .directory
 
+.config/konsolerc
+
 .netrwhist
 
 # Python 

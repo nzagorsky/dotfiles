@@ -47,7 +47,6 @@
     # ~/.config/kdeglobals: .config/kdeglobals
     ~/.config/kglobalshortcutsrc: .config/kglobalshortcutsrc
     ~/.config/khotkeysrc: .config/khotkeysrc
-    ~/.config/konsolerc: .config/konsolerc
     ~/.config/kwinrc: .config/kwinrc
     ~/.config/kxbrc: .config/kxbrc
 
