@@ -96,6 +96,8 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
+    call dein#add('chrisbra/csv.vim', {'on_ft': 'csv'})
+
     if dein#check_install()
       call dein#install()
     endif
