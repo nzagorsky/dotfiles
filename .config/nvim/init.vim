@@ -361,7 +361,8 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-python',
         \ 'coc-tsserver',
         \ 'coc-vetur',
-        \ 'coc-yaml'
+        \ 'coc-yaml',
+        \ 'coc-rls',
     \ ]
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)
@@ -373,18 +374,18 @@ if g:dein#is_sourced('coc.nvim')
 
 endif
 
-if g:dein#is_sourced('LanguageClient-neovim')
-    let g:LanguageClient_serverCommands = {
-        \ 'python': ['pyls'],
-        \ 'javascript.jsx': ['javascript-typescript-stdio'],
-        \ 'vue': ['vls']
-        \ }
-    let g:LanguageClient_diagnosticsEnable = 0
+" if g:dein#is_sourced('LanguageClient-neovim')
+"     let g:LanguageClient_serverCommands = {
+"         \ 'python': ['pyls'],
+"         \ 'javascript.jsx': ['javascript-typescript-stdio'],
+"         \ 'vue': ['vls']
+"         \ }
+"     let g:LanguageClient_diagnosticsEnable = 0
 
 
-    nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-endif
+"     nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
+"     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" endif
 
 if g:dein#is_sourced('ale')
     function! LinterStatus() abort
@@ -435,6 +436,7 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers.json = ['prettier']
     let g:ale_fixers.sh = ['shfmt']
     let g:ale_fixers.markdown = ['prettier']
+    let g:ale_fixers.rust = ['rustfmt']
 
 endif
 

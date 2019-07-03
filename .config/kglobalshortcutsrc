@@ -3,12 +3,13 @@ _k_friendly_name=Activity Manager
 switch-to-activity-25c051a0-bf82-4776-a0d8-1a04ecb5b29a=none,none,Switch to activity "Default"
 switch-to-activity-86896412-689a-49d5-a27e-8554cf64efdd=none,none,Switch to activity "Social"
 switch-to-activity-9c620baa-7633-4697-b19d-811e67283bb3=none,none,Switch to activity "Default"
+switch-to-activity-b42308f2-d146-4490-922e-66099d2cff19=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (US)=none,none,Switch keyboard layout to English (US)
 Switch keyboard layout to Russian=none,none,Switch keyboard layout to Russian
 Switch to Next Keyboard Layout=Meta+Space,Ctrl+Alt+K,Switch to Next Keyboard Layout
-_k_friendly_name=System Settings
+_k_friendly_name=KDE Daemon
 
 [kaccess]
 Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Toggle Screen Reader On and Off
@@ -246,6 +247,7 @@ activate task manager entry 8=,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=,Meta+9,Activate Task Manager Entry 9
 activate widget 2=Meta+F1,none,Activate Application Launcher Widget
 activate widget 22=Alt+F1,none,Activate Application Launcher Widget
+activate widget 3=,none,Activate Application Launcher Widget
 clear-history=none,none,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
 cycleNextAction=none,none,Next History Item
