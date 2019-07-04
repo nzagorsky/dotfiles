@@ -90,7 +90,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('zah/nim.vim', { 'on_ft': 'nim' })
 
     " Go
-    call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
+    " call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
@@ -363,6 +363,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-vetur',
         \ 'coc-yaml',
         \ 'coc-rls',
+        \ 'coc-go',
     \ ]
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)
