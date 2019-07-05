@@ -422,22 +422,21 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers = {}
 
     let g:ale_linters.javascript = ['standard']
-    let g:ale_fixers.javascript = ['standard']
-
     let g:ale_linters.python = ['flake8']
-    let g:ale_python_flake8_options = '--ignore=E501'
-    let g:ale_fixers.python = ['black']
-
-    let g:ale_fixers.yaml = ['prettier']
+    let g:ale_linters.rust = ['rls']
+    let g:ale_linters.vim = ['vint']
     let g:ale_linters.yaml = ['yamllint']
 
-    let g:ale_linters.vim = ['vint']
     let g:ale_fixers.go = ['gofmt']
     let g:ale_fixers.html = ['prettier']
+    let g:ale_fixers.javascript = ['standard']
     let g:ale_fixers.json = ['prettier']
-    let g:ale_fixers.sh = ['shfmt']
     let g:ale_fixers.markdown = ['prettier']
+    let g:ale_fixers.python = ['black']
     let g:ale_fixers.rust = ['rustfmt']
+    let g:ale_fixers.sh = ['shfmt']
+    let g:ale_fixers.yaml = ['prettier']
+    let g:ale_python_flake8_options = '--ignore=E501'
 
 endif
 
