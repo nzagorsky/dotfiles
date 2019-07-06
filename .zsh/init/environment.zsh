@@ -18,9 +18,8 @@ export PATH="$PATH:$GOPATH/bin"
 # Snaps
 export PATH="$PATH:/var/lib/snapd/snap/bin"  # Snap packages
 
-# Nim
-export NIMPATH="~/.nimble"
-export PATH="$PATH:$NIMPATH/bin"
+# Cargo
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Python
 # export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.7/site-packages"  # Python

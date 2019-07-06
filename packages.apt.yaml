@@ -13,9 +13,11 @@
     - zsh
 
 - shell:
-      # Install rustup and cargo to install ripgrep
+    # Install rustup and cargo to install ripgrep
     - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
+    - rustup default stable
+    - cargo install ripgrep
+    - cargo install fd-find
       # Install neovim.
     - sudo add-apt-repository ppa:neovim-ppa/stable -y
     - sudo apt-get update
