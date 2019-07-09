@@ -1,1 +1,1 @@
-wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip
+wget http://cachefly.cachefly.net/100mb.test -O /dev/null 
