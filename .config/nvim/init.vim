@@ -55,7 +55,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Code check.
     call dein#add('w0rp/ale')
-    call dein#add('neoclide/coc.nvim', {'build': './install.sh'})
+    call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
     " Auto complete pairs.
     call dein#add('raimondi/delimitmate')
@@ -374,19 +374,6 @@ if g:dein#is_sourced('coc.nvim')
     nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 endif
-
-" if g:dein#is_sourced('LanguageClient-neovim')
-"     let g:LanguageClient_serverCommands = {
-"         \ 'python': ['pyls'],
-"         \ 'javascript.jsx': ['javascript-typescript-stdio'],
-"         \ 'vue': ['vls']
-"         \ }
-"     let g:LanguageClient_diagnosticsEnable = 0
-
-
-"     nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
-"     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" endif
 
 if g:dein#is_sourced('ale')
     function! LinterStatus() abort
