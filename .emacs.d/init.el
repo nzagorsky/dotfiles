@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;; GC dirty hacks
+;; GC dirty hacks to speed up opening of Emacs.
 (setq gc-cons-threshold 50000000)
 (add-hook 'emacs-startup-hook 'my/set-gc-threshold)
 (defun my/set-gc-threshold ()
@@ -45,80 +45,12 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-; (define-key global-map (kbd "C-c g e v") 'open-init-file)
-; (define-key global-map (kbd "C-c g s v") 'reload-init-file)
-
+(define-key global-map (kbd "C-c g e v") 'open-init-file)
+(define-key global-map (kbd "C-c g s v") 'reload-init-file)
 
 ;; ----------------------------------------
 ;; Plugins
 ;; ----------------------------------------
- (use-package evil
-   :ensure t
-   :config
-     (evil-mode 1)
- 
-     ;; Fix C-u
-     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-     (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
-     (define-key evil-insert-state-map (kbd "C-u")
-
-     (lambda ()
- 	(interactive)
- 	(evil-delete (point-at-bol) (point))))
- 
-     ;; Replace with system clipboard
-     (fset 'evil-visual-update-x-selection 'ignore)
- 
- )
-
-;; Configure `jk`
- (use-package evil-escape
-     :ensure t
-     :config
- 	(evil-escape-mode)
- 	(setq evil-escape-inhibit-functions '(evil-visual-state-p))
- 	(setq-default evil-escape-key-sequence "jk")
- 	(setq-default evil-escape-delay 0.3))
- 
- ;; Vim surround config
- (use-package evil-surround
-     :ensure t
-     :config
- 	(global-evil-surround-mode))
- 
- (use-package evil-indent-textobject
-      :ensure t)
- 
- (use-package evil-vimish-fold
-     :ensure t
-     :config
- 	(evil-vimish-fold-mode 1))
-
-;; Configure vim leader keys
-(use-package evil-leader
-    :ensure t
-    :config
-	(global-evil-leader-mode)
-	(setq evil-leader/leader "<SPC>")
-	(evil-leader/set-key
-	    "<SPC>" 'evil-visual-line
-	    "b" 'switch-to-buffer
-	    "gev" 'open-init-file
-	    "gsv" 'reload-init-file
-	    "gst" 'magit-status
-	    "q" 'evil-quit
-	    "w" 'save-buffer
-	    "d" 'lsp-find-definition
-	    "l" 'swiper  ; Lines in current buffer
-	    "c" 'counsel-M-x
-	    "a" 'projectile-ripgrep
-	    "f" 'counsel-fzf))
-
-(use-package evil-commentary
-  :ensure t
-  :config
-  (evil-commentary-mode))
-
 (use-package which-key
   :ensure t
   :config
@@ -144,10 +76,6 @@
 			nil
 			:foreground "#282a2e"))
 
-; Emacs super profiler
-; (use-package esup
-;   :ensure t
-;   :defer t)
 
 ;; System setup
 (setq vc-follow-symlinks t)
