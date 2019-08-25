@@ -22,8 +22,8 @@
     ~/.zshrc: .zshrc
     ~/.scripts: .scripts
 
-    # Fish
-    ~/.config/fish: .config/fish
+    # Xfce4 terminal
+    ~/.config/xfce4/terminal: .config/xfce4/terminal
 
     # VIM
     ~/.vim: .config/nvim/
