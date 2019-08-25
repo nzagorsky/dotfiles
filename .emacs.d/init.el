@@ -24,8 +24,9 @@
 
 ;; Bootstrap `use-package'
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")  ;; Fix for some packages downloading
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 
 (setq package-enable-at-startup nil)
 

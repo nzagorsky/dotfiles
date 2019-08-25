@@ -44,9 +44,8 @@ if dein#load_state(expand('~/.config/nvim'))
     endif
 
     " Style
-    call dein#add('morhetz/gruvbox')
-    call dein#add('junegunn/goyo.vim')
-    call dein#add('drewtempelmeyer/palenight.vim')
+    " call dein#add('drewtempelmeyer/palenight.vim')
+    call dein#add('arcticicestudio/nord-vim')
 
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -54,11 +53,8 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-vinegar')
 
     " Code check.
-    call dein#add('w0rp/ale')
+    call dein#add('dense-analysis/ale')
     call dein#add('neoclide/coc.nvim', {'rev': 'release'})
-
-    " Auto complete pairs.
-    call dein#add('raimondi/delimitmate')
 
     " Routine automation.
     call dein#add('tpope/vim-surround')
@@ -83,20 +79,15 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('numirias/semshi', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
-    " JS
-    call dein#add('elzr/vim-json', { 'on_ft': 'json' })
-
-    " Nim
-    call dein#add('zah/nim.vim', { 'on_ft': 'nim' })
-
-    " Go
-    " call dein#add('fatih/vim-go', { 'hook_post_update': ':GoInstallBinaries', 'on_ft': 'go' })
-
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
+    " CSV
     call dein#add('chrisbra/csv.vim', {'on_ft': 'csv'})
+
+    " JSON
+    call dein#add('elzr/vim-json', { 'on_ft': 'json' })
 
     if dein#check_install()
       call dein#install()
@@ -148,11 +139,10 @@ cmap w!! w !sudo tee % >/dev/null
 
 " }}}
 " Color setup {{{1
-colorscheme palenight
-set background=dark
-" let g:gruvbox_contrast_dark='dark'
+colorscheme nord
+function! UpdateStyle() abort
+    " set background=dark
 
-function! UpdatedHighlights() abort
     hi Normal ctermbg=none
     hi LineNr ctermbg=none cterm=none
     hi SignColumn ctermbg=none
@@ -175,12 +165,11 @@ function! UpdatedHighlights() abort
     " hi StatusLineNC ctermfg=240
     " set fillchars+=stlnc:_
     " set fillchars+=stl:_
-
 endfunction
 
 augroup EditorAppearance
     autocmd!
-    autocmd ColorScheme * call UpdatedHighlights()
+    autocmd ColorScheme * call UpdateStyle()
 augroup END
 " }}}
 " Editor setup {{{1
@@ -191,7 +180,7 @@ filetype plugin indent on " Enable filetype plugins and indention
 
 set completeopt-=preview
 set lazyredraw
-set scrolloff=3
+set scrolloff=1
 set textwidth=0  " Do not break the line while typing
 set showcmd " Show the (partial) command as it’s being typed
 set nostartofline " Don’t reset cursor to start of line when moving around.
@@ -202,7 +191,6 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
-" Search settings
 set incsearch
 set hlsearch
 set ignorecase
@@ -313,11 +301,13 @@ endif
 
 if g:dein#is_sourced('vim-gitgutter')
     let g:gitgutter_realtime = 1
+
     function! GitGutterStyleUpdate() abort
-        hi GitGutterAdd ctermbg=none ctermfg=green
-        hi GitGutterChange ctermbg=none ctermfg=yellow
+        hi GitGutterAdd ctermbg=none ctermfg=darkgreen
+        hi GitGutterChange ctermbg=none ctermfg=3
         hi GitGutterDelete ctermbg=none ctermfg=red
-        hi GitGutterChangeDelete ctermbg=none
+        hi GitGutterChangeDelete ctermbg=none ctermfg=red
+
     endfunction
     autocmd EditorAppearance BufEnter * call GitGutterStyleUpdate()
 
@@ -409,7 +399,8 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers = {}
 
     let g:ale_linters.javascript = ['standard']
-    let g:ale_linters.python = ['flake8']
+    let g:ale_linters.python = ['pyflakes', 'bandit', 'mypy', 'vulture']
+    let g:ale_python_flake8_options = '--ignore=E501'
     let g:ale_linters.rust = ['rls']
     let g:ale_linters.vim = ['vint']
     let g:ale_linters.yaml = ['yamllint']
@@ -423,7 +414,7 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers.rust = ['rustfmt']
     let g:ale_fixers.sh = ['shfmt']
     let g:ale_fixers.yaml = ['prettier']
-    let g:ale_python_flake8_options = '--ignore=E501'
+
 
 endif
 

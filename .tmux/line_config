@@ -24,10 +24,9 @@ set -g message-style "bg=colour0,fg=colour2"
 set -g pane-border-style "bg=default,fg=colour240"
 set -g pane-active-border-style "bg=default,fg=colour245"
 
-# Current (active) window setting
 setw -g window-status-current-format "#W"
 setw -g window-status-current-style "bg=default,fg=blue,bold"
-setw -g window-status-style "bg=default,fg=colour240"
+setw -g window-status-style "bg=default,fg=colour250"
 setw -g window-status-format "#W"
 setw -g window-status-separator " "
 

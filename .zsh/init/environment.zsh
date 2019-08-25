@@ -1,4 +1,4 @@
-export BROWSER="/usr/bin/firefox"
+export BROWSER="/usr/bin/opera"
 export EDITOR=/usr/bin/nvim
 export HISTFILE=~/.zsh_history
 

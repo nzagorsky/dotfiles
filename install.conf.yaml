@@ -29,9 +29,11 @@
     ~/.vim: .config/nvim/
     ~/.vimrc: .config/nvim/init.vim
     ~/.config/nvim: .config/nvim
-    ~/.ctags.d: .ctags.d
 
+    # Emacs
     ~/.emacs.d: .emacs.d
+
+    ~/.ctags.d: .ctags.d
     ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
     ~/.Xresources: .Xresources

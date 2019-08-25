@@ -4,6 +4,10 @@ vim-vint
 python-language-server[all]
 jedi==0.13.3  # 0.14 is broken
 flake8
+bandit
+mypy
+pyflakes
+pydocstyle
 yamllint
 
 # Interactive shell
