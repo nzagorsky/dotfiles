@@ -28,7 +28,6 @@ MiscShowRelaunchDialog=TRUE
 ScrollingUnlimited=TRUE
 TitleMode=TERMINAL_TITLE_REPLACE
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
-BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=1,000000
 FontName=Hack 11.5
 ScrollingOnOutput=FALSE
@@ -41,4 +40,7 @@ ColorCursor=#D8DEE9
 ColorBold=#D8DEE9
 ColorBoldUseDefault=FALSE
 TabActivityColor=#88C0D0
+BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
+ShortcutsNoHelpkey=TRUE
+ShortcutsNoMenukey=TRUE
 
