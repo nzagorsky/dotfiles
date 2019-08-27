@@ -9,7 +9,7 @@
  '(git-gutter:update-interval 0.2)
  '(package-selected-packages
    (quote
-    (company-lsp lsp-ui lsp-mode docker-compose-mode dockerfile-mode git-gutter company counsel ivy ripgrep projectile flycheck magit smartparens gruvbox-theme which-key use-package))))
+    (nord-theme company-lsp lsp-ui lsp-mode docker-compose-mode dockerfile-mode git-gutter company counsel ivy ripgrep projectile flycheck magit smartparens gruvbox-theme which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

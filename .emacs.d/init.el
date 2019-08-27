@@ -58,10 +58,12 @@
   (which-key-mode))
 
 ;; Style/Theme config
-(use-package gruvbox-theme
+(use-package nord-theme
   :ensure t
   :init (setq inhibit-startup-message t) ;; hide the startup message
   :config
+    (load-theme 'nord t)
+
     (toggle-scroll-bar -1)
     (tool-bar-mode -1)
     (menu-bar-mode -1)
