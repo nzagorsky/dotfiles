@@ -58,11 +58,11 @@
   (which-key-mode))
 
 ;; Style/Theme config
-(use-package nord-theme
+(use-package gruvbox-theme
   :ensure t
   :init (setq inhibit-startup-message t) ;; hide the startup message
   :config
-    (load-theme 'nord t)
+    (load-theme 'gruvbox t)
 
     (toggle-scroll-bar -1)
     (tool-bar-mode -1)
@@ -143,7 +143,7 @@
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
   (global-set-key (kbd "C-c c g") 'counsel-git-grep)
-  (global-set-key (kbd "C-c c a") 'counsel-ag)
+  (global-set-key (kbd "C-c c a") 'counsel-rg)
   (global-set-key (kbd "C-x c l") 'counsel-locate)
 
 )
@@ -192,7 +192,7 @@
 
     ;; Define minor mode name
     (custom-set-variables
-    '(git-gutter:lighter " GG"))
+    '(git-gutter:lighter " gitgutter"))
 
     ;; Set update interval
     (custom-set-variables
@@ -232,8 +232,12 @@
   :ensure t
   :commands company-lsp
   :config
-  (push 'company-lsp company-backends)
+  (push 'company-lsp company-backends))
+
+(use-package csv-mode
+  :ensure t
 )
+
 
 (provide 'init)
 ; }}}
