@@ -105,7 +105,8 @@
   :ensure t
   :config
   (global-flycheck-mode)
-  )
+  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+)
 
 
 (use-package projectile
