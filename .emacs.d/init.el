@@ -141,12 +141,8 @@
   (ivy-mode 1)
   
   (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-
-  (global-set-key (kbd "C-c c g") 'counsel-git-grep)
+  (global-set-key (kbd "C-c c f") 'counsel-fzf)
   (global-set-key (kbd "C-c c a") 'counsel-rg)
-  (global-set-key (kbd "C-x c l") 'counsel-locate)
-
 )
 
 (use-package counsel

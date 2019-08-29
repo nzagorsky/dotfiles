@@ -438,3 +438,11 @@ augroup AutomaticDirectoryCreation
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+
+" Autoexpanding of brackets
+inoremap ( (<CR>)<C-c>O
+inoremap ( (<CR>)<C-c>O
+inoremap { {<CR>}<C-c>O
+inoremap { {<CR>}<C-c>O
+inoremap [ [<CR>]<C-c>O
+inoremap [ [<CR>]<C-c>O
