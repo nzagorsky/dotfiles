@@ -44,8 +44,7 @@ if dein#load_state(expand('~/.config/nvim'))
     endif
 
     " Style
-    " call dein#add('drewtempelmeyer/palenight.vim')
-    call dein#add('arcticicestudio/nord-vim')
+    call dein#add('drewtempelmeyer/palenight.vim')
 
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -127,8 +126,6 @@ if exists(':tnoremap')
     tnoremap <C-j> <C-\><C-n><C-w>j
     tnoremap <C-k> <C-\><C-n><C-w>k
     tnoremap <C-l> <C-\><C-n><C-w>l
-    tnoremap gt <C-\><C-n>gt 
-    tnoremap gT <C-\><C-n>gT 
     tnoremap jk <C-\><C-n>
 endif
 
@@ -139,9 +136,9 @@ cmap w!! w !sudo tee % >/dev/null
 
 " }}}
 " Color setup {{{1
-colorscheme nord
+colorscheme palenight
 function! UpdateStyle() abort
-    " set background=dark
+    set background=dark
 
     hi Normal ctermbg=none
     hi LineNr ctermbg=none cterm=none
@@ -399,7 +396,7 @@ if g:dein#is_sourced('ale')
     let g:ale_fixers = {}
 
     let g:ale_linters.javascript = ['standard']
-    let g:ale_linters.python = ['pyflakes', 'bandit', 'mypy', 'vulture']
+    let g:ale_linters.python = ['pyflakes']
     let g:ale_python_flake8_options = '--ignore=E501'
     let g:ale_linters.rust = ['rls']
     let g:ale_linters.vim = ['vint']
