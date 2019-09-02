@@ -49,7 +49,6 @@ if dein#load_state(expand('~/.config/nvim'))
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
     call dein#add('junegunn/fzf.vim')
-    call dein#add('tpope/vim-vinegar')
 
     " Code check.
     call dein#add('dense-analysis/ale')
@@ -107,6 +106,8 @@ nnoremap <leader>k :bd<CR>
 nmap <Leader><Leader> V
 nmap j gj
 nmap k gk
+nnoremap <C-e> :Explore<CR>
+
 
 " Remove trailing whitespaces
 nnoremap<leader>S :%s/\s\+$//<cr>:let @/=''<CR>
@@ -415,10 +416,6 @@ if g:dein#is_sourced('ale')
 
 endif
 
-if g:dein#is_sourced('vim-vinegar')
-    nnoremap <C-e> :Explore<CR>
-endif
-
 if g:dein#is_sourced('supertab')
     let g:SuperTabDefaultCompletionType='<c-n>'
 endif
@@ -438,11 +435,3 @@ augroup AutomaticDirectoryCreation
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
-
-" Autoexpanding of brackets
-inoremap ( (<CR>)<C-c>O
-inoremap ( (<CR>)<C-c>O
-inoremap { {<CR>}<C-c>O
-inoremap { {<CR>}<C-c>O
-inoremap [ [<CR>]<C-c>O
-inoremap [ [<CR>]<C-c>O
