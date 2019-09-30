@@ -1,4 +1,5 @@
 - aptget:
+    - abduco
     - exuberant-ctags
     - docker
     - docker-compose

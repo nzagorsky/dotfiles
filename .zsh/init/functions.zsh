@@ -65,11 +65,12 @@ torify () {
 }
 
 v () {
-    if [ ! -f Session.vim ]; then
-        nvim $*
-    else
-        nvim $* -S
-    fi
+    abduco -A nvim-session nvim $*
+    # if [ ! -f Session.vim ]; then
+    #     nvim $*
+    # else
+    #     nvim $* -S
+    # fi
 }
 
 # Kukareku.
