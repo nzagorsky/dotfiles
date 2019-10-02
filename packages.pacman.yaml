@@ -35,7 +35,8 @@
     - gcc
     - npm
     - patch
-    - pacaur
+    - pacaur  # For dotbot
+    - yay
 
 - shell:
-    - pacaur -S xgetres nerd-fonts-terminus nerd-fonts-hack --noconfirm
+    - yay -S xgetres nerd-fonts-terminus nerd-fonts-hack --noconfirm --norebuild --needed

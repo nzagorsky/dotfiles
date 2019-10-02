@@ -131,6 +131,7 @@ if exists(':tnoremap')
 endif
 
 nnoremap <silent> <S-t> :tab split<CR>
+nnoremap <silent> <C-t> :tabnew<CR>
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 nnoremap <leader><leader> V
 cmap w!! w !sudo tee % >/dev/null
