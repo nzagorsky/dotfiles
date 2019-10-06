@@ -29,6 +29,8 @@ export PATH="$PATH:$HOME/.local/bin"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || find * -type f'
 export FZF_DEFAULT_OPTS="--inline-info"
 
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+
 # Source FZF for optional keybindings and shell improvement: C-r search commands; C-t for file search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

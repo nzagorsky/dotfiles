@@ -15,3 +15,5 @@ ipython
 
 # Env management
 pipenv
+
+neovim-remote

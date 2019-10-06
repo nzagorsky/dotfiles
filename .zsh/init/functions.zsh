@@ -65,7 +65,12 @@ torify () {
 }
 
 v () {
-    abduco -A nvim-session nvim $*
+    # Function to prevent nesting of sessions with running neovim.
+    if [ "$ABDUCO_SESSION" = "nvim-session" ]; then 
+        nvr $*;
+    else
+        ABDUCO_SESSION="nvim-session" abduco -A nvim-session nvr $*
+    fi
     # if [ ! -f Session.vim ]; then
     #     nvim $*
     # else
