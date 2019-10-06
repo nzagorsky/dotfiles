@@ -51,7 +51,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('junegunn/fzf.vim')
 
     " Code check.
-    call dein#add('dense-analysis/ale')
     call dein#add('neoclide/coc.nvim', {'rev': 'release'})
 
     " Routine automation.
@@ -68,7 +67,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Git integration.
     call dein#add('tpope/vim-fugitive')
-    call dein#add('airblade/vim-gitgutter')
 
     " Syntax highlightning for all languages.
     call dein#add('sheerun/vim-polyglot')
@@ -202,6 +200,10 @@ function! UpdateStyle() abort
 
     set fillchars+=vert:│
 
+    hi DiffAdd ctermbg=none ctermfg=darkgreen
+    hi DiffChange ctermbg=none ctermfg=3
+    hi DiffDelete ctermbg=none ctermfg=red
+
     " hi StatusLine ctermfg=7
     " hi StatusLineNC ctermfg=240
     " set fillchars+=stlnc:_
@@ -279,7 +281,7 @@ set statusline+=\ %m
 set statusline+=%=
 
 set statusline+=%3*
-set statusline+=\ %{LinterStatus()}
+set statusline+=\ %{StatusDiagnostic()}
 set statusline+=%*
 
 " Filetype
@@ -340,20 +342,6 @@ if g:dein#is_sourced('vim-polyglot')
     let g:polyglot_disabled = ['yaml', 'python']
 endif
 
-if g:dein#is_sourced('vim-gitgutter')
-    let g:gitgutter_realtime = 1
-
-    function! GitGutterStyleUpdate() abort
-        hi GitGutterAdd ctermbg=none ctermfg=darkgreen
-        hi GitGutterChange ctermbg=none ctermfg=3
-        hi GitGutterDelete ctermbg=none ctermfg=red
-        hi GitGutterChangeDelete ctermbg=none ctermfg=red
-
-    endfunction
-    autocmd EditorAppearance BufEnter * call GitGutterStyleUpdate()
-
-endif
-
 if g:dein#is_sourced('vim-fugitive')
     function! GitBranch() abort
         let l:stripped_git_status = matchstr(fugitive#statusline(), '(.*)')[1:-2]
@@ -395,68 +383,41 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-yaml',
         \ 'coc-rls',
         \ 'coc-go',
+        \ 'coc-git',
     \ ]
-
+    nnoremap <silent> <F3> :call CocAction('format')<CR>
     nmap <silent> <leader>g <Plug>(coc-type-definition)
     nmap <silent> <leader>d <Plug>(coc-definition)
     nmap <silent> <leader>i <Plug>(coc-implementation)
     nmap <silent> <leader>n <Plug>(coc-references)
-
+    nmap <silent> <leader>rn <Plug>(coc-rename)
     nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-endif
+    " coc-git
+    nmap [g <Plug>(coc-git-prevchunk)
+    nmap ]g <Plug>(coc-git-nextchunk)
+    nmap gs <Plug>(coc-git-chunkinfo)
+    nmap gu :CocCommand git.chunkUndo<cr>
 
-if g:dein#is_sourced('ale')
-    function! LinterStatus() abort
-       let l:counts = ale#statusline#Count(bufnr(''))
-       let l:all_errors = l:counts.error + l:counts.style_error
-       let l:all_non_errors = l:counts.total - l:all_errors
+    " diagnostics navigation
+    nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-       let l:return_value=''
-       if l:all_errors > 0
-           let l:return_value=l:all_errors
-       endif
-       return l:return_value
-    endfunction
+    " Statusline method to show errors and warnings.
+	function! StatusDiagnostic() abort
+	  let info = get(b:, 'coc_diagnostic_info', {})
+	  if empty(info) | return '' | endif
+	  let msgs = []
 
-    function! AleStyleUpdate() abort
-        hi ALEError ctermbg=none
-        hi ALEErrorLine ctermbg=none
-        hi ALEErrorSign ctermbg=none ctermfg=red " Red
+	  if get(info, 'error', 0)
+	    call add(msgs, 'E' . info['error'])
+	  endif
 
-        hi ALEWarning ctermbg=none
-        hi ALEWarningLine ctermbg=none
-        hi ALEWarningSign ctermbg=none ctermfg=3 " Yellow
-    endfunction
-
-    autocmd EditorAppearance BufEnter * call AleStyleUpdate()
-
-    noremap <F3> :ALEFix<CR>
-
-    let g:ale_sign_warning = '~'
-    let g:ale_sign_error = 'x'
-
-    let g:ale_linters = {}
-    let g:ale_fixers = {}
-
-    let g:ale_linters.javascript = ['standard']
-    let g:ale_linters.python = ['pyflakes']
-    let g:ale_python_flake8_options = '--ignore=E501'
-    let g:ale_linters.rust = ['rls']
-    let g:ale_linters.vim = ['vint']
-    let g:ale_linters.yaml = ['yamllint']
-
-    let g:ale_fixers.go = ['gofmt']
-    let g:ale_fixers.html = ['prettier']
-    let g:ale_fixers.javascript = ['standard']
-    let g:ale_fixers.json = ['prettier']
-    let g:ale_fixers.markdown = ['prettier']
-    let g:ale_fixers.python = ['black']
-    let g:ale_fixers.rust = ['rustfmt']
-    let g:ale_fixers.sh = ['shfmt']
-    let g:ale_fixers.yaml = ['prettier']
-
-
+	  if get(info, 'warning', 0)
+	    call add(msgs, 'W' . info['warning'])
+	  endif
+	  return join(msgs, ' ')
+	endfunction
 endif
 
 if g:dein#is_sourced('supertab')
