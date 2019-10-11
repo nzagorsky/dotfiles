@@ -116,10 +116,11 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 if exists(':tnoremap')
-    augroup TerminalConfiguration
-        autocmd BufWinEnter,WinEnter term://* startinsert
-        autocmd BufLeave term://* stopinsert
-    augroup END
+    " Enter terminal insert mode on enter.
+    " augroup TerminalConfiguration
+    "     autocmd BufWinEnter,WinEnter term://* startinsert
+    "     autocmd BufLeave term://* stopinsert
+    " augroup END
 
     tnoremap <C-h> <C-\><C-n><C-w>h
     tnoremap <C-j> <C-\><C-n><C-w>j

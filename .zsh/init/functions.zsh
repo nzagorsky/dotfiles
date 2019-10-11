@@ -43,16 +43,16 @@ function dutop {
 }
 
 # Tmux
-t () {
-    if [ -z "$1" ]
-    then
-        tmux -u attach -t default || tmux -u new -s default
+# t () {
+#     if [ -z "$1" ]
+#     then
+#         tmux -u attach -t default || tmux -u new -s default
 
-    else
-        tmux -u attach -t $1 || tmux -u new -s $1
+#     else
+#         tmux -u attach -t $1 || tmux -u new -s $1
 
-    fi
-}
+#     fi
+# }
 
 ctop () {
     docker run \
@@ -67,15 +67,11 @@ torify () {
 v () {
     # Function to prevent nesting of sessions with running neovim.
     if [ "$ABDUCO_SESSION" = "nvim-session" ]; then 
-        nvr $*;
+        nvr $*
     else
-        ABDUCO_SESSION="nvim-session" abduco -A nvim-session nvr $*
+        ABDUCO_SESSION="nvim-session" abduco -c nvim-session nvr $* ||
+            nvr $*; abduco -a nvim-session
     fi
-    # if [ ! -f Session.vim ]; then
-    #     nvim $*
-    # else
-    #     nvim $* -S
-    # fi
 }
 
 # Kukareku.
