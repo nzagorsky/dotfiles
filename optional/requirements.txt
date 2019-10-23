@@ -2,8 +2,9 @@
 black
 vim-vint
 python-language-server[all]
-jedi==0.13.3  # 0.14 is broken
+jedi
 flake8
+radon # dependency for flake8 that should be updated
 bandit
 mypy
 pyflakes
@@ -17,3 +18,4 @@ ipython
 pipenv
 
 neovim-remote
+botostubs
