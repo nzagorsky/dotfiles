@@ -79,8 +79,8 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
-    " CSV
-    call dein#add('chrisbra/csv.vim', {'on_ft': 'csv'})
+    " " CSV
+    " call dein#add('chrisbra/csv.vim', {'on_ft': 'csv'})
 
     " JSON
     call dein#add('elzr/vim-json', { 'on_ft': 'json' })
