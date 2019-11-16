@@ -57,6 +57,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
+    call dein#add('jiangmiao/auto-pairs')
     call dein#add('ervandew/supertab')
 
     " Async command execution
