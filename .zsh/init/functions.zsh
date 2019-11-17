@@ -72,7 +72,7 @@ v () {
 
     # Function to prevent nesting of sessions with running neovim.
     if [[ $ABDUCO_SESSION = $SESSION_NAME ]]; then 
-        nvr --servername $SERVERNAME $*
+        NVIM_LISTEN_ADDRESS=$SERVERNAME nvr --servername $SERVERNAME $*
     else
         ABDUCO_SESSION=$SESSION_NAME abduco -c $SESSION_NAME nvr --servername $SERVERNAME $* || ABDUCO_SESSION=$SESSION_NAME nvr --servername $SERVERNAME $*; ABDUCO_SESSION=$SESSION_NAME abduco -a $SESSION_NAME
     fi
