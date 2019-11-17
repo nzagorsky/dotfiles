@@ -65,7 +65,7 @@ torify () {
 }
 
 v () {
-    CURRENT_FOLDER_HASH=`pwd  | /usr/bin/md5sum | /bin/cut -f1 -d" "`
+    CURRENT_FOLDER_HASH=`pwd  | md5sum | cut -f1 -d" "`
     SESSION_NAME="nvim-session-$CURRENT_FOLDER_HASH"
     SERVERNAME=/tmp/$SESSION_NAME
     NVIM_LISTEN_ADDRESS=$SERVERNAME
