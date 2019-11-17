@@ -65,17 +65,21 @@ torify () {
 }
 
 v () {
+<<<<<<< HEAD
     CURRENT_FOLDER_HASH=`pwd  | md5sum | cut -f1 -d" "`
     SESSION_NAME="nvim-session-$CURRENT_FOLDER_HASH"
+=======
+    CURRENT_FOLDER_HASH=`pwd  | /usr/bin/md5sum | /bin/cut -f1 -d" "`
+    SESSION_NAME=nvim-session-$CURRENT_FOLDER_HASH
+>>>>>>> origin/master
     SERVERNAME=/tmp/$SESSION_NAME
     NVIM_LISTEN_ADDRESS=$SERVERNAME
 
     # Function to prevent nesting of sessions with running neovim.
-    if [ "$ABDUCO_SESSION" = $SESSION_NAME]; then 
+    if [[ $ABDUCO_SESSION = $SESSION_NAME ]]; then 
         nvr --servername $SERVERNAME $*
     else
-        ABDUCO_SESSION=$SESSION_NAME abduco -c $SESSION_NAME nvr --servername $SERVERNAME $* ||
-            nvr --servername $SERVERNAME $*; abduco -a $SESSION_NAME
+        ABDUCO_SESSION=$SESSION_NAME abduco -c $SESSION_NAME nvr --servername $SERVERNAME $* || ABDUCO_SESSION=$SESSION_NAME nvr --servername $SERVERNAME $*; ABDUCO_SESSION=$SESSION_NAME abduco -a $SESSION_NAME
     fi
 }
 

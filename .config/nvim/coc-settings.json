@@ -1,12 +1,10 @@
 {
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "codeLens.enable": true,
-
     "git.addedSign.text": "┃",
     "git.removedSign.text": "┃",
     "git.changedSign.text": "┃",
     "git.changeRemovedSign.text": "┃",
-
     "diagnostic.checkCurrentLine": true,
     "diagnostic.errorSign": "✖",
     "diagnostic.hintSign": "○",
@@ -14,13 +12,24 @@
     "diagnostic.warningSign": "⚠",
     "diagnostic.maxWindowHeight": 20,
     "diagnostic.refreshOnInsertMode": true,
-
     "suggest.enablePreview": true,
     "suggest.maxPreviewWidth": 100,
-
     "python.jediEnabled": true,
     "python.linting.pylintEnabled": false,
+    "python.linting.mypyEnabled": true,
     "python.linting.flake8Enabled": true,
     "python.formatting.provider": "black",
-    "python.linting.flake8Args": ["--ignore=E501"]
+    "python.linting.flake8Args": [
+        "--ignore=E501"
+    ],
+
+    "languageserver": {
+        "terraform": {
+            "command": "terraform-lsp",
+            "filetypes": [
+                "terraform"
+            ],
+            "initializationOptions": {}
+        }
+    }
 }
