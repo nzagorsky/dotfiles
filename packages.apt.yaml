@@ -10,7 +10,6 @@
     - ranger
     - software-properties-common
     - sshfs
-    - tmux
     - zsh
 
 - shell:

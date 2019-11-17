@@ -12,10 +12,6 @@
     - [git submodule update --init --recursive, Installing submodules]
 
 - link:
-    # Tmux
-    ~/.tmux/plugins/tpm: .tmux/plugins/tpm
-    ~/.tmux/line_config: .tmux/line_config
-    ~/.tmux.conf: .tmux.conf
 
     # ZSH
     ~/.zsh: .zsh
@@ -57,7 +53,6 @@
     - mkdir -p ~/.credentials; touch ~/.credentials/secure
     - mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
     - [pip3 install -r optional/requirements.txt -U --user, Python dependencies]
-    - [~/.tmux/plugins/tpm/bin/install_plugins, Tmux plugin installation]
     - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
     # - [emacs --batch --load ~/.emacs.d/init.el, Installing emacs files]
     - [
