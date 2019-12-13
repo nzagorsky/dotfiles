@@ -386,6 +386,8 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-rls',
         \ 'coc-go',
         \ 'coc-git',
+        \ 'coc-docker',
+        \ 'coc-yaml',
     \ ]
     nnoremap <silent> <F3> :call CocAction('format')<CR>
     nmap <silent> <leader>g <Plug>(coc-type-definition)
