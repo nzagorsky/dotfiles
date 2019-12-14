@@ -26,27 +26,27 @@
     ~/.vimrc: .config/nvim/init.vim
     ~/.config/nvim: .config/nvim
 
-    # Emacs
-    ~/.emacs.d: .emacs.d
+    # # Emacs
+    # ~/.emacs.d: .emacs.d
 
     ~/.ctags.d: .ctags.d
-    ~/.yaourtrc: .yaourtrc
+    # ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
-    ~/.Xresources: .Xresources
-    ~/.config/ranger: .config/ranger
-    ~/.config/rofi/config: .config/rofi/config
+    # ~/.Xresources: .Xresources
+    # ~/.config/ranger: .config/ranger
+    # ~/.config/rofi/config: .config/rofi/config
 
-    # I3
-    ~/.config/i3: .config/i3
-    ~/.config/polybar: .config/polybar
+    # # I3
+    # ~/.config/i3: .config/i3
+    # ~/.config/polybar: .config/polybar
 
-    # KDE
-    ~/.config/breezerc: .config/breezerc
-    # ~/.config/kdeglobals: .config/kdeglobals
-    ~/.config/kglobalshortcutsrc: .config/kglobalshortcutsrc
-    ~/.config/khotkeysrc: .config/khotkeysrc
-    ~/.config/kwinrc: .config/kwinrc
-    ~/.config/kxbrc: .config/kxbrc
+    # # KDE
+    # ~/.config/breezerc: .config/breezerc
+    # # ~/.config/kdeglobals: .config/kdeglobals
+    # ~/.config/kglobalshortcutsrc: .config/kglobalshortcutsrc
+    # ~/.config/khotkeysrc: .config/khotkeysrc
+    # ~/.config/kwinrc: .config/kwinrc
+    # ~/.config/kxbrc: .config/kxbrc
 
 - shell:
     - mkdir -p ~/.vim/sessions ~/.vim/undo

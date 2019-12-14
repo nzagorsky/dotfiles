@@ -1,24 +1,22 @@
 - aptget:
     - abduco
     - exuberant-ctags
-    - docker
-    - docker-compose
+    # - docker
+    # - docker-compose
     - htop
-    - iotop
+    # - iotop
     - python-pip
     - python3-pip
-    - ranger
+    # - ranger
     - software-properties-common
-    - sshfs
+    # - sshfs
     - zsh
+    - neovim
+    - rust
 
 - shell:
-    # Install rustup and cargo to install ripgrep
-    - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    - rustup default stable
+    # # Install rustup and cargo to install ripgrep
+    # - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    # - rustup default stable
     - cargo install ripgrep
     - cargo install fd-find
-      # Install neovim.
-    - sudo add-apt-repository ppa:neovim-ppa/stable -y
-    - sudo apt-get update
-    - sudo apt-get install neovim -y
