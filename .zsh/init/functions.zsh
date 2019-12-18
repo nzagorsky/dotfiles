@@ -64,18 +64,18 @@ torify () {
     proxychains -f ~/.config/proxychains.conf $*
 }
 
-v () {
-    CURRENT_FOLDER_HASH=`pwd  | md5sum | cut -f1 -d" "`
-    SESSION_NAME=nvim-session-$CURRENT_FOLDER_HASH
-    SERVERNAME=/tmp/$SESSION_NAME
-    NVIM_LISTEN_ADDRESS=$SERVERNAME
+# v () {
+#     CURRENT_FOLDER_HASH=`pwd  | md5sum | cut -f1 -d" "`
+#     SESSION_NAME=nvim-session-$CURRENT_FOLDER_HASH
+#     SERVERNAME=/tmp/$SESSION_NAME
+#     NVIM_LISTEN_ADDRESS=$SERVERNAME
 
-    # Function to prevent nesting of sessions with running neovim.
-    if [[ $ABDUCO_SESSION = $SESSION_NAME ]]; then 
-        NVIM_LISTEN_ADDRESS=$SERVERNAME nvr --servername $SERVERNAME $*
-    else
-        ABDUCO_SESSION=$SESSION_NAME abduco -c $SESSION_NAME nvr --servername $SERVERNAME $* || ABDUCO_SESSION=$SESSION_NAME nvr --servername $SERVERNAME $*; ABDUCO_SESSION=$SESSION_NAME abduco -a $SESSION_NAME
-    fi
-}
+#     # Function to prevent nesting of sessions with running neovim.
+#     if [[ $ABDUCO_SESSION = $SESSION_NAME ]]; then 
+#         NVIM_LISTEN_ADDRESS=$SERVERNAME nvr --servername $SERVERNAME $*
+#     else
+#         ABDUCO_SESSION=$SESSION_NAME abduco -c $SESSION_NAME nvr --servername $SERVERNAME $* || ABDUCO_SESSION=$SESSION_NAME nvr --servername $SERVERNAME $*; ABDUCO_SESSION=$SESSION_NAME abduco -a $SESSION_NAME
+#     fi
+# }
 
 # Kukareku.

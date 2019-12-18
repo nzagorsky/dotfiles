@@ -16,6 +16,7 @@ alias e='emacs -nw'
 alias k='kubectl'
 alias r='ranger'
 alias g=git
+alias v=nvim
 
 alias ping='grc --colour=auto ping'
 alias diff='grc --colour=auto diff'
