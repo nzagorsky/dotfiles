@@ -1,22 +1,11 @@
 - aptget:
-    - abduco
     - exuberant-ctags
-    # - docker
-    # - docker-compose
+    - docker
+    - docker-compose
     - htop
-    # - iotop
+    - iotop
     - python-pip
     - python3-pip
-    # - ranger
     - software-properties-common
-    # - sshfs
     - zsh
     - neovim
-    - rust
-
-- shell:
-    # # Install rustup and cargo to install ripgrep
-    # - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    # - rustup default stable
-    - cargo install ripgrep
-    - cargo install fd-find

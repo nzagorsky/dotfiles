@@ -31,31 +31,14 @@
 
     ~/.ctags.d: .ctags.d
     ~/.gitconfig: .gitconfig
-    # ~/.yaourtrc: .yaourtrc
-    # ~/.Xresources: .Xresources
-    # ~/.config/ranger: .config/ranger
-    # ~/.config/rofi/config: .config/rofi/config
-
-    # # I3
-    # ~/.config/i3: .config/i3
-    # ~/.config/polybar: .config/polybar
-
-    # # KDE
-    # ~/.config/breezerc: .config/breezerc
-    # # ~/.config/kdeglobals: .config/kdeglobals
-    # ~/.config/kglobalshortcutsrc: .config/kglobalshortcutsrc
-    # ~/.config/khotkeysrc: .config/khotkeysrc
-    # ~/.config/kwinrc: .config/kwinrc
-    # ~/.config/kxbrc: .config/kxbrc
 
 - shell:
     - mkdir -p ~/.vim/sessions ~/.vim/undo
     - mkdir -p ~/.credentials; touch ~/.credentials/secure
     - mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
     - [pip3 install -r optional/requirements.txt -U --user, Python dependencies]
-    - [nvim --headless -S optional/setup.vim, Nvim plugin installation]
     # - [emacs --batch --load ~/.emacs.d/init.el, Installing emacs files]
     - [
         sudo npm install -g standard prettier neovim javascript-typescript-langserver,
-        Linting for JS and autoformat,
+        Linting for JS and autoformat
       ]
