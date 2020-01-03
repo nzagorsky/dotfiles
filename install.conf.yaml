@@ -30,8 +30,8 @@
     # ~/.emacs.d: .emacs.d
 
     ~/.ctags.d: .ctags.d
-    # ~/.yaourtrc: .yaourtrc
     ~/.gitconfig: .gitconfig
+    # ~/.yaourtrc: .yaourtrc
     # ~/.Xresources: .Xresources
     # ~/.config/ranger: .config/ranger
     # ~/.config/rofi/config: .config/rofi/config

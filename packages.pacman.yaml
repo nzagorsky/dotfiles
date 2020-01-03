@@ -1,6 +1,5 @@
 - pacman:
     # Development
-    - abduco
     - ctags
     - docker
     - docker-compose
@@ -9,11 +8,8 @@
     - python-pip
 
     # Desktop env
-    - playerctl
-    - ttf-hack # font
     - xfce4-screenshooter
     - xfce4-terminal
-    - dmenu
 
     # System administration
     - fd # Faster `find`
@@ -26,7 +22,6 @@
 
     # Utils
     - xclip
-    - xf86-input-libinput # Mouse drivers
 
     # Build dependencies
     - autoconf
@@ -36,6 +31,3 @@
     - patch
     - pacaur  # For dotbot
     - yay
-
-- shell:
-    - yay -S xgetres nerd-fonts-terminus nerd-fonts-hack --noconfirm --norebuild --needed
