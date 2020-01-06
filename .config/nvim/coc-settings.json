@@ -14,7 +14,7 @@
     "diagnostic.refreshOnInsertMode": true,
     "suggest.enablePreview": true,
     "suggest.maxPreviewWidth": 100,
-    "python.jediEnabled": true,
+
     "python.linting.pylintEnabled": false,
     "python.linting.mypyEnabled": true,
     "python.linting.flake8Enabled": true,

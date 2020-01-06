@@ -9,3 +9,5 @@
     - software-properties-common
     - zsh
     - neovim
+    - npm
+    - openvpn
