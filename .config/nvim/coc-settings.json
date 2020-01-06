@@ -15,6 +15,7 @@
     "suggest.enablePreview": true,
     "suggest.maxPreviewWidth": 100,
 
+    "python.jediEnabled": false,
     "python.linting.pylintEnabled": false,
     "python.linting.mypyEnabled": true,
     "python.linting.flake8Enabled": true,
