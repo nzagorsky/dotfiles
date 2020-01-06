@@ -43,16 +43,16 @@ function dutop {
 }
 
 # Tmux
-# t () {
-#     if [ -z "$1" ]
-#     then
-#         tmux -u attach -t default || tmux -u new -s default
+t () {
+    if [ -z "$1" ]
+    then
+        tmux -u attach -t default || tmux -u new -s default
 
-#     else
-#         tmux -u attach -t $1 || tmux -u new -s $1
+    else
+        tmux -u attach -t $1 || tmux -u new -s $1
 
-#     fi
-# }
+    fi
+}
 
 ctop () {
     docker run \
