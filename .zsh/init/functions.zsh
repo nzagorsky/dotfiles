@@ -39,7 +39,7 @@ pk () {
 
 # Disk usage
 function dutop {
-    du --one-file-system --max-depth=2 -h $1 | sort -hr | head -20;
+    du --max-depth=0 -h * | sort -hr | head -20;
 }
 
 # Tmux
