@@ -9,7 +9,9 @@
           python3-pip \
           curl \
           nodejs \
-          npm
+          npm \
+          ripgrep \
+          fd-find
 
     # - sudo npm install -g standard prettier neovim javascript-typescript-langserver
     - pip3 install -r optional/requirements.txt -U --user
