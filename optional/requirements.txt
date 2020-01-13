@@ -4,7 +4,7 @@ vim-vint
 python-language-server[all]
 jedi
 flake8
-radon # dependency for flake8 that should be updated
+radon  # dependency for flake8 that should be updated
 bandit
 mypy
 pyflakes
@@ -13,9 +13,7 @@ yamllint
 
 # Interactive shell
 ipython
+ipdb
 
-# Env management
-pipenv
-
-neovim-remote
-botostubs
+docker-compose
+neovim

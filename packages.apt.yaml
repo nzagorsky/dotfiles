@@ -1,7 +1,16 @@
 - shell:
     - >
-	apt update && apt install -y \
+       sudo apt update && sudo apt install -y \
           exuberant-ctags \
           htop \
           iotop \
-          zsh
+          zsh \
+          python3 \
+          python3-pip \
+          curl \
+          nodejs \
+          npm
+
+    # - sudo npm install -g standard prettier neovim javascript-typescript-langserver
+    - pip3 install -r optional/requirements.txt -U --user
+    - wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O ~/.local/bin/nvim; chmod a+x ~/.local/bin/nvim

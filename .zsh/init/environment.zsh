@@ -1,29 +1,13 @@
-export BROWSER="/usr/bin/opera"
-export EDITOR=/usr/bin/nvim
+# Default config
+export BROWSER="/usr/bin/chromium"
+export EDITOR=nvim
 export HISTFILE=~/.zsh_history
-
-export ESHELL=$SHELL
-
-# Nim
-export PATH="$PATH:$HOME/.nimble/bin"  # NIM
 
 # Utils
 export PATH="$PATH:$HOME/.scripts"  
-export PATH="$PATH:$HOME/.bin" 
 
 # Go
 export GOPATH="$HOME/.go"
-export PATH="$PATH:$GOPATH/bin"
-
-# Snaps
-export PATH="$PATH:/var/lib/snapd/snap/bin"  # Snap packages
-
-# Cargo
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# Python
-# export PYTHONPATH="$PYTHONPATH:/usr/lib/python3.7/site-packages"  # Python
-export PATH="$PATH:$HOME/.local/bin"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || find * -type f'
@@ -33,6 +17,12 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # Source FZF for optional keybindings and shell improvement: C-r search commands; C-t for file search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Binary paths
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="/snap/bin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$GOPATH/bin"
 
 # TODO move to separate modules file
 # Autocompletion
