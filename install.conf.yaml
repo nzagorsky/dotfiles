@@ -16,7 +16,6 @@
     # ZSH
     ~/.zsh: .zsh
     ~/.zshrc: .zshrc
-    ~/.scripts: .scripts
 
     # Tmux
     ~/.tmux: .tmux
@@ -31,10 +30,11 @@
     ~/.config/nvim: .config/nvim
 
     # Emacs
-    # ~/.emacs.d: .emacs.d
+    ~/.emacs.d: .emacs.d
 
     ~/.gitconfig: .gitconfig
     ~/.ctags.d: .ctags.d
+    ~/.scripts: .scripts
 
 - shell:
     - mkdir -p ~/.vim/sessions ~/.vim/undo

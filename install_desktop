@@ -12,7 +12,7 @@ flatpak install flathub --user -y \
 	io.dbeaver.DBeaverCommunity
 
 # }}}
-# Gnome setup {{{
+# Gnome config setup {{{
 dconf load  / < optional/dconf.conf
 # }}}
 

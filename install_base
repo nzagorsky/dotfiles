@@ -10,21 +10,5 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${BASEDIR}"
 git submodule update --init --recursive
 
-
-# Packages installation
-# Arch based installation.
-if hash pacman 2>/dev/null; then
-    echo "Found pacman"
-    PACKAGES_CONFIG=packages.pacman.yaml
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_SCRIPT_PATH}" -d "${BASEDIR}" -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot-pacman" "${@}"
-
-# Debian based installation.
-elif hash apt-get 2>/dev/null; then
-    echo "Found apt"
-    PACKAGES_CONFIG=packages.apt.yaml
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_SCRIPT_PATH}" -d "${BASEDIR}" -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot_plugin_aptget" "${@}"
-
-else
-    echo "Warning! Didn't found packet manager, install dependencies manually."
-
-fi
+PACKAGES_CONFIG=packages.apt.yaml
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_SCRIPT_PATH}" -d "${BASEDIR}" -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot_plugin_aptget" "${@}"
