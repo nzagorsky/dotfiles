@@ -22,27 +22,18 @@
     ~/.tmux: .tmux
     ~/.tmux.conf: .tmux.conf
 
-    # Xfce4 terminal
-    ~/.config/xfce4/terminal: .config/xfce4/terminal
-
     # VIM
     ~/.vim: .config/nvim/
     ~/.vimrc: .config/nvim/init.vim
     ~/.config/nvim: .config/nvim
 
-    # # Emacs
+    # Emacs
     # ~/.emacs.d: .emacs.d
 
-    ~/.ctags.d: .ctags.d
     ~/.gitconfig: .gitconfig
+    ~/.ctags.d: .ctags.d
 
 - shell:
     - mkdir -p ~/.vim/sessions ~/.vim/undo
     - mkdir -p ~/.credentials; touch ~/.credentials/secure
     - mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
-    - [pip3 install -r optional/requirements.txt -U --user, Python dependencies]
-    # - [emacs --batch --load ~/.emacs.d/init.el, Installing emacs files]
-    - [
-        sudo npm install -g standard prettier neovim javascript-typescript-langserver,
-        Linting for JS and autoformat
-      ]

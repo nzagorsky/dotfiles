@@ -1,13 +1,7 @@
-- aptget:
-    - exuberant-ctags
-    - docker
-    - docker-compose
-    - htop
-    - iotop
-    - python-pip
-    - python3-pip
-    - software-properties-common
-    - zsh
-    - neovim
-    - npm
-    - openvpn
+- shell:
+    - >
+	apt update && apt install -y \
+          exuberant-ctags \
+          htop \
+          iotop \
+          zsh

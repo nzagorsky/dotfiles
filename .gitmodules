@@ -7,12 +7,6 @@
 [submodule ".zsh/antigen"]
 	path = .zsh/antigen
 	url = https://github.com/zsh-users/antigen.git
-[submodule "dotbot_plugin_aptget"]
-	path = dotbot_plugin_aptget
-	url = https://github.com/dein0s/dotbot_plugin_aptget.git
 [submodule ".config/nvim/dein"]
 	path = .config/nvim/dein
 	url = https://github.com/Shougo/dein.vim
-[submodule ".config/fish/plugins/fisher"]
-	path = .config/fish/plugins/fisher
-	url = https://github.com/jorgebucaran/fisher
