@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Base {{{
-sudo apt install -y flatpak openvpn docker.io xclip xfce4-terminal
+# sudo apt install -y flatpak openvpn docker.io xclip xfce4-terminal
 # }}}
 # Flatpak packages {{{
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo

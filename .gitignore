@@ -21,3 +21,7 @@ tags
 *_cache
 *.zsh.zwc
 Session.vim
+
+.tmux/plugins/
+.tmux/resurrect
+

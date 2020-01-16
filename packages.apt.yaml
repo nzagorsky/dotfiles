@@ -1,17 +1,19 @@
 - shell:
     - >
        sudo apt update && sudo apt install -y \
-          universal-ctags \
-          htop \
-          iotop \
-          zsh \
-          python3 \
-          python3-pip \
           curl \
+          fd-find \
+          htop \
+          httpie \
+          iotop \
           nodejs \
           npm \
+          python3 \
+          python3-pip \
           ripgrep \
-          fd-find
+          tmux \
+          universal-ctags \
+          zsh
 
     # - sudo npm install -g standard prettier neovim javascript-typescript-langserver
     - pip3 install -r optional/requirements.txt -U --user

@@ -4,7 +4,7 @@
         excludesfile = ~/.gitignore
         autocrlf = input
         precomposeunicode = true
-        editor = /usr/bin/nvim
+        editor = nvim
 [color]
         ui = auto
 [color "branch"]
