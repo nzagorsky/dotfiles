@@ -8,7 +8,6 @@ flatpak install flathub --user -y \
 	telegram \
 	fondo \
 	spotify \
-	org.gnome.Boxes \
 	io.dbeaver.DBeaverCommunity
 
 # }}}
