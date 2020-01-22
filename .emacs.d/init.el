@@ -9,12 +9,13 @@
   "Reset `gc-cons-threshold' to its default value."
   (setq gc-cons-threshold 800000))
 
-
 ;; Disable auto-save and auto-backup
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 (setq default-frame-alist '((undecorated . t)))
 
+;; Fix emacs terminal binary availability
+(add-to-list 'exec-path "/usr/local/bin")
 
 ;;----------------------------------------
 ;; Initial
@@ -32,7 +33,7 @@
 
 (setq package-enable-at-startup nil)
 
-n(package-initialize)
+(package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -97,83 +98,10 @@ n(package-initialize)
     (smartparens-global-mode))
 
 
-(use-package magit
-  :ensure t
-  )
-
-
-(use-package flycheck
-  :ensure t
-  :config
-  (global-flycheck-mode)
-  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
-)
-
-
-(use-package projectile
-  :ensure t
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  )
-
-(use-package ripgrep
-  :ensure t)
-
-
-;;----------------------------------------
-;; Ivy
-;;----------------------------------------
-(use-package ivy
-  :ensure t
-  :init
-
-  ;; Human fuzzy search
-  (setq enable-recursive-minibuffers t)
-  (setq ivy-use-virtual-buffers t)
-
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-re-builders-alist
-	'((ivy-switch-buffer . ivy--regex-plus)
-	  (t . ivy--regex-fuzzy)))
-
-  :config
-  (ivy-mode 1)
-  
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-c c f") 'counsel-fzf)
-  (global-set-key (kbd "C-c c a") 'counsel-rg)
-)
-
-(use-package counsel
-;; Brings Swiper and Counsel
-  :ensure t
-)
-
-
-;;----------------------------------------
-;; Autocomplete window (Company)
-;;----------------------------------------
-(use-package company
-  :ensure t
-  :bind (:map company-active-map
-	      ("C-p" . company-select-previous)
-	      ("C-n" . company-select-next))
-  :init
-    (add-hook 'after-init-hook 'global-company-mode)
-    (setq company-tooltip-limit 10
-          company-idle-delay 0.1
-	  company-require-match nil
-	  company-selection-wrap-around t
-	  company-tooltip-align-annotations t
-	  company-tooltip-flip-when-above t
-          company-transformers '(company-sort-by-occurrence))
-)
-
-
+ 
 ;;----------------------------------------
 ;; Git integration
-;;----------------------------------------
+;;----------------------------------------p
 (use-package git-gutter
   :ensure t
   :config
@@ -194,46 +122,11 @@ n(package-initialize)
     ;; Set update interval
     (custom-set-variables
 	'(git-gutter:update-interval 0.2))
-)
+    )
 
-;;----------------------------------------
-;; Docker
-;;----------------------------------------
-(use-package dockerfile-mode
-  :mode (("Dockerfile\\'" . dockerfile-mode))
-  :ensure t)
-
-(use-package docker-compose-mode
-  :mode (("docker-compose\\'" . dockerfile-mode))
-  :ensure t)
-
-
-;;----------------------------------------
-;; LSP mode {{{
-;;----------------------------------------
-(use-package lsp-mode
+(use-package magit
   :ensure t
-  :commands lsp
-  :init
-  (require 'lsp-clients)
-  (add-hook 'python-mode-hook 'lsp)
-  
-  :config
-  (lsp-mode))
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode)
-
-(use-package company-lsp
-  :ensure t
-  :commands company-lsp
-  :config
-  (push 'company-lsp company-backends))
-
-(use-package csv-mode
-  :ensure t
-)
+  )
 
 
 (provide 'init)
