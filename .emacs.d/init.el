@@ -13,6 +13,8 @@
 ;; Disable auto-save and auto-backup
 (setq auto-save-default nil)
 (setq make-backup-files nil)
+(setq default-frame-alist '((undecorated . t)))
+
 
 ;;----------------------------------------
 ;; Initial
@@ -24,13 +26,13 @@
 
 ;; Bootstrap `use-package'
 (require 'package)
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")  ;; Fix for some packages downloading
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 
 (setq package-enable-at-startup nil)
 
-(package-initialize)
+n(package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -52,17 +54,16 @@
 ;; ----------------------------------------
 ;; Plugins
 ;; ----------------------------------------
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-mode))
-
 ;; Style/Theme config
-(use-package gruvbox-theme
+(use-package dracula-theme
   :ensure t
   :init (setq inhibit-startup-message t) ;; hide the startup message
   :config
-    (load-theme 'gruvbox t)
+    (toggle-scroll-bar -1)
+    (tool-bar-mode -1)
+    (menu-bar-mode -1)
+
+    (load-theme 'dracula t)
 
     (toggle-scroll-bar -1)
     (tool-bar-mode -1)
@@ -73,12 +74,12 @@
     (defun on-after-init ()
       (unless (display-graphic-p (selected-frame))
 	(set-face-background 'default "unspecified-bg" (selected-frame))))
+    
     (add-hook 'window-setup-hook 'on-after-init)
-
+    
     (set-face-attribute 'vertical-border
 			nil
 			:foreground "#282a2e"))
-
 
 ;; System setup
 (setq vc-follow-symlinks t)
@@ -118,7 +119,6 @@
 
 (use-package ripgrep
   :ensure t)
-
 
 
 ;;----------------------------------------
