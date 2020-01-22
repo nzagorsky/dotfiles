@@ -58,7 +58,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
     call dein#add('jiangmiao/auto-pairs')
-    call dein#add('ervandew/supertab')
+    " call dein#add('ervandew/supertab')
 
     " Async command execution
     call dein#add('tpope/vim-dispatch')
@@ -136,47 +136,48 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 nnoremap <leader><leader> V
 cmap w!! w !sudo tee % >/dev/null
 
-" Human tab navigation
-nnoremap <A-1> <Esc>1gt
-nnoremap <A-2> <Esc>2gt
-nnoremap <A-3> <Esc>3gt
-nnoremap <A-4> <Esc>4gt
-nnoremap <A-5> <Esc>5gt
-nnoremap <A-6> <Esc>6gt
-nnoremap <A-7> <Esc>7gt
-nnoremap <A-8> <Esc>8gt
-nnoremap <A-9> <Esc>9gt
-nnoremap <A-0> <Esc>10gt
+" Alt-based tab navigation {{{
+" nnoremap <A-1> <Esc>1gt
+" nnoremap <A-2> <Esc>2gt
+" nnoremap <A-3> <Esc>3gt
+" nnoremap <A-4> <Esc>4gt
+" nnoremap <A-5> <Esc>5gt
+" nnoremap <A-6> <Esc>6gt
+" nnoremap <A-7> <Esc>7gt
+" nnoremap <A-8> <Esc>8gt
+" nnoremap <A-9> <Esc>9gt
+" nnoremap <A-0> <Esc>10gt
 
-inoremap <A-1> <Esc>1gt
-inoremap <A-2> <Esc>2gt
-inoremap <A-3> <Esc>3gt
-inoremap <A-4> <Esc>4gt
-inoremap <A-5> <Esc>5gt
-inoremap <A-6> <Esc>6gt
-inoremap <A-7> <Esc>7gt
-inoremap <A-8> <Esc>8gt
-inoremap <A-9> <Esc>9gt
-inoremap <A-0> <Esc>10gt
+" inoremap <A-1> <Esc>1gt
+" inoremap <A-2> <Esc>2gt
+" inoremap <A-3> <Esc>3gt
+" inoremap <A-4> <Esc>4gt
+" inoremap <A-5> <Esc>5gt
+" inoremap <A-6> <Esc>6gt
+" inoremap <A-7> <Esc>7gt
+" inoremap <A-8> <Esc>8gt
+" inoremap <A-9> <Esc>9gt
+" inoremap <A-0> <Esc>10gt
 
-tnoremap <A-1> <C-\><C-n>1gt
-tnoremap <A-2> <C-\><C-n>2gt
-tnoremap <A-3> <C-\><C-n>3gt
-tnoremap <A-4> <C-\><C-n>4gt
-tnoremap <A-5> <C-\><C-n>5gt
-tnoremap <A-6> <C-\><C-n>6gt
-tnoremap <A-7> <C-\><C-n>7gt
-tnoremap <A-8> <C-\><C-n>8gt
-tnoremap <A-9> <C-\><C-n>9gt
-tnoremap <A-0> <C-\><C-n>10gt
+" tnoremap <A-1> <C-\><C-n>1gt
+" tnoremap <A-2> <C-\><C-n>2gt
+" tnoremap <A-3> <C-\><C-n>3gt
+" tnoremap <A-4> <C-\><C-n>4gt
+" tnoremap <A-5> <C-\><C-n>5gt
+" tnoremap <A-6> <C-\><C-n>6gt
+" tnoremap <A-7> <C-\><C-n>7gt
+" tnoremap <A-8> <C-\><C-n>8gt
+" tnoremap <A-9> <C-\><C-n>9gt
+" tnoremap <A-0> <C-\><C-n>10gt
 
-nnoremap <A-h> <Esc>:tabprevious<CR>
-inoremap <A-h> <Esc>:tabprevious<CR>
-tnoremap <A-h> <C-\><C-n>:tabprevious<CR>
+" nnoremap <A-h> <Esc>:tabprevious<CR>
+" inoremap <A-h> <Esc>:tabprevious<CR>
+" tnoremap <A-h> <C-\><C-n>:tabprevious<CR>
 
-nnoremap <A-l> <Esc>:tabnext<CR>
-inoremap <A-l> <Esc>:tabnext<CR>
-tnoremap <A-l> <C-\><C-n>:tabnext<CR>
+" nnoremap <A-l> <Esc>:tabnext<CR>
+" inoremap <A-l> <Esc>:tabnext<CR>
+" tnoremap <A-l> <C-\><C-n>:tabnext<CR>
+" }}}
 
 " }}}
 " Color setup {{{1
@@ -367,6 +368,7 @@ if g:dein#is_sourced('semshi')
 endif
 
 if g:dein#is_sourced('coc.nvim')
+
     function! s:show_documentation()
       if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
@@ -406,6 +408,21 @@ if g:dein#is_sourced('coc.nvim')
     " diagnostics navigation
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+    " Proper tab autocommpletion
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " ctrl-space autocommpletion
+    inoremap <silent><expr> <c-space> coc#refresh()
 
     " Statusline method to show errors and warnings.
 	function! StatusDiagnostic() abort
