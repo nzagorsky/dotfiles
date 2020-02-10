@@ -1,7 +1,7 @@
 --recurse=yes
 
 --languages=python,go
---python-kinds=-iv
+--python-kinds=-i
 
 --exclude=*.bundle.*
 --exclude=*bundle.*
