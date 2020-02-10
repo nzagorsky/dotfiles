@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-# Base {{{
-sudo apt install -y flatpak openvpn docker.io xclip xfce4-terminal
-# }}}
-# Flatpak packages {{{
+
+# Install system deps
+sudo pacman -S --needed flatpak openvpn docker xclip xfce4-terminal
+# sudo apt install -y flatpak openvpn docker.io xclip xfce4-terminal
+
+
+# Flatpak packages
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub --user -y \
 	telegram \
@@ -10,9 +13,8 @@ flatpak install flathub --user -y \
 	spotify \
 	io.dbeaver.DBeaverCommunity
 
-# }}}
-# Gnome config setup {{{
-dconf load  / < optional/dconf.conf
-# }}}
 
-# vim:foldmethod=marker:foldlevel=0
+# Setup gnome
+dconf load  / < optional/dconf.conf
+# Use alttab on current workspace only.
+gsettings set org.gnome.shell.app-switcher current-workspace-only true

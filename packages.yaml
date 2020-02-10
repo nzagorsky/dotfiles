@@ -1,0 +1,41 @@
+# - shell:
+#     - >
+#        sudo apt update && sudo apt install -y \
+#           curl \
+#           fd-find \
+#           htop \
+#           httpie \
+#           iotop \
+#           nodejs \
+#           npm \
+#           python3 \
+#           python3-pip \
+#           ripgrep \
+#           tmux \
+#           universal-ctags \
+#           zsh
+
+#     - sudo npm install -g standard prettier neovim javascript-typescript-langserver
+#     - pip3 install -r optional/requirements.txt -U --user
+#     - wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O ~/.local/bin/nvim; chmod a+x ~/.local/bin/nvim
+
+- shell:
+    - >
+        sudo pacman -S --needed \
+            base-devel \
+            ctags \
+            curl \
+            fd \
+            htop \
+            httpie \
+            iotop \
+            neovim \
+            npm \
+            python-pip \
+            python3 \
+            ripgrep \
+            tmux \
+            zsh
+
+    - sudo npm install -g standard prettier neovim javascript-typescript-langserver
+    - pip3 install -r optional/requirements.txt -U --user

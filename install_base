@@ -10,5 +10,5 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${BASEDIR}"
 git submodule update --init --recursive
 
-PACKAGES_CONFIG=packages.apt.yaml
+PACKAGES_CONFIG=packages.yaml
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_SCRIPT_PATH}" -d "${BASEDIR}" -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot_plugin_aptget" "${@}"
