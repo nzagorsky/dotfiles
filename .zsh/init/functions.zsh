@@ -63,6 +63,15 @@ ctop () {
 torify () {
     proxychains -f ~/.config/proxychains.conf $*
 }
+list_iommu () {
+    shopt -s nullglob
+    for g in /sys/kernel/iommu_groups/*; do
+        echo "IOMMU Group ${g##*/}:"
+        for d in $g/devices/*; do
+            echo -e "\t$(lspci -nns ${d##*/})"
+        done;
+    done;
+}
 
 # v () {
 #     CURRENT_FOLDER_HASH=`pwd  | md5sum | cut -f1 -d" "`
