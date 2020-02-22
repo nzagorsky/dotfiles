@@ -1,5 +1,5 @@
 # Default config
-export BROWSER="/usr/bin/chromium"
+export BROWSER="/usr/bin/google-chrome-unstable"
 export EDITOR=nvim
 export HISTFILE=~/.zsh_history
 

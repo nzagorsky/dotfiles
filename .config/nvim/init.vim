@@ -101,7 +101,7 @@ inoremap jk <Esc>
 cnoremap jk <Esc>
 nnoremap <Leader>w :w<CR>
 nnoremap <leader>q :close<CR>
-nnoremap <leader>k :bd<CR>
+" nnoremap <leader>k :bd<CR>
 nmap <Leader><Leader> V
 nmap j gj
 nmap k gk

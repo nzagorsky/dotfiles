@@ -2,7 +2,7 @@
 black
 vim-vint
 python-language-server[all]
-jedi
+jedi==0.15.2  # Until warnings in coc-nvim are fixed
 flake8
 radon  # dependency for flake8 that should be updated
 bandit
