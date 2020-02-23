@@ -21,7 +21,6 @@ set cmdheight=2
 
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
-nnoremap geft :Explore ~/.vim/ftplugin<CR>
 
 set shortmess=aoOtIWcFs
 " }}}
