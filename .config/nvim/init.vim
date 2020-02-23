@@ -6,12 +6,9 @@ set hidden  " buffers
 set wrap
 set noswapfile
 set undofile
-set undodir=~/.vim/undo
-set backupdir=~/.vim/sessions
-set directory=~/.vim/sessions
-
-:silent call system('mkdir -p ' . &undodir)
-:silent call system('mkdir -p ' . &directory)
+set undodir=~/.config/nvim/undo
+set backupdir=~/.config/nvim/sessions
+set directory=~/.config/nvim/sessions
 
 set title
 set titleold="Terminal"
