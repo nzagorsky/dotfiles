@@ -6,12 +6,9 @@ set hidden  " buffers
 set wrap
 set noswapfile
 set undofile
-set undodir=~/.vim/undo
-set backupdir=~/.vim/sessions
-set directory=~/.vim/sessions
-
-:silent call system('mkdir -p ' . &undodir)
-:silent call system('mkdir -p ' . &directory)
+set undodir=~/.config/nvim/undo
+set backupdir=~/.config/nvim/sessions
+set directory=~/.config/nvim/sessions
 
 set title
 set titleold="Terminal"
@@ -21,7 +18,6 @@ set cmdheight=2
 
 nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
-nnoremap geft :Explore ~/.vim/ftplugin<CR>
 
 set shortmess=aoOtIWcFs
 " }}}
