@@ -56,6 +56,8 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('jiangmiao/auto-pairs')
     " call dein#add('ervandew/supertab')
 
+    call dein#add('junegunn/goyo.vim')
+
     " Async command execution
     call dein#add('tpope/vim-dispatch')
 
