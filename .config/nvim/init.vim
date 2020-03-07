@@ -45,6 +45,7 @@ if dein#load_state(expand('~/.config/nvim'))
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
     call dein#add('junegunn/fzf.vim')
+    call dein#add('antoinemadec/coc-fzf')
 
     " Code check.
     call dein#add('neoclide/coc.nvim', {'rev': 'release'})
@@ -76,6 +77,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+    call dein#add('neoclide/coc-neco', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
     " " CSV
@@ -302,6 +304,8 @@ set statusline+=\ %l\/%L
 " }}}
 " Plugins setup.  {{{1
 if g:dein#is_sourced('fzf.vim')
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
+
     function! UpdateTags() abort
         :Start! ctags .<CR>
     endfunction
@@ -377,16 +381,16 @@ if g:dein#is_sourced('coc.nvim')
 
     let g:coc_global_extensions = [
         \ 'coc-css',
+        \ 'coc-docker',
+        \ 'coc-git',
+        \ 'coc-go',
         \ 'coc-html',
         \ 'coc-json',
+        \ 'coc-prettier',
         \ 'coc-python',
+        \ 'coc-rls',
         \ 'coc-tsserver',
         \ 'coc-vetur',
-        \ 'coc-yaml',
-        \ 'coc-rls',
-        \ 'coc-go',
-        \ 'coc-git',
-        \ 'coc-docker',
         \ 'coc-yaml',
     \ ]
     nnoremap <silent> <F3> :call CocAction('format')<CR>
