@@ -1,6 +1,13 @@
 dotfiles
 ========
 
+Requirements
+------------
+
+	stow
+	git
+
+
 Installation:
 
 ```
