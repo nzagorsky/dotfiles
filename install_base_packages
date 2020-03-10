@@ -65,6 +65,10 @@ main () {
         install_base_debian
 
 
+    elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
+        echo "Ubuntu detected"
+        install_base_debian
+
     elif [ "$OS_DETECTED" == "arch" ]; then
         echo "Arch detected"
         install_base_arch
