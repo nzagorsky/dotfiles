@@ -9,10 +9,11 @@ Requirements
 
 
 Installation:
+-------------
 
-```
-git clone https://github.com/nzagorsky/dotfiles.git ~/dotfiles
-cd dotfiles
-./install
-zsh   # To trigger antigen install
-```
+    git clone https://github.com/nzagorsky/dotfiles.git ~/dotfiles
+    cd dotfiles
+
+    ./install_base_packages
+    ./install_dotfiles
+    ./install_desktop
