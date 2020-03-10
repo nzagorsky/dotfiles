@@ -60,12 +60,14 @@ identify_os () {
 
 
 main () {
-    if [ `identify_os` == "ubuntu" ]; then
+    OS_DETECTED=`identify_os`
+
+    if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
 
 
-    elif [ `identify_os` == "arch" ]; then
+    elif [ "$OS_DETECTED" == "arch" ]; then
         echo "Arch detected"
         install_base_arch
     fi
