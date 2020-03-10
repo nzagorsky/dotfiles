@@ -1,14 +1,23 @@
 #!/usr/bin/env bash
 
-set -e
+sudo apt update && sudo apt install -y \
+   curl \
+   fd-find \
+   htop \
+   httpie \
+   iotop \
+   nodejs \
+   npm \
+   python3 \
+   python3-pip \
+   ripgrep \
+   tmux \
+   universal-ctags \
+   zsh
 
-DOTBOT_DIR="dotbot"
 
-DOTBOT_SCRIPT_PATH="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+sudo npm install -g standard prettier neovim javascript-typescript-langserver
 
-cd "${BASEDIR}"
-git submodule update --init --recursive
+pip3 install -r optional/requirements.txt -U --user
 
-PACKAGES_CONFIG=packages.yaml
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_SCRIPT_PATH}" -d "${BASEDIR}" -c "${PACKAGES_CONFIG}" --plugin-dir "${BASEDIR}/dotbot_plugin_aptget" "${@}"
+wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O ~/.local/bin/nvim; chmod a+x ~/.local/bin/nvim
