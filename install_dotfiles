@@ -12,8 +12,6 @@ setup_dots () {
 }
 
 setup_structure () {
-    mkdir -p ~/.config/nvim/sessions ~/.config/nvim/undo
-
     mkdir -p ~/.credentials; touch ~/.credentials/secure
     mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
 }
