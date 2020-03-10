@@ -1,20 +1,39 @@
 #!/usr/bin/env bash
 
-# Install system deps
-sudo pacman -S --needed flatpak openvpn docker xclip xfce4-terminal
-# sudo apt install -y flatpak openvpn docker.io xclip xfce4-terminal
+# TODO identify desktop type
 
+identify_os () {
+    . /etc/os-release
+    echo $NAME | tr '[:upper:]' '[:lower:]'
+}
 
-# Flatpak packages
-flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub --user -y \
-	telegram \
-	fondo \
-	spotify \
-	io.dbeaver.DBeaverCommunity
+install_desktop_arch () {
+    sudo pacman -S --needed --noconfirm docker
+    sudo pacman -S --needed --noconfirm flatpak
+    sudo pacman -S --needed --noconfirm openvpn
+    sudo pacman -S --needed --noconfirm xclip
+    sudo pacman -S --needed --noconfirm xfce4-terminal
+}
 
+install_desktop_debian () {
+    sudo apt-get update
+    sudo apt-get install -y flatpak
+    sudo apt-get install -y openvpn
+    sudo apt-get install -y docker.io
+    sudo apt-get install -y xclip
+    sudo apt-get install -y xfce4-terminal
+}
 
-# Setup gnome
-dconf load  / < optional/dconf.conf
-# Use alttab on current workspace only.
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
+configure_gnome () {
+    dconf load  / < optional/dconf.conf
+    gsettings set org.gnome.shell.app-switcher current-workspace-only true
+}
+
+install_flatpak_apps () {
+    # Flatpak packages
+    flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak install flathub --user -y \
+        telegram \
+        fondo \
+        io.dbeaver.DBeaverCommunity
+}

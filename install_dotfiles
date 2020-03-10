@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+pull_submodules () {
+    git submodule update --init --recursive
+
+}
+
+
+setup_dots () {
+    cd src
+    stow -t ~ *
+}
+
+setup_structure () {
+    mkdir -p ~/.credentials; touch ~/.credentials/secure
+    mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
+}
+
+
+main () {
+    pull_submodules
+    setup_dots
+    setup_structure
+}
+
+
+main

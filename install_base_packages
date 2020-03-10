@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+install_base_debian () {
+    sudo apt-get update
+    sudo apt-get install -y curl
+    sudo apt-get install -y fd-find
+    sudo apt-get install -y htop
+    sudo apt-get install -y httpie
+    sudo apt-get install -y iotop
+    sudo apt-get install -y nodejs
+    sudo apt-get install -y npm
+    sudo apt-get install -y python3
+    sudo apt-get install -y python3-pip
+    sudo apt-get install -y ripgrep
+    sudo apt-get install -y tmux
+    sudo apt-get install -y universal-ctags
+    sudo apt-get install -y zsh
+}
+
+install_base_arch () {
+    sudo pacman -S --needed --noconfirm base-devel
+    sudo pacman -S --needed --noconfirm ctags
+    sudo pacman -S --needed --noconfirm curl
+    sudo pacman -S --needed --noconfirm fd
+    sudo pacman -S --needed --noconfirm htop
+    sudo pacman -S --needed --noconfirm httpie
+    sudo pacman -S --needed --noconfirm iotop
+    sudo pacman -S --needed --noconfirm neovim
+    sudo pacman -S --needed --noconfirm npm
+    sudo pacman -S --needed --noconfirm python-pip
+    sudo pacman -S --needed --noconfirm python3
+    sudo pacman -S --needed --noconfirm ripgrep
+    sudo pacman -S --needed --noconfirm tmux
+    sudo pacman -S --needed --noconfirm zsh
+}
+
+install_npm_deps () {
+    sudo npm install -g standard
+    sudo npm install -g prettier
+    sudo npm install -g neovim
+    sudo npm install -g javascript-typescript-langserver
+}
+
+install_python_deps () {
+    pip3 install -r optional/requirements.txt -U --user
+}
+
+
+neovim_appimage () {
+    wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O ~/.local/bin/nvim; chmod a+x ~/.local/bin/nvim
+}
+
+
+identify_os () {
+    . /etc/os-release
+    echo $NAME | tr '[:upper:]' '[:lower:]'
+}
+
+
+main () {
+    OS_DETECTED=`identify_os`
+
+    if [ "$OS_DETECTED" == "ubuntu" ]; then
+        echo "Ubuntu detected"
+        install_base_debian
+
+
+    elif [ "$OS_DETECTED" == "arch" ]; then
+        echo "Arch detected"
+        install_base_arch
+    fi
+
+    install_npm_deps
+    install_python_deps
+}
+
+
+main > /dev/null
+
