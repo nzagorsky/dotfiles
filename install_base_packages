@@ -72,6 +72,10 @@ main () {
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
         install_base_arch
+
+    elif [ "$OS_DETECTED" == "arch linux arm" ]; then
+        echo "Arch detected"
+        install_base_arch
     fi
 
     install_npm_deps

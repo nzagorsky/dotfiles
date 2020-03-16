@@ -11,9 +11,9 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm flatpak
     sudo pacman -S --needed --noconfirm openvpn
+    sudo pacman -S --needed --noconfirm ttf-hack
     sudo pacman -S --needed --noconfirm xclip
     sudo pacman -S --needed --noconfirm xfce4-terminal
-    sudo pacman -S --needed --noconfirm ttf-hack
 }
 
 install_desktop_debian () {
@@ -39,5 +39,4 @@ install_flatpak_apps () {
         io.dbeaver.DBeaverCommunity
 }
 
-configure_gnome
 install_desktop_arch
