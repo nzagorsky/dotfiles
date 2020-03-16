@@ -11,9 +11,9 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm flatpak
     sudo pacman -S --needed --noconfirm openvpn
-    sudo pacman -S --needed --noconfirm ttf-hack
-    sudo pacman -S --needed --noconfirm xclip
-    sudo pacman -S --needed --noconfirm xfce4-terminal
+    sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
+    sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
+    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
 }
 
 install_desktop_debian () {
@@ -26,6 +26,7 @@ install_desktop_debian () {
 }
 
 configure_gnome () {
+    # sudo pacman -S --needed --noconfirm xfce4-terminal
     dconf load  / < optional/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
 }
