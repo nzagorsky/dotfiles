@@ -72,7 +72,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('sheerun/vim-polyglot')
 
     " Python modules.
-    " call dein#add('numirias/semshi', { 'on_ft': 'python' })
+    call dein#add('numirias/semshi', { 'on_ft': 'python' })
     call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
     " Vim

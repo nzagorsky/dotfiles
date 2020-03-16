@@ -11,7 +11,7 @@ export GOPATH="$HOME/.go"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || find * -type f'
-export FZF_DEFAULT_OPTS="--inline-info"
+export FZF_DEFAULT_OPTS="--inline-info --preview 'cat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
