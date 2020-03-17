@@ -39,6 +39,11 @@ Rows=1
 [Effect-Blur]
 BlurStrength=15
 
+[NightColor]
+Active=true
+LatitudeAuto=55.7527
+LongitudeAuto=37.6172
+
 [Plugins]
 blurEnabled=true
 diminactiveEnabled=true

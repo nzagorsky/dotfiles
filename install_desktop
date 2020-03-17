@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO identify desktop type
-
 identify_os () {
     . /etc/os-release
     echo $NAME | tr '[:upper:]' '[:lower:]'
@@ -11,9 +9,13 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm flatpak
     sudo pacman -S --needed --noconfirm openvpn
+    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
+
+    # Fonts
+    # https://wiki.archlinux.org/index.php/Fonts
     sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
-    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
+    sudo pacman -S --needed --noconfirm noto-fonts-emoji
 }
 
 install_desktop_debian () {
@@ -32,7 +34,7 @@ configure_gnome () {
 }
 
 configure_kde () {
-    sudo pacman -S kdeconnect
+    sudo pacman -S --needed --noconfirm kdeconnect
 }
 
 install_flatpak_apps () {
@@ -44,4 +46,19 @@ install_flatpak_apps () {
         io.dbeaver.DBeaverCommunity
 }
 
-install_desktop_arch
+
+main () { 
+    install_desktop_arch
+
+    if [ "$XDG_SESSION_DESKTOP" == "KDE" ]; then
+        echo "Detected KDE"
+        configure_kde
+
+    else
+        echo "Did not detect session. Check XDG_SESSION_DESKTOP variable"
+
+    fi
+
+}
+
+main
