@@ -22,6 +22,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm ctags
     sudo pacman -S --needed --noconfirm curl
     sudo pacman -S --needed --noconfirm fd
+    sudo pacman -S --needed --noconfirm fzf
     sudo pacman -S --needed --noconfirm htop
     sudo pacman -S --needed --noconfirm httpie
     sudo pacman -S --needed --noconfirm iotop

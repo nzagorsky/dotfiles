@@ -4,7 +4,7 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 [Compositing]
 Backend=OpenGL
 Enabled=true
-GLCore=false
+GLCore=true
 GLPreferBufferSwap=a
 GLTextureFilter=2
 HiddenPreviews=5
@@ -34,7 +34,7 @@ Name_7=7
 Name_8=8
 Name_9=9
 Number=10
-Rows=10
+Rows=1
 
 [Effect-Blur]
 BlurStrength=15
@@ -43,7 +43,6 @@ BlurStrength=15
 blurEnabled=true
 diminactiveEnabled=true
 kwin4_effect_dimscreenEnabled=true
-kwin4_effect_fadedesktopEnabled=true
 slideEnabled=false
 
 [TabBox]
@@ -52,5 +51,7 @@ DesktopListLayout=org.kde.breeze.desktop
 LayoutName=org.kde.breeze.desktop
 
 [org.kde.kdecoration2]
+ButtonsOnLeft=
+ButtonsOnRight=X
 library=org.kde.breeze
 theme=Breeze
