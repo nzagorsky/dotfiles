@@ -15,6 +15,9 @@ install_desktop_arch () {
     # https://wiki.archlinux.org/index.php/Fonts
     sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
+    sudo pacman -S --needed --noconfirm ttf-roboto
+    sudo pacman -S --needed --noconfirm ttf-roboto-mono
+    sudo pacman -S --needed --noconfirm gnu-free-fonts
     sudo pacman -S --needed --noconfirm noto-fonts-emoji
 }
 
@@ -47,7 +50,7 @@ install_flatpak_apps () {
 }
 
 
-main () { 
+main () {
     install_desktop_arch
 
     if [ "$XDG_SESSION_DESKTOP" == "KDE" ]; then
