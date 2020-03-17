@@ -31,6 +31,10 @@ configure_gnome () {
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
 }
 
+configure_kde () {
+    sudo pacman -S kdeconnect
+}
+
 install_flatpak_apps () {
     # Flatpak packages
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
