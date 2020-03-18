@@ -9,6 +9,7 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm flatpak
     sudo pacman -S --needed --noconfirm openvpn
+    sudo pacman -S --needed --noconfirm playerctl
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
 
     # Fonts

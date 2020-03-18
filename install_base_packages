@@ -43,7 +43,30 @@ install_npm_deps () {
 }
 
 install_python_deps () {
-    pip3 install -r optional/requirements.txt -U --user
+    # Code style libs.
+    pip3 install -U --user black
+    pip3 install -U --user vim-vint
+    pip3 install -U --user python-language-server[all]
+    pip3 install -U --user jedi==0.15.2  # Until warnings in coc-nvim are fixed
+    pip3 install -U --user flake8
+    pip3 install -U --user radon  # dependency for flake8 that should be updated
+    pip3 install -U --user bandit
+    pip3 install -U --user mypy
+    pip3 install -U --user pyflakes
+    pip3 install -U --user pydocstyle
+    pip3 install -U --user yamllint
+
+    # Interactive shell
+    pip3 install -U --user ipython
+    pip3 install -U --user ipdb
+
+    # System
+    pip3 install -U --user docker-compose
+    pip3 install -U --user neovim
+
+    # Good things
+    pip3 install -U --user dataset
+    pip2 install -U --user awscli
 }
 
 
