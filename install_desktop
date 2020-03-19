@@ -29,6 +29,10 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
     sudo pacman -S --needed --noconfirm gnu-free-fonts
     sudo pacman -S --needed --noconfirm noto-fonts-emoji
+
+    # A2DP support
+    sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
+    sudo pacman -S --needed --noconfirm pavucontrol
 }
 
 install_desktop_debian () {
