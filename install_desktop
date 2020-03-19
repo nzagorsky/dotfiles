@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
+# TODO check if yay exists to avoid errors
 identify_os () {
     . /etc/os-release
     echo $NAME | tr '[:upper:]' '[:lower:]'
+}
+
+setup_yay () {
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
 }
 
 install_desktop_arch () {
@@ -11,9 +18,11 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
+    yay -S --needed --noconfirm megasync
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
+    yay -S --needed --noconfirm consolas-font
     sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
     sudo pacman -S --needed --noconfirm ttf-roboto
