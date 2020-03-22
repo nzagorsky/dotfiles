@@ -58,7 +58,6 @@ install_flatpak_apps () {
     # Flatpak packages
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install flathub --user -y \
-        telegram \
         fondo \
         io.dbeaver.DBeaverCommunity
 }
