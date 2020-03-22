@@ -45,17 +45,16 @@ if dein#load_state(expand('~/.config/nvim'))
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
     call dein#add('junegunn/fzf.vim')
-    call dein#add('antoinemadec/coc-fzf')
 
     " Code check.
     call dein#add('neoclide/coc.nvim', {'rev': 'release'})
+    call dein#add('neoclide/coc-neco', {'on_ft': 'vim'})
 
     " Routine automation.
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
     call dein#add('jiangmiao/auto-pairs')
-    " call dein#add('ervandew/supertab')
 
     call dein#add('junegunn/goyo.vim')
 
@@ -77,7 +76,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
-    call dein#add('neoclide/coc-neco', {'on_ft': 'vim'})
     call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
 
     " " CSV
@@ -284,7 +282,7 @@ set statusline+=\ %m
 set statusline+=%=
 
 set statusline+=%3*
-set statusline+=\ %{StatusDiagnostic()}
+set statusline+=\ %{StatusDiagnostic()}  " coc diagnostic message
 set statusline+=%*
 
 " Filetype
@@ -443,9 +441,6 @@ if g:dein#is_sourced('coc.nvim')
 	endfunction
 endif
 
-if g:dein#is_sourced('supertab')
-    let g:SuperTabDefaultCompletionType='<c-n>'
-endif
 " }}}
 " Utility functions {{{1
 " Creating parent folders if they doesn't exist on buffer save.
