@@ -29,6 +29,10 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
     sudo pacman -S --needed --noconfirm gnu-free-fonts
     sudo pacman -S --needed --noconfirm noto-fonts-emoji
+
+    # A2DP support
+    sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
+    sudo pacman -S --needed --noconfirm pavucontrol
 }
 
 install_desktop_debian () {
@@ -54,7 +58,6 @@ install_flatpak_apps () {
     # Flatpak packages
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install flathub --user -y \
-        telegram \
         fondo \
         io.dbeaver.DBeaverCommunity
 }

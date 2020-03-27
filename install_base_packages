@@ -66,7 +66,7 @@ install_python_deps () {
 
     # Good things
     pip3 install -U --user dataset
-    pip2 install -U --user awscli
+    pip3 install -U --user awscli
 }
 
 
