@@ -20,6 +20,11 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
     yay -S --needed --noconfirm megasync
 
+    # Bspwm Desktop
+    sudo pacman -S --needed --noconfirm bspwm
+    sudo pacman -S --needed --noconfirm sxhkd
+    sudo pacman -S --needed --noconfirm xfce4-terminal
+
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
     yay -S --needed --noconfirm consolas-font
