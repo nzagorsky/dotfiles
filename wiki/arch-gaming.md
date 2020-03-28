@@ -18,3 +18,8 @@ source: https://github.com/lutris/lutris/wiki/Installing-drivers
 # Install Wine and Lutris:
 
     sudo pacman -S wine lutris
+
+
+# Dependencies:
+
+    sudo pacman -S lib32-gnutls lib32-libldap lib32-libgpg-error lib32-sqlite lib32-libpulse
