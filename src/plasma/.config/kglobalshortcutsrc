@@ -8,7 +8,7 @@ switch-to-activity-a2955871-cb95-4899-a5ee-65e233b526e3=none,none,Switch to acti
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (US)=none,none,Switch keyboard layout to English (US)
 Switch keyboard layout to Russian=none,none,Switch keyboard layout to Russian
-Switch to Next Keyboard Layout=Meta+Space,none,Switch to Next Keyboard Layout
+Switch to Next Keyboard Layout=Meta+Space,Ctrl+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=KDE Daemon
 
 [kaccess]
@@ -260,8 +260,7 @@ activate task manager entry 6=,Meta+6,Activate Task Manager Entry 6
 activate task manager entry 7=,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=,Meta+9,Activate Task Manager Entry 9
-activate widget 26=Alt+F1,none,Activate Application Dashboard Widget
-activate widget 3=Alt+F1,none,Activate Application Launcher Widget
+activate widget 31=Alt+F1,none,Activate Application Dashboard Widget
 clear-history=none,none,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
 cycleNextAction=none,none,Next History Item

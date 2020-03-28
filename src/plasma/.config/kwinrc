@@ -36,6 +36,9 @@ Name_9=9
 Number=10
 Rows=1
 
+[DrmOutputs][abb0580273][abb0580273]
+Scale=2
+
 [Effect-Blur]
 BlurStrength=15
 NoiseStrength=2
@@ -86,7 +89,6 @@ CommandWindow3=Activate and pass click
 CommandWindowWheel=Scroll
 
 [NightColor]
-Active=true
 LatitudeAuto=55.7527
 LongitudeAuto=37.6172
 Mode=Constant
