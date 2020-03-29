@@ -1,6 +1,15 @@
 #! /bin/sh
 
+# Setup Xresources
+xrdb -merge ~/.Xresources
+
+# Speed up keyboard
+xset r rate 190 50
+
 sxhkd &
+compton -b &
+sxhkd &
+nitrogen --restore &
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
