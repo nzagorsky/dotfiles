@@ -7,7 +7,8 @@ super + e
     thunar
 
 # program launcher
-super + @space
+# super + @space
+super + d
 	kupfer
 
 # make sxhkd reload its configuration files:
