@@ -193,6 +193,7 @@ alias getmirrors='sudo pacman-mirrors -c Russia,Belarus,Ukraine,Poland,Netherlan
 
 alias ewm="$EDITOR ~/.config/bspwm/bspwmrc"
 alias eshort="$EDITOR ~/.config/sxhkd/sxhkdrc"
+alias ebar="$EDITOR ~/.config/polybar/config"
 # }}}
 
 # vim:foldmethod=marker:foldlevel=0
