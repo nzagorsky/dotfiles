@@ -46,7 +46,7 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
 
-    # A2DP support
+    # Sound and A2DP
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
     sudo pacman -S --needed --noconfirm pavucontrol
 }

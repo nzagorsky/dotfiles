@@ -103,8 +103,9 @@ main () {
         install_base_arch
     fi
 
-    install_npm_deps
-    install_python_deps
+    # TODO move to separate installer
+    # install_npm_deps
+    # install_python_deps
 }
 
 
