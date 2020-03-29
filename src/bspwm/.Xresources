@@ -10,21 +10,6 @@ Xft.autohint: 0
 Xft.rgba: rgb
 Xft.antialias: 1
 ! }}}
-! URxvt {{{
-URxvt.scrollBar:              false
-URxvt.font:                   xft:Hack-Regular:pixelsize=14,xft:Symbola
-URxvt.boldFont:               xft:Hack-Bold:pixelsize=14:weight=bold,xft:Symbola
-URxvt.italicFont:             xft:Hack-RegularOblique:pixelsize=14:slant=italic,xft:Symbola
-
-URxvt.internalBorder:		  15
-URxvt.perl-ext-common:        default,matcher,resize-font,url-select,keyboard-select
-URxvt.url-select-launcher:    firefox
-URxvt.url-select-underline:   true
-URxvt.colorUL:                #80d3f9
-
-URxvt*transparent:			true
-URxvt*shading:				25
-! }}}
 ! Scheme {{{
 ! Shapeshifter dark: http://terminal.sexy
 ! special

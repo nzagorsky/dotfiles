@@ -1,5 +1,5 @@
 #! /bin/sh
-
+# Init {{{
 # Setup Xresources
 xrdb -merge ~/.Xresources
 
@@ -9,7 +9,11 @@ xset r rate 190 50
 sxhkd &
 picom -b &
 sxhkd &
+kupfer --no-splash &
+pkill polybar; polybar mybar -r &
 nitrogen --restore &
+# }}}
+# BSPWM config {{{
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
@@ -25,3 +29,5 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+# }}}
+# vim:foldmethod=marker:foldlevel=0

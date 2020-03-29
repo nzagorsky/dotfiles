@@ -1,7 +1,4 @@
-#
-# wm independent hotkeys
-#
-
+# WM independent hotkeys {{{
 # terminal emulator
 super + Return
 	kitty
@@ -11,16 +8,17 @@ super + e
 
 # program launcher
 super + @space
-	dmenu_run
+	kupfer
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
-#
-# bspwm hotkeys
-#
+super + shift + e
+    xsecurelock
 
+# }}}
+# WM hotkeys {{{
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}
@@ -41,10 +39,8 @@ super + y
 super + g
 	bspc node -s biggest
 
-#
-# state/flags
-#
-
+# }}}
+# State / Flags {{{
 # set the window state
 super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
@@ -53,9 +49,9 @@ super + {t,shift + t,s,f}
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
-#
-# focus/swap
-#
+# }}}
+# Focus / Swap {{{
+
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
@@ -87,10 +83,8 @@ super + {o,i}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-#
-# preselect
-#
-
+# }}}
+# Preselect {{{
 # preselect the direction
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
@@ -107,10 +101,8 @@ super + ctrl + space
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
-#
-# move/resize
-#
-
+# }}}
+# Move / Resize {{{
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
@@ -122,3 +114,7 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# }}}
+
+# vim:foldmethod=marker:foldlevel=0
