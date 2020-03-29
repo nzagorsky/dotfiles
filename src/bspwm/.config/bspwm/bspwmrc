@@ -7,7 +7,7 @@ xrdb -merge ~/.Xresources
 xset r rate 190 50
 
 sxhkd &
-compton -b &
+picom -b &
 sxhkd &
 nitrogen --restore &
 

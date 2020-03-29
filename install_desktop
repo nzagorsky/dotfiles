@@ -26,7 +26,7 @@ install_desktop_arch () {
 
     # Bspwm Desktop
     sudo pacman -S --needed --noconfirm bspwm
-    sudo pacman -S --needed --noconfirm compton
+    sudo pacman -S --needed --noconfirm picom
     sudo pacman -S --needed --noconfirm dmenu
     sudo pacman -S --needed --noconfirm neofetch
     sudo pacman -S --needed --noconfirm nitrogen
