@@ -1,36 +1,9 @@
-
-export TERM=xterm-256color
-
-# Source configs
-# for f in ~/.zsh/init/*.zsh; do source $f; done
-
-# Export all secure variables.
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-# Alias {{{
-alias cp='cp -i'                          # confirm before overwriting something
-alias cya='systemctl suspend'
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias grep='grep --color=tty -d skip'
-alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ll='ls -lhs --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias lla='ls -lahs --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias p='ipython'
-alias rm='rm -I'
-alias e='emacs -nw'
-alias g=git
-alias v=nvim
-alias getmirrors='sudo pacman-mirrors -c Russia,Belarus,Ukraine,Poland,Netherlands'
-# }}}
 # Environment {{{
+export TERM=xterm-256color
 source ~/.credentials/secure
 
 # Default config
-export BROWSER="/usr/bin/google-chrome-unstable"
+export BROWSER="/usr/bin/google-chrome-stable"
 export EDITOR=nvim
 export HISTFILE=~/.zsh_history
 
@@ -61,6 +34,10 @@ zmodload zsh/zpty
 
 # }}}
 # Functions {{{
+
+# Add FZF functions
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 ex () {
   if [ -f $1 ] ; then
   case $1 in
@@ -153,7 +130,6 @@ list_iommu () {
 # Kukareku.
 #
 # }}}
-#
 # Keyboard {{{
 bindkey -e
 
@@ -167,7 +143,6 @@ setopt transient_rprompt
 # Ignore command duplicates.
 setopt histignoredups
 # }}}
-#
 # Plugins {{{ 
 source ~/.zsh/antigen/antigen.zsh
 
@@ -199,6 +174,25 @@ antigen bundle sindresorhus/pure
 # Execute
 antigen apply
 # }}}
+# Alias {{{
+alias cp='cp -i'                          # confirm before overwriting something
+alias cya='systemctl suspend'
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias grep='grep --color=tty -d skip'
+alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ll='ls -lhs --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias lla='ls -lahs --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias p='ipython'
+alias rm='rm -I'
+alias e='emacs -nw'
+alias g=git
+alias v=nvim
+alias getmirrors='sudo pacman-mirrors -c Russia,Belarus,Ukraine,Poland,Netherlands'
 
+alias ewm="$EDITOR ~/.config/bspwm/bspwmrc"
+alias eshort="$EDITOR ~/.config/sxhkd/sxhkdrc"
+# }}}
 
 # vim:foldmethod=marker:foldlevel=0

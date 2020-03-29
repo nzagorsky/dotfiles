@@ -4,7 +4,10 @@
 
 # terminal emulator
 super + Return
-	termite
+	urxvt
+
+super + e
+    thunar
 
 # program launcher
 super + @space

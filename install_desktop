@@ -31,9 +31,10 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm neofetch
     sudo pacman -S --needed --noconfirm nitrogen
     sudo pacman -S --needed --noconfirm sxhkd
-    sudo pacman -S --needed --noconfirm termite
+    sudo pacman -S --needed --noconfirm rxvt-unicode
     sudo pacman -S --needed --noconfirm xorg
     sudo pacman -S --needed --noconfirm xorg-xinit
+    sudo pacman -S --needed --noconfirm thunar
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
