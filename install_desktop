@@ -24,6 +24,11 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm bspwm
     sudo pacman -S --needed --noconfirm sxhkd
     sudo pacman -S --needed --noconfirm xfce4-terminal
+    sudo pacman -S --needed --noconfirm compton
+    sudo pacman -S --needed --noconfirm nitrogen
+    sudo pacman -S --needed --noconfirm xorg-xinit
+    sudo pacman -S --needed --noconfirm neofetch
+    sudo pacman -S --needed --noconfirm dmenu
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
