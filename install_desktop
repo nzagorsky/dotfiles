@@ -12,33 +12,39 @@ setup_yay () {
     makepkg -si
 }
 
+install_yay_packages() {
+    yay -S --needed --noconfirm megasync
+    yay -S --needed --noconfirm consolas-font
+}
+
 install_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm flatpak
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
-    yay -S --needed --noconfirm megasync
 
     # Bspwm Desktop
     sudo pacman -S --needed --noconfirm bspwm
-    sudo pacman -S --needed --noconfirm sxhkd
-    sudo pacman -S --needed --noconfirm xfce4-terminal
     sudo pacman -S --needed --noconfirm compton
-    sudo pacman -S --needed --noconfirm nitrogen
-    sudo pacman -S --needed --noconfirm xorg-xinit
-    sudo pacman -S --needed --noconfirm neofetch
     sudo pacman -S --needed --noconfirm dmenu
+    sudo pacman -S --needed --noconfirm neofetch
+    sudo pacman -S --needed --noconfirm nitrogen
+    sudo pacman -S --needed --noconfirm sxhkd
+    sudo pacman -S --needed --noconfirm termite
+    sudo pacman -S --needed --noconfirm xorg
+    sudo pacman -S --needed --noconfirm xorg-xinit
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
-    yay -S --needed --noconfirm consolas-font
+    sudo pacman -S --needed --noconfirm gnu-free-fonts
+    sudo pacman -S --needed --noconfirm noto-fonts
+    sudo pacman -S --needed --noconfirm noto-fonts-emoji
+    sudo pacman -S --needed --noconfirm noto-fonts-extra
     sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
-    sudo pacman -S --needed --noconfirm gnu-free-fonts
-    sudo pacman -S --needed --noconfirm noto-fonts-emoji
 
     # A2DP support
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
@@ -55,7 +61,6 @@ install_desktop_debian () {
 }
 
 configure_gnome () {
-    # sudo pacman -S --needed --noconfirm xfce4-terminal
     dconf load  / < optional/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
 }
