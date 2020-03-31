@@ -43,7 +43,6 @@ label-foreground = #D8DEE9
 [module/wireless-network]
 type = internal/network
 interface = wlp6s0
-
 label-connected = %essid%
 format-connected = <ramp-signal>
 label-connected-foreground = #82b414
@@ -54,12 +53,12 @@ label-disconnected-foreground = #f92672
 label-disconnected-background = #2E3440
 
 ramp-signal-foreground = #82b414
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-5 = 
+ramp-signal-0 = .
+ramp-signal-1 = .
+ramp-signal-2 = .
+ramp-signal-3 = .
+ramp-signal-4 = |
+ramp-signal-5 = |
 
 [module/cpu]
 type = internal/cpu
