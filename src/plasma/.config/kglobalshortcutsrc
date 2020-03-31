@@ -2,7 +2,7 @@
 _k_friendly_name=Activity Manager
 switch-to-activity-364e2ece-6d4b-4331-9b99-434e96e91e27=none,none,Switch to activity "chill"
 switch-to-activity-39ee3ad1-5be3-4f43-8fee-c92107730496=none,none,Switch to activity "Default"
-switch-to-activity-49b6eec4-7991-43c9-9304-20d13748bf44=none,none,Switch to activity "Default"
+switch-to-activity-49b6eec4-7991-43c9-9304-20d13748bf44=none,none,Switch to activity "work"
 switch-to-activity-a2955871-cb95-4899-a5ee-65e233b526e3=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
@@ -260,7 +260,8 @@ activate task manager entry 6=,Meta+6,Activate Task Manager Entry 6
 activate task manager entry 7=,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=,Meta+9,Activate Task Manager Entry 9
-activate widget 31=Alt+F1,none,Activate Application Dashboard Widget
+activate widget 29=Alt+F1,none,Activate Application Dashboard Widget
+activate widget 31=,none,Activate Application Dashboard Widget
 clear-history=none,none,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
 cycleNextAction=none,none,Next History Item
