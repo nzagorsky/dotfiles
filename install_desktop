@@ -88,8 +88,12 @@ main () {
         echo "Detected KDE"
         configure_kde
 
+    elif [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
+        echo "Detected Gnome"
+        configure_gnome
+
     else
-        echo "Did not detect session. Check XDG_SESSION_DESKTOP variable"
+        echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
 
     fi
 
