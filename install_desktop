@@ -64,8 +64,12 @@ install_desktop_debian () {
 }
 
 configure_gnome () {
+    sudo pacman -S --needed --noconfirm chrome-gnome-shell
     dconf load  / < optional/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 250
 }
 
 configure_kde () {
