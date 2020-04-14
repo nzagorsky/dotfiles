@@ -7,7 +7,7 @@ Name=main
 Parent=FALLBACK/
 
 [Keyboard]
-KeyBindings=linux
+KeyBindings=default
 
 [Scrolling]
 ScrollBarPosition=2
