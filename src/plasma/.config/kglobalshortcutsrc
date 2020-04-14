@@ -27,7 +27,7 @@ _k_friendly_name=KDE Daemon
 display=Display\tMeta+P,Display\tMeta+P,Switch Display
 
 [khotkeys]
-_k_friendly_name=KDE Daemon
+_k_friendly_name=System Settings
 {52ab1db4-ba32-4e6a-9447-a2e18b99e81a}=Meta+Return,none,terminal
 {bf8e6344-bbef-46e3-a173-0a42dd0bf9d7}=Meta+Shift+S,none,screenshot area
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=,none,Search
