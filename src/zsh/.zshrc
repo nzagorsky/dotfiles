@@ -103,6 +103,7 @@ ctop () {
 torify () {
     proxychains -f ~/.config/proxychains.conf $*
 }
+
 list_iommu () {
     shopt -s nullglob
     for g in /sys/kernel/iommu_groups/*; do

@@ -35,6 +35,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm ripgrep
     sudo pacman -S --needed --noconfirm tmux
     sudo pacman -S --needed --noconfirm zsh
+    sudo pacman -S --needed --noconfirm inotify-tools
 }
 
 install_npm_deps () {

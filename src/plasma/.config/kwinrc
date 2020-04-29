@@ -14,26 +14,8 @@ XRenderSmoothScale=false
 
 [Desktops]
 Id_1=57fc5b36-3ca5-473f-ab11-82dbfba5cea7
-Id_10=b3a393df-5534-4cae-b89f-6958e7b33ef7
-Id_2=89f0f6c8-429a-43c9-a9a1-f98e8e385765
-Id_3=9f5a6c15-251f-4cf8-bc71-6a8485794130
-Id_4=ca92d9f0-a063-4583-b811-ac2b1d153b35
-Id_5=5eb0cbb2-baa2-4a20-9701-a33f3f4c7aed
-Id_6=25f49222-247e-47b1-86bf-6a1901c61f56
-Id_7=676c6a5f-b89f-4481-91b8-3c86dd7043cc
-Id_8=fba25568-7c04-4d14-a07f-0c84dc3e4bd6
-Id_9=6c15ab44-1e6f-4bc7-853e-8a6e5b920c73
 Name_1=1
-Name_10=0
-Name_2=2
-Name_3=3
-Name_4=4
-Name_5=5
-Name_6=6
-Name_7=7
-Name_8=8
-Name_9=9
-Number=10
+Number=1
 Rows=1
 
 [DrmOutputs][abb0580273][abb0580273]
@@ -101,7 +83,6 @@ forceblurEnabled=false
 kwin4_effect_dimscreenEnabled=true
 kwin4_effect_windowapertureEnabled=false
 minimizeallEnabled=false
-slideEnabled=false
 synchronizeskipswitcherEnabled=false
 videowallEnabled=false
 windowgeometryEnabled=false
@@ -115,9 +96,9 @@ LayoutName=org.kde.breeze.desktop
 
 [Windows]
 ActiveMouseScreen=false
-AutoRaise=false
-AutoRaiseInterval=750
-BorderSnapZone=10
+AutoRaise=true
+AutoRaiseInterval=250
+BorderSnapZone=40
 CenterSnapZone=0
 ClickRaise=true
 DelayFocusInterval=300
@@ -127,14 +108,14 @@ ElectricBorderDelay=50
 ElectricBorderMaximize=true
 ElectricBorderTiling=true
 ElectricBorders=0
-FocusPolicy=ClickToFocus
+FocusPolicy=FocusFollowsMouse
 FocusStealingPreventionLevel=1
 GeometryTip=false
 HideUtilityWindowsForInactive=true
 MaximizeButtonLeftClickCommand=Maximize
 MaximizeButtonMiddleClickCommand=Maximize (vertical only)
 MaximizeButtonRightClickCommand=Maximize (horizontal only)
-NextFocusPrefersMouse=false
+NextFocusPrefersMouse=true
 Placement=Smart
 SeparateScreenFocus=false
 ShadeHover=false
