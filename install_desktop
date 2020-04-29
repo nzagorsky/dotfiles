@@ -18,14 +18,7 @@ install_yay_packages() {
     yay -S --needed --noconfirm polybar
 }
 
-install_desktop_arch () {
-    sudo pacman -S --needed --noconfirm docker
-    sudo pacman -S --needed --noconfirm flatpak
-    sudo pacman -S --needed --noconfirm openvpn
-    sudo pacman -S --needed --noconfirm playerctl
-    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
-
-    # Bspwm Desktop
+install_bspwm_arch() {
     sudo pacman -S --needed --noconfirm bspwm
     sudo pacman -S --needed --noconfirm picom
     sudo pacman -S --needed --noconfirm kupfer
@@ -48,6 +41,14 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
+
+}
+
+install_desktop_arch () {
+    sudo pacman -S --needed --noconfirm docker
+    sudo pacman -S --needed --noconfirm openvpn
+    sudo pacman -S --needed --noconfirm playerctl
+    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
 
     # Sound and A2DP
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth

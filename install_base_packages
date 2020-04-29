@@ -105,8 +105,8 @@ main () {
     fi
 
     # TODO move to separate installer
-    # install_npm_deps
-    # install_python_deps
+    install_npm_deps
+    install_python_deps
 }
 
 
