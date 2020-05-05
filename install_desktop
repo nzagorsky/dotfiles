@@ -37,17 +37,19 @@ install_bspwm_arch() {
     sudo pacman -S --needed --noconfirm noto-fonts
     sudo pacman -S --needed --noconfirm noto-fonts-emoji
     sudo pacman -S --needed --noconfirm noto-fonts-extra
-    sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
 
 }
 
-install_desktop_arch () {
+install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl
+
+    sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
+    sudo pacman -S --needed --noconfirm xfce4-terminal
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
 
     # Sound and A2DP
@@ -87,7 +89,7 @@ install_flatpak_apps () {
 
 
 main () {
-    install_desktop_arch
+    install_base_desktop_arch
 
     if [ "$XDG_SESSION_DESKTOP" == "KDE" ]; then
         echo "Detected KDE"
