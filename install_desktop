@@ -24,19 +24,19 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
+    sudo pacman -S --needed --noconfirm kitty
 
     # Bspwm Desktop
-    sudo pacman -S --needed --noconfirm bspwm
-    sudo pacman -S --needed --noconfirm picom
-    sudo pacman -S --needed --noconfirm kupfer
-    sudo pacman -S --needed --noconfirm neofetch
-    sudo pacman -S --needed --noconfirm nitrogen
-    sudo pacman -S --needed --noconfirm sxhkd
-    sudo pacman -S --needed --noconfirm kitty
-    sudo pacman -S --needed --noconfirm xorg
-    sudo pacman -S --needed --noconfirm xorg-xinit
-    sudo pacman -S --needed --noconfirm thunar
-    sudo pacman -S --needed --noconfirm xsecurelock
+    # sudo pacman -S --needed --noconfirm bspwm
+    # sudo pacman -S --needed --noconfirm picom
+    # sudo pacman -S --needed --noconfirm kupfer
+    # sudo pacman -S --needed --noconfirm neofetch
+    # sudo pacman -S --needed --noconfirm nitrogen
+    # sudo pacman -S --needed --noconfirm sxhkd
+    # sudo pacman -S --needed --noconfirm xorg
+    # sudo pacman -S --needed --noconfirm xorg-xinit
+    # sudo pacman -S --needed --noconfirm thunar
+    # sudo pacman -S --needed --noconfirm xsecurelock
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
@@ -68,8 +68,8 @@ configure_gnome () {
     dconf load  / < optional/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
-    gsettings set org.gnome.desktop.peripherals.keyboard delay 250
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 }
 
 configure_kde () {
