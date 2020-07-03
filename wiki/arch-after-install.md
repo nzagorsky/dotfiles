@@ -12,8 +12,11 @@
     # And add:
     load-module module-udev-detect tsched=0
 
-    pulseaudio -k
-    pulseaudio --start
+    # Then:
+    pulseaudio -k && pulseaudio --start
+
+    # Then edit /etc/bluetooth/main.conf to suit your needs
+    nvim /etc/bluetooth/main.conf
 
 
 > Source: https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Glitches.2C_skips_or_crackling
