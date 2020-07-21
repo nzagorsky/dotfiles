@@ -52,7 +52,7 @@ install_python_deps () {
     pip3 install -U --user black
     pip3 install -U --user vim-vint
     pip3 install -U --user python-language-server[all]
-    pip3 install -U --user jedi==0.15.2  # Until warnings in coc-nvim are fixed
+    pip3 install -U --user jedi
     pip3 install -U --user flake8
     pip3 install -U --user radon  # dependency for flake8 that should be updated
     pip3 install -U --user bandit
