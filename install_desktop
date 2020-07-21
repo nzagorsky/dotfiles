@@ -48,6 +48,7 @@ install_base_desktop_arch () {
 
     # Sound and A2DP
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
+    sudo pacman -S --needed --noconfirm bluez-utils
     sudo pacman -S --needed --noconfirm pavucontrol
 }
 

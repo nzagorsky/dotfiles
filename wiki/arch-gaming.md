@@ -7,12 +7,12 @@ Uncomment in /etc/pacman.conf:
     sudo pacman -Syyuu
 
 
-# Install AMD
+# Install AMD drivers
 
-    sudo pacman -S lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
+    sudo pacman -S --noconfirm --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
 
 
-source: https://github.com/lutris/lutris/wiki/Installing-drivers
+source: https://github.com/lutris/docs/blob/master/InstallingDrivers.md
 
 
 # Install Wine and Lutris:
@@ -20,6 +20,6 @@ source: https://github.com/lutris/lutris/wiki/Installing-drivers
     sudo pacman -S wine lutris
 
 
-# Dependencies:
+# Battle.net dependencies:
 
-    sudo pacman -S lib32-gnutls lib32-libldap lib32-libgpg-error lib32-sqlite lib32-libpulse
+    sudo pacman -S --noconfirm --needed lib32-gnutls lib32-libldap lib32-libgpg-error lib32-sqlite lib32-libpulse
