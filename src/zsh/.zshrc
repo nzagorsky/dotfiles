@@ -11,7 +11,7 @@ export HISTFILE=~/.zsh_history
 export PATH="$PATH:$HOME/.scripts"  
 
 # Go
-export GOPATH="$HOME/.go"
+export GOPATH="$HOME/code/go"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git || find * -type f'
