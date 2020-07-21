@@ -63,6 +63,7 @@ install_desktop_debian () {
 configure_gnome () {
     sudo pacman -S --needed --noconfirm chrome-gnome-shell
     sudo pacman -S --needed --noconfirm blueman
+    sudo pacman -S --needed --noconfirm gnome-screensaver
     dconf load  / < optional/dconf.conf
 
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
