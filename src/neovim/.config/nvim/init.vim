@@ -168,13 +168,13 @@ cmap w!! w !sudo tee % >/dev/null
 " tnoremap <A-9> <C-\><C-n>9gt
 " tnoremap <A-0> <C-\><C-n>10gt
 
-nnoremap <A-h> <Esc>:tabprevious<CR>
-inoremap <A-h> <Esc>:tabprevious<CR>
-tnoremap <A-h> <C-\><C-n>:tabprevious<CR>
+" nnoremap <A-h> <Esc>:tabprevious<CR>
+" inoremap <A-h> <Esc>:tabprevious<CR>
+" tnoremap <A-h> <C-\><C-n>:tabprevious<CR>
 
-nnoremap <A-l> <Esc>:tabnext<CR>
-inoremap <A-l> <Esc>:tabnext<CR>
-tnoremap <A-l> <C-\><C-n>:tabnext<CR>
+" nnoremap <A-l> <Esc>:tabnext<CR>
+" inoremap <A-l> <Esc>:tabnext<CR>
+" tnoremap <A-l> <C-\><C-n>:tabnext<CR>
 " }}}
 
 " }}}
