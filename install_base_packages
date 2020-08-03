@@ -29,15 +29,17 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm fzf
     sudo pacman -S --needed --noconfirm htop
     sudo pacman -S --needed --noconfirm httpie
+    sudo pacman -S --needed --noconfirm inotify-tools
     sudo pacman -S --needed --noconfirm iotop
+    sudo pacman -S --needed --noconfirm mysql
     sudo pacman -S --needed --noconfirm neovim
     sudo pacman -S --needed --noconfirm npm
     sudo pacman -S --needed --noconfirm python-pip
     sudo pacman -S --needed --noconfirm python3
     sudo pacman -S --needed --noconfirm ripgrep
     sudo pacman -S --needed --noconfirm tmux
+    sudo pacman -S --needed --noconfirm xmlsec
     sudo pacman -S --needed --noconfirm zsh
-    sudo pacman -S --needed --noconfirm inotify-tools
 }
 
 install_npm_deps () {
