@@ -23,23 +23,50 @@ install_base_debian () {
 
 install_base_arch () {
     sudo pacman -S --needed --noconfirm base-devel
-    sudo pacman -S --needed --noconfirm ctags
     sudo pacman -S --needed --noconfirm curl
-    sudo pacman -S --needed --noconfirm fd
-    sudo pacman -S --needed --noconfirm fzf
     sudo pacman -S --needed --noconfirm htop
-    sudo pacman -S --needed --noconfirm httpie
     sudo pacman -S --needed --noconfirm inotify-tools
     sudo pacman -S --needed --noconfirm iotop
-    sudo pacman -S --needed --noconfirm mysql
     sudo pacman -S --needed --noconfirm neovim
+    sudo pacman -S --needed --noconfirm tmux
+
+    # Build deps
+    sudo pacman -S --needed --noconfirm mysql
     sudo pacman -S --needed --noconfirm npm
     sudo pacman -S --needed --noconfirm python-pip
     sudo pacman -S --needed --noconfirm python3
-    sudo pacman -S --needed --noconfirm ripgrep
-    sudo pacman -S --needed --noconfirm tmux
+    sudo pacman -S --needed --noconfirm rust
     sudo pacman -S --needed --noconfirm xmlsec
+
+    # Shell goodies
+    sudo pacman -S --needed --noconfirm ctags
+    sudo pacman -S --needed --noconfirm fd
+    sudo pacman -S --needed --noconfirm fzf
+    sudo pacman -S --needed --noconfirm httpie
     sudo pacman -S --needed --noconfirm zsh
+    sudo pacman -S --needed --noconfirm reflector  # arch mirrors update
+
+    # Rust precompiled goodies
+    sudo pacman -S --needed --noconfirm bandwhich  # network analysis
+    sudo pacman -S --needed --noconfirm bat  # cat alternative
+    sudo pacman -S --needed --noconfirm exa  # ls alternative
+    sudo pacman -S --needed --noconfirm hyperfine  # benchmarks
+    sudo pacman -S --needed --noconfirm ripgrep
+    sudo pacman -S --needed --noconfirm sd  # find & replace
+    sudo pacman -S --needed --noconfirm tokei  # code stats
+
+}
+
+install_cargo_packages() {
+    PACKAGELIST=(
+        du-dust  # du alternative
+        grex  # regex generator
+        procs  # ps alternative
+        tealdeer  # tldr
+        ytop  # top alternative
+    )
+    cargo install $PACKAGELIST
+
 }
 
 install_npm_deps () {
@@ -112,6 +139,7 @@ main () {
     # TODO move to separate installer
     install_npm_deps
     install_python_deps
+    install_cargo_packages
 }
 
 

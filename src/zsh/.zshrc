@@ -15,7 +15,7 @@ export GOPATH="$HOME/code/go"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git || find * -type f'
-export FZF_DEFAULT_OPTS="--inline-info --preview 'cat {}'"
+export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
@@ -181,16 +181,18 @@ alias cya='systemctl suspend'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --color=tty -d skip'
-alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ll='ls -lhs --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias lla='ls -lahs --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias cat=bat
+alias la='exa -la --group-directories-first --color=auto -F'
+alias ll='exa -lhs --group-directories-first --color=auto -F'
+alias lla='exa -lahs --group-directories-first --color=auto -F'
+alias ls='exa --color=auto -F'
 alias p='ipython'
 alias rm='rm -I'
 alias e='emacs -nw'
 alias g=git
 alias v=nvim
-alias getmirrors='sudo pacman-mirrors -c Russia,Belarus,Ukraine,Poland,Netherlands'
+
+alias getmirrors='sudo bash -c "reflector -c Russia > /etc/pacman.d/mirrorlist"'
 
 alias ewm="$EDITOR ~/.config/bspwm/bspwmrc"
 alias eshort="$EDITOR ~/.config/sxhkd/sxhkdrc"

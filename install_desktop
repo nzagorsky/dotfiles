@@ -18,12 +18,27 @@ install_yay_packages() {
     yay -S --needed --noconfirm polybar
 }
 
+# NOTE: not used currently
 install_desktop_arch () {
+    # TODO install yay finally in automated way
+    # In order to do that I will need to check if yay is present and then `setup_yay`
+    yay -S --needed --noconfirm dbeaver
+    yay -S --needed --noconfirm insomnia
+    yay -S --needed --noconfirm mailspring
+    yay -S --needed --noconfirm fondo
+}
+
+install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl
-    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
     sudo pacman -S --needed --noconfirm kitty
+    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
+
+    # BT Sound and A2DP
+    sudo pacman -S --needed --noconfirm blueman
+    sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
+    sudo pacman -S --needed --noconfirm pavucontrol
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
@@ -31,25 +46,10 @@ install_desktop_arch () {
     sudo pacman -S --needed --noconfirm noto-fonts
     sudo pacman -S --needed --noconfirm noto-fonts-emoji
     sudo pacman -S --needed --noconfirm noto-fonts-extra
+    sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
-
-}
-
-install_base_desktop_arch () {
-    sudo pacman -S --needed --noconfirm docker
-    sudo pacman -S --needed --noconfirm openvpn
-    sudo pacman -S --needed --noconfirm playerctl
-
-    sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
-    sudo pacman -S --needed --noconfirm xfce4-terminal
-    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
-
-    # Sound and A2DP
-    sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
-    sudo pacman -S --needed --noconfirm bluez-utils
-    sudo pacman -S --needed --noconfirm pavucontrol
 }
 
 install_desktop_debian () {
@@ -57,17 +57,15 @@ install_desktop_debian () {
     sudo apt-get install -y openvpn
     sudo apt-get install -y docker.io
     sudo apt-get install -y xclip
-    sudo apt-get install -y xfce4-terminal
 }
 
 configure_gnome () {
     sudo pacman -S --needed --noconfirm chrome-gnome-shell
-    sudo pacman -S --needed --noconfirm blueman
     sudo pacman -S --needed --noconfirm gnome-screensaver
     dconf load  / < optional/dconf.conf
 
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 7
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 }
 
