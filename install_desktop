@@ -31,12 +31,13 @@ install_desktop_arch () {
 install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm openvpn
-    sudo pacman -S --needed --noconfirm playerctl
-    sudo pacman -S --needed --noconfirm kitty
+    sudo pacman -S --needed --noconfirm playerctl  # Control player from keyboard
+    sudo pacman -S --needed --noconfirm kitty  # GPU term
+    sudo pacman -S --needed --noconfirm alacritty  # GPU term
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
 
     # BT Sound and A2DP
-    sudo pacman -S --needed --noconfirm blueman
+    sudo pacman -S --needed --noconfirm blueman  # Because gnome-bluetooth suck balls
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
     sudo pacman -S --needed --noconfirm pavucontrol
 
