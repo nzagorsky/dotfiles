@@ -31,14 +31,9 @@ install_desktop_arch () {
 install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm openvpn
-<<<<<<< HEAD
-    sudo pacman -S --needed --noconfirm playerctl
-    sudo pacman -S --needed --noconfirm alacritty
-=======
     sudo pacman -S --needed --noconfirm playerctl  # Control player from keyboard
     sudo pacman -S --needed --noconfirm kitty  # GPU term
     sudo pacman -S --needed --noconfirm alacritty  # GPU term
->>>>>>> origin/master
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
 
     # BT Sound and A2DP
