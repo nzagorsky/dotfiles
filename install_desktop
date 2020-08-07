@@ -32,7 +32,7 @@ install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl
-    sudo pacman -S --needed --noconfirm kitty
+    sudo pacman -S --needed --noconfirm alacritty
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
 
     # BT Sound and A2DP
@@ -57,6 +57,7 @@ install_desktop_debian () {
     sudo apt-get install -y openvpn
     sudo apt-get install -y docker.io
     sudo apt-get install -y xclip
+    sudo apt-get install -y kitty
 }
 
 configure_gnome () {
