@@ -69,7 +69,6 @@ install_cargo_packages() {
         hyperfine  # benchmarks
         procs  # ps alternative
         ripgrep
-        ripgrep 
         sd  # find & replace
         tealdeer  # tldr
         tokei  # code stats
