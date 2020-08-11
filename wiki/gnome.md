@@ -7,3 +7,10 @@ Disable popup during workspace switch:
 
 Statusbar icons:
 - https://extensions.gnome.org/extension/1503/tray-icons/
+
+
+
+# Goodies
+For screensharing and possibly better bluetooth support
+
+    sudo pacman -S pipewire pipewire-pulse libpipewire02
