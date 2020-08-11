@@ -192,7 +192,7 @@ alias e='emacs -nw'
 alias g=git
 alias v=nvim
 
-alias getmirrors='sudo bash -c "reflector -c Russia > /etc/pacman.d/mirrorlist"'
+alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > /etc/pacman.d/mirrorlist"'
 
 alias ewm="$EDITOR ~/.config/bspwm/bspwmrc"
 alias eshort="$EDITOR ~/.config/sxhkd/sxhkdrc"
