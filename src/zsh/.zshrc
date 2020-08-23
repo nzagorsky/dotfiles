@@ -114,6 +114,11 @@ list_iommu () {
     done;
 }
 
+add_to_group() {
+    sudo gpasswd -a $USER $1
+}
+
+
 # v () {
 #     CURRENT_FOLDER_HASH=`pwd  | md5sum | cut -f1 -d" "`
 #     SESSION_NAME=nvim-session-$CURRENT_FOLDER_HASH
@@ -193,10 +198,8 @@ alias g=git
 alias v=nvim
 
 alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > /etc/pacman.d/mirrorlist"'
-
-alias ewm="$EDITOR ~/.config/bspwm/bspwmrc"
-alias eshort="$EDITOR ~/.config/sxhkd/sxhkdrc"
-alias ebar="$EDITOR ~/.config/polybar/config"
+alias gst="git status"
+alias gdiff="git diff"
 # }}}
 
 # vim:foldmethod=marker:foldlevel=0

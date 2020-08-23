@@ -262,11 +262,11 @@ else
     set shell=/bin/sh
 endif
 
-" augroup BufferOptions
-"     autocmd!
-"     autocmd WinEnter * set cursorline
-"     autocmd WinLeave * set nocursorline
-" augroup END
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set relativenumber
+    autocmd WinLeave * set norelativenumber
+augroup END
 
 " }}}
 " Statusline {{{1
