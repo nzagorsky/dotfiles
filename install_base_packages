@@ -47,16 +47,6 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm zsh
     sudo pacman -S --needed --noconfirm reflector  # arch mirrors update
 
-    # NOTE: moved to install_cargo_packages
-    # # Rust precompiled goodies
-    # sudo pacman -S --needed --noconfirm bandwhich  # network analysis
-    # sudo pacman -S --needed --noconfirm bat  # cat alternative
-    # sudo pacman -S --needed --noconfirm exa  # ls alternative
-    # sudo pacman -S --needed --noconfirm hyperfine  # benchmarks
-    # sudo pacman -S --needed --noconfirm ripgrep
-    # sudo pacman -S --needed --noconfirm sd  # find & replace
-    # sudo pacman -S --needed --noconfirm tokei  # code stats
-
 }
 
 install_cargo_packages() {
@@ -74,7 +64,12 @@ install_cargo_packages() {
         tokei  # code stats
         ytop  # top alternative
     )
-    cargo install $PACKAGELIST
+
+    for PACKAGE in "${PACKAGELIST[@]}"
+    do
+        echo "Installing $PACKAGE"
+        cargo install $PACKAGE
+    done
 
 }
 
@@ -145,12 +140,11 @@ main () {
         install_base_arch
     fi
 
-    # TODO move to separate installer
     install_npm_deps
     install_python_deps
     install_cargo_packages
 }
 
 
-main > /dev/null
+main
 
