@@ -200,6 +200,7 @@ alias v=nvim
 alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > /etc/pacman.d/mirrorlist"'
 alias gst="git status"
 alias gdiff="git diff"
+alias python=python3
 # }}}
 
 # vim:foldmethod=marker:foldlevel=0
