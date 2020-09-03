@@ -1,5 +1,5 @@
 [ActivityManager]
-_k_friendly_name=Plasma
+_k_friendly_name=Activity Manager
 switch-to-activity-364e2ece-6d4b-4331-9b99-434e96e91e27=none,none,Switch to activity "chill"
 switch-to-activity-39ee3ad1-5be3-4f43-8fee-c92107730496=none,none,Switch to activity "Default"
 switch-to-activity-49b6eec4-7991-43c9-9304-20d13748bf44=none,none,Switch to activity "work"
@@ -62,7 +62,7 @@ Lock Session=\tCtrl+Alt+L\tScreensaver,Meta+L\tCtrl+Alt+L\tScreensaver,Lock Sess
 Log Out=none,none,Log Out
 Log Out Without Confirmation=none,none,Log Out Without Confirmation
 Reboot Without Confirmation=none,none,Reboot Without Confirmation
-_k_friendly_name=System Settings
+_k_friendly_name=Session Management
 
 [kwin]
 Activate Window Demanding Attention=Ctrl+Alt+A,Ctrl+Alt+A,Activate Window Demanding Attention

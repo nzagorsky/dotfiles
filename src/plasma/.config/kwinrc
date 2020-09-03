@@ -80,10 +80,10 @@ CommandWindow3=Activate and pass click
 CommandWindowWheel=Scroll
 
 [NightColor]
+Active=true
 LatitudeAuto=55.7527
 LongitudeAuto=37.6172
-Mode=Constant
-NightTemperature=4800
+NightTemperature=4600
 
 [Plugins]
 blurEnabled=true
@@ -94,6 +94,10 @@ minimizeallEnabled=false
 synchronizeskipswitcherEnabled=false
 videowallEnabled=false
 windowgeometryEnabled=false
+
+[SubSession: 6f6ddd54-d6c4-4288-9a61-6828c6146a00]
+active=-1
+count=0
 
 [TabBox]
 BorderActivate=9
@@ -132,9 +136,7 @@ TitlebarDoubleClickCommand=Maximize
 WindowSnapZone=10
 
 [org.kde.kdecoration2]
-BorderSize=Tiny
+BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=
 ButtonsOnRight=X
-library=org.kde.breeze
-theme=Breeze
