@@ -3,7 +3,7 @@ export TERM=xterm-256color
 source ~/.credentials/secure
 
 # Default config
-export BROWSER="/usr/bin/google-chrome-stable"
+export BROWSER="/usr/bin/firefox"
 export EDITOR=nvim
 export HISTFILE=~/.zsh_history
 

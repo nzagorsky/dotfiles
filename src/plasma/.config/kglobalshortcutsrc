@@ -1,15 +1,17 @@
 [ActivityManager]
-_k_friendly_name=Activity Manager
+_k_friendly_name=Plasma
 switch-to-activity-364e2ece-6d4b-4331-9b99-434e96e91e27=none,none,Switch to activity "chill"
 switch-to-activity-39ee3ad1-5be3-4f43-8fee-c92107730496=none,none,Switch to activity "Default"
 switch-to-activity-49b6eec4-7991-43c9-9304-20d13748bf44=none,none,Switch to activity "work"
+switch-to-activity-50b95c7c-54fe-4cc6-b590-d9310d88eab6=none,none,Switch to activity "Default"
+switch-to-activity-6f6ddd54-d6c4-4288-9a61-6828c6146a00=none,none,Switch to activity "Chill"
 switch-to-activity-a2955871-cb95-4899-a5ee-65e233b526e3=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (US)=none,none,Switch keyboard layout to English (US)
 Switch keyboard layout to Russian=none,none,Switch keyboard layout to Russian
 Switch to Next Keyboard Layout=Ctrl+Alt+K,Ctrl+Alt+K,Switch to Next Keyboard Layout
-_k_friendly_name=KDE Daemon
+_k_friendly_name=Keyboard Layout Switcher
 
 [kaccess]
 Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Toggle Screen Reader On and Off
@@ -19,7 +21,7 @@ _k_friendly_name=Accessibility
 Disable Touchpad=Touchpad Off,Touchpad Off,Disable Touchpad
 Enable Touchpad=Touchpad On,Touchpad On,Enable Touchpad
 Toggle Touchpad=Touchpad Toggle,Touchpad Toggle,Toggle Touchpad
-_k_friendly_name=KDE Daemon
+_k_friendly_name=Touchpad
 
 [kded5]
 Show System Activity=Ctrl+Esc,Ctrl+Esc,Show System Activity
@@ -28,8 +30,8 @@ display=Display\tMeta+P,Display\tMeta+P,Switch Display
 
 [khotkeys]
 _k_friendly_name=System Settings
-{52ab1db4-ba32-4e6a-9447-a2e18b99e81a}=none,none,terminal
-{bf8e6344-bbef-46e3-a173-0a42dd0bf9d7}=none,none,screenshot area
+{52ab1db4-ba32-4e6a-9447-a2e18b99e81a}=Meta+Return,none,terminal
+{bf8e6344-bbef-46e3-a173-0a42dd0bf9d7}=Meta+Shift+S,none,screenshot area
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=,none,Search
 {d42a2962-ace6-4efa-9203-52a3324619b0}=none,none,Launch Konsole
 
@@ -56,11 +58,11 @@ _launch=Alt+Space\tAlt+F2\tSearch,Alt+Space\tAlt+F2\tSearch,KRunner
 
 [ksmserver]
 Halt Without Confirmation=none,none,Halt Without Confirmation
-Lock Session=Meta+L\tCtrl+Alt+L\tScreensaver,Meta+L\tCtrl+Alt+L\tScreensaver,Lock Session
+Lock Session=\tCtrl+Alt+L\tScreensaver,Meta+L\tCtrl+Alt+L\tScreensaver,Lock Session
 Log Out=none,none,Log Out
 Log Out Without Confirmation=none,none,Log Out Without Confirmation
 Reboot Without Confirmation=none,none,Reboot Without Confirmation
-_k_friendly_name=System Settings Module
+_k_friendly_name=System Settings
 
 [kwin]
 Activate Window Demanding Attention=Ctrl+Alt+A,Ctrl+Alt+A,Activate Window Demanding Attention
@@ -87,10 +89,10 @@ Switch One Desktop Down=Meta+Ctrl+Down,Meta+Ctrl+Down,Switch One Desktop Down
 Switch One Desktop Up=Meta+Ctrl+Up,Meta+Ctrl+Up,Switch One Desktop Up
 Switch One Desktop to the Left=Meta+Ctrl+Left,Meta+Ctrl+Left,Switch One Desktop to the Left
 Switch One Desktop to the Right=Meta+Ctrl+Right,Meta+Ctrl+Right,Switch One Desktop to the Right
-Switch Window Down=Meta+Alt+Down,Meta+Alt+Down,Switch to Window Below
-Switch Window Left=Meta+Alt+Left,Meta+Alt+Left,Switch to Window to the Left
-Switch Window Right=Meta+Alt+Right,Meta+Alt+Right,Switch to Window to the Right
-Switch Window Up=Meta+Alt+Up,Meta+Alt+Up,Switch to Window Above
+Switch Window Down=Meta+J\tMeta+Alt+Down,Meta+Alt+Down,Switch to Window Below
+Switch Window Left=Meta+H\tMeta+Alt+Left,Meta+Alt+Left,Switch to Window to the Left
+Switch Window Right=Meta+Alt+Right\tMeta+L,Meta+Alt+Right,Switch to Window to the Right
+Switch Window Up=Meta+K\tMeta+Alt+Up,Meta+Alt+Up,Switch to Window Above
 Switch to Desktop 1=Ctrl+F1,Ctrl+F1,Switch to Desktop 1
 Switch to Desktop 10=none,none,Switch to Desktop 10
 Switch to Desktop 11=none,none,Switch to Desktop 11
@@ -139,12 +141,12 @@ Walk Through Windows of Current Application Alternative=none,none,Walk Through W
 Walk Through Windows of Current Application Alternative (Reverse)=none,none,Walk Through Windows of Current Application Alternative (Reverse)
 Window Above Other Windows=none,none,Keep Window Above Others
 Window Below Other Windows=none,none,Keep Window Below Others
-Window Close=Alt+F4,Alt+F4,Close Window
-Window Fullscreen=none,none,Make Window Fullscreen
+Window Close=Meta+Shift+Q,Alt+F4,Close Window
+Window Fullscreen=Meta+Shift+F,none,Make Window Fullscreen
 Window Grow Horizontal=none,none,Pack Grow Window Horizontally
 Window Grow Vertical=none,none,Pack Grow Window Vertically
 Window Lower=none,none,Lower Window
-Window Maximize=Meta+PgUp,Meta+PgUp,Maximize Window
+Window Maximize=Meta+F,Meta+PgUp,Maximize Window
 Window Maximize Horizontal=none,none,Maximize Window Horizontally
 Window Maximize Vertical=none,none,Maximize Window Vertically
 Window Minimize=Meta+PgDown,Meta+PgDown,Minimize Window
@@ -157,15 +159,15 @@ Window One Desktop to the Left=none,none,Window One Desktop to the Left
 Window One Desktop to the Right=none,none,Window One Desktop to the Right
 Window Operations Menu=Alt+F3,Alt+F3,Window Operations Menu
 Window Pack Down=none,none,Pack Window Down
-Window Pack Left=,none,Pack Window to the Left
-Window Pack Right=,none,Pack Window to the Right
+Window Pack Left=none,none,Pack Window to the Left
+Window Pack Right=none,none,Pack Window to the Right
 Window Pack Up=none,none,Pack Window Up
-Window Quick Tile Bottom=Meta+Down,Meta+Down,Quick Tile Window to the Bottom
+Window Quick Tile Bottom=Meta+Shift+J\tMeta+Down,Meta+Down,Quick Tile Window to the Bottom
 Window Quick Tile Bottom Left=none,none,Quick Tile Window to the Bottom Left
 Window Quick Tile Bottom Right=none,none,Quick Tile Window to the Bottom Right
-Window Quick Tile Left=Meta+Left,Meta+Left,Quick Tile Window to the Left
-Window Quick Tile Right=Meta+Right,Meta+Right,Quick Tile Window to the Right
-Window Quick Tile Top=Meta+Up,Meta+Up,Quick Tile Window to the Top
+Window Quick Tile Left=Meta+Shift+H\tMeta+Left,Meta+Left,Quick Tile Window to the Left
+Window Quick Tile Right=Meta+Shift+L\tMeta+Right,Meta+Right,Quick Tile Window to the Right
+Window Quick Tile Top=Meta+Up\tMeta+Shift+K,Meta+Up,Quick Tile Window to the Top
 Window Quick Tile Top Left=none,none,Quick Tile Window to the Top Left
 Window Quick Tile Top Right=none,none,Quick Tile Window to the Top Right
 Window Raise=none,none,Raise Window
@@ -232,7 +234,7 @@ _launch=Meta+.,Meta+.,Emoji Selector
 ActiveWindowScreenShot=Meta+Print,Meta+Print,Capture Active Window
 CurrentMonitorScreenShot=,none,Capture Current Monitor
 FullScreenScreenShot=Shift+Print,Shift+Print,Capture Entire Desktop
-RectangularRegionScreenShot=Meta+Shift+S,Meta+Shift+Print,Capture Rectangular Region
+RectangularRegionScreenShot=Meta+Shift+Print,Meta+Shift+Print,Capture Rectangular Region
 _k_friendly_name=Spectacle
 _launch=Print,Print,Launch Spectacle
 
@@ -242,6 +244,7 @@ Decrease Screen Brightness=Monitor Brightness Down,Monitor Brightness Down,Decre
 Hibernate=Hibernate,Hibernate,Hibernate
 Increase Keyboard Brightness=Keyboard Brightness Up,Keyboard Brightness Up,Increase Keyboard Brightness
 Increase Screen Brightness=Monitor Brightness Up,Monitor Brightness Up,Increase Screen Brightness
+PowerDown=Power Down,Power Down,Power Down
 PowerOff=Power Off,Power Off,Power Off
 Sleep=Sleep,Sleep,Suspend
 Toggle Keyboard Backlight=Keyboard Light On/Off,Keyboard Light On/Off,Toggle Keyboard Backlight
@@ -260,9 +263,10 @@ activate task manager entry 6=Meta+6,Meta+6,Activate Task Manager Entry 6
 activate task manager entry 7=Meta+7,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=Meta+8,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
-activate widget 29=,none,Activate Application Dashboard Widget
+activate widget 24=Alt+F1,none,Activate Application Launcher Widget
+activate widget 29=none,none,Activate Application Dashboard Widget
 activate widget 37=none,none,Activate Icons-only Task Manager Widget
-activate widget 38=Alt+F1,none,Activate Application Launcher Widget
+activate widget 38=none,none,Activate Application Launcher Widget
 clear-history=none,none,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
 cycleNextAction=none,none,Next History Item
@@ -279,3 +283,7 @@ stop current activity=Meta+S,Meta+S,Stop Current Activity
 switch to next activity=none,none,Switch to Next Activity
 switch to previous activity=none,none,Switch to Previous Activity
 toggle do not disturb=none,none,Toggle do not disturb
+
+[systemsettings.desktop]
+_k_friendly_name=System Settings
+_launch=Tools,Tools,System Settings

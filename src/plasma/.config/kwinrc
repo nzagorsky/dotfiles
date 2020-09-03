@@ -14,8 +14,14 @@ XRenderSmoothScale=false
 
 [Desktops]
 Id_1=57fc5b36-3ca5-473f-ab11-82dbfba5cea7
+Id_2=f2b3f39c-a84c-4477-abae-3c6450c005d7
+Id_3=5075db8b-a3d7-4a75-a569-5984817731b9
+Id_4=c3717414-7092-402f-957b-4439e837dc88
 Name_1=1
-Number=1
+Name_2=New Desktop
+Name_3=New Desktop
+Name_4=New Desktop
+Number=4
 Rows=1
 
 [DrmOutputs][abb0580273][abb0580273]
@@ -52,6 +58,9 @@ Top=None
 TopLeft=None
 TopRight=None
 
+[ModifierOnlyShortcuts]
+Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
+
 [MouseBindings]
 CommandActiveTitlebar1=Raise
 CommandActiveTitlebar2=Nothing
@@ -78,7 +87,6 @@ NightTemperature=4800
 
 [Plugins]
 blurEnabled=true
-diminactiveEnabled=true
 forceblurEnabled=false
 kwin4_effect_dimscreenEnabled=true
 kwin4_effect_windowapertureEnabled=false
@@ -108,7 +116,6 @@ ElectricBorderDelay=50
 ElectricBorderMaximize=true
 ElectricBorderTiling=true
 ElectricBorders=0
-FocusPolicy=FocusFollowsMouse
 FocusStealingPreventionLevel=1
 GeometryTip=false
 HideUtilityWindowsForInactive=true
@@ -129,5 +136,5 @@ BorderSize=Tiny
 BorderSizeAuto=false
 ButtonsOnLeft=
 ButtonsOnRight=X
-library=org.kde.kwin.aurorae
-theme=__aurorae__svg__Aritim-Dark
+library=org.kde.breeze
+theme=Breeze
