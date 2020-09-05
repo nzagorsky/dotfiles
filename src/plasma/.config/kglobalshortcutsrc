@@ -29,7 +29,7 @@ _k_friendly_name=KDE Daemon
 display=Display\tMeta+P,Display\tMeta+P,Switch Display
 
 [khotkeys]
-_k_friendly_name=System Settings
+_k_friendly_name=KDE Daemon
 {52ab1db4-ba32-4e6a-9447-a2e18b99e81a}=Meta+Return,none,terminal
 {bf8e6344-bbef-46e3-a173-0a42dd0bf9d7}=Meta+Shift+S,none,screenshot area
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=,none,Search
@@ -58,7 +58,7 @@ _launch=Alt+Space\tAlt+F2\tSearch,Alt+Space\tAlt+F2\tSearch,KRunner
 
 [ksmserver]
 Halt Without Confirmation=none,none,Halt Without Confirmation
-Lock Session=\tCtrl+Alt+L\tScreensaver,Meta+L\tCtrl+Alt+L\tScreensaver,Lock Session
+Lock Session=Ctrl+Alt+L\tMeta+Shift+E\tScreensaver,Meta+L\tCtrl+Alt+L\tScreensaver,Lock Session
 Log Out=none,none,Log Out
 Log Out Without Confirmation=none,none,Log Out Without Confirmation
 Reboot Without Confirmation=none,none,Reboot Without Confirmation
@@ -263,10 +263,10 @@ activate task manager entry 6=Meta+6,Meta+6,Activate Task Manager Entry 6
 activate task manager entry 7=Meta+7,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=Meta+8,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
-activate widget 24=Alt+F1,none,Activate Application Launcher Widget
+activate widget 24=,none,Activate Application Launcher Widget
 activate widget 29=none,none,Activate Application Dashboard Widget
-activate widget 37=none,none,Activate Icons-only Task Manager Widget
-activate widget 38=none,none,Activate Application Launcher Widget
+activate widget 40=Alt+F1,none,Activate Application Menu Widget
+activate widget 42=none,none,Activate Task Manager Widget
 clear-history=none,none,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
 cycleNextAction=none,none,Next History Item
