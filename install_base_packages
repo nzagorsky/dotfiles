@@ -25,6 +25,7 @@ install_base_debian () {
 install_base_arch () {
     sudo pacman -S --needed --noconfirm base-devel
     sudo pacman -S --needed --noconfirm pkgconf
+    sudo pacman -S --needed --noconfirm p7zip
     sudo pacman -S --needed --noconfirm autoconf
     sudo pacman -S --needed --noconfirm curl
     sudo pacman -S --needed --noconfirm htop
