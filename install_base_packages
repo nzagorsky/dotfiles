@@ -33,6 +33,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm iotop
     sudo pacman -S --needed --noconfirm neovim
     sudo pacman -S --needed --noconfirm tmux
+    sudo pacman -S --needed --noconfirm bind-tools
 
     # Build deps
     sudo pacman -S --needed --noconfirm mysql

@@ -39,6 +39,7 @@ install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm blueman  # Because gnome-bluetooth suck balls
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
     sudo pacman -S --needed --noconfirm pavucontrol
+    sudo pacman -S --needed --noconfirm dnsmasq
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
@@ -50,6 +51,10 @@ install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
+
+
+    sudo systemctl enable bluetooth --now
+    sudo systemctl enable dnsmasq --now
 }
 
 install_desktop_debian () {
