@@ -79,6 +79,7 @@ configure_gnome () {
 configure_kde () {
     # For mailspring to work
     sudo pacman -S --needed --noconfirm gnome-keyring
+
     # Fix meta for opening menu
     kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
     qdbus org.kde.KWin /KWin reconfigure
@@ -92,6 +93,7 @@ main () {
         configure_gnome
 
     elif [ "$XDG_SESSION_DESKTOP" == "KDE" ]; then
+        echo "Detected Plasma"
         configure_kde
 
     else
@@ -102,3 +104,4 @@ main () {
 }
 
 main
+
