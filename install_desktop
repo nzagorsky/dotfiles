@@ -85,7 +85,25 @@ configure_kde () {
     qdbus org.kde.KWin /KWin reconfigure
 }
 
+setup_user() {
+    sudo gpasswd -a $USER rfkill
+}
+
+virtd() {
+    sudo pacman -S libvirt qemu ebtables virt-manager --needed --noconfirm
+    sudo gpasswd -a $USER kvm
+    sudo gpasswd -a $USER libvirt
+    sudo systemctl enable libvirtd --now
+}
+
+docker() {
+    sudo pacman -S docker
+    sudo systemctl enable docker --now
+    sudo gpasswd -a $USER docker
+}
+
 main () {
+    setup_user
     install_base_desktop_arch
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
