@@ -129,7 +129,6 @@ MaximizeButtonLeftClickCommand=Maximize
 MaximizeButtonMiddleClickCommand=Maximize (vertical only)
 MaximizeButtonRightClickCommand=Maximize (horizontal only)
 NextFocusPrefersMouse=true
-Placement=Smart
 SeparateScreenFocus=false
 ShadeHover=false
 ShadeHoverInterval=250

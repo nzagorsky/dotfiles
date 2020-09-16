@@ -36,7 +36,7 @@ _k_friendly_name=KDE Daemon
 {d42a2962-ace6-4efa-9203-52a3324619b0}=none,none,Launch Konsole
 
 [kmix]
-_k_friendly_name=Audio Volume
+_k_friendly_name=KMix
 decrease_microphone_volume=Microphone Volume Down,Microphone Volume Down,Decrease Microphone Volume
 decrease_volume=Volume Down,Volume Down,Decrease Volume
 increase_microphone_volume=Microphone Volume Up,Microphone Volume Up,Increase Microphone Volume
