@@ -41,7 +41,7 @@ BorderActivate=9
 
 [Effect-DimInactive]
 DimFullScreen=false
-Strength=30
+Strength=50
 
 [Effect-PresentWindows]
 BorderActivate=9
@@ -65,7 +65,7 @@ Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
 CommandActiveTitlebar1=Raise
 CommandActiveTitlebar2=Nothing
 CommandActiveTitlebar3=Operations menu
-CommandAll1=Move
+CommandAll1=Activate, raise and move
 CommandAll2=Toggle raise and lower
 CommandAll3=Resize
 CommandAllKey=Alt
@@ -87,6 +87,7 @@ NightTemperature=4600
 
 [Plugins]
 blurEnabled=true
+diminactiveEnabled=true
 forceblurEnabled=false
 kwin4_effect_dimscreenEnabled=true
 kwin4_effect_fadedesktopEnabled=true
@@ -109,7 +110,6 @@ DesktopListLayout=org.kde.breeze.desktop
 LayoutName=org.kde.breeze.desktop
 
 [Windows]
-ActiveMouseScreen=false
 AutoRaise=true
 AutoRaiseInterval=250
 BorderSnapZone=40
