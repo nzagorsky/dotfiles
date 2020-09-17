@@ -97,6 +97,7 @@ install_python_deps () {
     pip3 install -U --user pyflakes
     pip3 install -U --user pydocstyle
     pip3 install -U --user yamllint
+    pip3 install -U --user pyinotify  # for inotifyexec
 
     # Interactive shell
     pip3 install -U --user ipython
