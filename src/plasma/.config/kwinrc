@@ -83,7 +83,6 @@ CommandWindowWheel=Scroll
 Active=true
 LatitudeAuto=55.7527
 LongitudeAuto=37.6172
-NightTemperature=4600
 
 [Plugins]
 blurEnabled=true
