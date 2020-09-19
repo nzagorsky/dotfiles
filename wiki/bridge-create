@@ -2,9 +2,10 @@
 
 BRIDGE_NAME=br0
 INITIAL_CONNECTION_NAME="Wired connection 1"
-ETHERNET_ADAPTER_NAME="enp5s0"
+
+ETHERNET_ADAPTER_NAME="enp10s0"
 
 nmcli connection add type bridge ifname $BRIDGE_NAME stp no
 nmcli connection add type bridge-slave ifname $ETHERNET_ADAPTER_NAME master $BRIDGE_NAME
-nmcli connection down $INITIAL_CONNECTION_NAME
+nmcli connection down "$INITIAL_CONNECTION_NAME"
 nmcli connection up bridge-$BRIDGE_NAME
