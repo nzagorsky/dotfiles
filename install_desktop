@@ -77,11 +77,13 @@ configure_gnome () {
 
 
 configure_kde () {
-    # For mailspring to work
-    sudo pacman -S --needed --noconfirm gnome-keyring
+    sudo pacman -S --needed --noconfirm gnome-keyring  # For mailspring to work
+    sudo pacman -S --needed --noconfirm kvantum-qt5
 
     # Fix meta for opening menu
     kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
+
+    # Restart kwin
     qdbus org.kde.KWin /KWin reconfigure
 }
 
