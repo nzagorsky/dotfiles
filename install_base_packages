@@ -34,6 +34,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm neovim
     sudo pacman -S --needed --noconfirm tmux
     sudo pacman -S --needed --noconfirm bind-tools
+    sudo pacman -S --needed --noconfirm kubectl
 
     # Build deps
     sudo pacman -S --needed --noconfirm mysql
