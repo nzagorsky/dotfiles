@@ -6,13 +6,17 @@ xrdb -merge ~/.Xresources
 # Speed up keyboard
 xset r rate 190 50
 
-sxhkd &
 picom -b &
+
+# sxhkd duplicate running app prevention
+SXHKD_PIDS=$(pgrep sxhkd)
 sxhkd &
-kupfer --no-splash &
-pkill polybar; polybar mybar -r &
+echo $SXHKD_PIDS | xargs -L1 kill
+
+# blueman-applet &
 nitrogen --restore &
 # }}}
+
 # BSPWM config {{{
 
 bspc monitor -d I II III IV V VI VII VIII IX X
@@ -27,7 +31,7 @@ bspc config gapless_monocle      true
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+# bspc rule -a Kupfer.py focus=on
+# bspc rule -a Screenkey manage=off
 # }}}
 # vim:foldmethod=marker:foldlevel=0
