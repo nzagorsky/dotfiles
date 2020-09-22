@@ -78,6 +78,9 @@ install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
 
+    # Icons
+    sudo pacman -S --needed --noconfirm elementary-icon-theme
+
 }
 # }}}
 
@@ -92,14 +95,35 @@ install_desktop_debian () {
 # }}}
 
 # Gnome config {{{
+
+install_gnome_extension() {
+    extension_name=$1
+    extension_id=$2
+
+    gnome-extensions list | grep $extension_name > /dev/null  || \
+        gnome-shell-extension-installer --yes $extension_id
+    gnome-extensions enable $extension_name
+}
+
 configure_gnome () {
     sudo pacman -S --needed --noconfirm chrome-gnome-shell
     sudo pacman -S --needed --noconfirm gnome-screensaver
+
+    yay -S --needed --noconfirm gnome-shell-extension-installer
+
     dconf load  / < optional/dconf.conf
 
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 7
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+
+    gnome-shell-extension-installer --update
+
+    install_gnome_extension desktop-icons@xtilam 2452  # Desktop icons
+    install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
+    install_gnome_extension unite@hardpixel.eu 1287  # Unite
+    install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
+    install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
 }
 # }}}
 
