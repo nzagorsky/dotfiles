@@ -68,7 +68,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-fugitive')
 
     " Syntax highlightning for all languages.
-    call dein#add('sheerun/vim-polyglot')
+    " call dein#add('sheerun/vim-polyglot')
 
     " Python modules.
     call dein#add('numirias/semshi', { 'on_ft': 'python' })
@@ -341,9 +341,9 @@ if g:dein#is_sourced('fzf.vim')
       \   <bang>0)
 endif
 
-if g:dein#is_sourced('vim-polyglot')
-    let g:polyglot_disabled = ['yaml', 'python']
-endif
+" if g:dein#is_sourced('vim-polyglot')
+"     let g:polyglot_disabled = ['yaml', 'python']
+" endif
 
 if g:dein#is_sourced('vim-fugitive')
     function! GitBranch() abort
