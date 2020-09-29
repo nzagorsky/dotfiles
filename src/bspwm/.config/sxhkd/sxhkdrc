@@ -32,7 +32,6 @@ super + Escape
 # }}}
 # WM hotkeys {{{
 # quit/restart bspwm
-
 super + alt + {q,r}
 	bspc {quit,wm -r}
 

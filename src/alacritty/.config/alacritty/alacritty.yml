@@ -3,6 +3,7 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
+
 #env:
   # TERM variable
   #
@@ -18,7 +19,7 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-     columns: 180
+     columns: 150
      lines: 48
 
   # Window position (changes require restart)
@@ -34,8 +35,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 5
-    y: 5
+    x: 3
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -166,7 +167,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#000000'
+    background: '#080808'
     foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
@@ -312,7 +313,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-#background_opacity: 1.0
+background_opacity: 0.95
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
