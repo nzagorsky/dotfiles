@@ -43,11 +43,16 @@ virtd() {
 
 # Arch {{{
 install_yay_packages() {
-    yay -S --needed --noconfirm consolas-font \
-        polybar \
+    yay -S --needed --noconfirm \
+        consolas-font \
         dbeaver \
         insomnia \
-        mailspring
+        mailspring \
+        google-chrome \
+        authy \
+        fondo \
+        toptracker \
+        megasync
 }
 
 install_base_desktop_arch () {
@@ -55,6 +60,7 @@ install_base_desktop_arch () {
     command -v yay || setup_yay
 
     sudo pacman -S --needed --noconfirm docker
+    sudo pacman -S --needed --noconfirm telegram-desktop
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl  # Control player from keyboard
     sudo pacman -S --needed --noconfirm kitty  # GPU term
