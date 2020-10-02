@@ -39,6 +39,10 @@ virtd() {
     sudo gpasswd -a $USER libvirt
     sudo systemctl enable libvirtd --now
 }
+
+setup_dconf() {
+    dconf load  / < optional/dconf.conf
+}
 # }}}
 
 # Arch {{{
@@ -52,6 +56,7 @@ install_yay_packages() {
         authy \
         fondo \
         toptracker \
+        ocs-url  \
         megasync
 }
 
@@ -113,11 +118,7 @@ install_gnome_extension() {
 
 configure_gnome () {
     sudo pacman -S --needed --noconfirm chrome-gnome-shell
-    sudo pacman -S --needed --noconfirm gnome-screensaver
-
     yay -S --needed --noconfirm gnome-shell-extension-installer
-
-    dconf load  / < optional/dconf.conf
 
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 7
@@ -154,11 +155,16 @@ main () {
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
         echo "Detected Gnome"
+        setup_dconf
         configure_gnome
 
     elif [ "$XDG_SESSION_DESKTOP" == "KDE" ]; then
         echo "Detected Plasma"
         configure_kde
+
+    elif [ "$XDG_SESSION_DESKTOP" == "cinnamon" ]; then
+        echo "Detected Cinnamon"
+        setup_dconf
 
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
