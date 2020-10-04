@@ -134,6 +134,10 @@ configure_gnome () {
 }
 # }}}
 
+configure_cinnamon() {
+    gsettings set org.cinnamon.desktop.wm.preferences num-workspaces 10
+}
+
 # Plamsa config {{{
 configure_kde () {
     sudo pacman -S --needed --noconfirm gnome-keyring  # For mailspring to work
@@ -165,6 +169,7 @@ main () {
     elif [ "$XDG_SESSION_DESKTOP" == "cinnamon" ]; then
         echo "Detected Cinnamon"
         setup_dconf
+        configure_cinnamon
 
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
