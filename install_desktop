@@ -47,17 +47,17 @@ setup_dconf() {
 
 # Arch {{{
 install_yay_packages() {
-    yay -S --needed --noconfirm \
-        consolas-font \
-        dbeaver \
-        insomnia \
-        mailspring \
-        google-chrome \
-        authy \
-        fondo \
-        toptracker \
-        ocs-url  \
-        megasync
+    yay -S --needed --noconfirm consolas-font
+    yay -S --needed --noconfirm dbeaver
+    yay -S --needed --noconfirm insomnia
+    yay -S --needed --noconfirm mailspring
+    yay -S --needed --noconfirm google-chrome
+    yay -S --needed --noconfirm authy
+    yay -S --needed --noconfirm fondo
+    yay -S --needed --noconfirm toptracker
+    yay -S --needed --noconfirm ocs-url
+    yay -S --needed --noconfirm ytmdesktop
+    yay -S --needed --noconfirm megasync
 }
 
 install_base_desktop_arch () {
