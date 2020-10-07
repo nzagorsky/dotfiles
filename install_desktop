@@ -121,7 +121,7 @@ configure_gnome () {
     yay -S --needed --noconfirm gnome-shell-extension-installer
 
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 7
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 15
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 
     gnome-shell-extension-installer --update
