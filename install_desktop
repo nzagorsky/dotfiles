@@ -3,7 +3,6 @@
 
 # Utils {{{
 
-# TODO check if yay exists to avoid errors
 identify_os () {
     . /etc/os-release
     echo $NAME | tr '[:upper:]' '[:lower:]'
@@ -16,7 +15,7 @@ setup_yay () {
 }
 
 docker() {
-    sudo pacman -S docker
+    sudo pacman -S --needed --noconfirm docker
     sudo systemctl enable docker --now
     sudo gpasswd -a $USER docker
 }
@@ -24,8 +23,6 @@ docker() {
 setup_services() {
     sudo systemctl enable bluetooth --now
     sudo systemctl enable dnsmasq --now
-
-    docker
 }
 
 setup_user() {
@@ -42,12 +39,19 @@ virtd() {
 
 setup_dconf() {
     dconf load  / < optional/dconf.conf
+    gsettings set org.gnome.shell.app-switcher current-workspace-only true
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 15
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 }
+
+setup_dconf_cinnamon() {
+    dconf load  / < optional/cinnamon.conf
+}
+
 # }}}
 
 # Arch {{{
 install_yay_packages() {
-    yay -S --needed --noconfirm consolas-font
     yay -S --needed --noconfirm dbeaver
     yay -S --needed --noconfirm insomnia
     yay -S --needed --noconfirm mailspring
@@ -56,27 +60,39 @@ install_yay_packages() {
     yay -S --needed --noconfirm fondo
     yay -S --needed --noconfirm toptracker
     yay -S --needed --noconfirm ocs-url
-    yay -S --needed --noconfirm ytmdesktop
     yay -S --needed --noconfirm megasync
+    yay -S --needed --noconfirm rancher-k3d-bin
+}
+
+install_base_desktop_manjaro() {
+    sudo pacman -S --needed --noconfirm alacritty  # GPU term
+    sudo pacman -S --needed --noconfirm openvpn
+    sudo pacman -S --needed --noconfirm pavucontrol
+    sudo pacman -S --needed --noconfirm telegram-desktop
+    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
+    sudo pacman -S --needed --noconfirm yay
+
+    docker
 }
 
 install_base_desktop_arch () {
     # Check if yay is present and install it if not.
     command -v yay || setup_yay
 
-    sudo pacman -S --needed --noconfirm docker
     sudo pacman -S --needed --noconfirm telegram-desktop
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm playerctl  # Control player from keyboard
     sudo pacman -S --needed --noconfirm kitty  # GPU term
     sudo pacman -S --needed --noconfirm alacritty  # GPU term
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
+    sudo pacman -S --needed --noconfirm dnsmasq
+
+    docker
 
     # BT Sound and A2DP
     sudo pacman -S --needed --noconfirm blueman  # Because gnome-bluetooth suck balls
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
     sudo pacman -S --needed --noconfirm pavucontrol
-    sudo pacman -S --needed --noconfirm dnsmasq
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts
@@ -88,6 +104,7 @@ install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
     sudo pacman -S --needed --noconfirm ttf-roboto
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
+    yay -S --needed --noconfirm consolas-font
 
     # Icons
     sudo pacman -S --needed --noconfirm elementary-icon-theme
@@ -120,15 +137,11 @@ configure_gnome () {
     sudo pacman -S --needed --noconfirm chrome-gnome-shell
     yay -S --needed --noconfirm gnome-shell-extension-installer
 
-    gsettings set org.gnome.shell.app-switcher current-workspace-only true
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 7
-    gsettings set org.gnome.desktop.peripherals.keyboard delay 200
-
     gnome-shell-extension-installer --update
 
-    install_gnome_extension desktop-icons@xtilam 2452  # Desktop icons
+    # install_gnome_extension desktop-icons@xtilam 2452  # Desktop icons
+    # install_gnome_extension unite@hardpixel.eu 1287  # Unite
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
-    install_gnome_extension unite@hardpixel.eu 1287  # Unite
     install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
 }
@@ -153,22 +166,31 @@ configure_kde () {
 
 
 main () {
-    setup_user
-    install_base_desktop_arch
-    install_yay_packages
+    OS_DETECTED=`identify_os`
+    echo "------------------------------"
+    echo "OS: $OS_DETECTED"
+    echo "Desktop: $XDG_SESSION_DESKTOP"
+    echo "------------------------------"
+
+    if [ "$OS_DETECTED" == "arch linux" ]; then
+	setup_user
+	install_base_desktop_arch
+	install_yay_packages
+
+    elif [ "$OS_DETECTED" == "manjaro linux" ]; then
+	install_base_desktop_manjaro
+	install_yay_packages
+    fi
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
-        echo "Detected Gnome"
         setup_dconf
         configure_gnome
 
     elif [ "$XDG_SESSION_DESKTOP" == "KDE" ]; then
-        echo "Detected Plasma"
         configure_kde
 
     elif [ "$XDG_SESSION_DESKTOP" == "cinnamon" ]; then
-        echo "Detected Cinnamon"
-        setup_dconf
+        setup_dconf_cinnamon
         configure_cinnamon
 
     else

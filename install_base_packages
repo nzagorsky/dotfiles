@@ -22,19 +22,48 @@ install_base_debian () {
     sudo apt-get install -y stow
 }
 
-install_base_arch () {
+install_base_manjaro() {
     sudo pacman -S --needed --noconfirm base-devel
-    sudo pacman -S --needed --noconfirm pkgconf
-    sudo pacman -S --needed --noconfirm p7zip
+    sudo pacman -S --needed --noconfirm curl
+    sudo pacman -S --needed --noconfirm htop
+    sudo pacman -S --needed --noconfirm kubectl
+    sudo pacman -S --needed --noconfirm neovim
+    sudo pacman -S --needed --noconfirm reflector  # arch mirrors update
+    sudo pacman -S --needed --noconfirm stow
+    sudo pacman -S --needed --noconfirm tmux
+    sudo pacman -S --needed --noconfirm wget
+
+    # Build deps
+    sudo pacman -S --needed --noconfirm npm
+    sudo pacman -S --needed --noconfirm rust
+    sudo pacman -S --needed --noconfirm xmlsec
+
+    # Shell goodies
+    sudo pacman -S --needed --noconfirm bat
+    sudo pacman -S --needed --noconfirm ctags
+    sudo pacman -S --needed --noconfirm exa
+    sudo pacman -S --needed --noconfirm fd
+    sudo pacman -S --needed --noconfirm fzf
+    sudo pacman -S --needed --noconfirm httpie
+    sudo pacman -S --needed --noconfirm ripgrep
+    sudo pacman -S --needed --noconfirm sd
+    sudo pacman -S --needed --noconfirm zsh
+}
+
+install_base_arch () {
     sudo pacman -S --needed --noconfirm autoconf
+    sudo pacman -S --needed --noconfirm base-devel
+    sudo pacman -S --needed --noconfirm bind-tools
     sudo pacman -S --needed --noconfirm curl
     sudo pacman -S --needed --noconfirm htop
     sudo pacman -S --needed --noconfirm inotify-tools
     sudo pacman -S --needed --noconfirm iotop
-    sudo pacman -S --needed --noconfirm neovim
-    sudo pacman -S --needed --noconfirm tmux
-    sudo pacman -S --needed --noconfirm bind-tools
     sudo pacman -S --needed --noconfirm kubectl
+    sudo pacman -S --needed --noconfirm neovim
+    sudo pacman -S --needed --noconfirm p7zip
+    sudo pacman -S --needed --noconfirm pkgconf
+    sudo pacman -S --needed --noconfirm stow
+    sudo pacman -S --needed --noconfirm tmux
 
     # Build deps
     sudo pacman -S --needed --noconfirm mysql
@@ -49,8 +78,8 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm fd
     sudo pacman -S --needed --noconfirm fzf
     sudo pacman -S --needed --noconfirm httpie
-    sudo pacman -S --needed --noconfirm zsh
     sudo pacman -S --needed --noconfirm reflector  # arch mirrors update
+    sudo pacman -S --needed --noconfirm zsh
 
 }
 
@@ -131,15 +160,21 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
+	install_cargo_packages
 
 
     elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
         echo "Ubuntu detected"
         install_base_debian
+	install_cargo_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
         install_base_arch
+
+    elif [ "$OS_DETECTED" == "manjaro linux" ]; then
+	echo "Manjaro detected"
+	install_base_manjaro
 
     elif [ "$OS_DETECTED" == "arch linux arm" ]; then
         echo "Arch detected"
@@ -148,7 +183,6 @@ main () {
 
     install_npm_deps
     install_python_deps
-    install_cargo_packages
 }
 
 
