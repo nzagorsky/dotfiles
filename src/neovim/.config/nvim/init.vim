@@ -341,10 +341,6 @@ if g:dein#is_sourced('fzf.vim')
       \   <bang>0)
 endif
 
-" if g:dein#is_sourced('vim-polyglot')
-"     let g:polyglot_disabled = ['yaml', 'python']
-" endif
-
 if g:dein#is_sourced('vim-fugitive')
     function! GitBranch() abort
         let l:stripped_git_status = matchstr(fugitive#statusline(), '(.*)')[1:-2]

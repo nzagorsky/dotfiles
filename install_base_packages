@@ -34,6 +34,7 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm wget
 
     # Build deps
+    sudo pacman -S --needed --noconfirm yarn
     sudo pacman -S --needed --noconfirm npm
     sudo pacman -S --needed --noconfirm rust
     sudo pacman -S --needed --noconfirm xmlsec
@@ -45,6 +46,7 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm fd
     sudo pacman -S --needed --noconfirm fzf
     sudo pacman -S --needed --noconfirm httpie
+    sudo pacman -S --needed --noconfirm k9s
     sudo pacman -S --needed --noconfirm ripgrep
     sudo pacman -S --needed --noconfirm sd
     sudo pacman -S --needed --noconfirm zsh
@@ -78,6 +80,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm fd
     sudo pacman -S --needed --noconfirm fzf
     sudo pacman -S --needed --noconfirm httpie
+    sudo pacman -S --needed --noconfirm k9s
     sudo pacman -S --needed --noconfirm reflector  # arch mirrors update
     sudo pacman -S --needed --noconfirm zsh
 
@@ -105,6 +108,12 @@ install_cargo_packages() {
         cargo install $PACKAGE
     done
 
+}
+
+install_devspace() {
+    curl -s -L "https://github.com/devspace-cloud/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace;
+
+    sudo install devspace /usr/local/bin;
 }
 
 install_npm_deps () {

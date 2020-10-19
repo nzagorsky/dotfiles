@@ -1,36 +1,36 @@
 {
-    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "codeLens.enable": true,
-    "git.addedSign.text": "┃",
-    "git.removedSign.text": "┃",
-    "git.changedSign.text": "┃",
-    "git.changeRemovedSign.text": "┃",
-    "diagnostic.checkCurrentLine": true,
-    "diagnostic.errorSign": "✖",
-    "diagnostic.hintSign": "○",
-    "diagnostic.infoSign": "●",
-    "diagnostic.warningSign": "⚠",
-    "diagnostic.maxWindowHeight": 20,
-    "diagnostic.refreshOnInsertMode": true,
-    "suggest.enablePreview": true,
-    "suggest.maxPreviewWidth": 100,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "codeLens.enable": true,
+  "git.addedSign.text": "┃",
+  "git.removedSign.text": "┃",
+  "git.changedSign.text": "┃",
+  "git.changeRemovedSign.text": "┃",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.errorSign": "✖",
+  "diagnostic.hintSign": "○",
+  "diagnostic.infoSign": "●",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.maxWindowHeight": 20,
+  "diagnostic.refreshOnInsertMode": true,
+  "suggest.enablePreview": true,
+  "suggest.maxPreviewWidth": 100,
 
-    "python.jediEnabled": false,
-    "python.linting.pylintEnabled": false,
-    "python.linting.mypyEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.formatting.provider": "black",
-    "python.linting.flake8Args": [
-        "--ignore=E501"
-    ],
+  "python.jediEnabled": false,
+  "python.linting.pylintEnabled": false,
+  "python.linting.mypyEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "black",
+  "python.linting.flake8Args": ["--ignore=E501"],
 
-    "languageserver": {
-        "terraform": {
-            "command": "terraform-lsp",
-            "filetypes": [
-                "terraform"
-            ],
-            "initializationOptions": {}
-        }
+  "yaml.schemas": {
+    "kubernetes": "/*.yml"
+  },
+  "yaml.trace.server": "verbose",
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
     }
+  }
 }
