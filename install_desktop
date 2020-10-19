@@ -62,6 +62,7 @@ install_yay_packages() {
     yay -S --needed --noconfirm ocs-url
     yay -S --needed --noconfirm megasync
     yay -S --needed --noconfirm rancher-k3d-bin
+    yay -S --needed --noconfirm elementary-planner
 }
 
 install_base_desktop_manjaro() {
@@ -173,13 +174,13 @@ main () {
     echo "------------------------------"
 
     if [ "$OS_DETECTED" == "arch linux" ]; then
-	setup_user
-	install_base_desktop_arch
-	install_yay_packages
+        setup_user
+        install_base_desktop_arch
+        install_yay_packages
 
     elif [ "$OS_DETECTED" == "manjaro linux" ]; then
-	install_base_desktop_manjaro
-	install_yay_packages
+        install_base_desktop_manjaro
+        install_yay_packages
     fi
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
