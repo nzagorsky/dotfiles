@@ -40,7 +40,7 @@ virtd() {
 setup_dconf() {
     dconf load  / < optional/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 15
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 }
 
@@ -91,9 +91,9 @@ install_base_desktop_arch () {
     docker
 
     # BT Sound and A2DP
-    sudo pacman -S --needed --noconfirm blueman  # Because gnome-bluetooth suck balls
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
     sudo pacman -S --needed --noconfirm pavucontrol
+    sudo pacman -S --needed --noconfirm bluez-tools bluez-utils
 
     # Fonts
     # https://wiki.archlinux.org/index.php/Fonts

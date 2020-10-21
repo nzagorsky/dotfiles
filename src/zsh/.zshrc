@@ -118,6 +118,14 @@ add_to_group() {
     sudo gpasswd -a $USER $1
 }
 
+b() {
+    # Usage: b connect WH-1000XM4
+    DEVICE=`bluetoothctl -- devices | grep -i $2`
+    echo ">> Found device: $DEVICE"
+    MAC_ADDRESS=`echo $DEVICE | cut -d' ' -f2`
+    bluetoothctl -- $1 $MAC_ADDRESS
+}
+
 
 # v () {
 #     CURRENT_FOLDER_HASH=`pwd  | md5sum | cut -f1 -d" "`
@@ -133,7 +141,6 @@ add_to_group() {
 #     fi
 # }
 
-# Kukareku.
 #
 # }}}
 # Keyboard {{{
@@ -201,6 +208,20 @@ alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > 
 alias gst="git status"
 alias gdiff="git diff"
 alias python=python3
+
+
+# Columns for piping
+# Example: cat test.txt | c2 | xargs echo
+alias c1="awk '{print \$1}'"
+alias c2="awk '{print \$2}'"
+alias c3="awk '{print \$3}'"
+alias c4="awk '{print \$4}'"
+alias c5="awk '{print \$5}'"
+alias c6="awk '{print \$6}'"
+alias c7="awk '{print \$7}'"
+alias c8="awk '{print \$8}'"
+alias c9="awk '{print \$9}'"
 # }}}
 
+# Kukareku.
 # vim:foldmethod=marker:foldlevel=0
