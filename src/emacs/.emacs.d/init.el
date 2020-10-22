@@ -16,6 +16,8 @@
 
 ;; Fix emacs terminal binary availability
 (add-to-list 'exec-path "/usr/local/bin")
+(add-to-list 'exec-path "~/.bin")
+(add-to-list 'exec-path "~/.scripts")
 
 ;;----------------------------------------
 ;; Initial

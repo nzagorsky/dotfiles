@@ -140,11 +140,10 @@ configure_gnome () {
 
     gnome-shell-extension-installer --update
 
-    # install_gnome_extension desktop-icons@xtilam 2452  # Desktop icons
-    # install_gnome_extension unite@hardpixel.eu 1287  # Unite
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
+    install_gnome_extension auto-move-windows@gnome-shell-extensions.gcampax.github.com 16  # AutoMoveWindows
 }
 # }}}
 
