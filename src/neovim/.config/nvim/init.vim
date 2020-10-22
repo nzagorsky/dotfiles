@@ -387,13 +387,23 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-vetur',
         \ 'coc-yaml',
     \ ]
-    nnoremap <silent> <F3> :call CocAction('format')<CR>
+
+    function! s:format_code()
+        if (&ft=='python')
+            call CocAction('format') | CocCommand python.sortImports
+        else
+            echo "SOSI"
+            call CocAction('format')
+        endif
+    endfunction
+
     nmap <silent> <leader>g <Plug>(coc-type-definition)
     nmap <silent> <leader>d <Plug>(coc-definition)
     nmap <silent> <leader>i <Plug>(coc-implementation)
     nmap <silent> <leader>n <Plug>(coc-references)
     nmap <silent> <leader>rn <Plug>(coc-rename)
     nnoremap <silent> K :call <SID>show_documentation()<CR>
+    nnoremap <silent> <F3>  :call <SID>format_code()<CR>
 
     " coc-git
     nmap [g <Plug>(coc-git-prevchunk)

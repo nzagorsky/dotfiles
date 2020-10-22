@@ -21,6 +21,8 @@
   "python.linting.flake8Enabled": true,
   "python.formatting.provider": "black",
   "python.linting.flake8Args": ["--ignore=E501"],
+  "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags",
+  "python.sortImports.args": ["-sl"],
 
   "yaml.schemas": {
     "kubernetes": "/*.yml"
