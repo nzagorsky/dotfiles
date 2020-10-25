@@ -72,6 +72,8 @@ install_base_desktop_manjaro() {
     sudo pacman -S --needed --noconfirm telegram-desktop
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
     sudo pacman -S --needed --noconfirm yay
+    sudo pacman -S --needed --noconfirm bluez-tools
+    sudo pacman -S --needed --noconfirm bluez-utils
 
     docker
 }
