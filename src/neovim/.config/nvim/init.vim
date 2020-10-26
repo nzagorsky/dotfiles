@@ -402,6 +402,7 @@ if g:dein#is_sourced('coc.nvim')
     nmap <silent> <leader>i <Plug>(coc-implementation)
     nmap <silent> <leader>n <Plug>(coc-references)
     nmap <silent> <leader>rn <Plug>(coc-rename)
+    nmap <silent> gd <Plug>(coc-definition)
     nnoremap <silent> K :call <SID>show_documentation()<CR>
     nnoremap <silent> <F3>  :call <SID>format_code()<CR>
 
