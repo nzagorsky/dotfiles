@@ -392,7 +392,6 @@ if g:dein#is_sourced('coc.nvim')
         if (&ft=='python')
             call CocAction('format') | CocCommand python.sortImports
         else
-            echo "SOSI"
             call CocAction('format')
         endif
     endfunction
