@@ -28,6 +28,9 @@ export PATH="$PATH:$GOPATH/bin"
 # }}}
 # Functions {{{
 
+# Overwrite fish greeting
+function fish_greeting
+end
 
 # Disk usage
 function dutop 
@@ -83,6 +86,7 @@ alias ll='exa -lhs --group-directories-first --color=auto -F'
 alias lla='exa -lahs --group-directories-first --color=auto -F'
 alias ls='exa --color=auto -F'
 alias p='ipython'
+alias k='kubectl'
 alias rm='rm -I'
 alias e='emacs -nw'
 alias g=git
