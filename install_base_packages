@@ -32,6 +32,8 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm stow
     sudo pacman -S --needed --noconfirm tmux
     sudo pacman -S --needed --noconfirm wget
+    sudo pacman -S --needed --noconfirm bind-tools
+    sudo pacman -S --needed --noconfirm traceroute
 
     # Build deps
     sudo pacman -S --needed --noconfirm yarn
