@@ -65,11 +65,18 @@ function add_to_group
 end
 
 function b
-    # Usage: b connect WH-1000XM4
-    set DEVICE (bluetoothctl -- devices | grep -i $argv[2])
-    echo ">> Found device: $DEVICE"
-    set MAC_ADDRESS (echo $DEVICE | cut -d' ' -f2)
-    bluetoothctl -- $argv[1] $MAC_ADDRESS
+    set no_search_commands "scan" "devices"
+
+    if contains $argv[1] $no_search_commands
+        bluetoothctl -- $argv
+
+    else
+
+        set DEVICE (bluetoothctl -- devices | grep -i $argv[2])
+        echo ">> Found device: $DEVICE"
+        set MAC_ADDRESS (echo $DEVICE | cut -d' ' -f2)
+        bluetoothctl -- $argv[1] $MAC_ADDRESS
+    end
 end
 
 
