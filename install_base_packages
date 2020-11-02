@@ -9,6 +9,7 @@ install_base_debian () {
     sudo apt-get install -y httpie
     sudo apt-get install -y iotop
     sudo apt-get install -y neovim
+    sudo apt-get install -y emacs
     sudo apt-get install -y net-tools
     sudo apt-get install -y nodejs-lts-erbium
     sudo apt-get install -y npm
@@ -28,6 +29,8 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm htop
     sudo pacman -S --needed --noconfirm kubectl
     sudo pacman -S --needed --noconfirm neovim
+    sudo pacman -S --needed --noconfirm emacs
+    sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm reflector  # arch mirrors update
     sudo pacman -S --needed --noconfirm stow
     sudo pacman -S --needed --noconfirm tmux
@@ -64,6 +67,8 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm iotop
     sudo pacman -S --needed --noconfirm kubectl
     sudo pacman -S --needed --noconfirm neovim
+    sudo pacman -S --needed --noconfirm emacs
+    sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm p7zip
     sudo pacman -S --needed --noconfirm pkgconf
     sudo pacman -S --needed --noconfirm stow
@@ -119,15 +124,20 @@ install_devspace() {
 }
 
 install_npm_deps () {
+    # vim
     sudo npm install -g standard
     sudo npm install -g prettier
     sudo npm install -g neovim
     sudo npm install -g javascript-typescript-langserver
+
+    # operations
+    sudo npm install -g elasticdump
 }
 
 install_python_deps () {
     # Code style libs.
     pip3 install -U --user black
+    pip3 install -U --user flake8-polyfill
     pip3 install -U --user vim-vint
     pip3 install -U --user python-language-server[all]
     pip3 install -U --user jedi
@@ -164,6 +174,10 @@ identify_os () {
     echo $NAME | tr '[:upper:]' '[:lower:]'
 }
 
+install_doom () {
+    ~/.emacs.d/bin/doom -y install
+}
+
 
 main () {
     OS_DETECTED=`identify_os`
@@ -171,21 +185,23 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
-	install_cargo_packages
+        install_cargo_packages
 
 
     elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
         echo "Ubuntu detected"
         install_base_debian
-	install_cargo_packages
+        install_cargo_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
         install_base_arch
+        install_doom
 
     elif [ "$OS_DETECTED" == "manjaro linux" ]; then
-	echo "Manjaro detected"
-	install_base_manjaro
+        echo "Manjaro detected"
+        install_base_manjaro
+        install_doom
 
     elif [ "$OS_DETECTED" == "arch linux arm" ]; then
         echo "Arch detected"

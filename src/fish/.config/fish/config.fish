@@ -24,6 +24,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="/snap/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # }}}
 # Functions {{{
