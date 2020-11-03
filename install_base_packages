@@ -41,7 +41,7 @@ install_base_manjaro() {
     # Build deps
     sudo pacman -S --needed --noconfirm yarn
     sudo pacman -S --needed --noconfirm npm
-    sudo pacman -S --needed --noconfirm rust
+    sudo pacman -S --needed --noconfirm rustup
     sudo pacman -S --needed --noconfirm xmlsec
 
     # Shell goodies
@@ -79,7 +79,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm npm
     sudo pacman -S --needed --noconfirm python-pip
     sudo pacman -S --needed --noconfirm python3
-    sudo pacman -S --needed --noconfirm rust
+    sudo pacman -S --needed --noconfirm rustup
     sudo pacman -S --needed --noconfirm xmlsec
 
     # Shell goodies

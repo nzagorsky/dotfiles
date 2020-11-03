@@ -68,7 +68,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-fugitive')
 
     " Syntax highlightning for all languages.
-    " call dein#add('sheerun/vim-polyglot')
+    call dein#add('sheerun/vim-polyglot')
 
     " Python modules.
     call dein#add('numirias/semshi', { 'on_ft': 'python' })
