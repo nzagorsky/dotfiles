@@ -54,3 +54,9 @@
 ;; they are implemented.
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 0)
+
+(defcustom lsp-file-watch-threshold 100000
+  "Show warning if the files to watch are more than.
+Set to nil to disable the warning."
+  :type 'number
+  :group 'lsp-mode)

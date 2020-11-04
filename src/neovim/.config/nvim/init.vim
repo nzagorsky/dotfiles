@@ -68,7 +68,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-fugitive')
 
     " Syntax highlightning for all languages.
-    " call dein#add('sheerun/vim-polyglot')
+    call dein#add('sheerun/vim-polyglot')
 
     " Python modules.
     call dein#add('numirias/semshi', { 'on_ft': 'python' })
@@ -301,6 +301,10 @@ set statusline+=\ %l\/%L
 
 " }}}
 " Plugins setup.  {{{1
+if g:dein#is_sourced('vim-polyglot')
+    let g:polyglot_disabled = ['python']
+endif
+
 if g:dein#is_sourced('fzf.vim')
     let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
 
@@ -381,7 +385,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-prettier',
-        \ 'coc-python',
+        \ 'coc-pyright',
         \ 'coc-rls',
         \ 'coc-tsserver',
         \ 'coc-vetur',
@@ -389,11 +393,13 @@ if g:dein#is_sourced('coc.nvim')
     \ ]
 
     function! s:format_code()
-        if (&ft=='python')
-            call CocAction('format') | CocCommand python.sortImports
-        else
-            call CocAction('format')
-        endif
+        " if (&ft=='python')
+        "     call CocAction('format') | CocCommand python.sortImports
+        " else
+        "     call CocAction('format')
+        " endif
+       
+        call CocAction('format')
     endfunction
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)

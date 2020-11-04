@@ -43,6 +43,7 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm npm
     sudo pacman -S --needed --noconfirm rustup
     sudo pacman -S --needed --noconfirm xmlsec
+    sudo pacman -S --needed --noconfirm mysql
 
     # Shell goodies
     sudo pacman -S --needed --noconfirm bat
@@ -162,6 +163,9 @@ install_python_deps () {
     # Good things
     pip3 install -U --user dataset
     pip3 install -U --user awscli
+
+    # Stubs
+    pip3 install -U --user django-stubs
 }
 
 
