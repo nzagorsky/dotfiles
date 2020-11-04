@@ -129,6 +129,7 @@ install_npm_deps () {
     sudo npm install -g prettier
     sudo npm install -g neovim
     sudo npm install -g javascript-typescript-langserver
+    sudo npm install -g pyright
 
     # operations
     sudo npm install -g elasticdump
