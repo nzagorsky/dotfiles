@@ -69,6 +69,7 @@ install_base_desktop_manjaro() {
     sudo pacman -S --needed --noconfirm alacritty  # GPU term
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm pavucontrol
+    sudo pacman -S --needed --noconfirm pulsemixer
     sudo pacman -S --needed --noconfirm telegram-desktop
     sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
     sudo pacman -S --needed --noconfirm yay
@@ -95,6 +96,7 @@ install_base_desktop_arch () {
     # BT Sound and A2DP
     sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
     sudo pacman -S --needed --noconfirm pavucontrol
+    sudo pacman -S --needed --noconfirm pulsemixer
     sudo pacman -S --needed --noconfirm bluez-tools bluez-utils
 
     # Fonts
