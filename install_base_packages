@@ -61,6 +61,11 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm jq
     sudo pacman -S --needed --noconfirm terraform
 
+    # Org mode dependencies
+    sudo pacman -S --noconfirm --needed texlive-core
+    sudo pacman -S --noconfirm --needed texlive-bin
+    sudo pacman -S --noconfirm --needed texlive-science
+    sudo pacman -S --noconfirm --needed gnuplot sqlite
 }
 
 install_base_arch () {
@@ -102,6 +107,12 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm jq
     sudo pacman -S --needed --noconfirm terraform
 
+    # Org mode dependencies
+    sudo pacman -S --noconfirm --needed texlive-core
+    sudo pacman -S --noconfirm --needed texlive-bin
+    sudo pacman -S --noconfirm --needed texlive-science
+    sudo pacman -S --noconfirm --needed gnuplot sqlite
+
 }
 
 install_cargo_packages() {
@@ -123,7 +134,7 @@ install_cargo_packages() {
     for PACKAGE in "${PACKAGELIST[@]}"
     do
         echo "Installing $PACKAGE"
-        cargo install $PACKAGE
+        cargo install "$PACKAGE"
     done
 
 }
@@ -161,6 +172,7 @@ install_npm_deps () {
     # tools
     sudo npm install -g elasticdump
     sudo npm install -g marked
+    sudo npm install -g dockerfile-language-server-nodejs
 }
 
 install_python_deps () {
@@ -168,7 +180,7 @@ install_python_deps () {
     pip3 install -U --user black
     pip3 install -U --user flake8-polyfill
     pip3 install -U --user vim-vint
-    pip3 install -U --user python-language-server[all]
+    pip3 install -U --user "python-language-server[all]"
     pip3 install -U --user jedi
     pip3 install -U --user flake8
     pip3 install -U --user radon  # dependency for flake8 that should be updated
@@ -207,7 +219,7 @@ neovim_appimage () {
 
 identify_os () {
     . /etc/os-release
-    echo $NAME | tr '[:upper:]' '[:lower:]'
+    echo "$NAME" | tr '[:upper:]' '[:lower:]'
 }
 
 install_doom () {
@@ -216,7 +228,7 @@ install_doom () {
 
 
 main () {
-    OS_DETECTED=`identify_os`
+    OS_DETECTED=$(identify_os)
 
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
