@@ -52,11 +52,24 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(setq company-idle-delay 0.1
+(setq company-idle-delay 0.01
       company-minimum-prefix-length 0)
 
 (defcustom lsp-file-watch-threshold 100000
-  "Show warning if the files to watch are more than.
-Set to nil to disable the warning."
+  "Show warning if the files to watch are more than. Set to nil to disable the warning."
   :type 'number
   :group 'lsp-mode)
+
+;; Welcome home
+(after! evil-escape
+  (setq evil-escape-key-sequence "jk"))
+
+;; Navigation between windows made simple
+(map! :map general-override-mode-map
+      :n "C-j" #'evil-window-down
+      :n "C-k" #'evil-window-up
+      :n "C-h" #'evil-window-left
+      :n "C-l" #'evil-window-right)
+
+;; Disable line numbers
+(setq display-line-numbers-type nil)
