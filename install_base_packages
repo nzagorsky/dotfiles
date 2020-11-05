@@ -20,7 +20,6 @@ install_base_debian () {
     sudo apt-get install -y wget
     sudo apt-get install -y zsh
     sudo apt-get install -y cargo
-    sudo apt-get install -y stow
 }
 
 install_base_manjaro() {
@@ -32,7 +31,6 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm emacs
     sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm reflector
-    sudo pacman -S --needed --noconfirm stow
     sudo pacman -S --needed --noconfirm tmux
     sudo pacman -S --needed --noconfirm wget
     sudo pacman -S --needed --noconfirm bind-tools
@@ -79,7 +77,6 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm p7zip
     sudo pacman -S --needed --noconfirm pkgconf
-    sudo pacman -S --needed --noconfirm stow
     sudo pacman -S --needed --noconfirm tmux
 
     # Build deps

@@ -111,9 +111,6 @@ install_base_desktop_arch () {
     sudo pacman -S --needed --noconfirm ttf-roboto-mono
     yay -S --needed --noconfirm consolas-font
 
-    # Icons
-    sudo pacman -S --needed --noconfirm elementary-icon-theme
-
 }
 # }}}
 
