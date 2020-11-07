@@ -53,7 +53,6 @@ setup_dconf_cinnamon() {
 # Arch {{{
 install_yay_packages() {
     yay -S --needed --noconfirm dbeaver
-    yay -S --needed --noconfirm insomnia
     yay -S --needed --noconfirm mailspring
     yay -S --needed --noconfirm google-chrome
     yay -S --needed --noconfirm authy
