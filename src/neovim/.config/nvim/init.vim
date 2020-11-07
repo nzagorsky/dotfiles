@@ -1,5 +1,5 @@
 " vim:foldmethod=marker:foldlevel=0
-" Basic settings.  {{{1
+" Basic settings {{{1
 scriptencoding utf-8
 set clipboard+=unnamedplus  " system clipboard
 set hidden  " buffers
@@ -300,7 +300,7 @@ set statusline+=\ %l\/%L
 
 
 " }}}
-" Plugins setup.  {{{1
+" Plugins setup {{{1
 if g:dein#is_sourced('vim-polyglot')
     let g:polyglot_disabled = ['python']
 endif
@@ -384,6 +384,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-go',
         \ 'coc-html',
         \ 'coc-json',
+        \ 'coc-sql',
         \ 'coc-prettier',
         \ 'coc-pyright',
         \ 'coc-rls',
@@ -469,3 +470,5 @@ augroup AutomaticDirectoryCreation
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+
+" }}}
