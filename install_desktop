@@ -63,6 +63,7 @@ install_yay_packages() {
     yay -S --needed --noconfirm megasync
     yay -S --needed --noconfirm rancher-k3d-bin
     yay -S --needed --noconfirm elementary-planner
+    yay -S --needed --noconfirm emacs-native-comp-git  # gccemacs
 }
 
 install_base_desktop_manjaro() {

@@ -57,7 +57,7 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(setq company-idle-delay 0.01
+(setq company-idle-delay 0.001
       company-minimum-prefix-length 0)
 
 (defcustom lsp-file-watch-threshold 100000
@@ -65,7 +65,6 @@
   :type 'number
   :group 'lsp-mode)
 
-;; Welcome home
 (after! evil-escape
   (setq evil-escape-key-sequence "jk"))
 
@@ -80,7 +79,7 @@
 (setq display-line-numbers-type nil)
 
 (after! which-key
-    (setq which-key-idle-delay 0.5))
+    (setq which-key-idle-delay 0.2))
 
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
