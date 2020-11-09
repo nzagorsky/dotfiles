@@ -301,9 +301,10 @@ set statusline+=\ %l\/%L
 
 " }}}
 " Plugins setup {{{1
-if g:dein#is_sourced('vim-polyglot')
-    let g:polyglot_disabled = ['python']
-endif
+"
+call dein#config('sheerun/vim-polyglot', {
+            \ 'hook_source': "let g:polyglot_disabled = ['python']"
+            \ })
 
 if g:dein#is_sourced('fzf.vim')
     function! s:build_quickfix_list(lines)
