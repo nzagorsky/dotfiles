@@ -48,7 +48,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     " Code check.
     call dein#add('neoclide/coc.nvim', {'rev': 'release'})
-    call dein#add('neoclide/coc-neco', {'on_ft': 'vim'})
 
     " Routine automation.
     call dein#add('tpope/vim-surround')
@@ -104,6 +103,7 @@ nmap <Leader><Leader> V
 nmap j gj
 nmap k gk
 nnoremap <C-e> :Explore<CR>
+nnoremap <A-x> :Commands<CR>
 
 
 " Remove trailing whitespaces
@@ -262,11 +262,11 @@ else
     set shell=/bin/sh
 endif
 
-augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set relativenumber
-    autocmd WinLeave * set norelativenumber
-augroup END
+" augroup BgHighlight
+"     autocmd!
+"     autocmd WinEnter * set relativenumber
+"     autocmd WinLeave * set norelativenumber
+" augroup END
 
 " }}}
 " Statusline {{{1
@@ -306,7 +306,17 @@ if g:dein#is_sourced('vim-polyglot')
 endif
 
 if g:dein#is_sourced('fzf.vim')
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
+    function! s:build_quickfix_list(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+      copen
+      cc
+    endfunction
+
+    let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 
     function! UpdateTags() abort
         :Start! ctags .<CR>
@@ -323,14 +333,24 @@ if g:dein#is_sourced('fzf.vim')
         autocmd! User FzfStatusLine call <SID>FzfHighlights()
     augroup END
 
-    
+    " TODO not woring currently, will wok in tmux 3.2
+    " if exists('$TMUX')
+    "   let g:fzf_layout = { 'tmux': '-p90%,60%' }
+    " else
+    " endif
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+    " autocmd! FileType fzf
+    " autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    "   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
     "search word under cursor
     nnoremap <leader>A :Rg <C-r><C-w><CR>   
 
     nnoremap <leader>f :Files<CR>
     nnoremap <leader>a :Rg<Space>
     nnoremap <leader>b :Buffers<CR>
-    nnoremap <leader>c :Commands<CR>
+    " nnoremap <leader>c :Commands<CR>
     nnoremap <leader>h :Helptags<CR>
     nnoremap <leader>l :Lines<CR>
     nnoremap <leader>t :Tags<CR>
@@ -391,15 +411,10 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-tsserver',
         \ 'coc-vetur',
         \ 'coc-yaml',
+        \ 'coc-vimlsp',
     \ ]
 
     function! s:format_code()
-        " if (&ft=='python')
-        "     call CocAction('format') | CocCommand python.sortImports
-        " else
-        "     call CocAction('format')
-        " endif
-       
         call CocAction('format')
     endfunction
 
@@ -452,6 +467,7 @@ if g:dein#is_sourced('coc.nvim')
 	  endif
 	  return join(msgs, ' ')
 	endfunction
+
 endif
 
 " }}}
