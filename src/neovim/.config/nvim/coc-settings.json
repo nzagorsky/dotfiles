@@ -23,7 +23,7 @@
   "python.linting.flake8Args": ["--ignore=E501"],
   "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags",
   "python.sortImports.args": ["--sl", "-m", "3"],
-
+  "sh.enable": true,
   "yaml.schemas": {
     "kubernetes": "/*.yml"
   },

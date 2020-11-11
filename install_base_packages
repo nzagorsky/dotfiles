@@ -2,14 +2,13 @@
 
 install_base_debian () {
     sudo apt-get update
-
     sudo apt-get install -y curl
     sudo apt-get install -y fd-find
     sudo apt-get install -y htop
     sudo apt-get install -y httpie
     sudo apt-get install -y iotop
     sudo apt-get install -y neovim
-    sudo apt-get install -y emacs
+    # sudo apt-get install -y emacs
     sudo apt-get install -y net-tools
     sudo apt-get install -y nodejs-lts-erbium
     sudo apt-get install -y npm
@@ -28,7 +27,7 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm htop
     sudo pacman -S --needed --noconfirm kubectl
     sudo pacman -S --needed --noconfirm neovim
-    sudo pacman -S --needed --noconfirm emacs
+    # sudo pacman -S --needed --noconfirm emacs
     sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm reflector
     sudo pacman -S --needed --noconfirm tmux
@@ -78,7 +77,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm iotop
     sudo pacman -S --needed --noconfirm kubectl
     sudo pacman -S --needed --noconfirm neovim
-    sudo pacman -S --needed --noconfirm emacs
+    # sudo pacman -S --needed --noconfirm emacs
     sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm p7zip
     sudo pacman -S --needed --noconfirm pkgconf
@@ -233,24 +232,24 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
-        install_cargo_packages
+        # install_cargo_packages
 
 
     elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
         echo "Ubuntu detected"
         install_base_debian
-        install_cargo_packages
+        # install_cargo_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
         install_base_arch
-        install_doom
+        # install_doom
         install_go_packages
 
     elif [ "$OS_DETECTED" == "manjaro linux" ]; then
         echo "Manjaro detected"
         install_base_manjaro
-        install_doom
+        # install_doom
         install_go_packages
 
     elif [ "$OS_DETECTED" == "arch linux arm" ]; then
