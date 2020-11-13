@@ -145,6 +145,13 @@ configure_gnome () {
     install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     install_gnome_extension auto-move-windows@gnome-shell-extensions.gcampax.github.com 16  # AutoMoveWindows
+    install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
+    install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
+    install_gnome_extension caffeine@patapon.info 517  # caffeine
+
+    # install_gnome_extension dash-to-panel@jderose9.github.com 1160  # Dash to panel
+    # install_gnome_extension blyr@yozoon.dev.gmail.com 1251  # blyr
+    # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
     # install_gnome_extension hidetopbar@mathieu.bidon.ca 545  # hide top bar
 }
 # }}}
