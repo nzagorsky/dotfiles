@@ -35,6 +35,7 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm wget
     sudo pacman -S --needed --noconfirm bind-tools
     sudo pacman -S --needed --noconfirm traceroute
+    sudo pacman -S --needed --noconfirm postgresql-libs
 
     # Build deps
     sudo pacman -S --needed --noconfirm yarn
@@ -83,6 +84,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm p7zip
     sudo pacman -S --needed --noconfirm pkgconf
     sudo pacman -S --needed --noconfirm tmux
+    sudo pacman -S --needed --noconfirm postgresql-libs
 
     # Build deps
     sudo pacman -S --needed --noconfirm mysql
@@ -194,6 +196,9 @@ install_python_deps () {
     # Interactive shell
     pip3 install -U --user ipython
     pip3 install -U --user ipdb
+    pip3 install -U --user litecli
+    pip3 install -U --user pgcli
+    pip3 install -U --user iredis
 
     # System
     pip3 install -U --user docker-compose
