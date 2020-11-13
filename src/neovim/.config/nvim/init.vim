@@ -403,6 +403,7 @@ if g:dein#is_sourced('coc.nvim')
     let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-docker',
+        \ 'coc-sh',
         \ 'coc-git',
         \ 'coc-go',
         \ 'coc-html',
