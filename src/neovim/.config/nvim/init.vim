@@ -30,12 +30,13 @@ endif
 set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
 " Setup plugins
+let g:dein#auto_recache = 1
 if dein#load_state(expand('~/.config/nvim'))
     call dein#begin(expand('~/.config/nvim'))
     call dein#add('Shougo/dein.vim')
 
     " Utility.
-    if executable('tmux')
+    if exists('$TMUX')
         call dein#add('christoomey/vim-tmux-navigator')
     endif
 
@@ -85,6 +86,7 @@ if dein#load_state(expand('~/.config/nvim'))
 
     if dein#check_install()
       call dein#install()
+      call dein#remote_plugins()
     endif
 
     call dein#end()
