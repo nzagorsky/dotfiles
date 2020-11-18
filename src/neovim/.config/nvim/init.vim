@@ -86,7 +86,6 @@ if dein#load_state(expand('~/.config/nvim'))
 
     if dein#check_install()
       call dein#install()
-      call dein#remote_plugins()
     endif
 
     call dein#end()
@@ -410,7 +409,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-json',
         \ 'coc-sql',
         \ 'coc-prettier',
-        \ 'coc-pyright',
+        \ 'coc-python',
         \ 'coc-rls',
         \ 'coc-tsserver',
         \ 'coc-vetur',
