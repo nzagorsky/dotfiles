@@ -1,18 +1,10 @@
-# Requirements {{{
-
-#  - bspwm 
-#  - sxhkd
-#  - alacritty
-#  - thunar
-
-# }}}
 # WM independent hotkeys {{{
 # terminal emulator
 super + Return
 	alacritty
 
 super + e
-    thunar
+    nautilus
 
 # program launcher
 # super + @space
