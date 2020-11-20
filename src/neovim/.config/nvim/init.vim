@@ -410,6 +410,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-sql',
         \ 'coc-prettier',
         \ 'coc-python',
+        \ 'coc-fish',
         \ 'coc-rls',
         \ 'coc-tsserver',
         \ 'coc-vetur',
