@@ -4,11 +4,10 @@ bspwm() {
     sudo pacman -S --needed --noconfirm sxhkd
     sudo pacman -S --needed --noconfirm bspwm
     sudo pacman -S --needed --noconfirm dmenu
-    sudo pacman -S --needed --noconfirm thunar
+    sudo pacman -S --needed --noconfirm nautilus
     sudo pacman -S --needed --noconfirm nitrogen
     sudo pacman -S --needed --noconfirm picom
 
-    yay -S --needed --noconfirm consolas-font
     yay -S --needed --noconfirm polybar
 }
 
