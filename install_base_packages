@@ -207,6 +207,10 @@ install_python_deps () {
     # Good things
     pip3 install -U --user dataset
     pip3 install -U --user awscli
+    pip3 install -U --user selenium
+    pip3 install -U --user nptime
+    pip3 install -U --user dateparser
+    pip3 install -U --user python-dateutil
 
     # Stubs
     pip3 install -U --user django-stubs
