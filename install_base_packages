@@ -8,7 +8,6 @@ install_base_debian () {
     sudo apt-get install -y httpie
     sudo apt-get install -y iotop
     sudo apt-get install -y neovim
-    # sudo apt-get install -y emacs
     sudo apt-get install -y net-tools
     sudo apt-get install -y nodejs-lts-erbium
     sudo apt-get install -y npm
@@ -27,7 +26,6 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm htop
     sudo pacman -S --needed --noconfirm kubectl
     sudo pacman -S --needed --noconfirm neovim
-    # sudo pacman -S --needed --noconfirm emacs
     sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm reflector
     sudo pacman -S --needed --noconfirm tmux
@@ -78,7 +76,6 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm iotop
     sudo pacman -S --needed --noconfirm kubectl
     sudo pacman -S --needed --noconfirm neovim
-    # sudo pacman -S --needed --noconfirm emacs
     sudo pacman -S --needed --noconfirm cmake
     sudo pacman -S --needed --noconfirm p7zip
     sudo pacman -S --needed --noconfirm pkgconf
@@ -231,10 +228,6 @@ identify_os () {
     echo "$NAME" | tr '[:upper:]' '[:lower:]'
 }
 
-install_doom () {
-    ~/.emacs.d/bin/doom -y install
-}
-
 
 main () {
     OS_DETECTED=$(identify_os)
@@ -253,13 +246,11 @@ main () {
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
         install_base_arch
-        # install_doom
         install_go_packages
 
     elif [ "$OS_DETECTED" == "manjaro linux" ]; then
         echo "Manjaro detected"
         install_base_manjaro
-        # install_doom
         install_go_packages
 
     elif [ "$OS_DETECTED" == "arch linux arm" ]; then
