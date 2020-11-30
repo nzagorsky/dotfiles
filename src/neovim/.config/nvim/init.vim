@@ -419,7 +419,11 @@ if g:dein#is_sourced('coc.nvim')
     \ ]
 
     function! s:format_code()
-        call CocAction('format')
+        if (&ft=='python')
+            call CocAction('format') | CocCommand python.sortImports
+        else
+            call CocAction('format')
+        endif
     endfunction
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)
