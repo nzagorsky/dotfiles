@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+# TODO fix notification based on exit status
+# TODO track exit status and modify text based on that
+COMMAND="$*; notify-send 'Command finished' \"$* finished execution\" -u critical; sleep 300"
+
+SESSION=`tmux has-session -t background 2>/dev/null`
+if [ $? -eq 0 ]; then
+    echo "Creating new split in background session for \"$*\""
+    tmux new-window -t background "$COMMAND"
+
+else
+    echo "Creating new background session for \"$*\""
+    tmux new-session -d -s background "$COMMAND"
+fi;
