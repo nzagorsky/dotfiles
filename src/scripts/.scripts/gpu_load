@@ -23,6 +23,8 @@ set VRAM_USAGE (cat /sys/class/drm/card0/device/mem_info_vram_used)
 # To check your VRAM size, execute:
 set VRAM_SIZE (cat /sys/class/drm/card0/device/mem_info_vram_total)
 
+set GPU_CLOCK (cat /sys/class/drm/card0/device/pp_dpm_sclk | grep '\*' | awk '{print $2}')
+
 
 # echo $PSTATE
 # echo $UTIL
@@ -33,5 +35,5 @@ set VRAM_SIZE (cat /sys/class/drm/card0/device/mem_info_vram_total)
 set percent_usage (math -s2 "$VRAM_USAGE / $VRAM_SIZE * 100")
 set temp (math -s0 "$TEMP / 1000")
 
-echo "Util: $UTIL Temp: $temp VRAM Usage: $percent_usage%"
+echo "Util: $UTIL% (clock: $GPU_CLOCK) Temp: $temp VRAM Usage: $percent_usage%"
 # echo "$VRAM_USAGE / $VRAM_SIZE"
