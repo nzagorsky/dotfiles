@@ -104,6 +104,7 @@ alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > 
 alias gst="git status"
 alias gdiff="git diff"
 alias python=python3
+alias rclone="rclone -P -i"
 
 
 # Columns for piping
