@@ -63,6 +63,7 @@ install_yay_packages() {
 
 install_base_desktop_manjaro() {
     sudo pacman -S --needed --noconfirm alacritty  # GPU term
+    sudo pacman -S --needed --noconfirm rclone  # backups
     sudo pacman -S --needed --noconfirm openvpn
     sudo pacman -S --needed --noconfirm pavucontrol
     sudo pacman -S --needed --noconfirm pulsemixer
@@ -80,6 +81,7 @@ install_base_desktop_arch () {
 
     sudo pacman -S --needed --noconfirm telegram-desktop
     sudo pacman -S --needed --noconfirm openvpn
+    sudo pacman -S --needed --noconfirm rclone  # backups
     sudo pacman -S --needed --noconfirm playerctl  # Control player from keyboard
     sudo pacman -S --needed --noconfirm kitty  # GPU term
     sudo pacman -S --needed --noconfirm alacritty  # GPU term

@@ -18,6 +18,7 @@ install_base_debian () {
     sudo apt-get install -y wget
     sudo apt-get install -y zsh
     sudo apt-get install -y cargo
+    sudo apt-get install -y fish
 }
 
 install_base_manjaro() {
@@ -230,6 +231,10 @@ identify_os () {
 }
 
 
+install_fish() {
+    fish -c "fisher add jethrokuan/z"
+}
+
 main () {
     OS_DETECTED=$(identify_os)
 
@@ -261,6 +266,7 @@ main () {
 
     install_npm_deps
     install_python_deps
+    install_fish
 }
 
 
