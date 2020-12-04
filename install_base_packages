@@ -139,6 +139,7 @@ install_cargo_packages() {
 
 install_go_packages() {
     export GOPATH=~/code/go
+
     go get -u github.com/motemen/gore/cmd/gore
     go get -u github.com/stamblerre/gocode
     go get -u golang.org/x/tools/cmd/godoc
