@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO REFACTOR TO USE ONE COMMAND
+
 install_base_debian () {
     sudo apt-get update
     sudo apt-get install -y curl
@@ -28,6 +30,7 @@ install_base_manjaro() {
     sudo pacman -S --needed --noconfirm kubectl
     sudo pacman -S --needed --noconfirm neovim
     sudo pacman -S --needed --noconfirm cmake
+    sudo pacman -S --needed --noconfirm go
     sudo pacman -S --needed --noconfirm reflector
     sudo pacman -S --needed --noconfirm tmux
     sudo pacman -S --needed --noconfirm wget
@@ -38,7 +41,7 @@ install_base_manjaro() {
     # Build deps
     sudo pacman -S --needed --noconfirm yarn
     sudo pacman -S --needed --noconfirm npm
-    sudo pacman -S --needed --noconfirm rustup
+    sudo pacman -S --needed --noconfirm rust
     sudo pacman -S --needed --noconfirm xmlsec
     sudo pacman -S --needed --noconfirm mysql
 
@@ -88,7 +91,7 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm npm
     sudo pacman -S --needed --noconfirm python-pip
     sudo pacman -S --needed --noconfirm python3
-    sudo pacman -S --needed --noconfirm rustup
+    sudo pacman -S --needed --noconfirm rust
     sudo pacman -S --needed --noconfirm xmlsec
 
     # Shell goodies
@@ -114,29 +117,6 @@ install_base_arch () {
 
 }
 
-install_cargo_packages() {
-    PACKAGELIST=(
-        bandwhich  # network analysis
-        bat  # cat alternative
-        du-dust  # du alternative
-        exa  # ls alternative
-        grex  # regex generator
-        hyperfine  # benchmarks
-        procs  # ps alternative
-        ripgrep
-        sd  # find & replace
-        tealdeer  # tldr
-        tokei  # code stats
-        ytop  # top alternative
-    )
-
-    for PACKAGE in "${PACKAGELIST[@]}"
-    do
-        echo "Installing $PACKAGE"
-        cargo install "$PACKAGE"
-    done
-
-}
 
 install_go_packages() {
     export GOPATH=~/code/go
@@ -241,13 +221,11 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
-        # install_cargo_packages
 
 
     elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
         echo "Ubuntu detected"
         install_base_debian
-        # install_cargo_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
