@@ -17,3 +17,20 @@ Will mount to `pwd`/storage
 
     mkdir -p storage
     rclone mount $RCLONE_STORAGE_NAME:$RCLONE_BUCKET_NAME storage
+
+Mount with better performance:
+
+	rclone mount \
+	    --vfs-cache-mode writes \
+	    --rc \
+	    --size-only \
+	    --dir-cache-time=2m \
+	    --vfs-read-chunk-size=64M \
+	    --vfs-cache-max-age 675h \
+	    --vfs-read-chunk-size-limit=1G \
+	    --buffer-size=32M \
+	    --log-level INFO \
+	    --timeout 5s \
+	    --contimeout 5s \
+	    remote:/ /mnt/remote
+
