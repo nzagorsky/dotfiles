@@ -14,7 +14,7 @@ setup_yay () {
     makepkg -si
 }
 
-docker() {
+arch_docker() {
     sudo pacman -S --needed --noconfirm docker
     sudo systemctl enable docker --now
     sudo gpasswd -a $USER docker
@@ -39,9 +39,6 @@ virtd() {
 
 setup_dconf() {
     dconf load  / < optional/dconf.conf
-    gsettings set org.gnome.shell.app-switcher current-workspace-only true
-    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
-    gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 }
 
 setup_dconf_cinnamon() {
@@ -72,7 +69,10 @@ install_base_desktop_manjaro() {
     sudo pacman -S --needed --noconfirm yay
     sudo pacman -S --needed --noconfirm transmission-gtk  # For Linux ISOs.
 
-    docker
+    sudo pacman -S --needed --noconfirm chrome-gnome-shell
+    yay -S --needed --noconfirm gnome-shell-extension-installer
+
+    arch_docker
 }
 
 install_base_desktop_arch () {
@@ -132,12 +132,15 @@ install_gnome_extension() {
     gnome-extensions enable $extension_name
 }
 
+# TODO disable rest of the plugins
+# TODO create backup solution with rclone
+# TODO install lutris (possibly create install_gaming script)
 configure_gnome () {
-    sudo pacman -S --needed --noconfirm chrome-gnome-shell
-    yay -S --needed --noconfirm gnome-shell-extension-installer
+    gsettings set org.gnome.shell.app-switcher current-workspace-only true
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 
     gnome-shell-extension-installer --update
-
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
@@ -188,6 +191,13 @@ main () {
     elif [ "$OS_DETECTED" == "manjaro linux" ]; then
         install_base_desktop_manjaro
         install_yay_packages
+
+    elif [ "$OS_DETECTED" == "ubuntu" ]; then
+        install_base_desktop_debian
+
+    else
+        echo "Did not detect OS. Quitting."
+        exit 1
     fi
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
@@ -203,7 +213,7 @@ main () {
 
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
-
+        exit 1
     fi
 
 }

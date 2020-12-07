@@ -4,23 +4,32 @@
 
 install_base_debian () {
     sudo apt-get update
-    sudo apt-get install -y curl
-    sudo apt-get install -y fd-find
-    sudo apt-get install -y htop
-    sudo apt-get install -y httpie
-    sudo apt-get install -y iotop
-    sudo apt-get install -y neovim
-    sudo apt-get install -y net-tools
-    sudo apt-get install -y nodejs-lts-erbium
-    sudo apt-get install -y npm
-    sudo apt-get install -y python3
-    sudo apt-get install -y python3-pip
-    sudo apt-get install -y tmux
-    sudo apt-get install -y universal-ctags
-    sudo apt-get install -y wget
-    sudo apt-get install -y zsh
-    sudo apt-get install -y cargo
-    sudo apt-get install -y fish
+
+    sudo apt-get install -y \
+        cargo \
+        curl \
+        fd-find \
+        fish \
+        htop \
+        httpie \
+        iotop \
+        neovim \
+        net-tools \
+        nodejs \
+        npm \
+        python3 \
+        python3-pip \
+        rclone \
+        tmux \
+        universal-ctags \
+        wget \
+        && echo "apt install success"
+
+    install_base_snap
+}
+
+install_base_snap(){ 
+    sudo snap install go --classic
 }
 
 install_base_manjaro() {
@@ -221,7 +230,7 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
-
+        install_go_packages
 
     elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
         echo "Ubuntu detected"
@@ -240,6 +249,9 @@ main () {
     elif [ "$OS_DETECTED" == "arch linux arm" ]; then
         echo "Arch detected"
         install_base_arch
+    else
+        echo "Didn't detect OS"
+        exit 1
     fi
 
     install_npm_deps
