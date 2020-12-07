@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # vim:foldmethod=marker:foldlevel=0
 
+# TODO make output of script less verbose
+# TODO create backup solution with rclone
+# TODO install lutris (possibly create install_gaming script)
+# TODO fix extensions that are not installing on first run
+
 # Utils {{{
 
 identify_os () {
@@ -37,42 +42,40 @@ virtd() {
     sudo systemctl enable libvirtd --now
 }
 
-setup_dconf() {
-    dconf load  / < optional/dconf.conf
-}
-
-setup_dconf_cinnamon() {
-    dconf load  / < optional/cinnamon.conf
-}
-
 # }}}
 
 # Arch {{{
 install_yay_packages() {
-    yay -S --needed --noconfirm dbeaver
-    yay -S --needed --noconfirm mailspring
-    yay -S --needed --noconfirm google-chrome
-    yay -S --needed --noconfirm authy
-    yay -S --needed --noconfirm fondo
-    yay -S --needed --noconfirm toptracker
-    yay -S --needed --noconfirm rancher-k3d-bin
+    yay -S --needed --noconfirm  \
+        authy \
+        dbeaver \
+        fondo \
+        gnome-shell-extension-installer \
+        google-chrome \
+        mailspring \
+        rancher-k3d-bin \
+        toptracker \
+	&& echo -e '\033[1mYAY packages are installed\033[0m'
 }
 
 install_base_desktop_manjaro() {
-    sudo pacman -S --needed --noconfirm alacritty  # GPU term
-    sudo pacman -S --needed --noconfirm rclone  # backups
-    sudo pacman -S --needed --noconfirm openvpn
-    sudo pacman -S --needed --noconfirm pavucontrol
-    sudo pacman -S --needed --noconfirm pulsemixer
-    sudo pacman -S --needed --noconfirm telegram-desktop
-    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
-    sudo pacman -S --needed --noconfirm yay
-    sudo pacman -S --needed --noconfirm transmission-gtk  # For Linux ISOs.
+    sudo pacman -S --needed --noconfirm \
+        alacritty \
+        bluez-tools \
+        bluez-utils \
+        chrome-gnome-shell \
+        openvpn \
+        pavucontrol \
+        pulsemixer \
+        rclone \
+        telegram-desktop \
+        transmission-gtk \
+        xclip \
+        yay \
+    && arch_docker \
+	&& echo -e '\033[1mBase desktop packages are installed\033[0m'
 
-    sudo pacman -S --needed --noconfirm chrome-gnome-shell
-    yay -S --needed --noconfirm gnome-shell-extension-installer
 
-    arch_docker
 }
 
 install_base_desktop_arch () {
@@ -132,24 +135,30 @@ install_gnome_extension() {
     gnome-extensions enable $extension_name
 }
 
-# TODO disable rest of the plugins
-# TODO create backup solution with rclone
-# TODO install lutris (possibly create install_gaming script)
 configure_gnome () {
+    # Put dconf settings in
+    dconf load  / < optional/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+
+    # Disable all extensions firts
+    for EXT in $(gnome-extensions list)
+    do
+        gnome-extensions disable $EXT
+    done
+
+    # Install and enable required extensions
 
     gnome-shell-extension-installer --update
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
+    install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
 
     # install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
     # install_gnome_extension auto-move-windows@gnome-shell-extensions.gcampax.github.com 16  # AutoMoveWindows
     # install_gnome_extension unite@hardpixel.eu 1287  # Unite
-
-    # install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
     # install_gnome_extension caffeine@patapon.info 517  # caffeine
     # install_gnome_extension dash-to-panel@jderose9.github.com 1160  # Dash to panel
     # install_gnome_extension blyr@yozoon.dev.gmail.com 1251  # blyr
@@ -158,30 +167,14 @@ configure_gnome () {
 }
 # }}}
 
-configure_cinnamon() {
-    gsettings set org.cinnamon.desktop.wm.preferences num-workspaces 10
-}
-
-# Plamsa config {{{
-configure_kde () {
-    sudo pacman -S --needed --noconfirm gnome-keyring  # For mailspring to work
-    sudo pacman -S --needed --noconfirm kvantum-qt5
-
-    # Fix meta for opening menu
-    kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
-
-    # Restart kwin
-    qdbus org.kde.KWin /KWin reconfigure
-}
-# }}}
-
-
 main () {
     OS_DETECTED=`identify_os`
+    echo -e "\033[1m"
     echo "------------------------------"
     echo "OS: $OS_DETECTED"
     echo "Desktop: $XDG_SESSION_DESKTOP"
     echo "------------------------------"
+    echo -e "\033[0m"
 
     if [ "$OS_DETECTED" == "arch linux" ]; then
         setup_user
@@ -199,17 +192,10 @@ main () {
         echo "Did not detect OS. Quitting."
         exit 1
     fi
+    # ------------------------------------------
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
-        setup_dconf
         configure_gnome
-
-    elif [ "$XDG_SESSION_DESKTOP" == "KDE" ]; then
-        configure_kde
-
-    elif [ "$XDG_SESSION_DESKTOP" == "cinnamon" ]; then
-        setup_dconf_cinnamon
-        configure_cinnamon
 
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
