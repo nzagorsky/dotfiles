@@ -55,6 +55,7 @@ install_yay_packages() {
         mailspring \
         rancher-k3d-bin \
         toptracker \
+        xsv-bin \
 	&& echo -e '\033[1mYAY packages are installed\033[0m'
 }
 

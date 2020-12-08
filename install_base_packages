@@ -59,6 +59,7 @@ install_base_manjaro() {
         jq \
         k9s \
         kubectl \
+        tldr \
         neovim \
         npm \
         postgresql-libs \
