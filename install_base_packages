@@ -4,70 +4,76 @@
 
 install_base_debian () {
     sudo apt-get update
-    sudo apt-get install -y curl
-    sudo apt-get install -y fd-find
-    sudo apt-get install -y htop
-    sudo apt-get install -y httpie
-    sudo apt-get install -y iotop
-    sudo apt-get install -y neovim
-    sudo apt-get install -y net-tools
-    sudo apt-get install -y nodejs-lts-erbium
-    sudo apt-get install -y npm
-    sudo apt-get install -y python3
-    sudo apt-get install -y python3-pip
-    sudo apt-get install -y tmux
-    sudo apt-get install -y universal-ctags
-    sudo apt-get install -y wget
-    sudo apt-get install -y zsh
-    sudo apt-get install -y cargo
-    sudo apt-get install -y fish
+
+    sudo apt-get install -y \
+        cargo \
+        curl \
+        fd-find \
+        fish \
+        htop \
+        httpie \
+        iotop \
+        neovim \
+        net-tools \
+        nodejs \
+        npm \
+        python3 \
+        python3-pip \
+        rclone \
+        tmux \
+        universal-ctags \
+        wget \
+    && echo "apt install success"
+
+    install_base_snap
+}
+
+install_base_snap(){
+    sudo snap install go --classic
 }
 
 install_base_manjaro() {
-    sudo pacman -S --needed --noconfirm base-devel
-    sudo pacman -S --needed --noconfirm curl
-    sudo pacman -S --needed --noconfirm htop
-    sudo pacman -S --needed --noconfirm kubectl
-    sudo pacman -S --needed --noconfirm neovim
-    sudo pacman -S --needed --noconfirm cmake
-    sudo pacman -S --needed --noconfirm go
-    sudo pacman -S --needed --noconfirm reflector
-    sudo pacman -S --needed --noconfirm tmux
-    sudo pacman -S --needed --noconfirm wget
-    sudo pacman -S --needed --noconfirm bind-tools
-    sudo pacman -S --needed --noconfirm traceroute
-    sudo pacman -S --needed --noconfirm postgresql-libs
+    # TODO
+    # mysql \
+    # reflector \
 
-    # Build deps
-    sudo pacman -S --needed --noconfirm yarn
-    sudo pacman -S --needed --noconfirm npm
-    sudo pacman -S --needed --noconfirm rust
-    sudo pacman -S --needed --noconfirm xmlsec
-    sudo pacman -S --needed --noconfirm mysql
+    # TODO
+    # sudo pacman-mirrors -c Russia
 
-    # Shell goodies
-    sudo pacman -S --needed --noconfirm bat
-    sudo pacman -S --needed --noconfirm ctags
-    sudo pacman -S --needed --noconfirm exa
-    sudo pacman -S --needed --noconfirm fd
-    sudo pacman -S --needed --noconfirm fzf
-    sudo pacman -S --needed --noconfirm httpie
-    sudo pacman -S --needed --noconfirm k9s
-    sudo pacman -S --needed --noconfirm ripgrep
-    sudo pacman -S --needed --noconfirm sd
-    sudo pacman -S --needed --noconfirm fish
-
-    # Code tools
-    sudo pacman -S --needed --noconfirm rust-analyzer
-    sudo pacman -S --needed --noconfirm shellcheck
-    sudo pacman -S --needed --noconfirm jq
-    sudo pacman -S --needed --noconfirm terraform
-
-    # Org mode dependencies
-    sudo pacman -S --noconfirm --needed texlive-core
-    sudo pacman -S --noconfirm --needed texlive-bin
-    sudo pacman -S --noconfirm --needed texlive-science
-    sudo pacman -S --noconfirm --needed gnuplot sqlite
+    sudo pacman -S --quiet --needed --noconfirm \
+        base-devel \
+        go \
+        rclone \
+        bat \
+        bind-tools \
+        cmake \
+        ctags \
+        curl \
+        exa \
+        fd \
+        fish \
+        fzf \
+        go \
+        htop \
+        httpie \
+        jq \
+        k9s \
+        kubectl \
+        neovim \
+        npm \
+        postgresql-libs \
+        ripgrep \
+        rust \
+        rust-analyzer \
+        sd \
+        shellcheck \
+        terraform \
+        tmux \
+        traceroute \
+        wget \
+        xmlsec \
+        yarn \
+    && echo -e '\033[1mBase install success\033[0m'
 }
 
 install_base_arch () {
@@ -108,13 +114,6 @@ install_base_arch () {
     sudo pacman -S --needed --noconfirm shellcheck
     sudo pacman -S --needed --noconfirm jq
     sudo pacman -S --needed --noconfirm terraform
-
-    # Org mode dependencies
-    sudo pacman -S --noconfirm --needed texlive-core
-    sudo pacman -S --noconfirm --needed texlive-bin
-    sudo pacman -S --noconfirm --needed texlive-science
-    sudo pacman -S --noconfirm --needed gnuplot sqlite
-
 }
 
 
@@ -139,70 +138,53 @@ install_devspace() {
 }
 
 install_npm_deps () {
-    sudo npm install -g neovim
-
-    # code tools
-    sudo npm install -g standard
-    sudo npm install -g prettier
-
-    # lang servers
-    sudo npm install -g javascript-typescript-langserver
-    sudo npm install -g pyright
-    sudo npm install -g bash-language-server
-
-    # tools
-    sudo npm install -g elasticdump
-    sudo npm install -g marked
-    sudo npm install -g dockerfile-language-server-nodejs
+    sudo npm install -g \
+        neovim \
+        bash-language-server \
+        dockerfile-language-server-nodejs \
+        elasticdump \
+        javascript-typescript-langserver \
+        marked \
+        prettier \
+        pyright \
+        standard \
+    && echo -e '\033[1mNPM install success\033[0m'
 }
 
-install_python_deps () {
-    # Code style libs.
-    pip3 install -U --user black
-    pip3 install -U --user flake8-polyfill
-    pip3 install -U --user vim-vint
-    pip3 install -U --user "python-language-server[all]"
-    pip3 install -U --user jedi
-    pip3 install -U --user flake8
-    pip3 install -U --user radon  # dependency for flake8 that should be updated
-    pip3 install -U --user bandit
-    pip3 install -U --user mypy
-    pip3 install -U --user pyflakes
-    pip3 install -U --user pydocstyle
-    pip3 install -U --user yamllint
-    pip3 install -U --user pyinotify  # for inotifyexec
-
-    # Interactive shell
-    pip3 install -U --user ipython
-    pip3 install -U --user ipdb
-    pip3 install -U --user litecli
-    pip3 install -U --user pgcli
-    pip3 install -U --user iredis
-
-    # System
-    pip3 install -U --user docker-compose
-    pip3 install -U --user neovim
-    pip3 install -U --user pipenv
-
-    # Good things
-    pip3 install -U --user dataset
-    pip3 install -U --user awscli
-    pip3 install -U --user selenium
-    pip3 install -U --user nptime
-    pip3 install -U --user dateparser
-    pip3 install -U --user python-dateutil
-
-    # Stubs
-    pip3 install -U --user django-stubs
-
-    # Should come latest to avoid warnings with wrong version
-    pip3 install -U --user requests
+install_python_deps() {
+    pip3 install -U --user \
+        black \
+        flake8-polyfill \
+        vim-vint \
+        "python-language-server[all]" \
+        jedi \
+        flake8 \
+        radon \
+        bandit \
+        mypy \
+        pyflakes \
+        pydocstyle \
+        yamllint \
+        pyinotify \
+        ipython \
+        ipdb \
+        litecli \
+        pgcli \
+        iredis \
+        docker-compose \
+        neovim \
+        pipenv \
+        dataset \
+        awscli \
+        selenium \
+        nptime \
+        dateparser \
+        python-dateutil \
+        django-stubs \
+        requests \
+        && echo -e '\033[1mPIP install success\033[0m'
 }
 
-
-neovim_appimage () {
-    wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O ~/.local/bin/nvim; chmod a+x ~/.local/bin/nvim
-}
 
 
 identify_os () {
@@ -212,7 +194,12 @@ identify_os () {
 
 
 install_fish() {
-    fish -c "fisher add jethrokuan/z"
+    fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+    fish -c "fisher install jethrokuan/z"
+}
+
+change_default_shell() {
+    sudo chsh toltenos -s $(which fish)
 }
 
 main () {
@@ -221,7 +208,7 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
-
+        install_go_packages
 
     elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
         echo "Ubuntu detected"
@@ -240,11 +227,16 @@ main () {
     elif [ "$OS_DETECTED" == "arch linux arm" ]; then
         echo "Arch detected"
         install_base_arch
+    else
+        echo "Didn't detect OS"
+        exit 1
     fi
 
     install_npm_deps
     install_python_deps
     install_fish
+
+    change_default_shell
 }
 
 

@@ -16,6 +16,10 @@ setup_structure () {
     mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
 }
 
+setup_fisher() {
+    fisher add z
+}
+
 
 main () {
     pull_submodules
