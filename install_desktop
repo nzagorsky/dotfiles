@@ -53,6 +53,7 @@ install_yay_packages() {
         gnome-shell-extension-installer \
         google-chrome \
         mailspring \
+        spotify \
         rancher-k3d-bin \
         toptracker \
         xsv-bin \

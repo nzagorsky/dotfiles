@@ -71,6 +71,7 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('sheerun/vim-polyglot')
 
     " Python modules.
+    " TODO debug it's only working in tmux lol
     call dein#add('numirias/semshi')
     call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
