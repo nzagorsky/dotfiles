@@ -68,6 +68,7 @@ install_base_desktop_manjaro() {
         chrome-gnome-shell \
         openvpn \
         pavucontrol \
+        sqlitebrowser \
         pulsemixer \
         rclone \
         telegram-desktop \

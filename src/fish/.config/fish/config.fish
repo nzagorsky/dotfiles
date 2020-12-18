@@ -42,10 +42,10 @@ end
 # Tmux
 function t
     if [ -z "$argv" ]
-        tmux -u attach -t default || tmux -u new -s default
+        tmux -u attach -t default || systemd-run --scope --user tmux -u new -s default
 
     else
-        tmux -u attach -t $argv || tmux -u new -s $argv
+        tmux -u attach -t $argv || systemd-run --scope --user tmux -u new -s $argv
 
     end
 end
