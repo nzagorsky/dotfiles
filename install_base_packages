@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO REFACTOR TO USE ONE COMMAND
-
 install_base_debian () {
     sudo apt-get update
 
@@ -33,17 +31,8 @@ install_base_snap(){
 }
 
 install_base_manjaro() {
-    # TODO
-    # mysql \
-    # reflector \
-
-    # TODO
-    # sudo pacman-mirrors -c Russia
-
     sudo pacman -S --quiet --needed --noconfirm \
         base-devel \
-        go \
-        rclone \
         bat \
         bind-tools \
         cmake \
@@ -54,21 +43,24 @@ install_base_manjaro() {
         fish \
         fzf \
         go \
+        go \
+        helm \
         htop \
         httpie \
         jq \
         k9s \
         kubectl \
-        tldr \
         neovim \
         npm \
         postgresql-libs \
+        rclone \
         ripgrep \
         rust \
         rust-analyzer \
         sd \
         shellcheck \
         terraform \
+        tldr \
         tmux \
         traceroute \
         wget \
@@ -78,43 +70,40 @@ install_base_manjaro() {
 }
 
 install_base_arch () {
-    sudo pacman -S --needed --noconfirm autoconf
-    sudo pacman -S --needed --noconfirm base-devel
-    sudo pacman -S --needed --noconfirm bind-tools
-    sudo pacman -S --needed --noconfirm curl
-    sudo pacman -S --needed --noconfirm htop
-    sudo pacman -S --needed --noconfirm inotify-tools
-    sudo pacman -S --needed --noconfirm iotop
-    sudo pacman -S --needed --noconfirm kubectl
-    sudo pacman -S --needed --noconfirm neovim
-    sudo pacman -S --needed --noconfirm cmake
-    sudo pacman -S --needed --noconfirm p7zip
-    sudo pacman -S --needed --noconfirm pkgconf
-    sudo pacman -S --needed --noconfirm tmux
-    sudo pacman -S --needed --noconfirm postgresql-libs
-
-    # Build deps
-    sudo pacman -S --needed --noconfirm mysql
-    sudo pacman -S --needed --noconfirm npm
-    sudo pacman -S --needed --noconfirm python-pip
-    sudo pacman -S --needed --noconfirm python3
-    sudo pacman -S --needed --noconfirm rust
-    sudo pacman -S --needed --noconfirm xmlsec
-
-    # Shell goodies
-    sudo pacman -S --needed --noconfirm ctags
-    sudo pacman -S --needed --noconfirm fd
-    sudo pacman -S --needed --noconfirm fzf
-    sudo pacman -S --needed --noconfirm httpie
-    sudo pacman -S --needed --noconfirm k9s
-    sudo pacman -S --needed --noconfirm reflector  # arch mirrors update
-    sudo pacman -S --needed --noconfirm fish
-
-    # Code tools
-    sudo pacman -S --needed --noconfirm rust-analyzer
-    sudo pacman -S --needed --noconfirm shellcheck
-    sudo pacman -S --needed --noconfirm jq
-    sudo pacman -S --needed --noconfirm terraform
+    sudo pacman -S --needed --noconfirm \
+        autoconf \
+        base-devel \
+        bind-tools \
+        cmake \
+        ctags \
+        curl \
+        fd \
+        fish \
+        fzf \
+        helm \
+        htop \
+        httpie \
+        inotify-tools \
+        iotop \
+        jq \
+        k9s \
+        kubectl \
+        mysql \
+        neovim \
+        npm \
+        p7zip \
+        pkgconf \
+        postgresql-libs \
+        python-pip \
+        python3 \
+        reflector \
+        rust \
+        rust-analyzer \
+        shellcheck \
+        terraform \
+        tmux \
+        xmlsec \
+    && echo -e '\033[1mBase install success\033[0m'
 }
 
 
@@ -154,36 +143,36 @@ install_npm_deps () {
 
 install_python_deps() {
     pip3 install -U --user \
-        black \
-        flake8-polyfill \
-        vim-vint \
         "python-language-server[all]" \
-        jedi \
-        flake8 \
-        radon \
-        bandit \
-        mypy \
-        pyflakes \
-        pydocstyle \
-        yamllint \
-        pyinotify \
-        ipython \
-        ipdb \
-        litecli \
-        pgcli \
-        iredis \
-        docker-compose \
-        neovim \
-        pipenv \
-        dataset \
         awscli \
-        selenium \
-        nptime \
+        bandit \
+        black \
+        dataset \
         dateparser \
-        python-dateutil \
         django-stubs \
+        docker-compose \
+        flake8 \
+        flake8-polyfill \
+        ipdb \
+        ipython \
+        iredis \
+        jedi \
+        litecli \
+        mypy \
+        neovim \
+        nptime \
+        pgcli \
+        pipenv \
+        pydocstyle \
+        pyflakes \
+        pyinotify \
+        python-dateutil \
+        radon \
         requests \
-        && echo -e '\033[1mPIP install success\033[0m'
+        selenium \
+        vim-vint \
+        yamllint \
+    && echo -e '\033[1mPIP install success\033[0m'
 }
 
 
@@ -200,7 +189,7 @@ install_fish() {
 }
 
 change_default_shell() {
-    sudo chsh toltenos -s $(which fish)
+    sudo chsh $(whoami) -s $(which fish)
 }
 
 main () {
