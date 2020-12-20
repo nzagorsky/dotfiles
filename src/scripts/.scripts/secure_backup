@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+mkdir -p secure_backup
+
+cp -r ~/.ssh ~/secure_backup/.ssh
+cp -r ~/.kube ~/secure_backup/.kube
+cp -r ~/.credentials ~/secure_backup/.credentials
+cp -r ~/.gnupg ~/secure_backup/.gnupg
+cp -r ~/.aws ~/secure_backup/.aws
+
