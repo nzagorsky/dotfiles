@@ -147,6 +147,7 @@ install_python_deps() {
         awscli \
         bandit \
         black \
+        bpytop \
         dataset \
         dateparser \
         django-stubs \
