@@ -1,34 +1,54 @@
 #! /bin/sh
-# Init {{{
-# Setup Xresources
+
+# ----
+# Init
+# ----
+
+# TODO live reload of all configs
+# TODO lemonbr config
+# TODO dunst config
+# TODO mpv config
+# TODO gtk config backed up
+# TODO move files around, use .local/bin for scripts and so on
+# TODO screenshots
+
+# TODO debug chrome not exiting
+# TODO change highlight of borders
+# TODO setup stalonetray or find alternate solution
+
+eval $("ssh-agent") && /bin/ls ~/.ssh/id_rsa* | grep -v .pub | xargs -L1 ssh-add
 xrdb -merge ~/.Xresources
-
-# Speed up keyboard
-xset r rate 190 50
-
-picom -b &
-
-# sxhkd duplicate running app prevention
-SXHKD_PIDS=$(pgrep sxhkd)
-sxhkd &
-echo $SXHKD_PIDS | xargs -L1 kill
-
+xset r rate 200 50
+gnome-keyring-daemon &
+pkill sxhkd; sxhkd &
 nitrogen --restore &
-# }}}
+setxkbmap -option grp:win_space_toggle us,ru &
 
-# BSPWM config {{{
+# ------
+# Config
+# ------
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
-bspc config border_width         4
-bspc config window_gap          12
+bspc config border_width          4
+bspc config window_gap            15
 
-bspc config split_ratio          0.52
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
+bspc config split_ratio           0.52
+bspc config borderless_monocle    true
+bspc config gapless_monocle       true
+bspc config focus_follows_pointer true
 
+# NOTE: to get class names use `xprop`
+bspc rule -a Google-chrome desktop='^2'
+bspc rule -a TelegramDesktop desktop='^4' state=floating
 bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
-# }}}
+bspc rule -a Nitrogen state=floating
+bspc rule -a "MEGAsync" state=floating
+
+bspc rule -a "pop-up" state=floating
+bspc rule -a dialog state=floating
+bspc rule -a menu state=floating follow=on
+bspc rule -a bubble state=floating follow=on
+
 # vim:foldmethod=marker:foldlevel=0

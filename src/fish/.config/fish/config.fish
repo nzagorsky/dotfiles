@@ -67,6 +67,7 @@ end
 
 function b
     set no_search_commands "scan" "devices"
+    bluetoothctl power on > /dev/null
 
     if contains $argv[1] $no_search_commands
         bluetoothctl -- $argv

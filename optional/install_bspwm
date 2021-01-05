@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 
+# picom \
+
 bspwm() {
     sudo pacman -S --needed --noconfirm  \
         bspwm \
         dmenu \
+        dunst \
         nitrogen \
-        picom \
-        polybar \
+        playerctl \
+        lxappearance \
+        lemonbar \
         sxhkd \
+        stalonetray \
+    && mkdir -p ~/.cache/bspwm; touch ~/.cache/bspwm/log
     && echo -e '\033[1mBase install success\033[0m'
 }
 

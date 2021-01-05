@@ -8,7 +8,7 @@ super + e
 
 # program launcher
 # super + @space
-super + d
+super + a
 	dmenu_run
 
 alt + space
@@ -88,7 +88,8 @@ super + {o,i}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} '^{1-9,10}' --follow
+
 
 # }}}
 # Preselect {{{
@@ -129,6 +130,9 @@ super + {Left,Down,Up,Right}
 #Raises volume
 XF86AudioRaiseVolume
     pactl set-sink-volume @DEFAULT_SINK@ +10%
+
+super + alt + {1,2}
+    pactl set-sink-volume @DEFAULT_SINK@ {-10%,+10%}
 
 #Lowers volume
 XF86AudioLowerVolume
