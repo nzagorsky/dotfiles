@@ -5,7 +5,7 @@
 # ----
 
 # TODO live reload of all configs
-# TODO lemonbr config
+# TODO tint2 config
 # TODO dunst config
 # TODO mpv config
 # TODO gtk config backed up
@@ -23,7 +23,7 @@ pkill ssh-agent; eval $("ssh-agent") && /bin/ls ~/.ssh/id_rsa* | grep -v .pub | 
 xrdb -merge ~/.Xresources
 picom -b &
 blueman-applet &
-pkill stalonetray; stalonetray -c ~/.config/stalonetrayrc &
+pkill tint2; tint2 &
 xset r rate 200 50
 gnome-keyring-daemon -r -d &
 pkill sxhkd; sxhkd &
