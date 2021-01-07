@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+modprobe i2c_hid
+sudo bash -c 'echo "i2c-ELAN0001:00" | tee /sys/bus/i2c/drivers/elants_i2c/unbind'
+sudo bash -c 'echo "i2c-ELAN0001:00" | tee /sys/bus/i2c/drivers/i2c_hid/bind'
+
