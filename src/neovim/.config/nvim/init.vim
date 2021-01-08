@@ -22,18 +22,23 @@ nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 set shortmess=aoOtIWcFs
 " }}}
 " Plugins {{{1
-if (!isdirectory(expand('$HOME/.config/nvim/repos/github.com/Shougo/dein.vim')))
-    call system(expand('mkdir -p $HOME/.config/nvim/repos/github.com'))
-    call system(expand('git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim'))
+if (!isdirectory(expand('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')))
+    call system(expand('mkdir -p $HOME/.cache/dein/repos/github.com'))
+    call system(expand('git clone https://github.com/Shougo/dein.vim $HOME/.cache/dein/repos/github.com/Shougo/dein.vim'))
 endif
 
 set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
 " Setup plugins
-let g:dein#auto_recache = 1
-if dein#load_state(expand('~/.config/nvim'))
-    call dein#begin(expand('~/.config/nvim'))
-    call dein#add('Shougo/dein.vim')
+" let g:dein#auto_recache = 1
+if dein#load_state(expand('~/.cache/dein'))
+    call dein#begin(expand('~/.cache/dein'))
+
+    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+    " Python modules.
+    call dein#add('numirias/semshi', {'on_ft': 'python'})
+    call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
 
     " Utility.
     if exists('$TMUX')
@@ -55,7 +60,6 @@ if dein#load_state(expand('~/.config/nvim'))
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-commentary')
     call dein#add('jiangmiao/auto-pairs')
-
     call dein#add('junegunn/goyo.vim')
 
     " Async command execution
@@ -70,17 +74,8 @@ if dein#load_state(expand('~/.config/nvim'))
     " Syntax highlightning for all languages.
     call dein#add('sheerun/vim-polyglot')
 
-    " Python modules.
-    " TODO debug it's only working in tmux lol
-    call dein#add('numirias/semshi')
-    call dein#add('raimon49/requirements.txt.vim', { 'on_ft': 'requirements' })
-
     " Vim
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
-    " call dein#add('Kuniwak/vint', {'on_ft': 'vim'})
-
-    " " CSV
-    " call dein#add('chrisbra/csv.vim', {'on_ft': 'csv'})
 
     " JSON
     call dein#add('elzr/vim-json', { 'on_ft': 'json' })
@@ -389,6 +384,7 @@ if g:dein#is_sourced('semshi')
     function! SemshiStyleUpdate() abort
         hi semshiSelected ctermfg=none ctermbg=none
     endfunction
+
     autocmd EditorAppearance BufEnter * call SemshiStyleUpdate()
 endif
 
