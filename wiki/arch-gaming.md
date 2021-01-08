@@ -17,7 +17,7 @@ source: https://github.com/lutris/docs/blob/master/InstallingDrivers.md
 
 # Install Wine and Lutris:
 
-    sudo pacman -S wine lutris
+    sudo pacman -S wine-staging wine-mono wine-gecko lutris
 
 
 # Battle.net dependencies:

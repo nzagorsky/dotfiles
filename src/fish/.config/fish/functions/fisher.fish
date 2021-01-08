@@ -19,7 +19,7 @@ function fisher -a cmd -d "Fish plugin manager"
         case ls list
             string match --entire --regex -- "$argv[2]" $_fisher_plugins
         case install update remove
-            isatty || read -laz stdin && set --append argv $stdin
+            isatty || read --local --null --array stdin && set --append argv $stdin
             set --local install_plugins
             set --local update_plugins
             set --local remove_plugins
@@ -90,7 +90,7 @@ function fisher -a cmd -d "Fish plugin manager"
                     set --query fisher_user_api_token && set opts -u $fisher_user_api_token
 
                     echo -e \"Fetching \x1b[4m\$url\x1b[24m\"
-                    if command curl $opts -Ss -w \"\" \$url 2>&1 | command tar -xzf- -C \$temp 2>/dev/null
+                    if command curl $opts --silent \$url | tar --extract --gzip --directory \$temp --file -
                         command cp -Rf \$temp/*/* $source
                     else
                         echo fisher: Invalid plugin name or host unavailable: \\\"$plugin\\\" >&2
@@ -198,10 +198,13 @@ if functions --query _fisher_self_update || test -e $__fish_config_dir/fishfile 
     _fisher_migrate >/dev/null 2>/dev/null
 end
 
-if functions --query _fisher_list && ! set --query _fisher_4_1_migration_done
-    set --global _fisher_4_1_migration_done
-    fisher update >/dev/null 2>/dev/null
-    set --query XDG_DATA_HOME || set --local XDG_DATA_HOME ~/.local/share
-    test -e $XDG_DATA_HOME/fisher \
-        && echo (set_color --bold red)"fisher: XDG_DATA_HOME/fisher has been deprecated, please remove it: rm -rf $XDG_DATA_HOME/fisher"(set_color normal)
+function _fisher_fish_postexec --on-event fish_postexec
+    if functions --query _fisher_list
+        fisher update >/dev/null 2>/dev/null
+        set --query XDG_DATA_HOME || set --local XDG_DATA_HOME ~/.local/share
+        test -e $XDG_DATA_HOME/fisher && rm -rf $XDG_DATA_HOME/fisher
+        functions --erase _fisher_list _fisher_plugin_parse
+        set --erase fisher_data
+    end
+    functions --erase _fisher_fish_postexec
 end
