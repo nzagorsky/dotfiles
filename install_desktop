@@ -61,6 +61,10 @@ install_yay_packages() {
 }
 
 install_base_desktop_manjaro() {
+    # Handle groups
+    sudo gpasswd -a $USER input
+
+    # Install packages.
     sudo pacman -S --needed --noconfirm \
         alacritty \
         bluez-tools \
