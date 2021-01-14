@@ -408,7 +408,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-json',
         \ 'coc-sql',
         \ 'coc-prettier',
-        \ 'coc-python',
+        \ 'coc-pyright',
         \ 'coc-fish',
         \ 'coc-rls',
         \ 'coc-tsserver',
