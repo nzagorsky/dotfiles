@@ -10,6 +10,7 @@ install_base_debian () {
         fish \
         htop \
         httpie \
+        software-properties-common \
         iotop \
         neovim \
         net-tools \
@@ -17,18 +18,15 @@ install_base_debian () {
         npm \
         python3 \
         python3-pip \
+        python3-dev \
         rclone \
         tmux \
+        libpq-dev \
         universal-ctags \
         wget \
-    && echo "apt install success"
-
-    install_base_snap
+    && echo -e '\033[1mBase install success\033[0m'
 }
 
-install_base_snap(){
-    sudo snap install go --classic
-}
 
 install_base_manjaro() {
     sudo pacman -S --quiet --needed --noconfirm \
@@ -142,6 +140,8 @@ install_npm_deps () {
 }
 
 install_python_deps() {
+    pip3 install -U --user setuptools wheel
+
     pip3 install -U --user \
         "python-language-server[all]" \
         awscli \
@@ -199,11 +199,12 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_debian
-        install_go_packages
+        # install_go_packages
 
     elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
-        echo "Ubuntu detected"
+        echo "Debian detected"
         install_base_debian
+        # install_go_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
