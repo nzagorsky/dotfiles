@@ -9,6 +9,8 @@ install_base_debian () {
         fd-find \
         fish \
         htop \
+        exa \
+        ripgrep \
         httpie \
         software-properties-common \
         iotop \
