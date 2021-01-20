@@ -27,7 +27,7 @@ if (!isdirectory(expand('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')))
     call system(expand('git clone https://github.com/Shougo/dein.vim $HOME/.cache/dein/repos/github.com/Shougo/dein.vim'))
 endif
 
-set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Setup plugins
 " let g:dein#auto_recache = 1
@@ -408,7 +408,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-json',
         \ 'coc-sql',
         \ 'coc-prettier',
-        \ 'coc-python',
+        \ 'coc-pyright',
         \ 'coc-fish',
         \ 'coc-rls',
         \ 'coc-tsserver',
@@ -419,10 +419,10 @@ if g:dein#is_sourced('coc.nvim')
 
     function! s:format_code()
         if (&ft=='python')
-            call CocAction('format') | CocCommand python.sortImports
-        else
-            call CocAction('format')
+            :silent exec "!isort --sl -m 3 %"
         endif
+
+        call CocActionAsync('format')
     endfunction
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)
