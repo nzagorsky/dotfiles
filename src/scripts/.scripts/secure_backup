@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-mkdir secure_backup
+TMP_DIR=/tmp/secure_backup
+mkdir $TMP_DIR
 
-cp -r ~/.ssh secure_backup/.ssh
-cp -r ~/.kube secure_backup/.kube
-cp -r ~/.credentials secure_backup/.credentials
-cp -r ~/.gnupg secure_backup/.gnupg
-cp -r ~/.aws secure_backup/.aws
+cp -r ~/.ssh $TMP_DIR/.ssh
+cp -r ~/.kube $TMP_DIR/.kube
+cp -r ~/.credentials $TMP_DIR/.credentials
+cp -r ~/.gnupg $TMP_DIR/.gnupg
+cp -r ~/.aws $TMP_DIR/.aws
+
+zip -r secure.zip $TMP_DIR
+rm -rf $TMP_DIR
