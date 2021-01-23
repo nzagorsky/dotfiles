@@ -9,7 +9,6 @@ install_base_debian () {
         fd-find \
         fish \
         htop \
-        exa \
         ripgrep \
         httpie \
         software-properties-common \
@@ -26,6 +25,7 @@ install_base_debian () {
         libpq-dev \
         universal-ctags \
         wget \
+    && cargo install exa \
     && echo -e '\033[1mBase install success\033[0m'
 }
 
