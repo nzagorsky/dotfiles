@@ -15,7 +15,7 @@ export GOPATH="$HOME/code/go"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git || find * -type f'
-export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
+export FZF_DEFAULT_OPTS="--inline-info --preview 'batcat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
@@ -89,7 +89,7 @@ alias cya='systemctl suspend'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --color=tty -d skip'
-alias cat=bat
+alias cat=batcat
 alias la='exa -la --group-directories-first --color=auto -F'
 alias ll='exa -lhs --group-directories-first --color=auto -F'
 alias lla='exa -lahs --group-directories-first --color=auto -F'

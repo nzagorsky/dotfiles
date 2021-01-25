@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
-install_base_debian () {
+install_base_ubuntu () {
     command rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
 
     sudo apt-get update
     sudo apt-get install -y \
+        bat \
         build-essential \
-        libxft-dev \
-        libssl-dev \
-        libx11-dev \
-        lm-sensors \
         cargo \
         cmake \
         curl \
@@ -23,7 +20,11 @@ install_base_debian () {
         libfontconfig1-dev \
         libfreetype6-dev \
         libpq-dev \
+        libssl-dev \
+        libx11-dev \
         libxcb-xfixes0-dev \
+        libxft-dev \
+        lm-sensors \
         neovim \
         net-tools \
         nodejs \
@@ -48,7 +49,6 @@ install_snap_packages() {
 install_base_manjaro() {
     sudo pacman -S --quiet --needed --noconfirm \
         base-devel \
-        bat \
         bind-tools \
         cmake \
         ctags \
@@ -215,14 +215,9 @@ main () {
 
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
-        install_base_debian > /dev/null
+        install_base_ubuntu > /dev/null
 	    install_snap_packages
-        # install_go_packages
-
-    elif [ "$OS_DETECTED" == "debian gnu/linux" ]; then
-        echo "Debian detected"
-        install_base_debian
-        # install_go_packages
+        install_go_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
         echo "Arch detected"
