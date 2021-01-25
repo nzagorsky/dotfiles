@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+sudo cp touchpadfix.service /etc/systemd/system/touchpadfix.service
+sudo cp touchpadfix /usr/local/bin/touchpadfix
+sudo chmod +x /usr/local/bin/touchpadfix
+sudo systemctl daemon-reload
+sudo systemctl enable --now touchpadfix.service

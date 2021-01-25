@@ -2,30 +2,16 @@
 
 pull_submodules () {
     git submodule update --init --recursive --depth 1
-
 }
-
 
 setup_dots () {
     cd src
     stow -t ~ *
 }
 
-setup_structure () {
-    mkdir -p ~/.credentials; touch ~/.credentials/secure
-    mkdir -p ~/.ssh && chmod -R 700 ~/.ssh
-}
-
-setup_fisher() {
-    fisher add z
-}
-
-
 main () {
     pull_submodules
     setup_dots
-    setup_structure
 }
 
-
-main
+main > /dev/null
