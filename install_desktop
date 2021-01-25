@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# vim:foldmethod=marker:foldlevel=0
 # This file represents installation scripts for Gnome and common desktop tools.
 # OSes currently supported: Manjaro, Arch, Ubuntu
 
@@ -12,6 +11,12 @@ setup_yay () {
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
+}
+
+setup_docker_ubuntu() {
+    sudo apt-get install -y docker.io
+    sudo systemctl enable docker --now
+    sudo gpasswd -a $USER docker
 }
 
 setup_docker_arch() {
@@ -108,15 +113,6 @@ install_base_desktop_arch () {
 
 }
 
-install_desktop_debian () {
-    sudo apt-get update
-    sudo apt-get install -y openvpn
-    sudo apt-get install -y docker.io
-    sudo apt-get install -y xclip
-    sudo apt-get install -y kitty
-}
-
-
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
@@ -134,14 +130,13 @@ configure_gnome () {
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
     gsettings set org.gnome.Epiphany.web:/ hardware-acceleration-policy 'always'
 
-    # Disable all extensions firts
+    # Disable all extensions first
     for EXT in $(gnome-extensions list)
     do
         gnome-extensions disable $EXT
     done
 
     # Install and enable required extensions
-
     gnome-shell-extension-installer --update
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
@@ -156,6 +151,42 @@ configure_gnome () {
     # install_gnome_extension blyr@yozoon.dev.gmail.com 1251  # blyr
     # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
     # install_gnome_extension hidetopbar@mathieu.bidon.ca 545  # hide top bar
+}
+
+# TODO mega, chrome, toptracker
+install_snap_packages() {
+    sudo snap install \
+        authy \
+        bitwarden \
+        mailspring \
+        insomnia \
+        dbeaver-ce
+}
+
+install_base_desktop_ubuntu() {
+    sudo apt-get update
+    sudo apt-get install -y \
+        chrome-gnome-shell \
+        fonts-hack-ttf \
+        gdebi \
+        gnome-tweak-tool \
+        openvpn \
+        pavucontrol \
+        pulsemixer \
+        sqlitebrowser \
+        telegram-desktop \
+        transmission-gtk \
+        xclip \
+    && setup_docker_ubuntu \
+	&& echo -e '\033[1mBase desktop packages are installed\033[0m'
+}
+
+install_cargo_packages() {
+    if ! command -v alacritty &> /dev/null 
+    then
+        cargo install alacritty
+        sudo cp $(which alacritty) /usr/bin/alacritty
+    fi
 }
 
 main () {
@@ -177,8 +208,9 @@ main () {
         install_yay_packages
 
     elif [ "$OS_DETECTED" == "ubuntu" ]; then
-        install_base_desktop_debian
-
+        install_base_desktop_ubuntu > /dev/null
+        install_snap_packages > /dev/null
+        install_cargo_packages > /dev/null
     else
         echo "Did not detect OS. Quitting."
         exit 1
@@ -187,7 +219,8 @@ main () {
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
         configure_gnome
-
+    elif [ "$XDG_SESSION_DESKTOP" == "ubuntu" ]; then  # fucking smart, eh?
+        configure_gnome
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
         exit 1
