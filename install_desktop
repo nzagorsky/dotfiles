@@ -155,12 +155,10 @@ configure_gnome () {
 
 # TODO mega, chrome, toptracker
 install_snap_packages() {
-    sudo snap install \
-        authy \
-        bitwarden \
-        mailspring \
-        insomnia \
-        dbeaver-ce
+    sudo snap install --beta authy
+    sudo snap install mailspring
+    sudo snap install insomnia
+    sudo snap install dbeaver-ce
 }
 install_flatpak_packages() {
     flatpak install -y com.github.calo001.fondo
@@ -184,7 +182,7 @@ install_base_desktop_ubuntu() {
         xclip \
     && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
     && setup_docker_ubuntu \
-	&& echo -e '\033[1mBase desktop packages are installed\033[0m'
+	&& >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
 }
 
 install_cargo_packages() {
@@ -217,7 +215,7 @@ main () {
         install_base_desktop_ubuntu > /dev/null
         install_snap_packages > /dev/null
         install_cargo_packages > /dev/null
-        install_flatpak_packages
+        install_flatpak_packages > /dev/null
     else
         echo "Did not detect OS. Quitting."
         exit 1
