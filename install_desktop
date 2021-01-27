@@ -2,6 +2,8 @@
 # This file represents installation scripts for Gnome and common desktop tools.
 # OSes currently supported: Manjaro, Arch, Ubuntu
 
+EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
+
 identify_os () {
     . /etc/os-release
     echo $NAME | tr '[:upper:]' '[:lower:]'
@@ -44,7 +46,6 @@ install_yay_packages() {
         authy \
         dbeaver \
         fondo \
-        gnome-shell-extension-installer \
         google-chrome \
         mailspring \
         spotify \
@@ -118,7 +119,7 @@ install_gnome_extension() {
     extension_id=$2
 
     gnome-extensions list | grep $extension_name > /dev/null  || \
-        gnome-shell-extension-installer --yes $extension_id
+        $EXTENSION_INSTALLER --yes $extension_id
     gnome-extensions enable $extension_name
 }
 
@@ -137,7 +138,7 @@ configure_gnome () {
     done
 
     # Install and enable required extensions
-    gnome-shell-extension-installer --update
+    $EXTENSION_INSTALLER --update
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
@@ -159,6 +160,7 @@ install_snap_packages() {
     sudo snap install mailspring
     sudo snap install insomnia
     sudo snap install dbeaver-ce
+    sudo snap install spotify
 }
 install_flatpak_packages() {
     flatpak install -y com.github.calo001.fondo
@@ -170,6 +172,7 @@ install_base_desktop_ubuntu() {
         chrome-gnome-shell \
         fonts-hack-ttf \
         gdebi \
+        mpv \
         gnome-tweak-tool \
         openvpn \
         pavucontrol \
@@ -188,8 +191,8 @@ install_base_desktop_ubuntu() {
 install_cargo_packages() {
     if ! command -v alacritty &> /dev/null 
     then
-        cargo install alacritty
-        sudo cp $(which alacritty) /usr/bin/alacritty
+        BUILD_PATH=/tmp/alacritty
+        cargo install alacritty --root $BUILD_PATH; sudo cp $BUILD_PATH/bin/alacritty /usr/bin/alacritty
     fi
 }
 
