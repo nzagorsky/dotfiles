@@ -52,8 +52,8 @@ install_yay_packages() {
         rancher-k3d-bin \
         toptracker \
         xsv-bin \
-	&& echo -e '\033[1mAUR packages are installed\033[0m'
-}
+        && echo -e '\033[1mAUR packages are installed\033[0m'
+    }
 
 install_base_desktop_manjaro() {
     # Handle groups
@@ -74,10 +74,10 @@ install_base_desktop_manjaro() {
         transmission-gtk \
         xclip \
         yay \
-    && setup_docker_arch \
-	&& echo -e '\033[1mBase desktop packages are installed\033[0m'
+        && setup_docker_arch \
+        && echo -e '\033[1mBase desktop packages are installed\033[0m'
 
-}
+    }
 
 install_base_desktop_arch () {
     # Check if yay is present and install it if not.
@@ -117,10 +117,7 @@ install_base_desktop_arch () {
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
-
-    gnome-extensions list | grep $extension_name > /dev/null  || \
-        $EXTENSION_INSTALLER --yes $extension_id
-    gnome-extensions enable $extension_name
+    gnome-extensions list | grep $extension_name > /dev/null  || $EXTENSION_INSTALLER --yes $extension_id gnome-extensions enable $extension_name
 }
 
 configure_gnome () {
@@ -183,10 +180,10 @@ install_base_desktop_ubuntu() {
         telegram-desktop \
         transmission-gtk \
         xclip \
-    && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
-    && setup_docker_ubuntu \
-	&& >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
-}
+        && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
+        && setup_docker_ubuntu \
+        && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
+    }
 
 install_cargo_packages() {
     if ! command -v alacritty &> /dev/null 

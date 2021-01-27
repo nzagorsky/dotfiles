@@ -38,8 +38,8 @@ install_base_ubuntu () {
         tmux \
         universal-ctags \
         wget \
-    && cargo install exa \
-    && echo -e '\033[1mBase install success\033[0m'
+        && cargo install exa \
+        && echo -e '\033[1mBase install success\033[0m'
 
     command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
 }
@@ -82,8 +82,8 @@ install_base_manjaro() {
         wget \
         xmlsec \
         yarn \
-    && echo -e '\033[1mBase install success\033[0m'
-}
+        && echo -e '\033[1mBase install success\033[0m'
+    }
 
 install_base_arch () {
     sudo pacman -S --needed --noconfirm \
@@ -119,8 +119,8 @@ install_base_arch () {
         terraform \
         tmux \
         xmlsec \
-    && echo -e '\033[1mBase install success\033[0m'
-}
+        && echo -e '\033[1mBase install success\033[0m'
+    }
 
 
 install_go_packages() {
@@ -154,8 +154,8 @@ install_npm_deps () {
         prettier \
         pyright \
         standard \
-    && echo -e '\033[1mNPM install success\033[0m'
-}
+        && echo -e '\033[1mNPM install success\033[0m'
+    }
 
 install_python_deps() {
     pip3 install -U --user setuptools wheel --no-warn-script-location
@@ -192,8 +192,8 @@ install_python_deps() {
         vim-vint \
         yamllint \
         --no-warn-script-location \
-    && echo -e '\033[1mPIP install success\033[0m'
-}
+        && echo -e '\033[1mPIP install success\033[0m'
+    }
 
 
 
@@ -218,7 +218,7 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_ubuntu > /dev/null
-	    install_snap_packages
+        install_snap_packages
         install_go_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
