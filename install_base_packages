@@ -2,6 +2,7 @@
 
 install_base_ubuntu () {
     command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
+    command -v pulumi 2>/dev/null || curl -fsSL https://get.pulumi.com | sh
 
     sudo apt-get update
     sudo apt-get install -y \
@@ -10,6 +11,7 @@ install_base_ubuntu () {
         cargo \
         cmake \
         curl \
+        openssh-server \
         fd-find \
         fish \
         golang \
@@ -44,6 +46,7 @@ install_base_ubuntu () {
 
 install_snap_packages() {
     sudo snap install bw
+    sudo snap install kubectl
 }
 
 install_base_manjaro() {
@@ -180,6 +183,8 @@ install_python_deps() {
         nptime \
         pgcli \
         pipenv \
+        pulumi \
+        pulumi-kubernetes \
         pydocstyle \
         pyflakes \
         pyinotify \

@@ -159,6 +159,7 @@ install_snap_packages() {
     sudo snap install mailspring
     sudo snap install insomnia
     sudo snap install dbeaver-ce
+    sudo snap install spotify
 }
 install_flatpak_packages() {
     flatpak install -y com.github.calo001.fondo

@@ -10,6 +10,9 @@ export HISTFILE=~/.zsh_history
 # Utils
 export PATH="$PATH:$HOME/.scripts"  
 
+# Pulumi
+export PATH="$PATH:$HOME/.pulumi/bin"
+
 # Go
 export GOPATH="$HOME/code/go"
 
