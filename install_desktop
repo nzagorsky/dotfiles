@@ -2,6 +2,8 @@
 # This file represents installation scripts for Gnome and common desktop tools.
 # OSes currently supported: Manjaro, Arch, Ubuntu
 
+EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
+
 identify_os () {
     . /etc/os-release
     echo $NAME | tr '[:upper:]' '[:lower:]'
@@ -44,15 +46,14 @@ install_yay_packages() {
         authy \
         dbeaver \
         fondo \
-        gnome-shell-extension-installer \
         google-chrome \
         mailspring \
         spotify \
         rancher-k3d-bin \
         toptracker \
         xsv-bin \
-	&& echo -e '\033[1mAUR packages are installed\033[0m'
-}
+        && echo -e '\033[1mAUR packages are installed\033[0m'
+    }
 
 install_base_desktop_manjaro() {
     # Handle groups
@@ -73,10 +74,10 @@ install_base_desktop_manjaro() {
         transmission-gtk \
         xclip \
         yay \
-    && setup_docker_arch \
-	&& echo -e '\033[1mBase desktop packages are installed\033[0m'
+        && setup_docker_arch \
+        && echo -e '\033[1mBase desktop packages are installed\033[0m'
 
-}
+    }
 
 install_base_desktop_arch () {
     # Check if yay is present and install it if not.
@@ -116,10 +117,7 @@ install_base_desktop_arch () {
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
-
-    gnome-extensions list | grep $extension_name > /dev/null  || \
-        gnome-shell-extension-installer --yes $extension_id
-    gnome-extensions enable $extension_name
+    gnome-extensions list | grep $extension_name > /dev/null  || $EXTENSION_INSTALLER --yes $extension_id gnome-extensions enable $extension_name
 }
 
 configure_gnome () {
@@ -137,7 +135,7 @@ configure_gnome () {
     done
 
     # Install and enable required extensions
-    gnome-shell-extension-installer --update
+    $EXTENSION_INSTALLER --update
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
@@ -171,6 +169,7 @@ install_base_desktop_ubuntu() {
         chrome-gnome-shell \
         fonts-hack-ttf \
         gdebi \
+        mpv \
         gnome-tweak-tool \
         openvpn \
         pavucontrol \
@@ -181,16 +180,16 @@ install_base_desktop_ubuntu() {
         telegram-desktop \
         transmission-gtk \
         xclip \
-    && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
-    && setup_docker_ubuntu \
-	&& >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
-}
+        && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
+        && setup_docker_ubuntu \
+        && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
+    }
 
 install_cargo_packages() {
     if ! command -v alacritty &> /dev/null 
     then
-        cargo install alacritty
-        sudo cp $(which alacritty) /usr/bin/alacritty
+        BUILD_PATH=/tmp/alacritty
+        cargo install alacritty --root $BUILD_PATH; sudo cp $BUILD_PATH/bin/alacritty /usr/bin/alacritty
     fi
 }
 
