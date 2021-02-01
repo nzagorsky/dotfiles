@@ -46,9 +46,10 @@ if dein#load_state(expand('~/.cache/dein'))
     endif
 
     " Style
-    " call dein#add('drewtempelmeyer/palenight.vim')
+    call dein#add('drewtempelmeyer/palenight.vim')
+    call dein#add('w0ng/vim-hybrid')
 
-    " Files navigation.
+    "Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
     call dein#add('junegunn/fzf.vim')
 
@@ -178,7 +179,7 @@ endif
 
 " }}}
 " Color setup {{{1
-" colorscheme palenight
+colorscheme palenight
 function! UpdateStyle() abort
     set background=dark
 
@@ -212,7 +213,7 @@ endfunction
 
 augroup EditorAppearance
     autocmd!
-    autocmd VimEnter * call UpdateStyle()
+    autocmd ColorScheme * call UpdateStyle()
 augroup END
 " }}}
 " Editor setup {{{1
@@ -419,10 +420,10 @@ if g:dein#is_sourced('coc.nvim')
 
     function! s:format_code()
         if (&ft=='python')
-            :silent exec "!isort --sl -m 3 %"
+            call CocAction('format') | CocCommand python.sortImports
+        else
+            call CocActionAsync('format')
         endif
-
-        call CocActionAsync('format')
     endfunction
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)

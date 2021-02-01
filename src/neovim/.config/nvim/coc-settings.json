@@ -1,10 +1,12 @@
 {
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "codeLens.enable": true,
+
   "git.addedSign.text": "┃",
   "git.removedSign.text": "┃",
   "git.changedSign.text": "┃",
   "git.changeRemovedSign.text": "┃",
+
   "diagnostic.checkCurrentLine": true,
   "diagnostic.errorSign": "✖",
   "diagnostic.hintSign": "○",
@@ -12,22 +14,29 @@
   "diagnostic.warningSign": "⚠",
   "diagnostic.maxWindowHeight": 20,
   "diagnostic.refreshOnInsertMode": true,
+
   "suggest.enablePreview": true,
   "suggest.maxPreviewWidth": 100,
 
-  "python.jediEnabled": false,
+  // "python.jediEnabled": false,
+  // "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags",
   "python.linting.pylintEnabled": false,
   "python.linting.mypyEnabled": false,
   "python.linting.flake8Enabled": true,
-  "python.formatting.provider": "black",
   "python.linting.flake8Args": ["--ignore=E501"],
-  "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags",
+  "pyright.organizeimports.provider": "isort",
+  "python.sortImports.path": "~/.local/bin/isort",
   "python.sortImports.args": ["--sl", "-m", "3"],
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.local/bin/black",
+
   "sh.enable": true,
+
   "yaml.schemas": {
     "kubernetes": "/*.yml"
   },
   "yaml.trace.server": "verbose",
+
   "languageserver": {
     "terraform": {
       "command": "terraform-lsp",
