@@ -213,6 +213,10 @@ install_fish() {
     fish -c "fisher install jethrokuan/z"
 }
 
+install_neovim_plugins() {
+    nvim test.py --headless +UpdateRemotePlugins +q
+}
+
 change_default_shell() {
     sudo chsh $(whoami) -s $(which fish)
 }
@@ -247,6 +251,7 @@ main () {
     install_npm_deps > /dev/null
     install_python_deps > /dev/null
     install_fish > /dev/null
+    install_neovim_plugins
 
     change_default_shell
 }
