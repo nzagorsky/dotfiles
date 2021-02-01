@@ -140,6 +140,7 @@ configure_gnome () {
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
     install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
+    install_gnome_extension mprisindicatorbutton@JasonLG1979.github.io 1379  # MPRIS indicator button
 
     # install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
     # install_gnome_extension auto-move-windows@gnome-shell-extensions.gcampax.github.com 16  # AutoMoveWindows
