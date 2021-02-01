@@ -46,7 +46,7 @@ if dein#load_state(expand('~/.cache/dein'))
     endif
 
     " Style
-    call dein#add('drewtempelmeyer/palenight.vim')
+    " call dein#add('drewtempelmeyer/palenight.vim')
 
     " Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -178,7 +178,7 @@ endif
 
 " }}}
 " Color setup {{{1
-colorscheme palenight
+" colorscheme palenight
 function! UpdateStyle() abort
     set background=dark
 
@@ -212,7 +212,7 @@ endfunction
 
 augroup EditorAppearance
     autocmd!
-    autocmd ColorScheme * call UpdateStyle()
+    autocmd VimEnter * call UpdateStyle()
 augroup END
 " }}}
 " Editor setup {{{1
