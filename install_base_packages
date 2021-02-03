@@ -49,7 +49,7 @@ install_base_ubuntu () {
 
 install_snap_packages() {
     sudo snap install bw
-    sudo snap install kubectl
+    sudo snap install kubectl --classic
 }
 
 install_base_manjaro() {
