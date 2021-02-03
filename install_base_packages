@@ -13,6 +13,7 @@ install_base_ubuntu () {
         openssh-server \
         fd-find \
         fish \
+        sqlite3 \
         golang \
         htop \
         httpie \
@@ -168,6 +169,7 @@ install_python_deps() {
         awscli \
         bandit \
         black \
+        boto3 \
         bpytop \
         dataset \
         dateparser \
