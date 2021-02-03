@@ -196,6 +196,7 @@ install_python_deps() {
         radon \
         requests \
         selenium \
+        youtube-dl \
         vim-vint \
         yamllint \
         --no-warn-script-location \
