@@ -117,7 +117,7 @@ install_base_desktop_arch () {
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
-    gnome-extensions list | grep $extension_name > /dev/null  || $EXTENSION_INSTALLER --yes $extension_id gnome-extensions enable $extension_name
+    gnome-extensions list | grep $extension_name > /dev/null  || $EXTENSION_INSTALLER --yes $extension_id; gnome-extensions enable $extension_name
 }
 
 configure_gnome () {
@@ -126,7 +126,6 @@ configure_gnome () {
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
-    gsettings set org.gnome.Epiphany.web:/ hardware-acceleration-policy 'always'
 
     # Disable all extensions first
     for EXT in $(gnome-extensions list)

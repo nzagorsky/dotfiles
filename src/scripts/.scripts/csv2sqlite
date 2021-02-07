@@ -4,8 +4,11 @@
 #
 
 FILENAME=$1
+
+# TODO find a way to import to SQLITE with piping csv
 TMP_FILENAME=/tmp/csv2sqlite.csv
 DB_NAME=csv2sqlite.db
+TABLE_NAME=data
 
 # Cleanup
 rm -rf $DB_NAME
@@ -17,7 +20,7 @@ FIXED_COLUMNS=$(head -1 "$FILENAME" | python3 -c "import sys,uuid; c=sys.stdin.r
 # Write columns and data
 echo $FIXED_COLUMNS > $TMP_FILENAME
 sed -r 1d "$FILENAME" >> $TMP_FILENAME
-sqlite3 -csv $DB_NAME ".import '$TMP_FILENAME' data"
+sqlite3 -csv $DB_NAME ".import '$TMP_FILENAME' $TABLE_NAME"
 
 # Cleanup is awesome
 rm -rf $TMP_FILENAME
