@@ -1,0 +1,166 @@
+#!/usr/bin/env python3
+
+"""
+Ingests CUR from current folder to PostgreSQL and drops tags
+"""
+import os
+import csv
+import glob
+import gzip
+import json
+import time
+from io import TextIOWrapper
+from queue import Empty
+from queue import Queue
+from threading import Thread
+
+import psycopg2
+
+# To be replaced with CMD args
+FILEPATH = os.getcwd()
+TABLE_NAME = f"cur_csv_{FILEPATH.split('/')[-1]}".replace("-", "_")
+
+# Connection config
+DB_NAME = "postgres"
+DB_USER = "postgres"
+DB_PASSWORD = "1337"
+DB_HOST = "localhost"
+DB_PORT = "5435"
+
+# Ingestion config
+QUEUE_SIZE = 3000
+BATCH_SIZE = 500
+WORKER_COUNT = 4
+LIMIT_TO = 1000000000000000
+
+connection = psycopg2.connect(
+    f"dbname={DB_NAME} user={DB_USER} password={DB_PASSWORD} host={DB_HOST} port={DB_PORT}"
+)
+
+
+queue = Queue(maxsize=QUEUE_SIZE)
+
+
+def create_table(columns):
+    with connection.cursor() as cursor:
+        cursor.execute(f"DROP TABLE IF EXISTS {TABLE_NAME}")
+        field_definitions = []
+        for column in columns:
+
+            if "blendedcost" in column.lower():
+                col_type = "NUMERIC"
+            else:
+                col_type = "VARCHAR(512)"
+
+            field_definitions.append(f"{column} {col_type}")
+
+        table_fields = ",\n".join(field_definitions)
+
+        schema_script = f"""
+        CREATE TABLE {TABLE_NAME} (
+        {table_fields}
+                )
+        """
+        cursor.execute(schema_script)
+
+    connection.commit()
+
+
+def ingest_items(items):
+    if not items:
+        return
+
+    keys = items[0].keys()
+    insertion_statement = f"""
+    insert into {TABLE_NAME} ({','.join(keys)}) VALUES
+    """
+    for item in items:
+        values = ",".join([f"'{value}'" for value in item.values()])
+        insertion_statement += f"\n ({values}),"
+
+    insertion_statement = insertion_statement.rstrip(",")
+
+    with connection.cursor() as cursor:
+        cursor.execute(insertion_statement)
+    connection.commit()
+
+
+def worker():
+    to_ingest = []
+
+    while True:
+        try:
+            _element = queue.get(block=True, timeout=10)
+            to_ingest.append(_element)
+            if len(to_ingest) == BATCH_SIZE:
+                ingest_items(items=to_ingest)
+                to_ingest = []
+
+        except Empty:
+            ingest_items(items=to_ingest)
+            break
+
+
+def get_rows():
+    cur_found = glob.glob(f"{FILEPATH}/*.csv.gz")
+    manifest_found = glob.glob(f"{FILEPATH}/*-Manifest.json")
+
+    if not cur_found and manifest_found and len(manifest_found) == 1:
+        with open(manifest_found[0]) as manifest_f:
+            manifest_data = json.load(manifest_f)
+            assembly_id = manifest_data["assemblyId"]
+            cur_found = glob.glob(f"{FILEPATH}/{assembly_id}/*.csv.gz")
+
+    if not cur_found:
+        raise ValueError(f"Cannot find CUR in {FILEPATH}")
+
+    for filename in cur_found:
+        print(f"Reading {filename}")
+        with gzip.GzipFile(filename) as zf:
+            reader = csv.DictReader(TextIOWrapper(zf, "utf-8"))  # type: ignore
+            for row in reader:
+                yield row
+
+
+def main():
+    row_counter = 0
+
+    # Start workers
+    ingest_workers = [Thread(target=worker) for _ in range(WORKER_COUNT)]
+    _ = [t.start() for t in ingest_workers]
+
+    table_initialized = False
+    previous_time = time.time()
+
+    # Start iterating over rows
+    for row in get_rows():
+
+        row = {
+            k.replace("/", "_"): v
+            for k, v in row.items()
+            if not k.startswith("resourceTags")
+        }
+
+        if not table_initialized:
+            create_table(columns=row.keys())
+            table_initialized = True
+
+        queue.put(row)
+        row_counter += 1
+
+        if not row_counter % 10000:
+            print(f"Inserted {row_counter} Took {time.time()-previous_time:.2f} s")
+            previous_time = time.time()
+
+        if row_counter == LIMIT_TO:
+            break
+
+    print("Joining threads")
+    _ = [t.join() for t in ingest_workers]
+    thread_results = [t.is_alive() for t in ingest_workers]
+    print("joined threads", thread_results)
+    print(f"Total ingested: {row_counter}")
+
+
+if __name__ == "__main__":
+    main()

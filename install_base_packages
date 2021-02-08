@@ -148,7 +148,7 @@ install_devspace() {
 }
 
 install_npm_deps () {
-    sudo npm install -g \
+    sudo npm install -g --silent \
         neovim \
         bash-language-server \
         dockerfile-language-server-nodejs \
