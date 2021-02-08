@@ -13,5 +13,5 @@ Set debug to `false`
     set org.gnome.Shell.Extensions.GSConnect debug false
 
 
-In case `Mount` option doesn't work:
+In case `Mount` option doesn't work restart KDE connect app on Android. Details:
 - https://github.com/GSConnect/gnome-shell-extension-gsconnect/issues/544
