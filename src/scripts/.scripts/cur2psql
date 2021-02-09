@@ -26,7 +26,6 @@ if len(sys.argv) > 1:
     _filename_elements = _filename.split("_")
     TABLE_NAME = f"dbr_csv_{_filename_elements[2]}_"  # Account number
     TABLE_NAME += "_".join(_filename_elements[-2:])  # Date
-    import ipdb; ipdb.set_trace()   # TODO TODO TODO
 
 else:
     is_cur = True

@@ -53,6 +53,16 @@ function t
     end
 end
 
+function tm
+    if [ -z "$argv" ]
+        tmux -u attach -t default || tmux -u new -s default
+
+    else
+        tmux -u attach -t $argv || tmux -u new -s $argv
+
+    end
+end
+
 function ctop
     docker run \
         --rm -it --name=ctop_`date +%s` \
