@@ -35,22 +35,18 @@ install_base_ubuntu () {
         python3 \
         python3-dev \
         python3-pip \
-        ripgrep \
         software-properties-common \
         tmux \
         universal-ctags \
         wget \
         && cargo install exa \
+        && cargo install ripgrep \
         && echo -e '\033[1mBase install success\033[0m'
 
     command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
     command -v pulumi 2>/dev/null || curl -fsSL https://get.pulumi.com | sh
 }
 
-install_snap_packages() {
-    sudo snap install bw
-    sudo snap install kubectl --classic
-}
 
 install_base_manjaro() {
     sudo pacman -S --quiet --needed --noconfirm \
@@ -148,6 +144,7 @@ install_devspace() {
 }
 
 install_npm_deps () {
+    sudo npm install -g  --silent @bitwarden/cli
     sudo npm install -g --silent \
         neovim \
         bash-language-server \
@@ -230,7 +227,6 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
         install_base_ubuntu > /dev/null
-        install_snap_packages
         install_go_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then

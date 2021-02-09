@@ -2,5 +2,5 @@
 
 ./install_dotfiles
 ./install_base_packages
-./install_desktop
+[ ! -z "$XDG_SESSION_DESKTOP"] && ./install_desktop
 [ ! -d "~/.credentials" ] && ./optional/setup_credentials
