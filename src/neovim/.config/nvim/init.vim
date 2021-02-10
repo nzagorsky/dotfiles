@@ -47,7 +47,9 @@ if dein#load_state(expand('~/.cache/dein'))
 
     " Style
     call dein#add('drewtempelmeyer/palenight.vim')
+    call dein#add('arcticicestudio/nord-vim')
     call dein#add('w0ng/vim-hybrid')
+    call dein#add('rakr/vim-one')
 
     "Files navigation.
     call dein#add('junegunn/fzf', { 'merged': 0, 'build': './install --bin' })
@@ -193,8 +195,9 @@ function! UpdateStyle() abort
     hi User2 ctermfg=8
     hi User3 ctermfg=red
 
-    hi StatusLineNC ctermbg=none cterm=none guibg=none gui=none
+    hi StatusLineNC ctermbg=none ctermfg=8 cterm=none guibg=none gui=none
     hi StatusLine ctermbg=none cterm=none guibg=none gui=none
+    hi TabLine ctermbg=none
     hi TabLineFill ctermbg=none guibg=none
     hi TabLineSel ctermbg=none guibg=none
     hi Folded ctermbg=none guibg=none

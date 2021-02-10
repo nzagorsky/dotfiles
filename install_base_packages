@@ -2,8 +2,8 @@
 
 install_base_ubuntu () {
 
-    sudo apt-get update
-    sudo apt-get install -y \
+    sudo apt-get update -qq
+    sudo apt-get install -y -qq \
         bat \
         build-essential \
         cargo \
@@ -39,8 +39,8 @@ install_base_ubuntu () {
         tmux \
         universal-ctags \
         wget \
-        && cargo install exa \
-        && cargo install ripgrep \
+        && cargo install exa -q \
+        && cargo install ripgrep -q \
         && echo -e '\033[1mBase install success\033[0m'
 
     command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
@@ -226,7 +226,7 @@ main () {
 
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo "Ubuntu detected"
-        install_base_ubuntu > /dev/null
+        install_base_ubuntu
         install_go_packages
 
     elif [ "$OS_DETECTED" == "arch linux" ]; then
@@ -247,9 +247,9 @@ main () {
         exit 1
     fi
 
-    install_npm_deps > /dev/null
-    install_python_deps > /dev/null
-    install_fish > /dev/null
+    install_npm_deps
+    install_python_deps
+    install_fish
     install_neovim_plugins
 
     change_default_shell
