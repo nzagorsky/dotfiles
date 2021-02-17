@@ -2,6 +2,7 @@
 " Basic settings {{{1
 scriptencoding utf-8
 set clipboard+=unnamedplus  " system clipboard
+set signcolumn=yes   " no more fucking text shifting
 set hidden  " buffers
 set wrap
 set noswapfile
@@ -82,6 +83,13 @@ if dein#load_state(expand('~/.cache/dein'))
 
     " JSON
     call dein#add('elzr/vim-json', { 'on_ft': 'json' })
+
+    " REPL
+    call dein#add('jpalardy/vim-slime')
+
+    " DB
+    call dein#add('tpope/vim-dadbod')
+    call dein#add('kristijanhusak/vim-dadbod-ui')
 
     if dein#check_install()
       call dein#install()
@@ -392,6 +400,18 @@ if g:dein#is_sourced('semshi')
     autocmd EditorAppearance BufEnter * call SemshiStyleUpdate()
 endif
 
+if g:dein#is_sourced('vim-slime')
+    let g:slime_target = "neovim"
+endif
+
+if g:dein#is_sourced('vim-dadbod-ui')
+
+    let g:db_ui_winwidth = 30
+    let g:dbs = {
+    \  'local': 'postgres://postgres:1337@localhost:5435/postgres'
+    \ }
+endif
+
 if g:dein#is_sourced('coc.nvim')
 
     function! s:show_documentation()
@@ -411,6 +431,7 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-sql',
+        \ 'coc-db',
         \ 'coc-prettier',
         \ 'coc-pyright',
         \ 'coc-fish',

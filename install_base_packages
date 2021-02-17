@@ -15,6 +15,7 @@ install_base_ubuntu () {
         fish \
         sqlite3 \
         golang \
+        postgresql-client \
         htop \
         httpie \
         iotop \
