@@ -49,80 +49,6 @@ install_base_ubuntu () {
 }
 
 
-install_base_manjaro() {
-    sudo pacman -S --quiet --needed --noconfirm \
-        base-devel \
-        bind-tools \
-        cmake \
-        ctags \
-        curl \
-        exa \
-        fd \
-        fish \
-        fzf \
-        go \
-        helm \
-        htop \
-        httpie \
-        jq \
-        k9s \
-        kubectl \
-        neovim \
-        npm \
-        postgresql-libs \
-        rclone \
-        ripgrep \
-        rust \
-        rust-analyzer \
-        sd \
-        shellcheck \
-        terraform \
-        tldr \
-        tmux \
-        traceroute \
-        wget \
-        xmlsec \
-        yarn \
-        && echo -e '\033[1mBase install success\033[0m'
-    }
-
-install_base_arch () {
-    sudo pacman -S --needed --noconfirm \
-        autoconf \
-        base-devel \
-        bind-tools \
-        cmake \
-        ctags \
-        curl \
-        fd \
-        fish \
-        fzf \
-        helm \
-        htop \
-        httpie \
-        inotify-tools \
-        iotop \
-        jq \
-        k9s \
-        kubectl \
-        mysql \
-        neovim \
-        npm \
-        p7zip \
-        pkgconf \
-        postgresql-libs \
-        python-pip \
-        python3 \
-        reflector \
-        rust \
-        rust-analyzer \
-        shellcheck \
-        terraform \
-        tmux \
-        xmlsec \
-        && echo -e '\033[1mBase install success\033[0m'
-    }
-
 
 install_go_packages() {
     export GOPATH=~/code/go
@@ -229,20 +155,6 @@ main () {
         echo "Ubuntu detected"
         install_base_ubuntu
         install_go_packages
-
-    elif [ "$OS_DETECTED" == "arch linux" ]; then
-        echo "Arch detected"
-        install_base_arch
-        install_go_packages
-
-    elif [ "$OS_DETECTED" == "manjaro linux" ]; then
-        echo "Manjaro detected"
-        install_base_manjaro
-        install_go_packages
-
-    elif [ "$OS_DETECTED" == "arch linux arm" ]; then
-        echo "Arch detected"
-        install_base_arch
     else
         echo "Didn't detect OS"
         exit 1

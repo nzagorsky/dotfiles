@@ -36,6 +36,11 @@ export PATH="$PATH:$HOME/.emacs.d/bin"
 function fish_greeting
 end
 
+function bluetooth_codecs
+    pactl list | grep a2dp_codec
+    echo "if nothing above, no codecs for ya"
+end
+
 # Disk usage
 function dutop 
     du --max-depth=0 -h * | sort -hr | head -20;

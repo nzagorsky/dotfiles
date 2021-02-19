@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This file represents installation scripts for Gnome and common desktop tools.
-# OSes currently supported: Manjaro, Arch, Ubuntu
+# OSes currently supported: Ubuntu
 
 EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
 
@@ -9,11 +9,6 @@ identify_os () {
     echo $NAME | tr '[:upper:]' '[:lower:]'
 }
 
-setup_yay () {
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
-    makepkg -si
-}
 
 setup_docker_ubuntu() {
     sudo apt-get install -y docker.io
@@ -21,97 +16,8 @@ setup_docker_ubuntu() {
     sudo gpasswd -a $USER docker
 }
 
-setup_docker_arch() {
-    sudo pacman -S --needed --noconfirm docker
-    sudo systemctl enable docker --now
-    sudo gpasswd -a $USER docker
-}
-
-
 setup_user() {
     sudo gpasswd -a $USER rfkill
-}
-
-# NOTE: not used
-# TODO move scripts alike to helpers
-virtd() {
-    sudo pacman -S libvirt qemu ebtables virt-manager --needed --noconfirm
-    sudo gpasswd -a $USER kvm
-    sudo gpasswd -a $USER libvirt
-    sudo systemctl enable libvirtd --now
-}
-
-install_yay_packages() {
-    yay -S --needed --noconfirm  \
-        authy \
-        dbeaver \
-        fondo \
-        google-chrome \
-        mailspring \
-        spotify \
-        rancher-k3d-bin \
-        toptracker \
-        xsv-bin \
-        && echo -e '\033[1mAUR packages are installed\033[0m'
-    }
-
-install_base_desktop_manjaro() {
-    # Handle groups
-    sudo gpasswd -a $USER input
-
-    # Install packages.
-    sudo pacman -S --needed --noconfirm \
-        alacritty \
-        bluez-tools \
-        bluez-utils \
-        chrome-gnome-shell \
-        openvpn \
-        pavucontrol \
-        pulsemixer \
-        rclone \
-        sqlitebrowser \
-        telegram-desktop \
-        transmission-gtk \
-        xclip \
-        yay \
-        && setup_docker_arch \
-        && echo -e '\033[1mBase desktop packages are installed\033[0m'
-
-    }
-
-install_base_desktop_arch () {
-    # Check if yay is present and install it if not.
-    command -v yay || setup_yay
-
-    sudo pacman -S --needed --noconfirm telegram-desktop
-    sudo pacman -S --needed --noconfirm openvpn
-    sudo pacman -S --needed --noconfirm rclone  # backups
-    sudo pacman -S --needed --noconfirm playerctl  # Control player from keyboard
-    sudo pacman -S --needed --noconfirm kitty  # GPU term
-    sudo pacman -S --needed --noconfirm alacritty  # GPU term
-    sudo pacman -S --needed --noconfirm xclip  # neovim shared copy/paste buffer
-    sudo pacman -S --needed --noconfirm dnsmasq
-
-    setup_docker_arch
-
-    # BT Sound and A2DP
-    sudo pacman -S --needed --noconfirm pulseaudio-bluetooth
-    sudo pacman -S --needed --noconfirm pavucontrol
-    sudo pacman -S --needed --noconfirm pulsemixer
-    sudo pacman -S --needed --noconfirm bluez-tools bluez-utils
-
-    # Fonts
-    # https://wiki.archlinux.org/index.php/Fonts
-    sudo pacman -S --needed --noconfirm gnu-free-fonts
-    sudo pacman -S --needed --noconfirm noto-fonts
-    sudo pacman -S --needed --noconfirm noto-fonts-emoji
-    sudo pacman -S --needed --noconfirm noto-fonts-extra
-    sudo pacman -S --needed --noconfirm ttf-hack  # Terminal
-    sudo pacman -S --needed --noconfirm ttf-liberation  # Mono fonts in browsers
-    sudo pacman -S --needed --noconfirm ttf-roboto
-    sudo pacman -S --needed --noconfirm ttf-roboto-mono
-    yay -S --needed --noconfirm consolas-font
-
 }
 
 install_gnome_extension() {
@@ -164,8 +70,26 @@ install_flatpak_packages() {
     flatpak install -y com.github.calo001.fondo
 }
 
+install_ldac_ubuntu() {
+    sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
+    sudo apt install -y -qq pulseaudio-modules-bt libldac
+}
+install_codecs_ubuntu() {
+    sudo apt-get install -qq -y \
+        ubuntu-restricted-extras \
+        libdvdnav4 \
+        gstreamer1.0-plugins-bad \
+        gstreamer1.0-plugins-ugly \
+        libdvd-pkg
+}
+
 install_base_desktop_ubuntu() {
     sudo apt-get update
+
+    install_codecs_ubuntu
+    install_ldac_ubuntu
+
+
     sudo apt-get install -y \
         chrome-gnome-shell \
         fonts-hack-ttf \
@@ -203,17 +127,8 @@ main () {
     echo "------------------------------"
     echo -e "\033[0m"
 
-    if [ "$OS_DETECTED" == "arch linux" ]; then
-        setup_user
-        install_base_desktop_arch
-        install_yay_packages
-
-    elif [ "$OS_DETECTED" == "manjaro linux" ]; then
-        install_base_desktop_manjaro
-        install_yay_packages
-
-    elif [ "$OS_DETECTED" == "ubuntu" ]; then
-        install_base_desktop_ubuntu > /dev/null
+    if [ "$OS_DETECTED" == "ubuntu" ]; then
+        install_base_desktop_ubuntu
         install_snap_packages > /dev/null
         install_cargo_packages > /dev/null
         install_flatpak_packages > /dev/null
