@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 BACKUP_PATH="/home/$USER/$USER_backup.tar.gz"
 TO_BACKUP="/home/$USER"
 
