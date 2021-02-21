@@ -38,7 +38,6 @@ end
 
 function bluetooth_codecs
     pactl list | grep a2dp_codec
-    echo "if nothing above, no codecs for ya"
 end
 
 # Disk usage
