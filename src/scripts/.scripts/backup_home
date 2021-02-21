@@ -1,0 +1,10 @@
+BACKUP_PATH="/home/$USER/$USER_backup.tar.gz"
+TO_BACKUP="/home/$USER"
+
+# tar -zcvpf $BACKUP_PATH /home/$user
+
+# # Compress
+# # Zip
+# # Files
+# # Preserve Permissions
+sudo tar cf - $TO_BACKUP -P | pv -s $(du -sb $TO_BACKUP | awk '{print $1}') | gzip > $BACKUP_PATH
