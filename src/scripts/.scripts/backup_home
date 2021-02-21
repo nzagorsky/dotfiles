@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-BACKUP_PATH="/home/$USER/$USER_backup.tar.gz"
+BACKUP_PATH="/home/$USER/$USER.backup.tar.gz"
 TO_BACKUP="/home/$USER"
 
 # tar -zcvpf $BACKUP_PATH /home/$user
@@ -8,4 +8,4 @@ TO_BACKUP="/home/$USER"
 # # Zip
 # # Files
 # # Preserve Permissions
-sudo tar cf - $TO_BACKUP -P | pv -s $(du -sb $TO_BACKUP | awk '{print $1}') | gzip > $BACKUP_PATH
+sudo tar cpf - $TO_BACKUP -P | pv -s $(du -sb $TO_BACKUP | awk '{print $1}')  > $BACKUP_PATH
