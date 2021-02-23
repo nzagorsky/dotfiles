@@ -47,6 +47,8 @@ install_base_ubuntu () {
 
     command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
     command -v pulumi 2>/dev/null || curl -fsSL https://get.pulumi.com | sh
+
+    sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 }
 
 
