@@ -3,18 +3,18 @@
 """
 Ingests CUR/DBR from current folder to PostgreSQL and drops tags
 """
-import sys
-import os
 import csv
-from zipfile import ZipFile
 import glob
 import gzip
 import json
+import os
+import sys
 import time
 from io import TextIOWrapper
 from queue import Empty
 from queue import Queue
 from threading import Thread
+from zipfile import ZipFile
 
 import psycopg2
 
@@ -22,7 +22,7 @@ if len(sys.argv) > 1:
     is_cur = False
 
     FILEPATH = os.path.join(os.getcwd(), sys.argv[1])
-    _filename = FILEPATH.split('/')[-1].replace("-", "_").strip(".csv.zip")
+    _filename = FILEPATH.split("/")[-1].replace("-", "_").strip(".csv.zip")
     _filename_elements = _filename.split("_")
     TABLE_NAME = f"dbr_csv_{_filename_elements[2]}_"  # Account number
     TABLE_NAME += "_".join(_filename_elements[-2:])  # Date
@@ -103,7 +103,7 @@ def worker():
 
     while True:
         try:
-            _element = queue.get(block=True, timeout=10)
+            _element = queue.get(block=True, timeout=1)
             to_ingest.append(_element)
             if len(to_ingest) == BATCH_SIZE:
                 ingest_items(items=to_ingest)
@@ -171,7 +171,7 @@ def main():
         queue.put(row)
         row_counter += 1
 
-        if not row_counter % 10000:
+        if not row_counter % 100000:
             print(f"Inserted {row_counter} Took {time.time()-previous_time:.2f} s")
             previous_time = time.time()
 
@@ -180,8 +180,8 @@ def main():
 
     print("Joining threads")
     _ = [t.join() for t in ingest_workers]
-    thread_results = [t.is_alive() for t in ingest_workers]
-    print("joined threads", thread_results)
+    thread_results = [not t.is_alive() for t in ingest_workers]
+    print("joined threads", all(thread_results))
     print(f"Total ingested: {row_counter}")
 
 
