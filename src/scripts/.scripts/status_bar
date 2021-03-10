@@ -1,5 +1,6 @@
 #!/bin/zsh
-BATTERY_LEVEL=$(acpi -b | awk '{print $4}')
+# BATTERY_LEVEL=$(acpi -b | awk '{print $4}')
+BATTERY_LEVEL=$(acpi -b | cut -d "," -f 2)
 DATE_AND_TIME=$(date +'%Y-%m-%d %l:%M:%S %p')
 VOLUME=$(pamixer --get-volume)
 BRIGHTNESS=$(brightnessctl -m | cut -d "," -f 4)

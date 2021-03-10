@@ -143,15 +143,20 @@ install_desktop_pacman_packages() {
         telegram-desktop \
         xorg-xwayland \
         mpv \
+        libldac \
         acpi \
         pavucontrol \
         brightnessctl \
         playerctl \
+        blueberry \
         pulseaudio \
     && echo -e '\033[1mDesktop install success\033[0m'
 
-    systemctl --user enable pulseaudio.socket
-    systemctl --user enable pulseaudio.service
+    yay -S --needed --noconfirm pulseaudio-modules-bt
+
+    sudo systemctl enable bluetooth --now
+    systemctl --user enable pulseaudio.socket --now
+    systemctl --user enable pulseaudio.service --now
 }
 
 
