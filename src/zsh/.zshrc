@@ -1,11 +1,11 @@
+#!/bin/zsh
+
 # Environment {{{
-export TERM=xterm-256color
 source ~/.credentials/secure
 
 # Default config
 export BROWSER="/usr/bin/google-chrome-stable"
 export EDITOR=nvim
-export HISTFILE=~/.zsh_history
 
 # Utils
 export PATH="$PATH:$HOME/.scripts"  
@@ -30,77 +30,69 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # }}}
-# Functions {{{
+# Options {{{
+bindkey -e
+setopt AUTO_CD
+setopt NO_CASE_GLOB
 
-# Overwrite fish greeting
-function fish_greeting
-end
+# History settings
+setopt EXTENDED_HISTORY
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
+SAVEHIST=5000
+HISTSIZE=2000
+HISTFILE=$HOME/.zsh/history
 
-function bluetooth_codecs
-    pactl list | grep a2dp_codec
-end
-
-# Disk usage
-function dutop 
-    du --max-depth=0 -h * | sort -hr | head -20;
-end
-
-
-# Tmux
-function t
-    if [ -z "$argv" ]
-        tmux -u attach -t default || systemd-run --scope --user tmux -u new -s default
-
-    else
-        tmux -u attach -t $argv || systemd-run --scope --user tmux -u new -s $argv
-
-    end
-end
-
-function tm
-    if [ -z "$argv" ]
-        tmux -u attach -t default || tmux -u new -s default
-
-    else
-        tmux -u attach -t $argv || tmux -u new -s $argv
-
-    end
-end
-
-function ctop
-    docker run \
-        --rm -it --name=ctop_`date +%s` \
-        -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest
-end
-
-
-function torify
-    proxychains -f ~/.config/proxychains.conf $argv
-end
-
-function add_to_group
-    sudo gpasswd -a $USER $argv[1]
-end
-
-function b
-    set no_search_commands "scan" "devices"
-    bluetoothctl power on > /dev/null
-
-    if contains $argv[1] $no_search_commands
-        bluetoothctl -- $argv
-
-    else
-
-        set DEVICE (bluetoothctl -- devices | grep -i $argv[2])
-        echo ">> Found device: $DEVICE"
-        set MAC_ADDRESS (echo $DEVICE | cut -d' ' -f2)
-        bluetoothctl -- $argv[1] $MAC_ADDRESS
-    end
-end
-
-
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
 # }}}
-# Alias {{{
+# Completion setup {{{
+zstyle ':completion:*' menu select
+# Case insensitive
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+
+# partial completion suggestions
+zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suffix 
+
+# Enable completion module
+autoload -U compinit && compinit
+# }}}
+# Plugins {{{
+source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
+# }}}
+# TODO if remote show hostname
+# TODO better git status
+# Prompt {{{
+PROMPT='%(?.%F{green}.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=\$vcs_info_msg_0_
+zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
+zstyle ':vcs_info:*' enable git
+# }}}
+# Functions {{{
+function t {
+    if [ -z "$argv" ]; then
+        tmux -u attach -t default || systemd-run --scope --user tmux -u new -s default
+    else
+        tmux -u attach -t $@ || systemd-run --scope --user tmux -u new -s $@
+    fi
+}
+
+function dutop  {
+    du --max-depth=0 -h * | sort -hr | head -20;
+}
+
+function bluetooth_codecs {
+    pactl list | grep a2dp_codec
+}
+# }}}
+# Alias setup {{{
 alias cp='cp -i'                          # confirm before overwriting something
 alias cya='systemctl suspend'
 alias df='df -h'                          # human-readable sizes
@@ -135,7 +127,13 @@ alias c6="awk '{print \$6}'"
 alias c7="awk '{print \$7}'"
 alias c8="awk '{print \$8}'"
 alias c9="awk '{print \$9}'"
+
+# }}}
+# Startup of sway {{{
+if [ -z $DISPLAY ] && [ "$(tty)" == "/dev/tty1" ]; then
+  exec sway
+fi
 # }}}
 
 # Kukareku.
-# vim:foldmethod=marker:foldlevel=0
+# vim:foldmethod=marker

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+pull_submodules () {
+    git submodule update --init --recursive --depth 1
+}
+
+setup_dots () {
+    cd src
+    stow -t ~ *
+}
+
+main () {
+    pull_submodules
+    setup_dots
+}
+
+main > /dev/null
