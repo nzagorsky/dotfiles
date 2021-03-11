@@ -1,40 +1,7 @@
 #!/usr/bin/env bash
 
-# i3-dmenu-desktop
+# Toggle logic
+PROCESS_EXISTS=$(ps x | grep alacritty | grep fzfmenu | awk '{print $1}')
+[[ ! -z "$PROCESS_EXISTS" ]] && echo $PROCESS_EXISTS | xargs kill && exit
 
-MENU_MODE=$1  # [drun, run]
-
-# If no arg is passed then it's run.
-if [ -z $MENU_MODE ]
-  then
-    MENU_MODE="run"
-fi
-
-# Colors
-BACKGROUND=$(xgetres background)
-BACKGROUND="${BACKGROUND:1}"
-FOREGROUND=$(xgetres foreground)
-FOREGROUND="${FOREGROUND:1}"
-
-# Visibility variables. NOTE: Alpha: From 00 to FF
-VISIBLE="CC"
-TRANSPARENT="00"
-
-# Define combinations.
-ACTIVETEXTCOLOR=$BACKGROUND
-TEXTCOLOR=$FOREGROUND
-ACTIVEROW=$VISIBLE$FOREGROUND
-USELESS="$TRANSPARENT$FOREGROUND"
-
-
-rofi \
-    -modi "run,drun" \
-    -show $MENU_MODE \
-    -color-normal "#$TRANSPARENT$BACKGROUND, #$TEXTCOLOR, #$USELESS, #$ACTIVEROW, #$ACTIVETEXTCOLOR" \
-    -color-window "#$VISIBLE$BACKGROUND, #$BACKGROUND, #$USELESS" \
-    -matching fuzzy \
-    -lines 7 \
-    -width 1200 \
-    -padding 120 \
-    -font "hack 19" \
-    -no-show-match
+alacritty --title fzfmenu -e ~/.scripts/launch_menu_app

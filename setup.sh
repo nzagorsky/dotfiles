@@ -1,26 +1,15 @@
 #!/usr/bin/env bash
 set -ex
 
-
-# DOT MANAGEMENT
-# TODO backup sway config
-
-# GOODIES
 # TODO redshift
 # TODO notifications
 # TODO find file manager
 # TODO find phone sync (gsync?kde connect?)
 # TODO find something for lock and sleep
 # TODO theme for sway
-# TODO LDAC
-# TODO battery indicator
 # TODO GTK theme
-# TODO replace dmenu
 # TODO floating telegram
 # TODO edit sway config alias
-
-# AUTOSTART
-# TODO bluetooth 
 
 
 install_python_deps() {
@@ -147,7 +136,6 @@ install_desktop_pacman_packages() {
         arc-gtk-theme \
         arc-icon-theme \
         pamixer \
-        dmenu \
         telegram-desktop \
         xorg-xwayland \
         mpv \
@@ -160,7 +148,9 @@ install_desktop_pacman_packages() {
         pulseaudio \
     && echo -e '\033[1mDesktop install success\033[0m'
 
-    yay -S --needed --noconfirm pulseaudio-modules-bt
+    yay -S --needed --noconfirm \
+        pulseaudio-modules-bt \
+        azote
 
     sudo systemctl enable bluetooth --now
     systemctl --user enable pulseaudio.socket --now
@@ -204,5 +194,4 @@ install_yay_packages() {
 # install_python_deps
 # install_go_packages
 # install_npm_packages
-# install_desktop_pacman_packages
-
+install_desktop_pacman_packages

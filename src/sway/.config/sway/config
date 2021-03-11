@@ -18,12 +18,13 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu exec ~/.scripts/launch_menu
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -243,6 +244,11 @@ input type:touchpad {
   pointer_accel 0.4
 }
 
+# Window placement
+for_window [title="fzfmenu"] floating enable, border pixel 0, resize set height 400
+for_window [class="telegram"] floating enable, border pixel 0
+
+# Autostart
 exec swaymsg "workspace 1; exec alacritty;"
 exec swaymsg "workspace 2; exec google-chrome-stable;"
 exec swaymsg "workspace 3; exec mailspring;"
@@ -250,6 +256,7 @@ exec swaymsg "workspace 4; exec telegram-desktop;"
 exec swaymsg "workspace 8; exec toptracker;"
 exec swaymsg "workspace 9; exec megasync;"
 exec swaymsg "workspace 9; exec blueberry;"
+exec swaymsg "ydotool"
 
 include /etc/sway/config.d/*
 
