@@ -129,8 +129,9 @@ alias c8="awk '{print \$8}'"
 alias c9="awk '{print \$9}'"
 
 # }}}
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Startup of sway {{{
-if [ -z $DISPLAY ] && [ "$(tty)" == "/dev/tty1" ]; then
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   exec sway
 fi
 # }}}

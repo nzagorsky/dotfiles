@@ -243,5 +243,13 @@ input type:touchpad {
   pointer_accel 0.4
 }
 
+exec swaymsg "workspace 1; exec alacritty;"
+exec swaymsg "workspace 2; exec google-chrome-stable;"
+exec swaymsg "workspace 3; exec mailspring;"
+exec swaymsg "workspace 4; exec telegram-desktop;"
+exec swaymsg "workspace 8; exec toptracker;"
+exec swaymsg "workspace 9; exec megasync;"
+exec swaymsg "workspace 9; exec blueberry;"
+
 include /etc/sway/config.d/*
 

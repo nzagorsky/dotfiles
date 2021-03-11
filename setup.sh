@@ -101,14 +101,12 @@ install_base_pacman_packages() {
     sudo pacman -S --needed --noconfirm \
         vifm
 
-    # ZSH plugin manager
-    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-
     sudo pacman -S --needed --noconfirm \
         base-devel \
         kubectl \
         neovim \
         man-db \
+        man-pages \
         git \
         stow \
         ctags \
@@ -124,7 +122,14 @@ install_base_pacman_packages() {
         go \
         jq \
         rust \
-        python
+        zsh \
+        zsh-completions \
+        zsh-syntax-highlighting \
+        python \
+    && echo -e '\033[1mPacman base install success\033[0m'
+
+    # ZSH plugin manager
+    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
     sudo systemctl enable sshd --now
@@ -138,6 +143,9 @@ install_desktop_pacman_packages() {
         sway \
         alacritty \
         ttf-dejavu \
+        ttf-roboto \
+        arc-gtk-theme \
+        arc-icon-theme \
         pamixer \
         dmenu \
         telegram-desktop \
