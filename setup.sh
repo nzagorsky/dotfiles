@@ -152,6 +152,8 @@ install_desktop_pacman_packages() {
         pulseaudio-modules-bt \
         azote
 
+    touch ~/.azotebg
+
     sudo systemctl enable bluetooth --now
     systemctl --user enable pulseaudio.socket --now
     systemctl --user enable pulseaudio.service --now

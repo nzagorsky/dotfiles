@@ -4,6 +4,9 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+gaps inner 5
+gaps outer 5
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -256,8 +259,9 @@ input type:touchpad {
 }
 
 # Window placement
-for_window [title="fzfmenu"] floating enable, border pixel 0, resize set height 400
-for_window [class="telegram"] floating enable, border pixel 0
+for_window [title="fzfmenu"] floating enable, border pixel 0, resize set height 30 ppt, resize set width 40 ppt, focus
+for_window [title="Azote~"] floating enable, focus
+for_window [class="Google-chrome"] border pixel 0
 
 # Autostart
 exec swaymsg "workspace 1; exec alacritty;"
@@ -268,6 +272,7 @@ exec swaymsg "workspace 8; exec toptracker;"
 exec swaymsg "workspace 9; exec megasync;"
 exec swaymsg "workspace 9; exec blueberry;"
 exec swaymsg "ydotool"
+exec swaymsg "bash ~/.azotebg"
 
 include /etc/sway/config.d/*
 
