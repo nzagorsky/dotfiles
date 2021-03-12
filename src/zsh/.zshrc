@@ -74,6 +74,8 @@ setopt prompt_subst
 RPROMPT=\$vcs_info_msg_0_
 zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
 zstyle ':vcs_info:*' enable git
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # }}}
 # Functions {{{
 function t {
@@ -129,10 +131,10 @@ alias c8="awk '{print \$8}'"
 alias c9="awk '{print \$9}'"
 
 # }}}
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Startup of sway {{{
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  exec sway
+    export GTK_THEME=deepin-dark
+    exec sway
 fi
 # }}}
 

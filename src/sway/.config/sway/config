@@ -261,6 +261,8 @@ input type:touchpad {
 # Window placement
 for_window [title="fzfmenu"] floating enable, border pixel 0, resize set height 30 ppt, resize set width 40 ppt, focus
 for_window [title="Azote~"] floating enable, focus
+for_window [app_id="Alacritty"] border pixel 0, focus
+for_window [title="MEGAsync"] floating enable, focus  # TODO move top right
 for_window [class="Google-chrome"] border pixel 0
 
 # Autostart
@@ -270,8 +272,7 @@ exec swaymsg "workspace 3; exec mailspring;"
 exec swaymsg "workspace 4; exec telegram-desktop;"
 exec swaymsg "workspace 8; exec toptracker;"
 exec swaymsg "workspace 9; exec megasync;"
-exec swaymsg "workspace 9; exec blueberry;"
-exec swaymsg "ydotool"
+exec swaymsg "workspace 9; exec blueberry-tray;"
 exec swaymsg "bash ~/.azotebg"
 
 include /etc/sway/config.d/*
