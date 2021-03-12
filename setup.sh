@@ -3,11 +3,9 @@ set -ex
 
 # TODO redshift
 # TODO notifications
-# TODO find file manager
 # TODO find phone sync (gsync?kde connect?)
 # TODO find something for lock and sleep
 # TODO theme for sway
-# TODO GTK theme
 # TODO floating telegram
 # TODO edit sway config alias
 
@@ -86,10 +84,6 @@ install_yay() {
 }
 
 install_base_pacman_packages() {
-    # Testing packages
-    sudo pacman -S --needed --noconfirm \
-        vifm
-
     sudo pacman -S --needed --noconfirm \
         base-devel \
         kubectl \
@@ -133,10 +127,16 @@ install_desktop_pacman_packages() {
         alacritty \
         ttf-dejavu \
         ttf-roboto \
-        arc-gtk-theme \
-        arc-icon-theme \
+        deepin-gtk-theme \
+        deepin-icon-theme \
         pamixer \
         telegram-desktop \
+        thunar \
+        thumbler \
+        ntfs-3g \
+        gvfs \
+        nomacs \
+        ffmpegthumbnailer \
         xorg-xwayland \
         mpv \
         libldac \

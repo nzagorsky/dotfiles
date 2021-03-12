@@ -66,6 +66,8 @@ set $menu exec ~/.scripts/launch_menu
     # Start a terminal
     bindsym $mod+Return exec $term
 
+    bindsym $mod+Shift+Return exec thunar
+
     bindsym $mod+Shift+S exec grim -g "$(slurp)" - | wl-copy
 
     # Kill focused window
@@ -227,6 +229,15 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Search exec bemenu-run
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'deepin-dark'
+    gsettings set $gnome-schema icon-theme 'bloom-dark'
+    # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
+    # gsettings set $gnome-schema font-name 'Your font name'
+}
 
 input type:keyboard {
   # See /usr/share/X11/xkb/rules/xorg.lst for options
