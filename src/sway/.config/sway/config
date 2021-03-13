@@ -215,6 +215,8 @@ bar {
     # The default just shows the current date and time.
     status_command while ~/.scripts/status_bar; do sleep 1; done
 
+    icon_theme Adwaita
+
     colors {
         statusline #ffffff
         background #323232
