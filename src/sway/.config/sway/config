@@ -4,24 +4,16 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-gaps inner 5
-gaps outer 5
 
 ### Variables
-#
-# Logo key. Use Mod1 for Alt.
+set $term alacritty
+set $browser google-chrome-stable
+set $filemanager thunar
 set $mod Mod4
-# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-set $term alacritty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-# set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu exec ~/.scripts/launch_menu
 
 ### Output configuration
@@ -67,9 +59,11 @@ set $menu exec ~/.scripts/launch_menu
 # Basics:
 #
     # Start a terminal
+    gaps inner 5
+    gaps outer 5
     bindsym $mod+Return exec $term
-
-    bindsym $mod+Shift+Return exec thunar
+    bindsym $mod+Shift+g exec $browser
+    bindsym $mod+Shift+Return exec $filemanager
 
     bindsym $mod+Shift+S exec grim -g "$(slurp)" - | wl-copy
 
