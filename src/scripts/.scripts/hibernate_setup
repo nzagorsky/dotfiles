@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
-
-# TODO consider writing to /etc/fstab
+"""
+Script to setup swapfile hibernation.
+Should be executed as root.
+"""
 
 import os
 import re
 import subprocess
 import sys
 
+# TODO consider writing to /etc/fstab
 # TODO modify /sys/power/image_size
+# TODO check free space before creation of swap image
+# TODO ensure image_size does not exceed total swap size
+# TODO consider using smaller swap image in conjunction with image_size
 
 SWAPFILE_PATH = "/swap.hibernate.img"
 INITRAMFS_RESUME = "/etc/initramfs-tools/conf.d/resume"
@@ -26,8 +32,8 @@ def create_swap():
     os.system(
         f"""
         # NOTE: below you can find systemd update found in the web, but it can be done better with overlays.
-        # sudo cp /usr/lib/systemd/system/systemd-suspend.service $BACKUP_FOLDER
-        # sudo sed -i 's/ suspend/ hybrid-sleep/g' /usr/lib/systemd/system/systemd-suspend.service
+        # cp /usr/lib/systemd/system/systemd-suspend.service $BACKUP_FOLDER
+        # sed -i 's/ suspend/ hybrid-sleep/g' /usr/lib/systemd/system/systemd-suspend.service
 
         set -e
 
@@ -37,22 +43,29 @@ def create_swap():
         SWAP_SIZE_GB=$(expr $SWAP_SIZE / 1024 / 1024 / 1024)
 
         if test -f "{SWAPFILE_PATH}"; then
-            sudo swapoff {SWAPFILE_PATH} || echo "{SWAPFILE_PATH} is not enabled as swap"
-            sudo rm {SWAPFILE_PATH}
+            swapoff {SWAPFILE_PATH} || echo "{SWAPFILE_PATH} is not enabled as swap"
+            rm {SWAPFILE_PATH}
         fi
 
         # Backup
         mkdir -p {BACKUP_FOLDER}
-        sudo cp -n {GRUB_CONFIG_SOURCE} {BACKUP_FOLDER}
+        cp -n {GRUB_CONFIG_SOURCE} {BACKUP_FOLDER}
 
         # Get image size, create and mount swapfile
 
         echo "Creating swap of $SWAP_SIZE_GB"
 
-        sudo fallocate -l $SWAP_SIZE {SWAPFILE_PATH}
-        sudo chmod 600 {SWAPFILE_PATH}
-        sudo mkswap {SWAPFILE_PATH}
-        sudo swapon {SWAPFILE_PATH}
+        fallocate -l $SWAP_SIZE {SWAPFILE_PATH}
+        chmod 600 {SWAPFILE_PATH}
+        mkswap {SWAPFILE_PATH}
+        swapon {SWAPFILE_PATH}
+
+        MEM_USED=$(free -b | grep Mem: | awk '{{print $3}}')
+        SWAP_USED=$(free -b | grep Swap: | awk '{{print $3}}')
+        TOTAL_MEM_USED=$(expr $MEM_USED + $SWAP_USED)
+
+        IMAGE_SIZE=$(expr $TOTAL_MEM_USED \* 2)
+        echo $IMAGE_SIZE > /sys/power/image_size
         """
     )
 
@@ -60,7 +73,7 @@ def create_swap():
 def setup_hibernation():
 
     swap_uuid = (
-        _exec_command(f"sudo findmnt -no UUID -T {SWAPFILE_PATH}")
+        _exec_command(f"findmnt -no UUID -T {SWAPFILE_PATH}")
         .stdout.decode()
         .strip()
     )
@@ -102,8 +115,8 @@ def setup_hibernation():
 
     os.system(
         """
-        sudo update-initramfs -u -k all
-        sudo update-grub
+        update-initramfs -u -k all
+        update-grub
         """
     )
 
