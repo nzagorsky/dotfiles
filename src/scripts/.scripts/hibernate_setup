@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+
+# TODO consider writing to /etc/fstab
+
+import os
+import re
+import subprocess
+import sys
+
+# TODO modify /sys/power/image_size
+
+SWAPFILE_PATH = "/swap.hibernate.img"
+INITRAMFS_RESUME = "/etc/initramfs-tools/conf.d/resume"
+GRUB_CONFIG_SOURCE = "/etc/default/grub"
+BACKUP_FOLDER = "~/.local/share/backups/"
+
+
+def _exec_command(command):
+    return subprocess.run(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+
+
+# Create swap
+def create_swap():
+    os.system(
+        f"""
+        # NOTE: below you can find systemd update found in the web, but it can be done better with overlays.
+        # sudo cp /usr/lib/systemd/system/systemd-suspend.service $BACKUP_FOLDER
+        # sudo sed -i 's/ suspend/ hybrid-sleep/g' /usr/lib/systemd/system/systemd-suspend.service
+
+        set -e
+
+
+        MEMORY_SIZE=$(expr $(free | grep Mem | awk '{{print $2}}') \* 1024)
+        SWAP_SIZE=$(expr $MEMORY_SIZE + $MEMORY_SIZE / 4)
+        SWAP_SIZE_GB=$(expr $SWAP_SIZE / 1024 / 1024 / 1024)
+
+        if test -f "{SWAPFILE_PATH}"; then
+            sudo swapoff {SWAPFILE_PATH} || echo "{SWAPFILE_PATH} is not enabled as swap"
+            sudo rm {SWAPFILE_PATH}
+        fi
+
+        # Backup
+        mkdir -p {BACKUP_FOLDER}
+        sudo cp -n {GRUB_CONFIG_SOURCE} {BACKUP_FOLDER}
+
+        # Get image size, create and mount swapfile
+
+        echo "Creating swap of $SWAP_SIZE_GB"
+
+        sudo fallocate -l $SWAP_SIZE {SWAPFILE_PATH}
+        sudo chmod 600 {SWAPFILE_PATH}
+        sudo mkswap {SWAPFILE_PATH}
+        sudo swapon {SWAPFILE_PATH}
+        """
+    )
+
+
+def setup_hibernation():
+
+    swap_uuid = (
+        _exec_command(f"sudo findmnt -no UUID -T {SWAPFILE_PATH}")
+        .stdout.decode()
+        .strip()
+    )
+    swap_offset = (
+        _exec_command(
+            f"filefrag -v {SWAPFILE_PATH} | head -n 4 | tail -n '-1' | awk '{{print $4}}' | awk -F'.' '{{print $1}}'"
+        )
+        .stdout.decode()
+        .strip()
+    )
+
+    print(f"Using this to resume: '{swap_uuid}' '{swap_offset}'")
+    with open(GRUB_CONFIG_SOURCE) as f:
+        grub_lines = f.readlines()
+
+    with open(GRUB_CONFIG_SOURCE, "w") as output:
+        updated_lines = []
+        try:
+            for line in grub_lines:
+                if "GRUB_CMDLINE_LINUX_DEFAULT" in line:
+                    values = re.search('="(.*)"', line).group(1)
+                    values = re.sub(r"  ", " ", values)
+                    values = re.sub(r"resume=\S*", " ", values)
+                    values = re.sub(r"resume_offset=\S*", " ", values)
+                    values = str(values).strip()
+                    line = f'GRUB_CMDLINE_LINUX_DEFAULT="resume=UUID={swap_uuid} resume_offset={swap_offset} {values}"\n'
+
+                updated_lines.append(line)
+
+            output.writelines(updated_lines)
+
+        except Exception as e:
+            print(f"ERROR MODIFYING {GRUB_CONFIG_SOURCE}", e)
+            output.writelines(grub_lines)
+            sys.exit(1)
+
+    with open(INITRAMFS_RESUME, "w") as f:
+        f.write(f"resume=UUID={swap_uuid} resume_offset={swap_offset}")
+
+    os.system(
+        """
+        sudo update-initramfs -u -k all
+        sudo update-grub
+        """
+    )
+
+
+if __name__ == "__main__":
+    create_swap()
+    setup_hibernation()

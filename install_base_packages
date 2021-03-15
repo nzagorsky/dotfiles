@@ -116,6 +116,8 @@ install_python_deps() {
         pipenv \
         pulumi \
         pulumi-kubernetes \
+        pulumi-aws \
+        pulumi-hcloud \
         pydocstyle \
         pyflakes \
         pyinotify \

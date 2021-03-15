@@ -20,6 +20,12 @@ setup_user() {
     sudo gpasswd -a $USER rfkill
 }
 
+install_ubuntu_mainline() {
+    sudo add-apt-repository ppa:cappelikan/ppa
+    sudo apt update
+    sudo apt install mainline
+}
+
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
@@ -153,6 +159,7 @@ main () {
         install_chrome_ubuntu
         install_toptracker_ubuntu
         install_mega_ubuntu
+        install_ubuntu_mainline
 
     else
         echo "Did not detect OS. Quitting."
