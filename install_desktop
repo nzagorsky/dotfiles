@@ -24,6 +24,10 @@ install_ubuntu_mainline() {
     sudo add-apt-repository ppa:cappelikan/ppa
     sudo apt update
     sudo apt install mainline
+
+    wget https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
+    chmod +x ubuntu-mainline-kernel.sh
+    sudo mv ubuntu-mainline-kernel.sh /usr/local/bin/
 }
 
 install_gnome_extension() {
@@ -34,7 +38,7 @@ install_gnome_extension() {
 
 configure_gnome () {
     # Put dconf settings in
-    dconf load  / < optional/dconf.conf
+    dconf load  / < assets/gnome/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
@@ -53,6 +57,9 @@ configure_gnome () {
     install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
     install_gnome_extension mprisindicatorbutton@JasonLG1979.github.io 1379  # MPRIS indicator button
     install_gnome_extension bluetooth-quick-connect@bjarosze.gmail.com 1401  # Bluetooth quick connect
+    install_gnome_extension impatience@gfxmonk.net 277  # Faster animations
+    install_gnome_extension user-theme@gnome-shell-extensions.gcampax.github.com 19  # Shell themes
+    install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
 
     # install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
     # install_gnome_extension auto-move-windows@gnome-shell-extensions.gcampax.github.com 16  # AutoMoveWindows
@@ -60,7 +67,6 @@ configure_gnome () {
     # install_gnome_extension caffeine@patapon.info 517  # caffeine
     # install_gnome_extension dash-to-panel@jderose9.github.com 1160  # Dash to panel
     # install_gnome_extension blyr@yozoon.dev.gmail.com 1251  # blyr
-    # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
     # install_gnome_extension hidetopbar@mathieu.bidon.ca 545  # hide top bar
 }
 
@@ -136,6 +142,11 @@ install_cargo_packages() {
     then
         BUILD_PATH=/tmp/alacritty
         cargo install alacritty --root $BUILD_PATH; sudo cp $BUILD_PATH/bin/alacritty /usr/bin/alacritty
+
+
+        sudo cp assets/alacritty/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+        sudo desktop-file-install assets/alacritty/Alacritty.desktop
+        sudo update-desktop-database
     fi
 }
 
