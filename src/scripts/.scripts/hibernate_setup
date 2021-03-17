@@ -10,10 +10,6 @@ import shutil
 import subprocess
 import sys
 
-# TODO consider writing to /etc/fstab
-# TODO check free space before creation of swap image
-# TODO ensure image_size does not exceed total swap size
-
 SWAPFILE_PATH = "/swap.hibernate.img"
 INITRAMFS_RESUME = "/etc/initramfs-tools/conf.d/resume"
 GRUB_CONFIG_SOURCE = "/etc/default/grub"
@@ -47,11 +43,14 @@ def get_total_memory_used() -> int:
     return int(total_mem_used)
 
 
-def get_required_swap_size() -> int:
-    return int(get_total_memory_used() * 1.2)  # bytes
+def get_memory_available() -> int:
+    return int(
+        _exec_command("free -b | grep Mem | awk '{print $2}'").stdout.decode().strip()
+    )
 
-def get_required_image_size() -> int:
-    return int(get_total_memory_used() * 1.1)  # bytes
+
+def get_required_swap_size() -> int:
+    return int(get_memory_available() * 1.2)  # bytes
 
 
 def get_swapfile_info():
@@ -69,13 +68,31 @@ def get_swapfile_info():
     return swap_uuid, swap_offset
 
 
+def get_current_swap_size() -> int:
+    current_swap_size = (
+        _exec_command(f"swapon --bytes | grep {SWAPFILE_PATH} | awk '{{print $3}}'")
+        .stdout.decode()
+        .strip()
+    )
+    return int(current_swap_size)
+
+
 def check_hibernation_setup():
     swap_uuid, swap_offset = get_swapfile_info()
     is_hibernation_configured = all([swap_uuid, swap_offset])
 
-    # Verify swap is mounted
+    # Verify swap is mounted and is big enough
     if SWAPFILE_PATH not in _exec_command("swapon").stdout.decode().strip():
         is_hibernation_configured = False
+
+    else:
+        current_size = get_current_swap_size()
+        memory_used = get_total_memory_used()
+        if current_size < memory_used:
+            raise SystemExit(
+                "Current swap is too small to hibernate. "
+                f"Need {(memory_used - current_size) / 1024 / 1024 / 1024:.2f}Gb more "
+            )
 
     # Verify presence of resume in initramfs and grub
     if is_hibernation_configured:
@@ -89,18 +106,10 @@ def check_hibernation_setup():
 
 
 def update_image_size():
-    os.system(
-        f"""
-        IMAGE_SIZE={get_required_image_size()}
-
-        echo $IMAGE_SIZE > /sys/power/image_size
-
-        echo Setting image_size to $(expr $IMAGE_SIZE / 1024 / 1024)Mb
-        """
-    )
+    """Use smallest possible image for hibernation"""
+    os.system(f"echo 0 > /sys/power/image_size")
 
 
-# Create swap
 def create_swap():
     os.system(
         f"""
@@ -174,10 +183,23 @@ def setup_resume():
     )
 
 
+def check_free_disk_space():
+    # Leave 10% of disk space
+    is_enough_disk_space = (
+        int(get_free_disk_space() - get_required_swap_size())
+        > get_free_disk_space() / 10
+    )
+    if not is_enough_disk_space:
+        raise SystemExit(
+            f"Not enough disk space for {get_required_swap_size() / 1024 / 1024 / 1024 :.2f}Gb of swap"
+        )
+
+
 def setup():
     is_hibernation_configured = check_hibernation_setup()
 
     if not is_hibernation_configured:
+        check_free_disk_space()
         create_swap()
         setup_resume()
     else:
