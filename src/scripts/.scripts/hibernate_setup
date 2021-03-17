@@ -5,9 +5,8 @@ Should be executed as root.
 """
 
 import os
-import shutil
-import psutil
 import re
+import shutil
 import subprocess
 import sys
 
@@ -26,13 +25,33 @@ def _exec_command(command):
         command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
 
+
 def get_free_disk_space() -> int:
     _, _, free = shutil.disk_usage("/")
     return free  # bytes
 
+
+def get_total_memory_used() -> int:
+    total_mem_used = (
+        _exec_command(
+            """
+    MEM_USED=$(free -b | grep Mem: | awk '{{print $3}}')
+    SWAP_USED=$(free -b | grep Swap: | awk '{{print $3}}')
+    TOTAL_MEM_USED=$(expr $MEM_USED + $SWAP_USED)
+    echo $TOTAL_MEM_USED
+    """
+        )
+        .stdout.decode()
+        .strip()
+    )
+    return int(total_mem_used)
+
+
 def get_required_swap_size() -> int:
-    used_memory = psutil.virtual_memory().used  # bytes
-    return int(used_memory * 1.1)
+    return int(get_total_memory_used() * 1.2)  # bytes
+
+def get_required_image_size() -> int:
+    return int(get_total_memory_used() * 1.1)  # bytes
 
 
 def get_swapfile_info():
@@ -71,11 +90,9 @@ def check_hibernation_setup():
 
 def update_image_size():
     os.system(
-        """
-        MEM_USED=$(free -b | grep Mem: | awk '{{print $3}}')
-        SWAP_USED=$(free -b | grep Swap: | awk '{{print $3}}')
-        TOTAL_MEM_USED=$(expr $MEM_USED + $SWAP_USED)
-        IMAGE_SIZE=$(expr $TOTAL_MEM_USED \* 2)
+        f"""
+        IMAGE_SIZE={get_required_image_size()}
+
         echo $IMAGE_SIZE > /sys/power/image_size
 
         echo Setting image_size to $(expr $IMAGE_SIZE / 1024 / 1024)Mb
@@ -93,9 +110,7 @@ def create_swap():
 
         set -e
 
-
-        MEMORY_SIZE=$(expr $(free | grep Mem | awk '{{print $2}}') \* 1024)
-        SWAP_SIZE=$(expr $MEMORY_SIZE + $MEMORY_SIZE / 4)
+        SWAP_SIZE={get_required_swap_size()}
 
         if test -f "{SWAPFILE_PATH}"; then
             swapoff {SWAPFILE_PATH} || echo "{SWAPFILE_PATH} is not enabled as swap"
