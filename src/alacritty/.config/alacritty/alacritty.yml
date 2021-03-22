@@ -39,7 +39,7 @@ window:
     y: 0
 
 font:
-  size: 11.0
+  size: 12.0
   normal:
     family: DejaVuSansMono
     style: Regular
