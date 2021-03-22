@@ -1,23 +1,16 @@
 #!/usr/bin/env bash
 
 install_base_ubuntu () {
-
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
         bat \
         build-essential \
         cargo \
-        parallel \
-        sshfs \
-        pv \
         cmake \
         curl \
-        openssh-server \
         fd-find \
         fish \
-        sqlite3 \
         golang \
-        postgresql-client \
         htop \
         httpie \
         iotop \
@@ -34,24 +27,46 @@ install_base_ubuntu () {
         net-tools \
         nodejs \
         npm \
+        openssh-server \
+        parallel \
         pkg-config \
+        postgresql-client \
+        pv \
         python3 \
         python3-dev \
         python3-pip \
         software-properties-common \
+        sqlite3 \
+        sshfs \
+        tldr \
         tmux \
         universal-ctags \
+        unzip \
         wget \
+        zip \
         && cargo install exa -q \
         && cargo install ripgrep -q \
         && echo -e '\033[1mBase install success\033[0m'
 
     command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
     command -v pulumi 2>/dev/null || curl -fsSL https://get.pulumi.com | sh
+    tldr -u > /dev/null
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 }
 
+
+install_chromedriver() {
+    set -e
+    CHROMEDRIVER_RELEASE=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+    wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" -O /tmp/chromedriver.zip
+    rm -rf /tmp/chromedriver/
+    mkdir /tmp/chromedriver/
+    unzip -qq /tmp/chromedriver.zip -d /tmp/chromedriver/
+    chmod +x /tmp/chromedriver/chromedriver
+    sudo cp /tmp/chromedriver/chromedriver /usr/local/bin/chromedriver
+    echo Installed $CHROMEDRIVER_RELEASE chromedriver
+}
 
 
 install_go_packages() {
@@ -169,6 +184,7 @@ main () {
     install_npm_deps
     install_python_deps
     install_fish
+    install_chromedriver
     install_neovim_plugins
 
     change_default_shell
