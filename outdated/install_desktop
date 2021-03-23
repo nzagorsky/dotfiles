@@ -20,6 +20,16 @@ setup_user() {
     sudo gpasswd -a $USER rfkill
 }
 
+install_ubuntu_mainline() {
+    sudo add-apt-repository -y ppa:cappelikan/ppa
+    sudo apt update
+    sudo apt install mainline
+
+    wget https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
+    chmod +x ubuntu-mainline-kernel.sh
+    sudo mv ubuntu-mainline-kernel.sh /usr/local/bin/
+}
+
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
@@ -28,7 +38,7 @@ install_gnome_extension() {
 
 configure_gnome () {
     # Put dconf settings in
-    dconf load  / < optional/dconf.conf
+    dconf load  / < assets/gnome/dconf.conf
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
@@ -47,24 +57,22 @@ configure_gnome () {
     install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
     install_gnome_extension mprisindicatorbutton@JasonLG1979.github.io 1379  # MPRIS indicator button
     install_gnome_extension bluetooth-quick-connect@bjarosze.gmail.com 1401  # Bluetooth quick connect
+    install_gnome_extension impatience@gfxmonk.net 277  # Faster animations
+    install_gnome_extension user-theme@gnome-shell-extensions.gcampax.github.com 19  # Shell themes
 
+    # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
     # install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
     # install_gnome_extension auto-move-windows@gnome-shell-extensions.gcampax.github.com 16  # AutoMoveWindows
     # install_gnome_extension unite@hardpixel.eu 1287  # Unite
     # install_gnome_extension caffeine@patapon.info 517  # caffeine
     # install_gnome_extension dash-to-panel@jderose9.github.com 1160  # Dash to panel
     # install_gnome_extension blyr@yozoon.dev.gmail.com 1251  # blyr
-    # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
     # install_gnome_extension hidetopbar@mathieu.bidon.ca 545  # hide top bar
 }
 
-# TODO mega, chrome, toptracker
 install_snap_packages() {
     sudo snap install --beta authy
     sudo snap install mailspring
-    sudo snap install insomnia
-    sudo snap install dbeaver-ce
-    sudo snap install spotify
 }
 install_flatpak_packages() {
     flatpak install -y com.github.calo001.fondo
@@ -73,20 +81,36 @@ install_flatpak_packages() {
 install_ldac_ubuntu() {
     sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
     sudo apt install -y -qq pulseaudio-modules-bt libldac
+    pulseaudio -k
 }
-install_codecs_ubuntu() {
-    sudo apt-get install -qq -y \
-        ubuntu-restricted-extras \
-        libdvdnav4 \
-        gstreamer1.0-plugins-bad \
-        gstreamer1.0-plugins-ugly \
-        libdvd-pkg
+
+install_chrome_ubuntu() {
+    dpkg -s google-chrome-stable &>/dev/null && return 0
+
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
+    sudo dpkg -i /tmp/chrome.deb
+    rm /tmp/chrome.deb
+}
+
+install_toptracker_ubuntu() {
+    dpkg -s toptracker &>/dev/null && return 0
+
+    wget https://tracker-api.toptal.com/desktop/latest/debian -O /tmp/toptracker.deb
+    sudo dpkg -i /tmp/toptracker.deb
+    rm /tmp/toptracker.deb
+}
+
+install_mega_ubuntu() {
+    dpkg -s megasync &>/dev/null && return 0
+
+    wget https://mega.nz/linux/MEGAsync/xUbuntu_20.10/amd64/megasync-xUbuntu_20.10_amd64.deb -O /tmp/megasync.deb
+    sudo dpkg -i /tmp/megasync.deb
+    rm /tmp/megasync.deb
 }
 
 install_base_desktop_ubuntu() {
     sudo apt-get update
 
-    install_codecs_ubuntu
     install_ldac_ubuntu
 
 
@@ -115,6 +139,11 @@ install_cargo_packages() {
     then
         BUILD_PATH=/tmp/alacritty
         cargo install alacritty --root $BUILD_PATH; sudo cp $BUILD_PATH/bin/alacritty /usr/bin/alacritty
+
+
+        sudo cp assets/alacritty/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+        sudo desktop-file-install assets/alacritty/Alacritty.desktop
+        sudo update-desktop-database
     fi
 }
 
@@ -127,21 +156,31 @@ main () {
     echo "------------------------------"
     echo -e "\033[0m"
 
+
+
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         install_base_desktop_ubuntu
         install_snap_packages > /dev/null
         install_cargo_packages > /dev/null
         install_flatpak_packages > /dev/null
+
+        install_chrome_ubuntu
+        install_toptracker_ubuntu
+        install_mega_ubuntu
+        install_ubuntu_mainline
+
     else
         echo "Did not detect OS. Quitting."
         exit 1
+
     fi
     # ------------------------------------------
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
         configure_gnome
-    elif [ "$XDG_SESSION_DESKTOP" == "ubuntu" ]; then  # fucking smart, eh?
+    elif [ "$XDG_SESSION_DESKTOP" == "ubuntu" ]; then
         configure_gnome
+
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
         exit 1

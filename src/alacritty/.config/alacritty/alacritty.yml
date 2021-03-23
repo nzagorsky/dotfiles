@@ -26,7 +26,7 @@ colors:
     cyan:    '0x42717b'
     white:   '0xdddddd'
 
-background_opacity: 0.95
+background_opacity: 0.98
 live_config_reload: true
 
 window:
@@ -39,7 +39,7 @@ window:
     y: 0
 
 font:
-  size: 14.0
+  size: 12.0
   normal:
     family: DejaVuSansMono
     style: Regular

@@ -1,6 +1,0 @@
-#!/usr/bin/bash
-
-# Enable Docker to run without sudo.
-sudo groupadd docker
-sudo gpasswd -a $USER docker
-sudo systemctl enable docker --now

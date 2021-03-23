@@ -1,8 +1,0 @@
-#!/bin/env bash
-
-# dconf dump / > ~/dotfiles/dconf.conf
-# TODO restore and dump this properly
-rm -f testing.txt
-dconf dump /org/gnome/desktop/wm/keybindings/ >> testing.txt
-dconf dump /org/gnome/mutter/ >> testing.txt
-dconf dump /org/gnome/settings-daemon/plugins/media-keys/ >> testing.txt
