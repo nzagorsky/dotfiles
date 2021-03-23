@@ -72,6 +72,7 @@ configure_gnome () {
 
 install_snap_packages() {
     sudo snap install --beta authy
+    sudo snap install mailspring
 }
 install_flatpak_packages() {
     flatpak install -y com.github.calo001.fondo
