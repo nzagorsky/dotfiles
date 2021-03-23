@@ -9,7 +9,6 @@ install_base_ubuntu () {
         cmake \
         curl \
         fd-find \
-        fish \
         golang \
         htop \
         httpie \
@@ -156,17 +155,12 @@ identify_os () {
 }
 
 
-install_fish() {
-    fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
-    fish -c "fisher install jethrokuan/z"
-}
-
 install_neovim_plugins() {
     nvim test.py --headless +UpdateRemotePlugins +q
 }
 
 change_default_shell() {
-    sudo chsh $(whoami) -s $(which fish)
+    sudo chsh $(whoami) -s /bin/zsh
 }
 
 main () {
@@ -183,7 +177,6 @@ main () {
 
     install_npm_deps
     install_python_deps
-    install_fish
     install_chromedriver
     install_neovim_plugins
 
