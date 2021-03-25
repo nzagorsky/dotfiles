@@ -78,10 +78,12 @@ zstyle ':vcs_info:*' enable git
 # }}}
 # Functions {{{
 function t {
+    launch_param=$(pidof systemd && echo "systemd-run --scope --user" || echo "")
+
     if [ -z "$argv" ]; then
-        tmux -u attach -t default || systemd-run --scope --user tmux -u new -s default
+        tmux -u attach -t default || $launch_param tmux -u new -s default
     else
-        tmux -u attach -t $@ || systemd-run --scope --user tmux -u new -s $@
+        tmux -u attach -t $@ || $launch_param tmux -u new -s $@
     fi
 }
 
