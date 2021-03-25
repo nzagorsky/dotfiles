@@ -43,6 +43,9 @@ configure_gnome () {
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 
+    # Do not install extensions if they are installed already.
+    gnome-extensions info -q gsconnect@andyholmes.github.io > /dev/null && return
+
     # Disable all extensions first
     for EXT in $(gnome-extensions list)
     do
@@ -79,6 +82,8 @@ install_flatpak_packages() {
 }
 
 install_ldac_ubuntu() {
+    dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
+
     sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
     sudo apt install -y -qq pulseaudio-modules-bt libldac
     pulseaudio -k
