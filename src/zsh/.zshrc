@@ -6,7 +6,7 @@ source ~/.credentials/secure
 # Default config
 export BROWSER="/usr/bin/google-chrome-stable"
 export EDITOR=nvim
-export TERM=xterm
+# export TERM=xterm
 
 # Utils
 export PATH="$PATH:$HOME/.scripts"  
