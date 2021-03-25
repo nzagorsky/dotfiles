@@ -166,7 +166,9 @@ install_neovim_plugins() {
     echo -e "${BOLD}neovim install success${NC}"
 }
 
-change_default_shell() {
+configure_shell() {
+    curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
+
     sudo chsh $(whoami) -s $(which zsh)
 }
 
@@ -187,7 +189,7 @@ main () {
     export -f install_python_deps
     export -f install_chromedriver
     export -f install_neovim_plugins
-    export -f change_default_shell
+    export -f configure_shell
 
     parallel ::: \
         install_go_packages \
@@ -195,7 +197,7 @@ main () {
         install_python_deps \
         install_chromedriver \
         install_neovim_plugins \
-        change_default_shell
+        configure_shell
 }
 
 

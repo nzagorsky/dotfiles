@@ -61,21 +61,15 @@ zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suff
 # Enable completion module
 autoload -U compinit && compinit
 # }}}
-# Plugins {{{
-source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
-# }}}
-# TODO if remote show hostname
-# TODO better git status
-# Prompt {{{
-PROMPT='%(?.%F{green}.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-RPROMPT=\$vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
-zstyle ':vcs_info:*' enable git
-
+# Custom prompt (disabled) {{{
+# PROMPT='%(?.%F{green}.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
+# autoload -Uz vcs_info
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# setopt prompt_subst
+# RPROMPT=\$vcs_info_msg_0_
+# zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
+# zstyle ':vcs_info:*' enable git
 # }}}
 # Functions {{{
 function t {
@@ -142,7 +136,11 @@ fi
 
 # Plugins {{{
 # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+
+POLYGLOT_PROMPT_DIRTRIM=5
+. ~/.local/bin/polyglot.sh
 # }}}
 
 # Kukareku.
