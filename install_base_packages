@@ -167,7 +167,7 @@ install_neovim_plugins() {
 }
 
 change_default_shell() {
-    sudo chsh $(whoami) -s /bin/zsh
+    sudo chsh $(whoami) -s $(which zsh)
 }
 
 main () {
