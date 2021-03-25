@@ -6,6 +6,7 @@ source ~/.credentials/secure
 # Default config
 export BROWSER="/usr/bin/google-chrome-stable"
 export EDITOR=nvim
+export TERM=xterm
 
 # Utils
 export PATH="$PATH:$HOME/.scripts"  
@@ -78,12 +79,12 @@ zstyle ':vcs_info:*' enable git
 # }}}
 # Functions {{{
 function t {
-    launch_param=$(pidof systemd && echo "systemd-run --scope --user" || echo "")
+    launch_param=$(pidof systemd > /dev/null && echo "systemd-run --scope --user" || echo "")
 
     if [ -z "$argv" ]; then
-        tmux -u attach -t default || $launch_param tmux -u new -s default
+        tmux -u attach -t default || zsh -c "$launch_param tmux -u new -s default 2> /dev/null"
     else
-        tmux -u attach -t $@ || $launch_param tmux -u new -s $@
+        tmux -u attach -t $@ || zsh -c "$launch_param tmux -u new -s $@ 2> /dev/null"
     fi
 }
 
