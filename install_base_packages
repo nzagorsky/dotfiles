@@ -2,6 +2,11 @@
 
 set -e
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BOLD='\033[1m'
+NC='\033[0m'
+
 install_base_ubuntu () {
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
@@ -47,11 +52,11 @@ install_base_ubuntu () {
         zip \
         && cargo install exa -q \
         && cargo install ripgrep -q \
-    && echo -e '\033[1mBase install success\033[0m'
+    && echo -e "${BOLD}Base install success${NC}"
 
-    command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
-    command -v pulumi 2>/dev/null || curl -fsSL https://get.pulumi.com | sh
-    tldr -u > /dev/null || echo "failed to update tldr"
+    command -v rclone > /dev/null 2>&1 || curl -s https://rclone.org/install.sh | sudo bash
+    command -v pulumi > /dev/null 2>&1 || curl -fsSL https://get.pulumi.com | sh
+    tldr -u > /dev/null 2>&1 || echo "failed to update tldr"
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 }
@@ -65,8 +70,8 @@ install_chromedriver() {
     mkdir /tmp/chromedriver/
     unzip -qq /tmp/chromedriver.zip -d /tmp/chromedriver/
     chmod +x /tmp/chromedriver/chromedriver
-    sudo cp /tmp/chromedriver/chromedriver /usr/local/bin/chromedriver
-    echo Installed $CHROMEDRIVER_RELEASE chromedriver
+    sudo install /tmp/chromedriver/chromedriver /usr/local/bin/chromedriver
+    rm -rf /tmp/chromedriver/
 }
 
 
@@ -82,17 +87,14 @@ install_go_packages() {
     go get -u github.com/cweill/gotests/...
     go get -u github.com/fatih/gomodifytags
     go get -u github.com/ericchiang/pup
+
+    echo -e "${BOLD}go plugins install success${NC}"
 }
 
-install_devspace() {
-    curl -s -L "https://github.com/devspace-cloud/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace;
-
-    sudo install devspace /usr/local/bin;
-}
 
 install_npm_deps () {
-    sudo npm install -g  --silent @bitwarden/cli
-    sudo npm install -g --silent \
+    sudo npm install -g --quiet --silent @bitwarden/cli > /dev/null 2>&1
+    sudo npm install -g --quiet --silent \
         neovim \
         bash-language-server \
         dockerfile-language-server-nodejs \
@@ -101,12 +103,12 @@ install_npm_deps () {
         marked \
         prettier \
         pyright \
-        standard \
-        && echo -e '\033[1mNPM install success\033[0m'
+        standard > /dev/null 2>&1 \
+    && echo -e "${BOLD}npm install success${NC}"
     }
 
 install_python_deps() {
-    pip3 install -U --user setuptools wheel --no-warn-script-location
+    pip3 install -U --user setuptools wheel --no-warn-script-location > /dev/null
 
     pip3 install -U --user \
         "python-language-server[all]" \
@@ -146,7 +148,9 @@ install_python_deps() {
         vim-vint \
         yamllint \
         --no-warn-script-location \
-        && echo -e '\033[1mPIP install success\033[0m'
+        > /dev/null
+
+    echo -e "${BOLD}pip install success${NC}"
     }
 
 
@@ -158,7 +162,8 @@ identify_os () {
 
 
 install_neovim_plugins() {
-    nvim test.py --headless +UpdateRemotePlugins +q
+    nvim test.py --headless +UpdateRemotePlugins +q > /dev/null 2>&1
+    echo -e "${BOLD}neovim install success${NC}"
 }
 
 change_default_shell() {
@@ -169,20 +174,28 @@ main () {
     OS_DETECTED=$(identify_os)
 
     if [ "$OS_DETECTED" == "ubuntu" ]; then
-        echo "Ubuntu detected"
+        echo -e "${GREEN}Ubuntu detected${NC}"
         install_base_ubuntu
-        install_go_packages
     else
         echo "Didn't detect OS"
         exit 1
     fi
 
-    install_npm_deps
-    install_python_deps
-    install_chromedriver
-    install_neovim_plugins
 
-    change_default_shell
+    export -f install_go_packages
+    export -f install_npm_deps
+    export -f install_python_deps
+    export -f install_chromedriver
+    export -f install_neovim_plugins
+    export -f change_default_shell
+
+    parallel ::: \
+        install_go_packages \
+        install_npm_deps \
+        install_python_deps \
+        install_chromedriver \
+        install_neovim_plugins \
+        change_default_shell
 }
 
 
