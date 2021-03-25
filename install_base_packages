@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 install_base_ubuntu () {
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
@@ -45,11 +47,11 @@ install_base_ubuntu () {
         zip \
         && cargo install exa -q \
         && cargo install ripgrep -q \
-        && echo -e '\033[1mBase install success\033[0m'
+    && echo -e '\033[1mBase install success\033[0m'
 
     command -v rclone 2>/dev/null || curl -s https://rclone.org/install.sh | sudo bash
     command -v pulumi 2>/dev/null || curl -fsSL https://get.pulumi.com | sh
-    tldr -u > /dev/null
+    tldr -u > /dev/null || echo "failed to update tldr"
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 }
