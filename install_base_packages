@@ -7,6 +7,8 @@ GREEN='\033[0;32m'
 BOLD='\033[1m'
 NC='\033[0m'
 
+cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
+
 install_base_ubuntu () {
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
@@ -15,6 +17,8 @@ install_base_ubuntu () {
         cargo \
         cmake \
         curl \
+        zsh \
+        zsh-syntax-highlighting  \
         fd-find \
         golang \
         htop \
