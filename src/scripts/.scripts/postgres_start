@@ -6,11 +6,14 @@
 
 docker run \
     -d \
-    --name local-psql \
+    --name local-postgres \
     -e POSTGRES_PASSWORD=1337 \
+    --user "$(id -u):$(id -g)" \
+    --volume /etc/passwd:/etc/passwd:ro \
     -e PGDATA=/var/lib/postgresql/data/pgdata \
     -p 127.0.0.1:5435:5432 \
     --restart unless-stopped \
-    --volume=$HOME/.local/share/postgres:/var/lib/postgresql/data \
+    --volume=$HOME/.local/lib/postgres:/var/lib/postgresql/data \
     postgres
 
+sudo chown -R $USER ~/.local/lib/postgres
