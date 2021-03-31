@@ -97,6 +97,13 @@ install_chrome_ubuntu() {
     rm /tmp/chrome.deb
 }
 
+install_dbeaver_ubuntu() {
+    dpkg -s dbeaver-ce &>/dev/null && return 0
+    wget https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O /tmp/dbeaver.deb
+    sudo dpkg -i /tmp/dbeaver.deb
+    rm /tmp/dbeaver.deb
+}
+
 install_toptracker_ubuntu() {
     dpkg -s toptracker &>/dev/null && return 0
 
@@ -170,6 +177,7 @@ main () {
         install_flatpak_packages > /dev/null
 
         install_chrome_ubuntu
+        install_dbeaver_ubuntu
         install_toptracker_ubuntu
         install_mega_ubuntu
         install_ubuntu_mainline
