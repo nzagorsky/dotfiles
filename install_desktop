@@ -2,7 +2,7 @@
 # This file represents installation scripts for Gnome and common desktop tools.
 # OSes currently supported: Ubuntu
 
-EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
+GNOME_EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
 
 identify_os () {
     . /etc/os-release
@@ -16,24 +16,11 @@ setup_docker_ubuntu() {
     sudo gpasswd -a $USER docker
 }
 
-setup_user() {
-    sudo gpasswd -a $USER rfkill
-}
-
-install_ubuntu_mainline() {
-    sudo add-apt-repository -y ppa:cappelikan/ppa
-    sudo apt update
-    sudo apt install mainline
-
-    wget https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
-    chmod +x ubuntu-mainline-kernel.sh
-    sudo mv ubuntu-mainline-kernel.sh /usr/local/bin/
-}
 
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
-    gnome-extensions list | grep $extension_name > /dev/null  || $EXTENSION_INSTALLER --yes $extension_id; gnome-extensions enable $extension_name
+    gnome-extensions list | grep $extension_name > /dev/null  || $GNOME_EXTENSION_INSTALLER --yes $extension_id; gnome-extensions enable $extension_name
 }
 
 configure_gnome () {
@@ -53,7 +40,7 @@ configure_gnome () {
     done
 
     # Install and enable required extensions
-    $EXTENSION_INSTALLER --update
+    $GNOME_EXTENSION_INSTALLER --update
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
@@ -77,17 +64,16 @@ install_snap_packages() {
     sudo snap install --beta authy
     sudo snap install mailspring
 }
-install_flatpak_packages() {
-    flatpak install -y com.github.calo001.fondo
-}
 
-install_ldac_ubuntu() {
-    dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
+# NOTE: not updated for 21.04 as of now (4 april 2021)
+# sudo add-apt-repository --remove -y ppa:berglh/pulseaudio-a2dp
+# install_ldac_ubuntu() {
+#     dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
 
-    sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
-    sudo apt install -y -qq pulseaudio-modules-bt libldac
-    pulseaudio -k
-}
+#     sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
+#     sudo apt install -y -qq pulseaudio-modules-bt libldac
+#     pulseaudio -k
+# }
 
 install_chrome_ubuntu() {
     dpkg -s google-chrome-stable &>/dev/null && return 0
@@ -129,7 +115,7 @@ install_spotify() {
 install_base_desktop_ubuntu() {
     sudo apt-get update
 
-    install_ldac_ubuntu
+    # install_ldac_ubuntu
 
 
     sudo apt-get install -y \
@@ -142,12 +128,9 @@ install_base_desktop_ubuntu() {
         pavucontrol \
         pulsemixer \
         sqlitebrowser \
-        flatpak \
-        gnome-software-plugin-flatpak \
         telegram-desktop \
         transmission-gtk \
         xclip \
-        && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
         && setup_docker_ubuntu \
         && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
     }
@@ -180,13 +163,12 @@ main () {
         install_base_desktop_ubuntu
         install_snap_packages > /dev/null
         install_cargo_packages > /dev/null
-        install_flatpak_packages > /dev/null
 
         install_chrome_ubuntu
         install_dbeaver_ubuntu
         install_toptracker_ubuntu
         install_mega_ubuntu
-        install_ubuntu_mainline
+        # install_ubuntu_mainline
 
     else
         echo "Did not detect OS. Quitting."

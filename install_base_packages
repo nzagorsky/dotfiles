@@ -56,6 +56,7 @@ install_base_ubuntu () {
         zip \
         && cargo install exa -q \
         && cargo install ripgrep -q \
+        && cargo install du-dust -q \
     && echo -e "${BOLD}Base install success${NC}"
 
     command -v rclone > /dev/null 2>&1 || curl -s https://rclone.org/install.sh | sudo bash
