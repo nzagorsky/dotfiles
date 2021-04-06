@@ -65,7 +65,8 @@ install_snap_packages() {
     sudo snap install mailspring
 }
 
-# NOTE: not updated for 21.04 as of now (4 april 2021)
+
+# TODO waiting for 21.04 release
 # sudo add-apt-repository --remove -y ppa:berglh/pulseaudio-a2dp
 # install_ldac_ubuntu() {
 #     dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
@@ -98,15 +99,18 @@ install_toptracker_ubuntu() {
     rm /tmp/toptracker.deb
 }
 
-install_mega_ubuntu() {
-    dpkg -s megasync &>/dev/null && return 0
+# TODO waiting for 21.04 release
+# install_mega_ubuntu() {
+#     dpkg -s megasync &>/dev/null && return 0
 
-    wget https://mega.nz/linux/MEGAsync/xUbuntu_20.10/amd64/megasync-xUbuntu_20.10_amd64.deb -O /tmp/megasync.deb
-    sudo dpkg -i /tmp/megasync.deb
-    rm /tmp/megasync.deb
-}
+#     . /etc/os-release
 
-install_spotify() {
+#     wget https://mega.nz/linux/MEGAsync/xUbuntu_"$VERSION_ID"/amd64/megasync-xUbuntu_"$VERSION_ID"_amd64.deb -O /tmp/megasync.deb
+#     sudo dpkg -i /tmp/megasync.deb
+#     rm /tmp/megasync.deb
+# }
+
+install_spotify_ubuntu() {
     curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
     echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
     sudo apt-get update && sudo apt-get install -y spotify-client
@@ -168,6 +172,7 @@ main () {
         install_dbeaver_ubuntu
         install_toptracker_ubuntu
         install_mega_ubuntu
+        install_spotify_ubuntu
         # install_ubuntu_mainline
 
     else
