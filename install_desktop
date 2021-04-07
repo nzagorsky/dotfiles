@@ -66,15 +66,13 @@ install_snap_packages() {
 }
 
 
-# TODO waiting for 21.04 release
-# sudo add-apt-repository --remove -y ppa:berglh/pulseaudio-a2dp
-# install_ldac_ubuntu() {
-#     dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
+install_ldac_ubuntu() {
+    dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
 
-#     sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
-#     sudo apt install -y -qq pulseaudio-modules-bt libldac
-#     pulseaudio -k
-# }
+    sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
+    sudo apt install -y -qq pulseaudio-modules-bt libldac
+    pulseaudio -k
+}
 
 install_chrome_ubuntu() {
     dpkg -s google-chrome-stable &>/dev/null && return 0
@@ -99,16 +97,15 @@ install_toptracker_ubuntu() {
     rm /tmp/toptracker.deb
 }
 
-# TODO waiting for 21.04 release
-# install_mega_ubuntu() {
-#     dpkg -s megasync &>/dev/null && return 0
+install_mega_ubuntu() {
+    dpkg -s megasync &>/dev/null && return 0
 
-#     . /etc/os-release
+    . /etc/os-release
 
-#     wget https://mega.nz/linux/MEGAsync/xUbuntu_"$VERSION_ID"/amd64/megasync-xUbuntu_"$VERSION_ID"_amd64.deb -O /tmp/megasync.deb
-#     sudo dpkg -i /tmp/megasync.deb
-#     rm /tmp/megasync.deb
-# }
+    wget https://mega.nz/linux/MEGAsync/xUbuntu_"$VERSION_ID"/amd64/megasync-xUbuntu_"$VERSION_ID"_amd64.deb -O /tmp/megasync.deb
+    sudo dpkg -i /tmp/megasync.deb
+    rm /tmp/megasync.deb
+}
 
 install_spotify_ubuntu() {
     curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
@@ -119,8 +116,7 @@ install_spotify_ubuntu() {
 install_base_desktop_ubuntu() {
     sudo apt-get update
 
-    # install_ldac_ubuntu
-
+    install_ldac_ubuntu
 
     sudo apt-get install -y \
         chrome-gnome-shell \
@@ -173,7 +169,6 @@ main () {
         install_toptracker_ubuntu
         install_mega_ubuntu
         install_spotify_ubuntu
-        # install_ubuntu_mainline
 
     else
         echo "Did not detect OS. Quitting."
