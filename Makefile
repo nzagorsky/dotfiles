@@ -14,4 +14,8 @@ bootstrap:
 	[ ! -d ~/.credentials ] && ./optional/setup_credentials
 
 build:
-	docker build -t devenv -f assets/build/Dockerfile .
+	docker build -t devenv -f assets/build/Dockerfile \
+		--build-arg UID=$$(id -u) \
+		--build-arg UNAME=$$(id -un) \
+		--build-arg GID=$$(id -g) \
+		.
