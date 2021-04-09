@@ -63,6 +63,7 @@ install_base_ubuntu () {
     command -v pulumi > /dev/null 2>&1 || curl -fsSL https://get.pulumi.com | sh
     tldr -u > /dev/null 2>&1 || echo
 
+    mkdir -p ~/.local/bin/
     curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
