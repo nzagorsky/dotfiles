@@ -61,6 +61,7 @@ install_base_ubuntu () {
 
     command -v rclone > /dev/null 2>&1 || curl -s https://rclone.org/install.sh | sudo bash
     command -v pulumi > /dev/null 2>&1 || curl -fsSL https://get.pulumi.com | sh
+
     tldr -u > /dev/null 2>&1 || echo
 
     mkdir -p ~/.local/bin/
