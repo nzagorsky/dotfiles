@@ -24,8 +24,9 @@ if len(sys.argv) > 1:
     FILEPATH = os.path.join(os.getcwd(), sys.argv[1])
     _filename = FILEPATH.split("/")[-1].replace("-", "_").strip(".csv.zip")
     _filename_elements = _filename.split("_")
-    TABLE_NAME = f"dbr_csv_{_filename_elements[2]}_"  # Account number
+    TABLE_NAME = f"dbr_csv_{_filename_elements[0]}_"  # Account number
     TABLE_NAME += "_".join(_filename_elements[-2:])  # Date
+    print(f"Using {TABLE_NAME} table")
 
 else:
     is_cur = True
