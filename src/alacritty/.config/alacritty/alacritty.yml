@@ -1,7 +1,8 @@
 colors:
   # Default colors
   primary:
-    background: '0x151515'
+    # background: '0x151515'
+    background: '0x000000'
     foreground: '0xd7d0c7'
 
   # Normal colors
@@ -26,11 +27,11 @@ colors:
     cyan:    '0x42717b'
     white:   '0xdddddd'
 
-background_opacity: 0.98
+background_opacity: 0.95
 live_config_reload: true
 
 window:
-  decorations: none
+  # decorations: none
   dimensions:
     columns: 100
     lines: 28

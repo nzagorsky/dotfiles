@@ -61,7 +61,11 @@ install_base_ubuntu () {
 
     command -v rclone > /dev/null 2>&1 || curl -s https://rclone.org/install.sh | sudo bash
     command -v pulumi > /dev/null 2>&1 || curl -fsSL https://get.pulumi.com | sh
-    tldr -u > /dev/null 2>&1 || echo "failed to update tldr"
+
+    tldr -u > /dev/null 2>&1 || echo
+
+    mkdir -p ~/.local/bin/
+    curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 }
@@ -172,7 +176,6 @@ install_neovim_plugins() {
 }
 
 configure_shell() {
-    curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
 
     sudo chsh $(whoami) -s $(which zsh)
 }

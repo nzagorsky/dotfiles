@@ -10,7 +10,7 @@ setup_dots () {
 }
 
 main () {
-    pull_submodules
+    pull_submodules || echo "Failed to pull submodules"
     setup_dots
 }
 
