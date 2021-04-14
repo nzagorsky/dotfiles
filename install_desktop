@@ -71,9 +71,24 @@ configure_gnome () {
     # install_gnome_extension hidetopbar@mathieu.bidon.ca 545  # hide top bar
 }
 
+install_flatpak_packages_ubuntu() {
+    sudo apt-get install flatpak gnome-software-plugin-flatpak
+
+    flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak install -y flathub com.spotify.Client
+    flatpak install -y flathub com.github.calo001.fondo
+    flatpak install -y flathub md.obsidian.Obsidian
+
+}
+
 install_snap_packages() {
     sudo snap install --beta authy
-    sudo snap install mailspring
+}
+
+install_mailspring_ubuntu() {
+    wget "https://updates.getmailspring.com/download?platform=linuxDeb" -O /tmp/mailspring.deb
+    sudo dpkg -i /tmp/mailspring.deb
+    rm /tmp/mailspring.deb
 }
 
 install_mailspring_fedora() {
@@ -87,23 +102,24 @@ install_ldac_ubuntu() {
     dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
 
     sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
-    sudo apt install -y -qq pulseaudio-modules-bt libldac
+    sudo apt-get install -y -qq pulseaudio-modules-bt libldac
     pulseaudio -k
 }
 
-install_chrome_ubuntu() {
-    dpkg -s google-chrome-stable &>/dev/null && return 0
+# install_chrome_ubuntu() {
+#     dpkg -s google-chrome-stable &>/dev/null && return 0
 
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
-    sudo dpkg -i /tmp/chrome.deb
-    rm /tmp/chrome.deb
-}
+#     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
+#     sudo dpkg -i /tmp/chrome.deb
+#     rm /tmp/chrome.deb
+# }
+
 install_brave_ubuntu() {
-    sudo apt install -y apt-transport-https curl
+    sudo apt-get install -y apt-transport-https curl > /dev/null
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-    sudo apt update
-    sudo apt install -y brave-browser
+    sudo apt-get update > /dev/null
+    sudo apt-get install -y brave-browser
 }
 
 install_brave_fedora() {
@@ -138,11 +154,11 @@ install_mega_ubuntu() {
     rm /tmp/megasync.deb
 }
 
-install_spotify_ubuntu() {
-    curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
-    echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-    sudo apt-get update && sudo apt-get install -y spotify-client
-}
+# install_spotify_ubuntu() {
+#     curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
+#     echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+#     sudo apt-get update && sudo apt-get install -y spotify-client
+# }
 
 install_base_desktop_fedora() {
 
@@ -163,21 +179,17 @@ install_base_desktop_fedora() {
 }
 
 install_base_desktop_ubuntu() {
-    sudo apt-get update
+    sudo apt-get update > /dev/null
 
     install_ldac_ubuntu
 
     sudo apt-get install -y \
-        chrome-gnome-shell \
-        fonts-hack-ttf \
-        gdebi \
         mpv \
         gnome-tweak-tool \
         openvpn \
         pavucontrol \
         pulsemixer \
         sqlitebrowser \
-        telegram-desktop \
         transmission-gtk \
         xclip \
         && setup_docker_ubuntu \
@@ -185,6 +197,8 @@ install_base_desktop_ubuntu() {
     }
 
 install_cargo_packages() {
+
+    # Install alacritty
     if ! command -v alacritty &> /dev/null 
     then
         BUILD_PATH=/tmp/alacritty
@@ -211,26 +225,19 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         install_base_desktop_ubuntu
         install_snap_packages > /dev/null
+        install_flatpak_packages_ubuntu > /dev/null
         install_cargo_packages > /dev/null
 
-        install_chrome_ubuntu
-        install_brave_ubuntu
         install_dbeaver_ubuntu
+        install_mailspring_ubuntu
+        install_brave_ubuntu
         install_toptracker_ubuntu
         install_mega_ubuntu
-        install_spotify_ubuntu
 
     elif [ "$OS_DETECTED" == "fedora" ]; then
         install_base_desktop_fedora
         install_brave_fedora
         install_mailspring_fedora
-        # install_snap_packages > /dev/null
-        # install_cargo_packages > /dev/null
-
-        # install_dbeaver_ubuntu
-        # install_toptracker_ubuntu
-        # install_mega_ubuntu
-        # install_spotify_ubuntu
 
     else
         echo "Did not detect OS. Quitting."
