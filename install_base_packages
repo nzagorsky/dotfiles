@@ -9,6 +9,40 @@ NC='\033[0m'
 
 cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 
+install_base_fedora() {
+    sudo dnf update
+    sudo dnf install -y \
+	    stress \
+	    zsh \
+	    curl \
+	    wget \
+	    htop \
+	    parallel \
+	    jq \
+	    util-linux-user \
+	    lm_sensors \
+	    npm \
+        zsh-syntax-highlighting \
+	    tmux \
+	    ctags \
+	    ripgrep \
+	    exa \
+	    rclone \
+        postgresql-devel \
+        python3-devel \
+    && echo -e "${BOLD}Base install success${NC}"
+	    
+    # command -v rclone > /dev/null 2>&1 || curl -s https://rclone.org/install.sh | sudo bash
+    command -v pulumi > /dev/null 2>&1 || curl -fsSL https://get.pulumi.com | sh
+
+    mkdir -p ~/.local/bin/
+    curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
+
+    sudo systemctl enable sshd --now
+    sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
+
+}
+
 install_base_ubuntu () {
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
@@ -83,22 +117,6 @@ install_chromedriver() {
     rm -rf /tmp/chromedriver/
 }
 
-
-install_go_packages() {
-    export GOPATH=~/code/go
-
-    go get -u github.com/motemen/gore/cmd/gore
-    go get -u github.com/stamblerre/gocode
-    go get -u golang.org/x/tools/cmd/godoc
-    go get -u golang.org/x/tools/cmd/goimports
-    go get -u golang.org/x/tools/cmd/gorename
-    go get -u golang.org/x/tools/cmd/guru
-    go get -u github.com/cweill/gotests/...
-    go get -u github.com/fatih/gomodifytags
-    go get -u github.com/ericchiang/pup
-
-    echo -e "${BOLD}go plugins install success${NC}"
-}
 
 
 install_npm_deps () {
@@ -186,13 +204,17 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo -e "${GREEN}Ubuntu detected${NC}"
         install_base_ubuntu
+
+    elif [ "$OS_DETECTED" == "fedora" ]; then
+        echo -e "${GREEN}Fedora detected${NC}"
+        install_base_fedora
+
     else
         echo "Didn't detect OS"
         exit 1
     fi
 
 
-    export -f install_go_packages
     export -f install_npm_deps
     export -f install_python_deps
     export -f install_chromedriver
@@ -200,7 +222,6 @@ main () {
     export -f configure_shell
 
     parallel ::: \
-        install_go_packages \
         install_npm_deps \
         install_python_deps \
         install_chromedriver \

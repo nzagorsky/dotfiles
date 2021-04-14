@@ -16,6 +16,17 @@ setup_docker_ubuntu() {
     sudo gpasswd -a $USER docker
 }
 
+setup_docker_fedora() {
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager \
+        --add-repo \
+        https://download.docker.com/linux/fedora/docker-ce.repo
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io
+    sudo systemctl enable docker --now
+    sudo gpasswd -a $USER docker
+
+}
+
 
 install_gnome_extension() {
     extension_name=$1
@@ -65,6 +76,12 @@ install_snap_packages() {
     sudo snap install mailspring
 }
 
+install_mailspring_fedora() {
+    wget "https://updates.getmailspring.com/download?platform=linuxRpm" -O /tmp/mailspring.rpm
+    sudo dnf install -y /tmp/mailspring.rpm
+    rm /tmp/mailspring.rpm
+}
+
 
 install_ldac_ubuntu() {
     dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
@@ -80,6 +97,20 @@ install_chrome_ubuntu() {
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
     sudo dpkg -i /tmp/chrome.deb
     rm /tmp/chrome.deb
+}
+install_brave_ubuntu() {
+    sudo apt install -y apt-transport-https curl
+    sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    sudo apt update
+    sudo apt install -y brave-browser
+}
+
+install_brave_fedora() {
+    sudo dnf install -y dnf-plugins-core
+    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+    sudo dnf install -y brave-browser
 }
 
 install_dbeaver_ubuntu() {
@@ -113,6 +144,24 @@ install_spotify_ubuntu() {
     sudo apt-get update && sudo apt-get install -y spotify-client
 }
 
+install_base_desktop_fedora() {
+
+    sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+    flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak install -y flathub org.telegram.desktop
+    flatpak install -y flathub com.spotify.Client
+
+    sudo dnf install -y \
+        mpv \
+        gnome-tweak-tool \
+        gnome-extensions-app \
+        openvpn \
+        pavucontrol \
+        megasync \
+    && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
+}
+
 install_base_desktop_ubuntu() {
     sudo apt-get update
 
@@ -132,7 +181,7 @@ install_base_desktop_ubuntu() {
         transmission-gtk \
         xclip \
         && setup_docker_ubuntu \
-        && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
+    && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
     }
 
 install_cargo_packages() {
@@ -165,10 +214,23 @@ main () {
         install_cargo_packages > /dev/null
 
         install_chrome_ubuntu
+        install_brave_ubuntu
         install_dbeaver_ubuntu
         install_toptracker_ubuntu
         install_mega_ubuntu
         install_spotify_ubuntu
+
+    elif [ "$OS_DETECTED" == "fedora" ]; then
+        install_base_desktop_fedora
+        install_brave_fedora
+        install_mailspring_fedora
+        # install_snap_packages > /dev/null
+        # install_cargo_packages > /dev/null
+
+        # install_dbeaver_ubuntu
+        # install_toptracker_ubuntu
+        # install_mega_ubuntu
+        # install_spotify_ubuntu
 
     else
         echo "Did not detect OS. Quitting."
@@ -181,7 +243,6 @@ main () {
         configure_gnome
     elif [ "$XDG_SESSION_DESKTOP" == "ubuntu" ]; then
         configure_gnome
-
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
         exit 1
