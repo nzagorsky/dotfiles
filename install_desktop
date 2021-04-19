@@ -60,6 +60,7 @@ configure_gnome () {
     install_gnome_extension bluetooth-quick-connect@bjarosze.gmail.com 1401  # Bluetooth quick connect
     install_gnome_extension impatience@gfxmonk.net 277  # Faster animations
     install_gnome_extension user-theme@gnome-shell-extensions.gcampax.github.com 19  # Shell themes
+    install_gnome_extension cpufreq@konkor 1082  # CPUfreq applet to control CPU boost
 
     # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
     # install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
