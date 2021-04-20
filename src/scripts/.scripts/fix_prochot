@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# sudo apt install linux-tools-$(uname -r)
+# sudo apt install msrtools
+
+# Determinate CPU capabilities
+MAX_CPU=$(cpupower frequency-info -l | tail -n1 | cut -d' ' -f2)
+
+# Disable "BD PROCHOT" 
+sudo wrmsr -a 0x1FC 262238;
+
+# Set and apply frequencies
+sudo cpupower frequency-set \
+  -d $(expr $MAX_CPU / 4) \
+  -u $MAX_CPU \
+  -r \
+  -g powersave;
