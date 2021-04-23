@@ -76,7 +76,8 @@ install_flatpak_packages_ubuntu() {
     sudo apt-get install flatpak gnome-software-plugin-flatpak
 
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    # flatpak install -y flathub com.spotify.Client
+    flatpak install -y flathub com.todoist.Todoist
+    flatpak install -y flathub com.spotify.Client
     flatpak install -y flathub com.github.calo001.fondo
     flatpak install -y flathub md.obsidian.Obsidian
 
