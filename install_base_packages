@@ -9,41 +9,6 @@ NC='\033[0m'
 
 cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 
-install_base_fedora() {
-    sudo dnf update
-    sudo dnf install -y \
-	    stress \
-	    zsh \
-        fd-find \
-	    curl \
-	    wget \
-	    htop \
-	    parallel \
-	    jq \
-	    util-linux-user \
-	    lm_sensors \
-	    npm \
-        zsh-syntax-highlighting \
-	    tmux \
-	    ctags \
-	    ripgrep \
-	    exa \
-	    rclone \
-        postgresql-devel \
-        python3-devel \
-    && echo -e "${BOLD}Base install success${NC}"
-	    
-    # command -v rclone > /dev/null 2>&1 || curl -s https://rclone.org/install.sh | sudo bash
-    command -v pulumi > /dev/null 2>&1 || curl -fsSL https://get.pulumi.com | sh
-
-    mkdir -p ~/.local/bin/
-    curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
-
-    sudo systemctl enable sshd --now
-    sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
-
-}
-
 install_base_ubuntu () {
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
@@ -212,10 +177,6 @@ main () {
         echo -e "${GREEN}Ubuntu detected${NC}"
         install_base_ubuntu
         install_ubuntu_mainline
-
-    elif [ "$OS_DETECTED" == "fedora" ]; then
-        echo -e "${GREEN}Fedora detected${NC}"
-        install_base_fedora
 
     else
         echo "Didn't detect OS"
