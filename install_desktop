@@ -93,6 +93,13 @@ install_mailspring_ubuntu() {
     rm /tmp/mailspring.deb
 }
 
+install_bluemail_ubuntu() {
+    wget "https://download.bluemail.me/BlueMail/deb/BlueMail.deb" -O /tmp/bluemail.deb
+    sudo dpkg -i /tmp/bluemail.deb
+    rm /tmp/bluemail.deb
+}
+
+
 install_mailspring_fedora() {
     wget "https://updates.getmailspring.com/download?platform=linuxRpm" -O /tmp/mailspring.rpm
     sudo dnf install -y /tmp/mailspring.rpm
@@ -232,6 +239,7 @@ main () {
 
         install_dbeaver_ubuntu
         install_mailspring_ubuntu
+        install_bluemail_ubuntu
         install_brave_ubuntu
         install_toptracker_ubuntu
         install_mega_ubuntu
