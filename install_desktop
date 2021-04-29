@@ -10,7 +10,7 @@ identify_os () {
 }
 
 setup_docker_ubuntu() {
-    sudo apt-get install -y docker.io
+    sudo apt-get install -qq -y docker.io
     sudo systemctl enable docker --now
     sudo gpasswd -a $USER docker
 }
@@ -60,13 +60,13 @@ configure_gnome () {
 }
 
 install_flatpak_packages_ubuntu() {
-    sudo apt-get install flatpak gnome-software-plugin-flatpak
+    sudo apt-get install -qq flatpak gnome-software-plugin-flatpak
 
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    flatpak install -y flathub com.todoist.Todoist
-    flatpak install -y flathub com.spotify.Client
-    flatpak install -y flathub com.github.calo001.fondo
-    flatpak install -y flathub md.obsidian.Obsidian
+    flatpak install --user -y flathub com.todoist.Todoist
+    flatpak install --user -y flathub com.spotify.Client
+    flatpak install --user -y flathub com.github.calo001.fondo
+    flatpak install --user -y flathub md.obsidian.Obsidian
 
 }
 
@@ -75,13 +75,13 @@ install_snap_packages() {
 }
 
 install_mailspring_ubuntu() {
-    wget "https://updates.getmailspring.com/download?platform=linuxDeb" -O /tmp/mailspring.deb
+    wget -q "https://updates.getmailspring.com/download?platform=linuxDeb" -O /tmp/mailspring.deb
     sudo dpkg -i /tmp/mailspring.deb
     rm /tmp/mailspring.deb
 }
 
 install_bluemail_ubuntu() {
-    wget "https://download.bluemail.me/BlueMail/deb/BlueMail.deb" -O /tmp/bluemail.deb
+    wget -q "https://download.bluemail.me/BlueMail/deb/BlueMail.deb" -O /tmp/bluemail.deb
     sudo dpkg -i /tmp/bluemail.deb
     rm /tmp/bluemail.deb
 }
@@ -90,23 +90,23 @@ install_bluemail_ubuntu() {
 # install_chrome_ubuntu() {
 #     dpkg -s google-chrome-stable &>/dev/null && return 0
 
-#     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
+#     wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
 #     sudo dpkg -i /tmp/chrome.deb
 #     rm /tmp/chrome.deb
 # }
 
 install_brave_ubuntu() {
-    sudo apt-get install -y apt-transport-https curl > /dev/null
+    sudo apt-get install -qq -y apt-transport-https curl > /dev/null
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-    sudo apt-get update > /dev/null
-    sudo apt-get install -y brave-browser
+    sudo apt-get update -qq > /dev/null
+    sudo apt-get install -qq -y brave-browser
 }
 
 
 install_dbeaver_ubuntu() {
     dpkg -s dbeaver-ce &>/dev/null && return 0
-    wget https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O /tmp/dbeaver.deb
+    wget -q https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O /tmp/dbeaver.deb
     sudo dpkg -i /tmp/dbeaver.deb
     rm /tmp/dbeaver.deb
 }
@@ -114,7 +114,7 @@ install_dbeaver_ubuntu() {
 install_toptracker_ubuntu() {
     dpkg -s toptracker &>/dev/null && return 0
 
-    wget https://tracker-api.toptal.com/desktop/latest/debian -O /tmp/toptracker.deb
+    wget -q https://tracker-api.toptal.com/desktop/latest/debian -O /tmp/toptracker.deb
     sudo dpkg -i /tmp/toptracker.deb
     rm /tmp/toptracker.deb
 }
@@ -124,7 +124,7 @@ install_mega_ubuntu() {
 
     . /etc/os-release
 
-    wget https://mega.nz/linux/MEGAsync/xUbuntu_"$VERSION_ID"/amd64/megasync-xUbuntu_"$VERSION_ID"_amd64.deb -O /tmp/megasync.deb
+    wget -q https://mega.nz/linux/MEGAsync/xUbuntu_"$VERSION_ID"/amd64/megasync-xUbuntu_"$VERSION_ID"_amd64.deb -O /tmp/megasync.deb
     sudo dpkg -i /tmp/megasync.deb
     rm /tmp/megasync.deb
 }
@@ -132,14 +132,14 @@ install_mega_ubuntu() {
 # install_spotify_ubuntu() {
 #     curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
 #     echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-#     sudo apt-get update && sudo apt-get install -y spotify-client
+#     sudo apt-get update && sudo apt-get install -qq -y spotify-client
 # }
 
 
 install_base_desktop_ubuntu() {
     sudo apt-get update > /dev/null
 
-    sudo apt-get install -y \
+    sudo apt-get install -qq -y \
         mpv \
         gnome-tweak-tool \
         openvpn \
