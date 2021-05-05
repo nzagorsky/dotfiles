@@ -36,7 +36,6 @@ install_base_ubuntu () {
         neovim \
         net-tools \
         nodejs \
-        npm \
         openssh-server \
         parallel \
         pkg-config \
