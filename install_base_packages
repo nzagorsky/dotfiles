@@ -31,6 +31,7 @@ install_base_ubuntu () {
         cargo \
         cmake \
         curl \
+        npm \
         zsh \
         zsh-syntax-highlighting  \
         fd-find \
