@@ -10,6 +10,8 @@ NC='\033[0m'
 cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 
 install_base_fedora() {
+    sudo update-crypto-policies --set DEFAULT:FEDORA32
+
     sudo dnf install -y \
         nodejs \
         zsh \
