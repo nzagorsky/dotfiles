@@ -19,6 +19,8 @@ install_base_fedora() {
         jq \
         neovim \
         parallel \
+        fd-find \
+        ripgrep \
         tmux \
         wget \
         util-linux-user \
