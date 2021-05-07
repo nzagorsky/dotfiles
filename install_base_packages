@@ -9,6 +9,24 @@ NC='\033[0m'
 
 cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 
+install_base_fedora() {
+    sudo update-crypto-policies --set DEFAULT:FEDORA32
+
+    sudo dnf install -y \
+        nodejs \
+        zsh \
+        bat \
+        jq \
+        neovim \
+        parallel \
+        fd-find \
+        ripgrep \
+        tmux \
+        wget \
+        util-linux-user \
+        zsh-syntax-highlighting
+}
+
 install_base_ubuntu () {
     sudo apt-get update -qq
     sudo apt-get install -y -qq \
@@ -17,6 +35,7 @@ install_base_ubuntu () {
         cargo \
         cmake \
         curl \
+        npm \
         zsh \
         zsh-syntax-highlighting  \
         fd-find \
@@ -36,7 +55,6 @@ install_base_ubuntu () {
         neovim \
         net-tools \
         nodejs \
-        npm \
         openssh-server \
         parallel \
         pkg-config \
@@ -88,7 +106,6 @@ install_chromedriver() {
     sudo install /tmp/chromedriver/chromedriver /usr/local/bin/chromedriver
     rm -rf /tmp/chromedriver/
 }
-
 
 
 install_npm_deps () {
@@ -177,7 +194,8 @@ main () {
         echo -e "${GREEN}Ubuntu detected${NC}"
         install_base_ubuntu
         install_ubuntu_mainline
-
+    elif [ "$OS_DETECTED" == "fedora" ]; then
+        install_base_fedora
     else
         echo "Didn't detect OS"
         exit 1

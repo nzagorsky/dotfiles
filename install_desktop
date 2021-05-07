@@ -15,6 +15,25 @@ setup_docker_ubuntu() {
     sudo gpasswd -a $USER docker
 }
 
+install_docker_fedora() {
+    command -v docker > /dev/null && return 0
+
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager  --add-repo  https://download.docker.com/linux/fedora/docker-ce.repo 
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io
+    sudo systemctl enable docker --now
+    sudo gpasswd -a $USER docker
+}
+
+install_media_requirements_fedora() {
+    command -v ffmpegthumbnailer > /dev/null && return 0
+
+    sudo dnf install -y gstreamer1-libav gstreamer1-plugins-ugly unrar compat-ffmpeg28 ffmpeg-libs ffmpegthumbnailer
+    rm -rf .cache/thumbnails/fail/gnome-thumbnail-factory/*
+    rm -rf .cache/thumbnails/large/*
+    nautilus -q
+}
+
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
@@ -28,26 +47,26 @@ configure_gnome () {
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 
+    $GNOME_EXTENSION_INSTALLER --update
+
     # Do not install extensions if they are installed already.
     gnome-extensions info -q gsconnect@andyholmes.github.io > /dev/null && return
 
-    # Disable all extensions first
-    for EXT in $(gnome-extensions list)
-    do
-        gnome-extensions disable $EXT
-    done
-
     # Install and enable required extensions
-    $GNOME_EXTENSION_INSTALLER --update
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
-    install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
+    # TODO fix audio switcher
     install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
     install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
-    install_gnome_extension mprisindicatorbutton@JasonLG1979.github.io 1379  # MPRIS indicator button
     install_gnome_extension bluetooth-quick-connect@bjarosze.gmail.com 1401  # Bluetooth quick connect
     install_gnome_extension impatience@gfxmonk.net 277  # Faster animations
     install_gnome_extension user-theme@gnome-shell-extensions.gcampax.github.com 19  # Shell themes
 
+    # install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
+    curl -sL https://github.com/windsorschmidt/disable-workspace-switcher-popup/tarball/master |
+      tar xzv --wildcards --strip 1 --directory ~/.local/share/gnome-shell/extensions/ \
+      "*/disable-workspace-switcher-popup@github.com"
+
+    # install_gnome_extension mprisindicatorbutton@JasonLG1979.github.io 1379  # MPRIS indicator button
     # install_gnome_extension cpufreq@konkor 1082  # CPUfreq applet to control CPU boost
     # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
     # install_gnome_extension disableworkspaceanim@owilliams.mixxx.org 1328  # Workspace switch animation disabler
@@ -80,21 +99,6 @@ install_mailspring_ubuntu() {
     rm /tmp/mailspring.deb
 }
 
-install_bluemail_ubuntu() {
-    wget -q "https://download.bluemail.me/BlueMail/deb/BlueMail.deb" -O /tmp/bluemail.deb
-    sudo dpkg -i /tmp/bluemail.deb
-    rm /tmp/bluemail.deb
-}
-
-
-# install_chrome_ubuntu() {
-#     dpkg -s google-chrome-stable &>/dev/null && return 0
-
-#     wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
-#     sudo dpkg -i /tmp/chrome.deb
-#     rm /tmp/chrome.deb
-# }
-
 install_brave_ubuntu() {
     sudo apt-get install -qq -y apt-transport-https curl > /dev/null
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -117,6 +121,31 @@ install_toptracker_ubuntu() {
     wget -q https://tracker-api.toptal.com/desktop/latest/debian -O /tmp/toptracker.deb
     sudo dpkg -i /tmp/toptracker.deb
     rm /tmp/toptracker.deb
+}
+
+install_mega_fedora() {
+    command -v megasync > /dev/null && return 0
+
+    . /etc/os-release
+    wget -q "https://mega.nz/linux/MEGAsync/Fedora_$VERSION_ID/x86_64/megasync-Fedora_$VERSION_ID.x86_64.rpm" -O /tmp/mega.rpm
+    sudo dnf localinstall -y /tmp/mega.rpm
+    rm /tmp/mega.rpm
+}
+
+install_toptracker_fedora() {
+    command -v toptracker > /dev/null && return 0
+
+    wget -q "https://tracker-api.toptal.com/desktop/latest/redhat" -O /tmp/toptracker.rpm
+    sudo dnf localinstall -y /tmp/toptracker.rpm
+
+}
+
+install_dbeaver_fedora() {
+    command -v dbeaver > /dev/null && return 0
+
+    wget -q "https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm" -O /tmp/dbeaver.rpm
+    sudo dnf localinstall -y /tmp/dbeaver.rpm
+
 }
 
 install_mega_ubuntu() {
@@ -153,6 +182,43 @@ install_base_desktop_ubuntu() {
     && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
     }
 
+
+install_brave_fedora() {
+    command -v brave-browser > /dev/null && exit 0
+
+    sudo dnf install -y dnf-plugins-core
+    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+    sudo dnf install -y brave-browser
+}
+
+install_mailspring_fedora() {
+    command -v mailspring > /dev/null && exit 0
+
+    wget "https://updates.getmailspring.com/download?platform=linuxRpm" -O /tmp/mailspring.rpm
+    sudo dnf localinstall -y /tmp/mailspring.rpm
+    rm /tmp/mailspring.rpm
+}
+
+install_base_desktop_fedora() {
+    command -v telegram-desktop > /dev/null && exit 0
+
+    # Enable RPM fusion
+    sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+    sudo dnf install -y \
+        mpv \
+        alacritty \
+        lm_sensors \
+        stress \
+        openvpn \
+        seahorse \
+        gnome-tweak-tool \
+        gnome-extensions-app \
+        telegram-desktop
+}
+
+
 install_cargo_packages() {
 
     # Install alacritty
@@ -177,27 +243,35 @@ main () {
     echo "------------------------------"
     echo -e "\033[0m"
 
-
-
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         install_base_desktop_ubuntu
         install_snap_packages > /dev/null
         install_flatpak_packages_ubuntu > /dev/null
         install_cargo_packages > /dev/null
 
+        install_brave_ubuntu
         install_dbeaver_ubuntu
         install_mailspring_ubuntu
-        install_bluemail_ubuntu
-        install_brave_ubuntu
-        install_toptracker_ubuntu
         install_mega_ubuntu
+        install_toptracker_ubuntu
+
+    elif [ "$OS_DETECTED" == "fedora" ]; then
+        install_base_desktop_fedora
+
+        install_brave_fedora
+        install_dbeaver_fedora
+        install_docker_fedora
+        install_mailspring_fedora
+        install_mega_fedora
+        install_toptracker_fedora
+        install_media_requirements_fedora
 
     else
         echo "Did not detect OS. Quitting."
         exit 1
 
     fi
-    # ------------------------------------------
+
 
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
         configure_gnome
@@ -207,7 +281,6 @@ main () {
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
         exit 1
     fi
-
 }
 
 main
