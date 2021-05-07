@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+sudo bash -c 'echo 1 > /sys/module/bluetooth/parameters/disable_ertm'
+
+echo
+echo
+echo "If it's 'Y' then it's good."
+cat /sys/module/bluetooth/parameters/disable_ertm
