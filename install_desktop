@@ -54,8 +54,6 @@ configure_gnome () {
 
     # Install and enable required extensions
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
-    # TODO fix audio switcher
-    install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
     install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
     install_gnome_extension bluetooth-quick-connect@bjarosze.gmail.com 1401  # Bluetooth quick connect
     install_gnome_extension impatience@gfxmonk.net 277  # Faster animations
