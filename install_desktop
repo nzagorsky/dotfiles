@@ -169,6 +169,7 @@ install_base_desktop_ubuntu() {
     sudo apt-get update > /dev/null
 
     sudo apt-get install -qq -y \
+        cpufrequtils \
         mpv \
         gnome-tweak-tool \
         openvpn \
