@@ -25,6 +25,11 @@ install_base_fedora() {
         wget \
         util-linux-user \
         zsh-syntax-highlighting
+
+    # pip installation deps
+    sudo dnf install -y \
+        postgresql-devel \
+        python3-devel
 }
 
 install_base_ubuntu () {
@@ -124,7 +129,7 @@ install_npm_deps () {
     }
 
 install_python_deps() {
-    pip3 install -U --user setuptools wheel --no-warn-script-location > /dev/null
+    pip3 install -U --user setuptools wheel --no-warn-script-location
 
     pip3 install -U --user \
         "python-language-server[all]" \
@@ -164,9 +169,7 @@ install_python_deps() {
         vim-vint \
         yamllint \
         --no-warn-script-location \
-        > /dev/null
-
-    echo -e "${BOLD}pip install success${NC}"
+        && echo -e "${BOLD}pip install success${NC}"
     }
 
 
