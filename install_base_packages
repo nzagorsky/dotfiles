@@ -17,6 +17,7 @@ install_base_fedora() {
         zsh \
         bat \
         jq \
+        htop \
         neovim \
         parallel \
         fd-find \

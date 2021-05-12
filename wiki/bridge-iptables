@@ -1,5 +1,4 @@
 # In case packets dropped for virtual bridge
-
 sudo sysctl net.bridge.bridge-nf-call-iptables=0
 
 # To check

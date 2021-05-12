@@ -68,17 +68,18 @@ configure_gnome () {
 
     # Install and enable required extensions
     install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
-    # TODO fix audio switcher
-    install_gnome_extension audio-switcher@AndresCidoncha 1092  # Audio input/output switch from top bar
     install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
     install_gnome_extension bluetooth-quick-connect@bjarosze.gmail.com 1401  # Bluetooth quick connect
     install_gnome_extension impatience@gfxmonk.net 277  # Faster animations
     install_gnome_extension user-theme@gnome-shell-extensions.gcampax.github.com 19  # Shell themes
 
-    # install_gnome_extension disable-workspace-switcher-popup@github.com 959   # Workspace switch popup disabler
     curl -sL https://github.com/windsorschmidt/disable-workspace-switcher-popup/tarball/master |
       tar xzv --wildcards --strip 1 --directory ~/.local/share/gnome-shell/extensions/ \
       "*/disable-workspace-switcher-popup@github.com"
+
+    curl -sL https://github.com/nzagorsky/audio-switcher/tarball/master |
+      tar xzv --wildcards --strip 1 --directory ~/.local/share/gnome-shell/extensions/ \
+      "*/audio-switcher@github.com"
 
     # install_gnome_extension mprisindicatorbutton@JasonLG1979.github.io 1379  # MPRIS indicator button
     # install_gnome_extension cpufreq@konkor 1082  # CPUfreq applet to control CPU boost
@@ -183,6 +184,7 @@ install_base_desktop_ubuntu() {
     sudo apt-get update > /dev/null
 
     sudo apt-get install -qq -y \
+        cpufrequtils \
         mpv \
         gnome-tweak-tool \
         openvpn \
