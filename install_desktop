@@ -15,6 +15,20 @@ setup_docker_ubuntu() {
     sudo gpasswd -a $USER docker
 }
 
+install_wine_dependencies_fedora() {
+    sudo dnf install -y gnutls gnutls.i686 gnutls-devel gnutls-devel.i686 \
+        openldap openldap.i686 openldap-devel openldap-devel.i686 libgpg-error \
+        libgpg-error.i686 sqlite2.i686 sqlite2.x86_64
+}
+
+install_ldac_ubuntu() {
+    dpkg --no-pager -l pulseaudio-modules-bt > /dev/null && return
+
+    sudo add-apt-repository -y ppa:berglh/pulseaudio-a2dp
+    sudo apt install -y -qq pulseaudio-modules-bt libldac
+    pulseaudio -k
+}
+
 install_docker_fedora() {
     command -v docker > /dev/null && return 0
 
@@ -265,6 +279,7 @@ main () {
         install_mega_fedora
         install_toptracker_fedora
         install_media_requirements_fedora
+        install_wine_dependencies_fedora
 
     else
         echo "Did not detect OS. Quitting."
