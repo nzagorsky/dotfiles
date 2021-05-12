@@ -9,6 +9,7 @@ NC='\033[0m'
 
 cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 
+# TODO install nodejs separately in case of extremely old version in ubuntu repos
 install_base_fedora() {
     sudo update-crypto-policies --set DEFAULT:FEDORA32
 
@@ -151,6 +152,7 @@ install_python_deps() {
         jedi \
         litecli \
         mypy \
+        smart-open \
         neovim \
         nptime \
         pgcli \

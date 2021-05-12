@@ -29,6 +29,11 @@ install_ldac_ubuntu() {
     pulseaudio -k
 }
 
+setup_node_ubuntu() {
+    curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+}
+
 install_docker_fedora() {
     command -v docker > /dev/null && return 0
 
@@ -194,6 +199,7 @@ install_base_desktop_ubuntu() {
         telegram-desktop \
         transmission-gtk \
         xclip \
+        linux-tools-$(uname -r) \
         && setup_docker_ubuntu \
     && >&2 echo -e '\033[1mBase desktop packages are installed\033[0m'
     }
