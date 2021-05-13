@@ -29,11 +29,6 @@ install_ldac_ubuntu() {
     pulseaudio -k
 }
 
-setup_node_ubuntu() {
-    curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-    sudo apt-get install -y nodejs
-}
-
 install_docker_fedora() {
     command -v docker > /dev/null && return 0
 

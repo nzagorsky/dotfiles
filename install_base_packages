@@ -34,6 +34,12 @@ install_base_fedora() {
         python3-devel
 }
 
+setup_node_ubuntu() {
+    curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+}
+
+
 install_base_ubuntu () {
     sudo apt-get update -qq
     sudo apt-get install -y -qq \

@@ -167,8 +167,7 @@ def worker(table_name: str, state: IterationState) -> None:
                 time.sleep(0.1)
 
 
-def s3_rows_fetcher(filepath: str):
-
+def get_report_keys(filepath: str) -> Iterator[str]:
     session = get_boto3_session()
     client = session.client("s3")
     bucket_name = filepath.split("/")[2]
@@ -176,17 +175,27 @@ def s3_rows_fetcher(filepath: str):
     manifest_path = f"{filepath}{manifest_name}-Manifest.json"
     prefix = "/".join(filepath.split("/")[3:])
 
-    with smart_open.open(manifest_path, transport_params={"session": session}) as f:  # type: ignore
+    with smart_open.open(manifest_path, transport_params={"client": client}) as f:  # type: ignore
         manifest_data = json.load(f)
-        assembly_id = manifest_data["assemblyId"]
-        for key in client.list_objects_v2(
-            Bucket=bucket_name, Prefix=f"{prefix}{assembly_id}"
-        )["Contents"]:
-            if key["Key"].endswith(".csv.gz"):
-                with smart_open.open(f"s3://{bucket_name}/{key['Key']}", transport_params=dict(session=session)) as report_handler:  # type: ignore
-                    reader = csv.DictReader(report_handler)
-                    for row in reader:
-                        rows_queue.put(row)
+
+    assembly_id = manifest_data["assemblyId"]
+    for key in client.list_objects_v2(
+        Bucket=bucket_name, Prefix=f"{prefix}{assembly_id}"
+    )["Contents"]:
+        if key["Key"].endswith(".csv.gz"):
+            yield key['Key']
+
+
+def s3_rows_fetcher(filepath: str):
+    session = get_boto3_session()
+    client = session.client("s3")
+    bucket_name = filepath.split("/")[2]
+
+    for report_key in get_report_keys(filepath=filepath):
+        with smart_open.open(f"s3://{bucket_name}/{report_key}", transport_params=dict(client=client)) as report_handler:  # type: ignore
+            reader = csv.DictReader(report_handler)
+            for row in reader:
+                rows_queue.put(row)
 
 
 def get_rows(is_cur: bool, is_remote: bool, filepath: str) -> Iterator[Dict[str, Any]]:
