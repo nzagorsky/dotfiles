@@ -10,6 +10,8 @@ identify_os () {
 }
 
 setup_docker_ubuntu() {
+    command -v docker > /dev/null && return 0
+
     sudo apt-get install -qq -y docker.io
     sudo systemctl enable docker --now
     sudo gpasswd -a $USER docker
@@ -97,10 +99,7 @@ install_flatpak_packages_ubuntu() {
     sudo apt-get install -qq flatpak gnome-software-plugin-flatpak
 
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    flatpak install --user -y flathub com.todoist.Todoist
-    flatpak install --user -y flathub com.spotify.Client
     flatpak install --user -y flathub com.github.calo001.fondo
-    flatpak install --user -y flathub md.obsidian.Obsidian
 
 }
 
@@ -109,12 +108,16 @@ install_snap_packages() {
 }
 
 install_mailspring_ubuntu() {
+    command -v mailspring > /dev/null && exit 0
+
     wget -q "https://updates.getmailspring.com/download?platform=linuxDeb" -O /tmp/mailspring.deb
     sudo dpkg -i /tmp/mailspring.deb
     rm /tmp/mailspring.deb
 }
 
 install_brave_ubuntu() {
+    command -v brave-browser > /dev/null && exit 0
+
     sudo apt-get install -qq -y apt-transport-https curl > /dev/null
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
@@ -124,14 +127,15 @@ install_brave_ubuntu() {
 
 
 install_dbeaver_ubuntu() {
-    dpkg -s dbeaver-ce &>/dev/null && return 0
+    command -v dbeaver > /dev/null && return 0
+
     wget -q https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O /tmp/dbeaver.deb
     sudo dpkg -i /tmp/dbeaver.deb
     rm /tmp/dbeaver.deb
 }
 
 install_toptracker_ubuntu() {
-    dpkg -s toptracker &>/dev/null && return 0
+    command -v toptracker > /dev/null && return 0
 
     wget -q https://tracker-api.toptal.com/desktop/latest/debian -O /tmp/toptracker.deb
     sudo dpkg -i /tmp/toptracker.deb
@@ -164,7 +168,7 @@ install_dbeaver_fedora() {
 }
 
 install_mega_ubuntu() {
-    dpkg -s megasync &>/dev/null && return 0
+    command -v megasync > /dev/null && return 0
 
     . /etc/os-release
 
