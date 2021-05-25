@@ -62,6 +62,11 @@ configure_gnome () {
     gsettings set org.gnome.shell.app-switcher current-workspace-only true
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+    gsettings set org.gnome.desktop.default-applications.terminal exec alacritty
+
+    sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50
+    sudo update-alternatives --auto x-terminal-emulator
+    # sudo update-alternatives --config x-terminal-emulator
 
     $GNOME_EXTENSION_INSTALLER --update
 
