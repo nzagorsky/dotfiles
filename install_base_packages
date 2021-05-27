@@ -45,7 +45,6 @@ install_base_ubuntu () {
     sudo apt-get install -y -qq \
         bat \
         build-essential \
-        cargo \
         cmake \
         curl \
         npm \
@@ -85,6 +84,7 @@ install_base_ubuntu () {
         unzip \
         wget \
         zip \
+        && install_rust \
         && cargo install exa -q \
         && cargo install ripgrep -q \
         && cargo install du-dust -q \
@@ -99,6 +99,14 @@ install_base_ubuntu () {
     curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
+}
+
+install_rust() {
+    command -v rustup > /dev/null && return 0
+
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/rustup_installer.sh
+    sh /tmp/rustup_installer.sh -y
+    rm /tmp/rustup_installer.sh
 }
 
 install_ubuntu_mainline() {
