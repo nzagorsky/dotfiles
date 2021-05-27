@@ -134,6 +134,14 @@ install_dbeaver_ubuntu() {
     rm /tmp/dbeaver.deb
 }
 
+install_foliate_ubuntu() {
+    # For some reason executable is having flatpak name.
+    command -v com.github.johnfactotum.Foliate > /dev/null && return 0
+
+    sudo add-apt-repository -y ppa:apandada1/foliate
+    sudo apt install -y foliate
+}
+
 install_toptracker_ubuntu() {
     command -v toptracker > /dev/null && return 0
 
@@ -275,6 +283,7 @@ main () {
         install_mailspring_ubuntu
         install_mega_ubuntu
         install_toptracker_ubuntu
+        install_foliate_ubuntu
 
     elif [ "$OS_DETECTED" == "fedora" ]; then
         install_base_desktop_fedora
