@@ -71,10 +71,9 @@ configure_gnome () {
     $GNOME_EXTENSION_INSTALLER --update
 
     # Do not install extensions if they are installed already.
-    gnome-extensions info -q gsconnect@andyholmes.github.io > /dev/null && return
+    gnome-extensions info -q bluetooth-quick-connect@bjarosze.gmail.com > /dev/null && return
 
     # Install and enable required extensions
-    install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     install_gnome_extension appindicatorsupport@rgcjonas.gmail.com 615  # KStatusNotifierItem
     install_gnome_extension bluetooth-quick-connect@bjarosze.gmail.com 1401  # Bluetooth quick connect
     install_gnome_extension impatience@gfxmonk.net 277  # Faster animations
@@ -88,6 +87,7 @@ configure_gnome () {
       tar xzv --wildcards --strip 1 --directory ~/.local/share/gnome-shell/extensions/ \
       "*/audio-switcher@github.com"
 
+    # install_gnome_extension gsconnect@andyholmes.github.io 1319  # GSconnect
     # install_gnome_extension mprisindicatorbutton@JasonLG1979.github.io 1379  # MPRIS indicator button
     # install_gnome_extension cpufreq@konkor 1082  # CPUfreq applet to control CPU boost
     # install_gnome_extension dash-to-dock@micxgx.gmail.com 307  # dash to dock
