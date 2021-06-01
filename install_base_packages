@@ -213,7 +213,11 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         echo -e "${GREEN}Ubuntu detected${NC}"
         install_base_ubuntu
-        install_ubuntu_mainline
+
+    elif [ "$OS_DETECTED" == "pop!_os" ]; then
+        echo -e "${GREEN}Pop! OS detected${NC}"
+        install_base_ubuntu
+        
     elif [ "$OS_DETECTED" == "fedora" ]; then
         install_base_fedora
     else

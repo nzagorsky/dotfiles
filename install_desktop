@@ -204,6 +204,7 @@ install_base_desktop_ubuntu() {
         cpufrequtils \
         mpv \
         gnome-tweak-tool \
+        network-manager-openvpn-gnome \
         openvpn \
         pavucontrol \
         pulsemixer \
@@ -279,6 +280,19 @@ main () {
 
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         install_base_desktop_ubuntu
+        # install_snap_packages > /dev/null
+        install_flatpak_packages_ubuntu > /dev/null
+        install_cargo_packages > /dev/null
+
+        install_brave_ubuntu
+        install_dbeaver_ubuntu
+        install_mailspring_ubuntu
+        install_mega_ubuntu
+        install_toptracker_ubuntu
+        install_foliate_ubuntu
+
+    elif [ "$OS_DETECTED" == "pop!_os" ]; then
+        install_base_desktop_ubuntu
         install_snap_packages > /dev/null
         install_flatpak_packages_ubuntu > /dev/null
         install_cargo_packages > /dev/null
@@ -312,6 +326,8 @@ main () {
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
         configure_gnome
     elif [ "$XDG_SESSION_DESKTOP" == "ubuntu" ]; then
+        configure_gnome
+    elif [ "$XDG_SESSION_DESKTOP" == "pop" ]; then
         configure_gnome
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
