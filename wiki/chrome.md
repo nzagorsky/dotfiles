@@ -15,3 +15,7 @@ And for additional adventure:
 
 
 Check here: chrome://gpu/
+
+As of late (Chromium 91+) there is a requirement to add following parameters to the launch command:
+
+    google-chrome-stable --use-gl=desktop --enable-features=VaapiVideoDecoder

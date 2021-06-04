@@ -50,6 +50,15 @@ install_media_requirements_fedora() {
     nautilus -q
 }
 
+install_media_requirements_ubuntu() {
+    command -v ffmpegthumbnailer > /dev/null && return 0
+
+    sudo apt install -y ffmpegthumbnailer gstreamer1.0-libav
+    rm -rf .cache/thumbnails/fail/gnome-thumbnail-factory/*
+    rm -rf .cache/thumbnails/large/*
+    nautilus -q
+}
+
 install_gnome_extension() {
     extension_name=$1
     extension_id=$2
@@ -205,6 +214,8 @@ install_base_desktop_ubuntu() {
         mpv \
         gnome-tweak-tool \
         openvpn \
+        network-manager-openvpn-gnome \ 
+        alacarte \
         pavucontrol \
         pulsemixer \
         sqlitebrowser \
@@ -289,6 +300,21 @@ main () {
         install_mega_ubuntu
         install_toptracker_ubuntu
         install_foliate_ubuntu
+        install_media_requirements_ubuntu
+
+    elif [ "$OS_DETECTED" == "pop!_os" ]; then
+        install_base_desktop_ubuntu
+        install_snap_packages > /dev/null
+        install_flatpak_packages_ubuntu > /dev/null
+        install_cargo_packages > /dev/null
+
+        install_brave_ubuntu
+        install_dbeaver_ubuntu
+        install_mailspring_ubuntu
+        install_mega_ubuntu
+        install_toptracker_ubuntu
+        install_foliate_ubuntu
+        install_media_requirements_ubuntu
 
     elif [ "$OS_DETECTED" == "fedora" ]; then
         install_base_desktop_fedora
@@ -312,6 +338,8 @@ main () {
     if [ "$XDG_SESSION_DESKTOP" == "gnome" ]; then
         configure_gnome
     elif [ "$XDG_SESSION_DESKTOP" == "ubuntu" ]; then
+        configure_gnome
+    elif [ "$XDG_SESSION_DESKTOP" == "pop" ]; then
         configure_gnome
     else
         echo "Did not detect session. Check XDG_SESSION_DESKTOP variable. Current value is $XDG_SESSION_DESKTOP"
