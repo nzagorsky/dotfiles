@@ -119,6 +119,10 @@ install_rust() {
     sh /tmp/rustup_installer.sh -y
     rm /tmp/rustup_installer.sh
     rustup default nightly
+
+    # Enable RPI development.
+    rustup target add armv7-unknown-linux-gnueabihf
+    sudo apt install -y gcc-arm-linux-gnueabihf
 }
 
 install_ubuntu_mainline() {
