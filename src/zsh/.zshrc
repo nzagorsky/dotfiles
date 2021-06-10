@@ -73,7 +73,7 @@ autoload -U compinit && compinit
 # }}}
 # Functions {{{
 function t {
-    launch_param=$(pidof systemd > /dev/null && echo "systemd-run --scope --user" || echo "")
+    launch_param=$(pidof systemd > /dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
 
     if [ -z "$argv" ]; then
         tmux -u attach -t default || zsh -c "$launch_param tmux -u new -s default 2> /dev/null"
@@ -135,9 +135,8 @@ fi
 # }}}
 
 # Plugins {{{
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 POLYGLOT_PROMPT_DIRTRIM=5
 . ~/.local/bin/polyglot.sh

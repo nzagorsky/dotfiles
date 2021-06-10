@@ -1,0 +1,124 @@
+#!/usr/bin/env zsh
+
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BOLD='\033[1m'
+NC='\033[0m'
+
+cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
+
+set -ex
+
+rust_setup() {
+    rustup-init -y --default-toolchain nightly
+    rustup target add armv7-unknown-linux-gnueabihf
+}
+
+install_neovim_plugins() {
+    nvim test.py --headless +UpdateRemotePlugins +q > /dev/null 2>&1
+    echo -e "${BOLD}neovim install success${NC}"
+}
+
+install_npm_deps () {
+    npm install -g --quiet --silent @bitwarden/cli > /dev/null 2>&1
+    npm install -g --quiet --silent \
+        neovim \
+        bash-language-server \
+        dockerfile-language-server-nodejs \
+        elasticdump \
+        javascript-typescript-langserver \
+        marked \
+        prettier \
+        pyright \
+        standard > /dev/null 2>&1 \
+        && echo -e "${BOLD}npm install success${NC}"
+    }
+
+install_python_deps() {
+    pip3 install -U --user \
+        "python-language-server[all]" \
+        awscli \
+        bandit \
+        black \
+        boto3 \
+        bpytop \
+        dataset \
+        dateparser \
+        django-stubs \
+        docker-compose \
+        flake8 \
+        flake8-polyfill \
+        ipdb \
+        ipython \
+        iredis \
+        jedi \
+        litecli \
+        mypy \
+        smart-open \
+        neovim \
+        nptime \
+        pgcli \
+        pipenv \
+        pulumi \
+        pulumi-kubernetes \
+        pulumi-aws \
+        pulumi-hcloud \
+        pydocstyle \
+        pyflakes \
+        python-dateutil \
+        radon \
+        requests \
+        selenium \
+        youtube-dl \
+        vim-vint \
+        yamllint \
+        --no-warn-script-location \
+        && echo -e "${BOLD}pip install success${NC}"
+    }
+
+
+install_brew_packages() {
+    brew install \
+        arm-linux-gnueabihf-binutils \
+        bat \
+        chromedriver \
+        ctags \
+        exa \
+        fd \
+        go \
+        htop \
+        jq \
+        kubectl \
+        postgresql \
+        mosh \
+        neovim \
+        node \
+        parallel \
+        pulumi \
+        python3 \
+        rclone \
+        ripgrep \
+        rustup-init \
+        sqlite3 \
+        tmux \
+        wget \
+        zsh-syntax-highlighting \
+        curl \
+    && echo -e "${BOLD}Brew install success${NC}"
+}
+
+main() {
+    install_brew_packages
+    rust_setup
+
+    install_npm_deps
+    install_python_deps
+    install_neovim_plugins
+
+    # Fix insecure directories
+    sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh
+
+}
+
+main
