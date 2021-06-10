@@ -25,10 +25,13 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # Binary paths
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="/snap/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.emacs.d/bin"
+export PATH="$PATH:$GOPATH/bin"
+
+# TODO separate scope for mac
+export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+export PATH=$(brew --prefix openvpn)/sbin:$PATH
 
 # }}}
 # Options {{{
@@ -73,7 +76,7 @@ autoload -U compinit && compinit
 # }}}
 # Functions {{{
 function t {
-    launch_param=$(pidof systemd > /dev/null && echo "systemd-run --scope --user" || echo "")
+    launch_param=$(pidof systemd > /dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
 
     if [ -z "$argv" ]; then
         tmux -u attach -t default || zsh -c "$launch_param tmux -u new -s default 2> /dev/null"
@@ -102,7 +105,6 @@ alias lla='exa -lahs --group-directories-first --color=auto -F'
 alias ls='exa --color=auto -F'
 alias p='ipython'
 alias k='kubectl'
-alias rm='rm -I'
 alias e='emacs -nw'
 alias g=git
 alias v=nvim
@@ -135,9 +137,8 @@ fi
 # }}}
 
 # Plugins {{{
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 POLYGLOT_PROMPT_DIRTRIM=5
 . ~/.local/bin/polyglot.sh

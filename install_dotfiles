@@ -9,9 +9,18 @@ setup_dots () {
     stow -t ~ *
 }
 
+setup_shell() {
+    mkdir -p ~/.local/bin/
+    curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
+
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git  ~/.zsh/plugins/zsh-syntax-highlighting
+
+}
+
 main () {
     pull_submodules || echo "Failed to pull submodules"
     setup_dots
+    setup_shell
 }
 
 main > /dev/null
