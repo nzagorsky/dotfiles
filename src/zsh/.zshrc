@@ -28,7 +28,10 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.emacs.d/bin"
 export PATH="$PATH:$GOPATH/bin"
+
+# TODO separate scope for mac
 export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+export PATH=$(brew --prefix openvpn)/sbin:$PATH
 
 # }}}
 # Options {{{
@@ -102,7 +105,6 @@ alias lla='exa -lahs --group-directories-first --color=auto -F'
 alias ls='exa --color=auto -F'
 alias p='ipython'
 alias k='kubectl'
-alias rm='rm -I'
 alias e='emacs -nw'
 alias g=git
 alias v=nvim
