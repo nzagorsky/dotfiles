@@ -25,10 +25,10 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # Binary paths
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="/snap/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.emacs.d/bin"
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/Library/Python/3.9/bin"
 
 # }}}
 # Options {{{
