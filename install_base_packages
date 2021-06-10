@@ -26,7 +26,6 @@ install_base_fedora() {
         tmux \
         wget \
         util-linux-user \
-        zsh-syntax-highlighting
 
     # pip installation deps
     sudo dnf install -y \
@@ -76,7 +75,6 @@ install_base_ubuntu () {
         curl \
         mosh \
         zsh \
-        zsh-syntax-highlighting  \
         fd-find \
         golang \
         htop \
