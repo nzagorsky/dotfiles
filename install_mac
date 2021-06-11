@@ -14,6 +14,24 @@ set_defaults() {
     # Command + Ctrl window movement
     defaults write -g NSWindowShouldDragOnGesture -bool true
 
+    # Keep spaces arrangement
+    defaults write com.apple.dock "mru-spaces" -bool "false"
+
+    # Reduce motion to avoid sliding animations on desktop switch
+    defaults write com.apple.universalaccess reduceMotion -bool true
+
+    # Finder: show hidden files by default
+    defaults write com.apple.Finder AppleShowAllFiles -bool true
+
+    # Enable spring loading for directories
+    defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+
+    # Remove the spring loading delay for directories
+    defaults write NSGlobalDomain com.apple.springing.delay -float 0
+
+    # Speed up Mission Control animations # TODO: confirm if it still works on Big Sur
+    defaults write com.apple.dock expose-animation-duration -float 0.1
+
     # Always show scrollbar
     defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
