@@ -26,7 +26,6 @@ install_base_fedora() {
         tmux \
         wget \
         util-linux-user \
-        zsh-syntax-highlighting
 
     # pip installation deps
     sudo dnf install -y \
@@ -37,9 +36,25 @@ install_base_fedora() {
 setup_kubectl() {
     command -v kubectl > /dev/null && return 0
 
+    pushd
+    cd /tmp
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
     rm kubectl
+    popd
+}
+
+setup_helm() {
+    command -v helm > /dev/null && return 0
+
+    pushd
+    cd /tmp
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
+    helm repo add bitnami https://charts.bitnami.com/bitnami
+    helm repo update
+    popd
 }
 
 setup_node_ubuntu() {
@@ -60,7 +75,6 @@ install_base_ubuntu () {
         curl \
         mosh \
         zsh \
-        zsh-syntax-highlighting  \
         fd-find \
         golang \
         htop \

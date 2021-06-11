@@ -31,7 +31,11 @@ export PATH="$PATH:$GOPATH/bin"
 
 # TODO separate scope for mac
 export PATH="$PATH:$HOME/Library/Python/3.9/bin"
-export PATH=$(brew --prefix openvpn)/sbin:$PATH
+
+if command -v brew > /dev/null 2>&1 
+then
+    export PATH=$(brew --prefix openvpn)/sbin:$PATH
+fi
 
 # }}}
 # Options {{{
