@@ -181,16 +181,24 @@ install_python_deps() {
 install_brew_packages() {
     brew tap homebrew/cask-fonts
 
+    # brew install --cask amethyst
+    brew install --cask karabiner-elements
+
+    brew install yqrashawn/goku/goku
+    brew services start goku
+
     brew install \
         arm-linux-gnueabihf-binutils \
         bat \
         font-dejavu \
         chromedriver \
-        ctags \
+        universal-ctags \
         exa \
         fd \
+        dbeaver-community \
         go \
         htop \
+        watch \
         jq \
         kubectl \
         postgresql \
