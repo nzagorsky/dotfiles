@@ -27,14 +27,14 @@ colors:
     cyan:    '0x42717b'
     white:   '0xdddddd'
 
-background_opacity: 0.95
+background_opacity: 1
 live_config_reload: true
 
 window:
   # decorations: none
   dimensions:
-    columns: 100
-    lines: 28
+    columns: 120
+    lines: 30
   padding:
     x: 3
     y: 0
@@ -42,21 +42,20 @@ window:
 scrolling:
   history: 100000
 
-
 font:
-  size: 12.0
-#   normal:
-#     family: DejaVuSansMono
-#     style: Regular
-#   bold:
-#     family: DejaVuSansMono
-#     style: Bold
-#   italic:
-#     family: DejaVuSansMono
-#     style: Italic
-#   bold_italic:
-#     family: DejaVuSansMono
-#     style: Bold Italic
+  size: 14.0
+  normal:
+    family: DejaVu Sans Mono
+    style: Book
+  bold:
+    family: DejaVu Sans Mono
+    style: Bold
+  italic:
+    family: DejaVu Sans Mono
+    style: Italic
+  bold_italic:
+    family: DejaVu Sans Mono
+    style: Bold Italic
 
 env:
   TERM: xterm-24bits
@@ -65,12 +64,12 @@ env:
 key_bindings:
   - { key: F, mods: Command, chars: "\x1Bf" }
   - { key: B, mods: Command, chars: "\x1Bb" }
-
   - { key: H, mods: Command, chars: "\x1Bh" }
   - { key: J, mods: Command, chars: "\x1Bj" }
   - { key: K, mods: Command, chars: "\x1Bk" }
   - { key: L, mods: Command, chars: "\x1Bl" }
-
+  - { key: P, mods: Command, chars: "\x1Bp" }
+  - { key: W, mods: Command, chars: "\x1Bw" }
   - { key: Key1, mods: Command, chars: "\x1B1" }
   - { key: Key2, mods: Command, chars: "\x1B2" }
   - { key: Key3, mods: Command, chars: "\x1B3" }
@@ -81,6 +80,20 @@ key_bindings:
   - { key: Key8, mods: Command, chars: "\x1B8" }
   - { key: Key9, mods: Command, chars: "\x1B9" }
 
-
-  - { key: N, mods: Command, action: SpawnNewInstance }
+  # - { key: F, mods: Option, chars: "\x1Bf" }
+  # - { key: B, mods: Option, chars: "\x1Bb" }
+  # - { key: H, mods: Option, chars: "\x1Bh" }
+  # - { key: J, mods: Option, chars: "\x1Bj" }
+  # - { key: K, mods: Option, chars: "\x1Bk" }
+  # - { key: L, mods: Option, chars: "\x1Bl" }
+  # - { key: Key1, mods: Option, chars: "\x1B1" }
+  # - { key: Key2, mods: Option, chars: "\x1B2" }
+  # - { key: Key3, mods: Option, chars: "\x1B3" }
+  # - { key: Key4, mods: Option, chars: "\x1B4" }
+  # - { key: Key5, mods: Option, chars: "\x1B5" }
+  # - { key: Key6, mods: Option, chars: "\x1B6" }
+  # - { key: Key7, mods: Option, chars: "\x1B7" }
+  # - { key: Key8, mods: Option, chars: "\x1B8" }
+  # - { key: Key9, mods: Option, chars: "\x1B9" }
+  # - { key: N, mods: Option, action: SpawnNewInstance }
 

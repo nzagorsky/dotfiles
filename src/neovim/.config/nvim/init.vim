@@ -408,7 +408,8 @@ if g:dein#is_sourced('vim-dadbod-ui')
 
     let g:db_ui_winwidth = 30
     let g:dbs = {
-    \  'local': 'postgres://postgres:1337@localhost:5435/postgres'
+    \  'localdocker': 'postgres://postgres:1337@localhost:5435/postgres',
+    \  'local': 'postgres://toltenos:@localhost:5432/postgres'
     \ }
 endif
 

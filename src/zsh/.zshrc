@@ -34,6 +34,7 @@ export PATH="$PATH:$HOME/Library/Python/3.9/bin"
 
 if command -v brew > /dev/null 2>&1 
 then
+    export PATH="/usr/local/opt/python/libexec/bin:$PATH"
     export PATH=$(brew --prefix openvpn)/sbin:$PATH
 fi
 

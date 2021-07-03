@@ -27,11 +27,12 @@
   "python.linting.mypyEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": ["--ignore=E501"],
-  "pyright.organizeimports.provider": "isort",
-  "python.sortImports.path": "~/.local/bin/isort",
-  "python.sortImports.args": ["--sl", "-m", "3"],
+
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/.local/bin/black",
+  "pyright.organizeimports.provider": "isort",
+  "python.sortImports.args": ["--sl", "-m", "3"],
+  "python.sortImports.path": "isort",
+  "python.formatting.blackPath": "black",
 
   "sh.enable": true,
 
