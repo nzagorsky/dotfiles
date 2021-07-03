@@ -2,6 +2,8 @@
 # This file represents installation scripts for Gnome and common desktop tools.
 # OSes currently supported: Ubuntu
 
+set -ex
+
 GNOME_EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
 
 identify_os () {
@@ -109,12 +111,17 @@ configure_gnome () {
     # install_gnome_extension hidetopbar@mathieu.bidon.ca 545  # hide top bar
 }
 
-install_flatpak_packages_ubuntu() {
-    sudo apt-get install -qq flatpak gnome-software-plugin-flatpak
+install_flatpak_ubuntu() {
+    command -v flatpak > /dev/null && exit 0
 
+    sudo apt-get install -qq \
+        flatpak \
+        gnome-software-plugin-flatpak
+}
+
+install_flatpak_packages() {
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install --user -y flathub com.github.calo001.fondo
-
 }
 
 install_snap_packages() {
@@ -209,13 +216,12 @@ install_mega_ubuntu() {
 install_base_desktop_ubuntu() {
     sudo apt-get update > /dev/null
 
-    sudo apt-get install -qq -y \
+    sudo apt-get install -y \
         cpufrequtils \
         mpv \
         gnome-tweak-tool \
         network-manager-openvpn-gnome \
         openvpn \
-        network-manager-openvpn-gnome \ 
         alacarte \
         pavucontrol \
         pulsemixer \
@@ -292,7 +298,8 @@ main () {
     if [ "$OS_DETECTED" == "ubuntu" ]; then
         install_base_desktop_ubuntu
         # install_snap_packages > /dev/null
-        install_flatpak_packages_ubuntu > /dev/null
+        install_flatpak_ubuntu
+        install_flatpak_packages
         install_cargo_packages > /dev/null
 
         install_brave_ubuntu
@@ -304,8 +311,8 @@ main () {
 
     elif [ "$OS_DETECTED" == "pop!_os" ]; then
         install_base_desktop_ubuntu
-        install_snap_packages > /dev/null
-        install_flatpak_packages_ubuntu > /dev/null
+        # install_snap_packages > /dev/null
+        install_flatpak_packages
         install_cargo_packages > /dev/null
 
         install_brave_ubuntu
@@ -315,20 +322,7 @@ main () {
         install_toptracker_ubuntu
         install_foliate_ubuntu
         install_media_requirements_ubuntu
-
-    elif [ "$OS_DETECTED" == "pop!_os" ]; then
-        install_base_desktop_ubuntu
-        install_snap_packages > /dev/null
-        install_flatpak_packages_ubuntu > /dev/null
-        install_cargo_packages > /dev/null
-
-        install_brave_ubuntu
-        install_dbeaver_ubuntu
-        install_mailspring_ubuntu
-        install_mega_ubuntu
-        install_toptracker_ubuntu
-        install_foliate_ubuntu
-        install_media_requirements_ubuntu
+        install_ldac_ubuntu
 
     elif [ "$OS_DETECTED" == "fedora" ]; then
         install_base_desktop_fedora

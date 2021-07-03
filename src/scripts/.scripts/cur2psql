@@ -60,8 +60,12 @@ connection = psycopg2.connect(
 class IterationState:
     finished_iteration = False
 
+
 def get_boto3_session() -> boto3.Session:
-    session = boto3.Session(profile_name=os.environ["AWS_PROFILE"])
+    if "AWS_PROFILE" in os.environ:
+        session = boto3.Session(profile_name=os.environ["AWS_PROFILE"])
+    else:
+        session = boto3.Session()
     return session
 
 
@@ -94,9 +98,9 @@ def get_table_name(is_cur: bool, is_remote: bool, filepath: str) -> str:
             report_name = filepath.split("/")[4]
             table_identifier = "_".join([report_name, cur_date])
         else:
-            table_identifier = filepath.split("/")[-1].replace("-", "_")
+            table_identifier = filepath.split("/")[-1]
 
-        table_name = f"cur_csv_{table_identifier}"
+        table_name = f"cur_csv_{table_identifier}".replace("-", "_")
     else:
         filename = filepath.split("/")[-1].replace("-", "_").strip(".csv.zip")
         filename_elements = filename.split("_")
@@ -170,20 +174,16 @@ def worker(table_name: str, state: IterationState) -> None:
 def get_report_keys(filepath: str) -> Iterator[str]:
     session = get_boto3_session()
     client = session.client("s3")
-    bucket_name = filepath.split("/")[2]
+    # bucket_name = filepath.split("/")[2]
+    # prefix = "/".join(filepath.split("/")[3:])
     manifest_name = filepath.split("/")[4]
     manifest_path = f"{filepath}{manifest_name}-Manifest.json"
-    prefix = "/".join(filepath.split("/")[3:])
 
     with smart_open.open(manifest_path, transport_params={"client": client}) as f:  # type: ignore
         manifest_data = json.load(f)
 
-    assembly_id = manifest_data["assemblyId"]
-    for key in client.list_objects_v2(
-        Bucket=bucket_name, Prefix=f"{prefix}{assembly_id}"
-    )["Contents"]:
-        if key["Key"].endswith(".csv.gz"):
-            yield key['Key']
+    for key in manifest_data["reportKeys"]:
+        yield key
 
 
 def s3_rows_fetcher(filepath: str):
@@ -201,7 +201,7 @@ def s3_rows_fetcher(filepath: str):
 def get_rows(is_cur: bool, is_remote: bool, filepath: str) -> Iterator[Dict[str, Any]]:
     if is_remote:
         if is_cur:
-            s3_worker = Thread(target=s3_rows_fetcher, args=(filepath, ))
+            s3_worker = Thread(target=s3_rows_fetcher, args=(filepath,))
             s3_worker.start()
             while True:
                 try:
@@ -251,7 +251,7 @@ def main() -> None:
     # Start workers
     state = IterationState()
     ingest_workers = [
-        Thread(target=worker, args=(table_name, state )) for _ in range(WORKER_COUNT)
+        Thread(target=worker, args=(table_name, state)) for _ in range(WORKER_COUNT)
     ]
     _ = [t.start() for t in ingest_workers]
 

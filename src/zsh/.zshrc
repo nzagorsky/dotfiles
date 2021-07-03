@@ -144,7 +144,7 @@ fi
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-POLYGLOT_PROMPT_DIRTRIM=5
+POLYGLOT_PROMPT_DIRTRIM=2
 . ~/.local/bin/polyglot.sh
 # }}}
 
