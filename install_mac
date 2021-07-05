@@ -201,7 +201,9 @@ install_brew_packages() {
         kubectl \
         postgresql \
         mosh \
+        mysql \
         neovim \
+        libxmlsec1 \
         node \
         parallel \
         pulumi \
