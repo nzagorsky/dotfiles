@@ -141,6 +141,7 @@ install_python_deps() {
         awscli \
         bandit \
         black \
+        mkenv \
         boto3 \
         bpytop \
         dataset \
@@ -154,7 +155,6 @@ install_python_deps() {
         iredis \
         jedi \
         litecli \
-        mypy \
         smart-open \
         neovim \
         nptime \

@@ -442,12 +442,13 @@ if g:dein#is_sourced('coc.nvim')
         \ 'coc-vimlsp',
     \ ]
 
+
+    function! s:format_imports()
+        CocCommand python.sortImports
+    endfunction
+
     function! s:format_code()
-        if (&ft=='python')
-            call CocAction('format') | CocCommand python.sortImports
-        else
-            call CocActionAsync('format')
-        endif
+        call CocActionAsync('format')
     endfunction
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)
@@ -458,6 +459,7 @@ if g:dein#is_sourced('coc.nvim')
     nmap <silent> gd <Plug>(coc-definition)
     nnoremap <silent> K :call <SID>show_documentation()<CR>
     nnoremap <silent> <F3>  :call <SID>format_code()<CR>
+    nnoremap <silent> <F4>  :call <SID>format_imports()<CR>
 
     " coc-git
     nmap [g <Plug>(coc-git-prevchunk)

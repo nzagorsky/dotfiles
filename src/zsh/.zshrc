@@ -97,6 +97,12 @@ function dutop  {
 function bluetooth_codecs {
     pactl list | grep a2dp_codec
 }
+
+function activate_venv {
+    . venv/bin/activate
+    pip3 install black isort neovim ipython django-stubs
+}
+
 # }}}
 # Alias setup {{{
 alias cp='cp -i'                          # confirm before overwriting something
