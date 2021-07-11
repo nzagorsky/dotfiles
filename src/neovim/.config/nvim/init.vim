@@ -448,7 +448,7 @@ if g:dein#is_sourced('coc.nvim')
     endfunction
 
     function! s:format_code()
-        call CocActionAsync('format')
+        call CocAction('format')
     endfunction
 
     nmap <silent> <leader>g <Plug>(coc-type-definition)

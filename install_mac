@@ -147,6 +147,7 @@ install_python_deps() {
         dataset \
         dateparser \
         django-stubs \
+        "django<3" \
         docker-compose \
         flake8 \
         flake8-polyfill \
