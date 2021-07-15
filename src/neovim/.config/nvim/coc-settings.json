@@ -30,7 +30,7 @@
 
   "python.formatting.provider": "black",
   "pyright.organizeimports.provider": "isort",
-  "python.sortImports.args": ["--sl", "-m", "3"],
+  // "python.sortImports.args": ["--sl", "-m", "3"],
   "python.sortImports.path": "isort",
   "python.formatting.blackPath": "black",
 

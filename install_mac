@@ -43,7 +43,7 @@ set_defaults() {
 
     # Speed up keyboard
     defaults write NSGlobalDomain KeyRepeat -int 1
-    defaults write NSGlobalDomain InitialKeyRepeat -int 10
+    defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
     # Enable subpixel font rendering on non-Apple LCDs
     # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
@@ -182,15 +182,17 @@ install_python_deps() {
 install_brew_packages() {
     brew tap homebrew/cask-fonts
 
-    brew install --cask karabiner-elements
-    brew install yqrashawn/goku/goku
-    brew services start goku
+    brew install --cask easy-move-plus-resize
+    brew install --cask chromedriver --no-quarantine
+
+    # brew install --cask karabiner-elements
+    # brew install yqrashawn/goku/goku
+    # brew services start goku
 
     brew install \
         arm-linux-gnueabihf-binutils \
         bat \
         font-dejavu \
-        chromedriver \
         universal-ctags \
         exa \
         fd \

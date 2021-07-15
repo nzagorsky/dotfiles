@@ -27,11 +27,11 @@ colors:
     cyan:    '0x42717b'
     white:   '0xdddddd'
 
-background_opacity: 1
+background_opacity: 0.92
 live_config_reload: true
 
 window:
-  # decorations: none
+  # decorations: buttonless
   dimensions:
     columns: 120
     lines: 30
