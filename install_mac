@@ -184,6 +184,7 @@ install_brew_packages() {
 
     brew install --cask easy-move-plus-resize
     brew install --cask chromedriver --no-quarantine
+    brew install --cask insomnia
 
     # brew install --cask karabiner-elements
     # brew install yqrashawn/goku/goku
