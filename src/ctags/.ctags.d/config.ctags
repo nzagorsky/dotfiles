@@ -7,6 +7,7 @@
 --exclude=*bundle.*
 --exclude=.git
 --exclude=.tox
+--exclude=.venv
 --exclude=.hg
 --exclude=.svn
 --exclude=.tmp
