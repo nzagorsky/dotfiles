@@ -21,17 +21,12 @@
   "sql.database": "postgresql",
   "sql.formatOptions": {"language": "postgresql", "uppercase": true, "indent": "    "},
 
-  // "python.jediEnabled": false,
-  // "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags",
   "python.linting.pylintEnabled": false,
   "python.linting.mypyEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": ["--ignore=E501"],
-
   "python.formatting.provider": "black",
   "pyright.organizeimports.provider": "isort",
-  // "python.sortImports.args": ["--sl", "-m", "3"],
-  "python.sortImports.path": "isort",
 
   "sh.enable": true,
 
