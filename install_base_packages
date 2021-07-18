@@ -135,7 +135,7 @@ install_rust() {
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/rustup_installer.sh
     sh /tmp/rustup_installer.sh -y
     rm /tmp/rustup_installer.sh
-    rustup default nightly
+    rustup default stable
 
     # Enable RPI development.
     rustup target add armv7-unknown-linux-gnueabihf

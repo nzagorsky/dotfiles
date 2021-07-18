@@ -116,7 +116,7 @@ set_defaults() {
 }
 
 rust_setup() {
-    rustup-init -y --default-toolchain nightly
+    rustup-init -y --default-toolchain stable
     rustup target add armv7-unknown-linux-gnueabihf
 }
 
