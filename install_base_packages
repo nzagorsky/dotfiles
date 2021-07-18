@@ -109,6 +109,7 @@ install_base_ubuntu () {
         wget \
         zip \
         && install_rust \
+        && install_lf \
         && setup_node_ubuntu \
         && cargo install exa -q \
         && cargo install ripgrep -q \
@@ -121,6 +122,11 @@ install_base_ubuntu () {
     tldr -u > /dev/null 2>&1 || echo
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
+}
+
+install_lf() {
+    command -v lf > /dev/null && return 0
+    env CGO_ENABLED=0 GO111MODULE=on go get -u -ldflags="-s -w" github.com/gokcehan/lf
 }
 
 install_rust() {

@@ -10,6 +10,11 @@ cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 
 set -ex
 
+install_lf() {
+    command -v lf > /dev/null && return 0
+    env CGO_ENABLED=0 GO111MODULE=on go get -u -ldflags="-s -w" github.com/gokcehan/lf
+}
+
 set_defaults() {
     # Command + Ctrl window movement
     defaults write -g NSWindowShouldDragOnGesture -bool true
@@ -232,6 +237,7 @@ main() {
     install_npm_deps
     install_python_deps
     install_neovim_plugins
+    install_lf
 
     # Fix insecure directories
     # sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh
