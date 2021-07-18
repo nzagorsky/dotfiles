@@ -112,7 +112,7 @@ configure_gnome () {
 }
 
 install_flatpak_ubuntu() {
-    command -v flatpak > /dev/null && exit 0
+    command -v flatpak > /dev/null && return 0
 
     sudo apt-get install -qq \
         flatpak \
@@ -122,6 +122,7 @@ install_flatpak_ubuntu() {
 install_flatpak_packages() {
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install --user -y flathub com.github.calo001.fondo
+    flatpak install --user -y flathub io.dbeaver.DBeaverCommunity
 }
 
 install_snap_packages() {
@@ -129,7 +130,7 @@ install_snap_packages() {
 }
 
 install_mailspring_ubuntu() {
-    command -v mailspring > /dev/null && exit 0
+    command -v mailspring > /dev/null && return 0
 
     wget -q "https://updates.getmailspring.com/download?platform=linuxDeb" -O /tmp/mailspring.deb
     sudo dpkg -i /tmp/mailspring.deb
@@ -137,7 +138,7 @@ install_mailspring_ubuntu() {
 }
 
 install_brave_ubuntu() {
-    command -v brave-browser > /dev/null && exit 0
+    command -v brave-browser > /dev/null && return 0
 
     sudo apt-get install -qq -y apt-transport-https curl > /dev/null
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -146,14 +147,6 @@ install_brave_ubuntu() {
     sudo apt-get install -qq -y brave-browser
 }
 
-
-install_dbeaver_ubuntu() {
-    command -v dbeaver > /dev/null && return 0
-
-    wget -q https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb -O /tmp/dbeaver.deb
-    sudo dpkg -i /tmp/dbeaver.deb
-    rm /tmp/dbeaver.deb
-}
 
 install_foliate_ubuntu() {
     # For some reason executable is having flatpak name.
@@ -188,14 +181,6 @@ install_toptracker_fedora() {
 
 }
 
-install_dbeaver_fedora() {
-    command -v dbeaver > /dev/null && return 0
-
-    wget -q "https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm" -O /tmp/dbeaver.rpm
-    sudo dnf localinstall -y /tmp/dbeaver.rpm
-
-}
-
 install_mega_ubuntu() {
     command -v megasync > /dev/null && return 0
 
@@ -217,6 +202,7 @@ install_base_desktop_ubuntu() {
     sudo apt-get update > /dev/null
 
     sudo apt-get install -y \
+        alacritty \
         cpufrequtils \
         mpv \
         gnome-tweak-tool \
@@ -236,7 +222,7 @@ install_base_desktop_ubuntu() {
 
 
 install_brave_fedora() {
-    command -v brave-browser > /dev/null && exit 0
+    command -v brave-browser > /dev/null && return 0
 
     sudo dnf install -y dnf-plugins-core
     sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
@@ -245,7 +231,7 @@ install_brave_fedora() {
 }
 
 install_mailspring_fedora() {
-    command -v mailspring > /dev/null && exit 0
+    command -v mailspring > /dev/null && return 0
 
     wget "https://updates.getmailspring.com/download?platform=linuxRpm" -O /tmp/mailspring.rpm
     sudo dnf localinstall -y /tmp/mailspring.rpm
@@ -253,7 +239,7 @@ install_mailspring_fedora() {
 }
 
 install_base_desktop_fedora() {
-    command -v telegram-desktop > /dev/null && exit 0
+    command -v telegram-desktop > /dev/null && return 0
 
     # Enable RPM fusion
     sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -280,6 +266,7 @@ install_cargo_packages() {
         cargo install alacritty --root $BUILD_PATH; sudo cp $BUILD_PATH/bin/alacritty /usr/bin/alacritty
 
 
+        # sudo apt-get install mesa-common-dev libgl1-mesa-dev
         sudo cp assets/alacritty/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
         sudo desktop-file-install assets/alacritty/Alacritty.desktop
         sudo update-desktop-database
@@ -303,7 +290,6 @@ main () {
         install_cargo_packages > /dev/null
 
         install_brave_ubuntu
-        install_dbeaver_ubuntu
         install_mailspring_ubuntu
         install_mega_ubuntu
         install_toptracker_ubuntu
@@ -313,10 +299,8 @@ main () {
         install_base_desktop_ubuntu
         # install_snap_packages > /dev/null
         install_flatpak_packages
-        install_cargo_packages > /dev/null
 
         install_brave_ubuntu
-        install_dbeaver_ubuntu
         install_mailspring_ubuntu
         install_mega_ubuntu
         install_toptracker_ubuntu
@@ -328,7 +312,6 @@ main () {
         install_base_desktop_fedora
 
         install_brave_fedora
-        install_dbeaver_fedora
         install_docker_fedora
         install_mailspring_fedora
         install_mega_fedora
