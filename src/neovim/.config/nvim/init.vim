@@ -383,11 +383,11 @@ if g:dein#is_sourced('vim-fugitive')
         return l:stripped_git_status
     endfunction
 
-    noremap <Leader>gs :Gstatus<CR>
-    noremap <Leader>gc :Gcommit<CR>
-    noremap <Leader>gpush :Gpush<CR>
-    noremap <Leader>gpull :Gpull<CR>
-    noremap <Leader>gb :Gblame<CR>
+    noremap <Leader>gs :Git<CR>
+    noremap <Leader>gc :Git commit<CR>
+    noremap <Leader>gpush :Git push<CR>
+    noremap <Leader>gpull :Git pull<CR>
+    noremap <Leader>gb :Git blame<CR>
     noremap <Leader>gd :Gvdiff<CR>
     noremap <Leader>gr :Gremove<CR>
 endif
