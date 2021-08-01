@@ -5,6 +5,7 @@ set -e
 GNOME_EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
 
 setup_yay() {
+    command -v yay > /dev/null && return 0
     sudo pacman -S --noconfirm --needed git base-devel
     git clone https://aur.archlinux.org/yay.git
     cd yay
@@ -27,9 +28,9 @@ install_npm_deps () {
 }
 
 install_python_deps() {
-    pip3 install -U --user setuptools wheel --no-warn-script-location
+    pip install -U --user setuptools wheel --no-warn-script-location
 
-    pip3 install -U --user \
+    pip install -U --user \
         "python-language-server[all]" \
         awscli \
         bandit \
@@ -72,8 +73,11 @@ install_python_deps() {
 setup_base() {
     sudo pacman -S --needed --noconfirm \
         bat \
+        parallel \
         ctags \
+        postgresql-libs \
         curl \
+        python-pip \
         docker \
         exa \
         fd \
@@ -130,6 +134,7 @@ setup_desktop() {
     sudo pacman -S --needed --noconfirm \
         alacritty \
         lutris \
+        ttf-dejavu \
         docker \
         networkmanager \
         firefox \
@@ -192,12 +197,15 @@ main () {
     export -f install_python_deps
     export -f install_neovim_plugins
     export -f configure_shell
+    export -f configure_gnome
 
     parallel ::: \
         install_npm_deps \
         install_python_deps \
         install_neovim_plugins \
-        configure_shell
+        configure_shell \
+        configure_gnome
+
 }
 
 
