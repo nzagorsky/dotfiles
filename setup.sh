@@ -138,7 +138,7 @@ setup_desktop() {
         mpv
 
     yay -S --needed --noconfirm \
-        brave \
+        brave-bin \
         toptracker \
         megasync \
         mailspring
