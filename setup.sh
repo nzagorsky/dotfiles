@@ -79,7 +79,7 @@ setup_base() {
         mariadb-clients \
         curl \
         python-pip \
-        libxml2 \
+        xmlsec \
         docker \
         exa \
         fd \
