@@ -76,8 +76,10 @@ setup_base() {
         parallel \
         ctags \
         postgresql-libs \
+        mariadb-clients \
         curl \
         python-pip \
+        libxml2 \
         docker \
         exa \
         fd \
@@ -134,6 +136,7 @@ setup_desktop() {
     sudo pacman -S --needed --noconfirm \
         alacritty \
         lutris \
+        bluez-utils \
         ttf-dejavu \
         docker \
         networkmanager \
@@ -145,7 +148,9 @@ setup_desktop() {
     yay -S --needed --noconfirm \
         brave-bin \
         toptracker \
+        fondo \
         megasync \
+        dbeaver \
         mailspring
 
     sudo systemctl enable docker --now
