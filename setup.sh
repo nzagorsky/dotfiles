@@ -5,10 +5,10 @@ set -e
 GNOME_EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
 
 setup_yay() {
-    sudo pacman -S --needed git base-devel
+    sudo pacman -S --noconfirm --needed git base-devel
     git clone https://aur.archlinux.org/yay.git
     cd yay
-    sudo makepkg -si
+    makepkg -si
 }
 
 install_npm_deps () {
