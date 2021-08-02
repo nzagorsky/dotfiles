@@ -138,10 +138,12 @@ setup_desktop() {
         lutris \
         bluez-utils \
         ttf-dejavu \
+        qbittorrent \
         docker \
         networkmanager \
         firefox \
         deja-dup \
+        xclip \
         telegram-desktop \
         mpv
 
