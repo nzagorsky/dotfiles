@@ -150,6 +150,7 @@ setup_desktop() {
     yay -S --needed --noconfirm \
         brave-bin \
         toptracker \
+        google-chrome \
         fondo \
         megasync \
         dbeaver \
@@ -157,6 +158,18 @@ setup_desktop() {
 
     sudo systemctl enable docker --now
     sudo gpasswd -a $USER docker
+}
+
+install_chromedriver() {
+    set -e
+    CHROMEDRIVER_RELEASE=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+    wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" -O /tmp/chromedriver.zip
+    rm -rf /tmp/chromedriver/
+    mkdir /tmp/chromedriver/
+    unzip -qq /tmp/chromedriver.zip -d /tmp/chromedriver/
+    chmod +x /tmp/chromedriver/chromedriver
+    sudo install /tmp/chromedriver/chromedriver /usr/local/bin/chromedriver
+    rm -rf /tmp/chromedriver/
 }
 
 install_gnome_extension() {
@@ -199,6 +212,7 @@ main () {
     setup_base
     setup_desktop
     setup_media
+    install_chromedriver
 
     export -f install_npm_deps
     export -f install_python_deps
