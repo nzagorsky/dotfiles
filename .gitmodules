@@ -1,6 +1,6 @@
-[submodule "src/tmux/.tmux/plugins/tpm"]
-	path = src/tmux/.tmux/plugins/tpm
+[submodule "src/.config/tmux/plugins/tpm"]
+	path = src/.config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "src/zsh/.zsh/plugins/zsh-z"]
-	path = src/zsh/.zsh/plugins/zsh-z
+[submodule "src/.config/zsh/plugins/zsh-z"]
+	path = src/.config/zsh/plugins/zsh-z
 	url = https://github.com/agkozak/zsh-z

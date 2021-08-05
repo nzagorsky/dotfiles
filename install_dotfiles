@@ -6,15 +6,15 @@ pull_submodules () {
 
 setup_dots () {
     cd src
-    stow -t ~ *
+    stow -t ~ .
 }
 
 setup_shell() {
     mkdir -p ~/.local/bin/
     curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
 
-    rm -rf ~/.zsh/plugins/zsh-syntax-highlighting/
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git  ~/.zsh/plugins/zsh-syntax-highlighting
+    rm -rf ~/.config/zsh/plugins/zsh-syntax-highlighting/
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git  ~/.config/zsh/plugins/zsh-syntax-highlighting
 
 }
 

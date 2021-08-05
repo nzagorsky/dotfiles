@@ -6,7 +6,6 @@ Requirements
 
 	stow
 	git
-    make
 
 
 Installation:
@@ -14,5 +13,5 @@ Installation:
 
     git clone https://github.com/nzagorsky/dotfiles.git ~/dotfiles
     cd dotfiles
-
-    make bootstrap
+    ./install_dotfiles
+    ./setup.sh
