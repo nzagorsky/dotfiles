@@ -9,6 +9,7 @@ export LESSHISTFILE="-"
 
 
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
+export IPYTHONDIR="${XDG_CONFIG_HOME:-$HOME/.config}/ipython"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
 export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
 export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
