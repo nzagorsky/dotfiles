@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Environment {{{
-source ~/.credentials/secure
+source ~/.config/credentials/secure
 
 export BROWSER=brave
 export EDITOR=nvim
@@ -101,7 +101,7 @@ alias lll='exa -lhs size'
 alias lla='exa -lahs size'
 alias ls='exa'
 alias p='ipython'
-alias k='kubectl'
+alias k='kubectl --log-file $HOME/.cache/kube/log --cache-dir $HOME/.cache/kube/'
 alias e='emacs -nw'
 alias g=git
 alias v=nvim

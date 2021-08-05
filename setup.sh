@@ -142,7 +142,6 @@ setup_desktop() {
         qbittorrent \
         docker \
         networkmanager \
-        firefox \
         deja-dup \
         xclip \
         telegram-desktop \
@@ -154,7 +153,6 @@ setup_desktop() {
         google-chrome \
         fondo \
         megasync \
-        dbeaver \
         mailspring
 
     sudo systemctl enable docker --now
