@@ -7,6 +7,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
 
 export KUBECONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/kube/config"
+export B2_ACCOUNT_INFO="${XDG_CONFIG_HOME:-$HOME/.config}/b2_account_info"
 
 export LESSHISTFILE="-"
 export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}/gnupg"
