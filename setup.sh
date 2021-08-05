@@ -4,6 +4,20 @@ set -e
 
 GNOME_EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
 
+bspwm() {
+    sudo pacman -S --needed --noconfirm \
+        sxhkd \
+        bspwm \
+        gnome-keyring \
+        pavucontrol \
+        blueman \
+        xcompmgr \
+        dunst \
+        dmenu \
+        nitrogen \
+        xdotool
+}
+
 setup_yay() {
     command -v yay > /dev/null && return 0
     sudo pacman -S --noconfirm --needed git base-devel

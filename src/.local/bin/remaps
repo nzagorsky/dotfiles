@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Speed up keyboard
+xset r rate 200 20
+
+# Map capslock to ctrl
+setxkbmap -option ctrl:nocaps
+# Turn off the caps lock if on since there is no longer a key for it.
+xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock

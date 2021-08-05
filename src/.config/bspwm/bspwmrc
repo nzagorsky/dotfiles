@@ -9,7 +9,6 @@
 # TODO dunst config
 # TODO mpv config
 # TODO gtk config backed up
-# TODO move files around, use .local/bin for scripts and so on
 # TODO screenshots
 
 # TODO debug chrome not exiting
@@ -21,12 +20,10 @@
 
 pkill ssh-agent; eval $("ssh-agent") && /bin/ls ~/.ssh/id_rsa* | grep -v .pub | xargs -L1 ssh-add
 xrdb -merge ~/.Xresources
-picom -b &
-blueman-applet &
-pkill tint2; tint2 &
-xset r rate 200 50
-gnome-keyring-daemon -r -d &
-pkill sxhkd; sxhkd &
+pkill blueman-applet && blueman-applet &
+pkill gnome-keyring-daemon && gnome-keyring-daemon &
+pkill sxhkd && sxhkd &
+pkill xcompmgr && xcompmgr &
 nitrogen --restore &
 setxkbmap -option grp:win_space_toggle us,ru &
 
