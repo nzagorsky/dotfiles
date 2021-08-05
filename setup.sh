@@ -115,7 +115,6 @@ setup_desktop() {
         qbittorrent \
         docker \
         networkmanager \
-        deja-dup \
         xclip \
         telegram-desktop \
         mpv
