@@ -75,6 +75,7 @@ setup_base() {
         bat \
         parallel \
         ctags \
+        sshpass \
         postgresql-libs \
         mariadb-clients \
         curl \

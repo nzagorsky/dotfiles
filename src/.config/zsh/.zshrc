@@ -3,13 +3,9 @@
 # Environment {{{
 source ~/.credentials/secure
 
-# Default config
-export BROWSER="/usr/bin/google-chrome-stable"
+export BROWSER=brave
 export EDITOR=nvim
 export TERM=xterm-256color
-
-# Utils
-export PATH="$PATH:$HOME/.scripts"  
 
 # Pulumi
 export PATH="$PATH:$HOME/.pulumi/bin"
@@ -29,12 +25,10 @@ export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.emacs.d/bin"
 export PATH="$PATH:$GOPATH/bin"
 
-# TODO separate scope for mac
-export PATH="$PATH:$HOME/Library/Python/3.9/bin"
-
 if command -v brew > /dev/null 2>&1 
 then
     export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+    export PATH="$PATH:$HOME/Library/Python/3.9/bin"
     export PATH=$(brew --prefix openvpn)/sbin:$PATH
 fi
 
@@ -53,7 +47,7 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
 SAVEHIST=5000
 HISTSIZE=2000
-HISTFILE=$HOME/.zsh/history
+HISTFILE=$ZDOTDIR/history
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
@@ -69,16 +63,7 @@ zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suff
 # Enable completion module
 autoload -U compinit && compinit
 # }}}
-# Custom prompt (disabled) {{{
-# PROMPT='%(?.%F{green}.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
-# autoload -Uz vcs_info
-# precmd_vcs_info() { vcs_info }
-# precmd_functions+=( precmd_vcs_info )
-# setopt prompt_subst
-# RPROMPT=\$vcs_info_msg_0_
-# zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
-# zstyle ':vcs_info:*' enable git
-# }}}
+
 # Functions {{{
 function t {
     launch_param=$(pidof systemd > /dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
@@ -141,17 +126,10 @@ alias c7="awk '{print \$7}'"
 alias c8="awk '{print \$8}'"
 alias c9="awk '{print \$9}'"
 
-# }}}
-# Startup of sway {{{
-if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-    export GTK_THEME=deepin-dark
-    exec sway
-fi
-# }}}
 
 # Plugins {{{
-source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh
+source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 POLYGLOT_PROMPT_DIRTRIM=2
 . ~/.local/bin/polyglot.sh
