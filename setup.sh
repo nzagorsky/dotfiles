@@ -18,9 +18,7 @@ install_npm_deps () {
         neovim \
         bash-language-server \
         dockerfile-language-server-nodejs \
-        elasticdump \
         javascript-typescript-langserver \
-        marked \
         prettier \
         pyright \
         standard > /dev/null 2>&1 \
@@ -33,34 +31,14 @@ install_python_deps() {
     pip install -U --user \
         "python-language-server[all]" \
         awscli \
-        bandit \
         black \
         boto3 \
-        bpytop \
-        dataset \
         dateparser \
         django-stubs \
-        docker-compose \
-        flake8 \
-        flake8-polyfill \
+        "django<3" \
         ipdb \
         ipython \
-        iredis \
-        litecli \
-        smart-open \
         neovim \
-        nptime \
-        pgcli \
-        pipenv \
-        pulumi \
-        pulumi-kubernetes \
-        pulumi-aws \
-        pulumi-hcloud \
-        pydocstyle \
-        pyflakes \
-        pyinotify \
-        python-dateutil \
-        radon \
         requests \
         selenium \
         youtube-dl \
@@ -87,7 +65,6 @@ setup_base() {
         fzf \
         git \
         go \
-        grub \
         htop \
         httpie \
         jq \
@@ -95,21 +72,17 @@ setup_base() {
         neovim \
         npm \
         openvpn \
-        pulumi \
         rclone \
         ripgrep \
         rustup \
         sqlite3 \
         stow \
         stress \
-        tldr \
         tmux \
         unzip \
         wget \
         zip \
-        zsh \
-
-    tldr -u > /dev/null 2>&1 || echo
+        zsh
 
 }
 
