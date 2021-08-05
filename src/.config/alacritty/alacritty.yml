@@ -97,3 +97,7 @@ key_bindings:
   # - { key: Key9, mods: Option, chars: "\x1B9" }
   # - { key: N, mods: Option, action: SpawnNewInstance }
 
+shell:
+  program: /bin/zsh
+  args:
+    - --login
