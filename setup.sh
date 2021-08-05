@@ -51,6 +51,7 @@ install_python_deps() {
 setup_base() {
     sudo pacman -S --needed --noconfirm \
         bat \
+        duplicity \
         parallel \
         ctags \
         sshpass \
