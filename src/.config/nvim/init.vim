@@ -1,15 +1,18 @@
 " vim:foldmethod=marker:foldlevel=0
 " Basic settings {{{1
 scriptencoding utf-8
+
 set clipboard+=unnamedplus  " system clipboard
+set autoread " detect when a file is changed
 set signcolumn=yes   " no more fucking text shifting
 set hidden  " buffers
 set wrap
 set noswapfile
 set undofile
-set undodir=~/.config/nvim/undo
-set backupdir=~/.config/nvim/sessions
-set directory=~/.config/nvim/sessions
+set undodir=~/.cache/nvim
+set backupdir=~/.cache/nvim
+set directory=~/.cache/nvim
+set history=1000
 
 set title
 set titleold="Terminal"
@@ -21,6 +24,15 @@ nnoremap gev :e $MYVIMRC<CR>
 nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
 
 set shortmess=aoOtIWcFs
+" }}}
+" Abbreviations {{{
+abbr funciton function
+abbr teh the
+abbr tempalte template
+abbr fitler filter
+abbr cosnt const
+abbr attribtue attribute
+abbr attribuet attribute
 " }}}
 " Plugins {{{1
 if (!isdirectory(expand('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')))
@@ -259,8 +271,9 @@ set splitright
 set wildmenu
 
 set foldenable
-set foldmethod=indent
-set foldlevel=99
+set foldmethod=syntax
+set foldlevelstart=99
+set foldnestmax=10 " deepest fold is 10 levels
 
 set noerrorbells  " No annoying errors
 set novisualbell
