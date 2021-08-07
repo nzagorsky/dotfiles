@@ -1,17 +1,19 @@
 #!/bin/zsh
 
 # Environment {{{
-source ~/.config/credentials/secure
+source ~/.config/credentials/secure > /dev/null 2>&1 || true
 
 export BROWSER=brave
 export EDITOR=nvim
 export TERM=xterm-256color
 
-# Pulumi
-export PATH="$PATH:$HOME/.pulumi/bin"
-
 # Go
-export GOPATH="$HOME/code/go"
+export GOPATH="$HOME/.local/include/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# Binary paths
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/include/cargo/bin"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git || find * -type f'
@@ -19,11 +21,6 @@ export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
-# Binary paths
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.emacs.d/bin"
-export PATH="$PATH:$GOPATH/bin"
 
 if command -v brew > /dev/null 2>&1 
 then
