@@ -15,7 +15,6 @@ echo "Backing up to $BACKUP_TO."
 
 echo "Calculating diff"
 duplicity \
-    incremental \
     --dry-run \
     --volsize=25 \
     --timeout=120 \
@@ -45,7 +44,6 @@ else
 fi
 
 duplicity \
-    incremental \
     --volsize=25 \
     --timeout=120 \
     --no-encryption \
