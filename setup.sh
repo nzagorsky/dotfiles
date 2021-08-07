@@ -74,6 +74,7 @@ setup_base() {
         python-pip \
         xmlsec \
         docker \
+        docker-compose \
         exa \
         fd \
         fzf \
