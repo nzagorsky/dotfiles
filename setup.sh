@@ -46,6 +46,8 @@ install_python_deps() {
         "python-language-server[all]" \
         awscli \
         black \
+        psycopg2 \
+        smart-open \
         boto3 \
         dateparser \
         django-stubs \
