@@ -11,6 +11,8 @@ setup_dots () {
 
 setup_shell() {
     mkdir -p ~/.local/bin/
+    mkdir -p ~/.config/wget/
+    touch ~/.config/wget/wgetrc
     curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh > ~/.local/bin/polyglot.sh
 
     rm -rf ~/.config/zsh/plugins/zsh-syntax-highlighting/

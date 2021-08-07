@@ -2,7 +2,7 @@
 
 set -e
 
-GNOME_EXTENSION_INSTALLER=~/.scripts/gnome-shell-extension-installer
+GNOME_EXTENSION_INSTALLER=~/.local/bin/gnome-shell-extension-installer
 
 bspwm() {
     sudo pacman -S --needed --noconfirm \
@@ -66,7 +66,6 @@ setup_base() {
     sudo pacman -S --needed --noconfirm \
         bat \
         duplicity \
-        parallel \
         ctags \
         sshpass \
         postgresql-libs \
@@ -196,23 +195,16 @@ configure_gnome () {
 main () {
     setup_yay
     setup_base
+
     setup_desktop
     setup_media
     install_chromedriver
 
-    export -f install_npm_deps
-    export -f install_python_deps
-    export -f install_neovim_plugins
-    export -f configure_shell
-    export -f configure_gnome
-
-    parallel ::: \
-        install_npm_deps \
-        install_python_deps \
-        install_neovim_plugins \
-        configure_shell \
-        configure_gnome
-
+    install_npm_deps
+    install_python_deps
+    install_neovim_plugins
+    configure_shell
+    configure_gnome
 }
 
 
