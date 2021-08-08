@@ -101,6 +101,7 @@ setup_base() {
         zip \
         zsh
 
+    sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 }
 
 install_neovim_plugins() {
