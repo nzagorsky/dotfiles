@@ -117,9 +117,10 @@ configure_shell() {
 setup_media() {
     command -v ffmpegthumbnailer > /dev/null && return 0
 
-    sudo pacman -S --needed --noconfirm ffmpegthumbnailer 
+    sudo pacman -S --needed --noconfirm ffmpegthumbnailer gst-plugins-ugly
     rm -rf .cache/thumbnails/fail/gnome-thumbnail-factory/*
     rm -rf .cache/thumbnails/large/*
+    rm -rf ~/.cache/gstreamer-1.0/*
     nautilus -q
 
 }
