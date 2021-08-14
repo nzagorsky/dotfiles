@@ -1,29 +1,69 @@
 " vim:foldmethod=marker:foldlevel=0
-" Basic settings {{{1
-scriptencoding utf-8
+" LUA transitioning {{{
+lua << EOF
+local g = vim.g
+local o = vim.o
 
-set clipboard+=unnamedplus  " system clipboard
-set autoread " detect when a file is changed
-set signcolumn=yes   " no more fucking text shifting
-set hidden  " buffers
-set wrap
-set noswapfile
-set undofile
-set undodir=~/.cache/nvim
-set backupdir=~/.cache/nvim
-set directory=~/.cache/nvim
-set history=1000
+-- Settings
+o.clipboard = 'unnamedplus'
+o.autoread = true -- detect when a file is changed
+o.signcolumn = 'yes'   --  no more fucking text shifting
+o.hidden = true  --  buffers
+o.wrap = true
+o.swapfile = true
+o.undofile = true
+o.undodir = '~/.cache/nvim'
+o.backupdir = '~/.cache/nvim'
+o.directory = '~/.cache/nvim'
+o.history=1000
+o.title = true
+o.titleold="Terminal"
+o.titlestring = "%F"
+o.cmdheight = 2
+o.shortmess="aoOtIWcFs"
 
-set title
-set titleold="Terminal"
-set titlestring=%F
+print("Lua must be working.")
 
-set cmdheight=2
+-- Hotkeys
+g.mapleader = ' '
+vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap=true})
+vim.api.nvim_set_keymap('c', 'jk', '<Esc>', {noremap=true})
+vim.api.nvim_set_keymap('t', 'jk', '<Esc>', {noremap=true})
 
-nnoremap gev :e $MYVIMRC<CR>
-nnoremap gsv :so $MYVIMRC <bar> bufdo e<CR>
+vim.api.nvim_set_keymap('n', 'j', 'gj', {})
+vim.api.nvim_set_keymap('n', 'k', 'gk', {})
 
-set shortmess=aoOtIWcFs
+vim.api.nvim_set_keymap('n', '<leader><leader>', 'V', {noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>w', ':w<cr>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>q', ':q<cr>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>kb', ':bd<cr>', {noremap=true})
+vim.api.nvim_set_keymap('n', 'Y', 'y$', {noremap=true})
+
+vim.api.nvim_set_keymap('n', '<c-e>', ':Explore<cr>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<a-x>', ':Commands<cr>', {noremap=true})
+
+vim.api.nvim_set_keymap('n', '<c-h>', '<C-w>h', {noremap=true})
+vim.api.nvim_set_keymap('n', '<c-j>', '<C-w>j', {noremap=true})
+vim.api.nvim_set_keymap('n', '<c-k>', '<C-w>k', {noremap=true})
+vim.api.nvim_set_keymap('n', '<c-l>', '<C-w>l', {noremap=true})
+
+vim.api.nvim_set_keymap('t', '<c-h>', [[<C-\><C-n><C-w>h]], {noremap=true})
+vim.api.nvim_set_keymap('t', '<c-j>', [[<C-\><C-n><C-w>j]], {noremap=true})
+vim.api.nvim_set_keymap('t', '<c-k>', [[<C-\><C-n><C-w>k]], {noremap=true})
+vim.api.nvim_set_keymap('t', '<c-l>', [[<C-\><C-n><C-w>l]], {noremap=true})
+
+
+vim.api.nvim_set_keymap('n', '<s-t>', ':tab split<cr>', {noremap=true, silent=true})
+vim.api.nvim_set_keymap('n', '<c-t>', ':tabnew<cr>', {noremap=true, silent=true})
+vim.api.nvim_set_keymap('n', '<cr>', ':nohlsearch<cr><cr>', {noremap=true, silent=true})
+
+vim.api.nvim_set_keymap('n', '<leader>S', [[:%s/\s\+$//<cr>:let @/=''<CR>]], {noremap=true, silent=true})
+
+vim.api.nvim_set_keymap('c', 'w!!', 'w !sudo tee % > /dev/null', {})
+
+vim.api.nvim_set_keymap('n', 'gev', ':e $MYVIMRC<cr>', {noremap=true})
+vim.api.nvim_set_keymap('n', 'gsv', ':so $MYVIMRC <bar> bufdo e<CR>', {noremap=true})
+EOF
 " }}}
 " Abbreviations {{{
 abbr funciton function
@@ -111,49 +151,6 @@ if dein#load_state(expand('~/.cache/dein'))
 endif
 
 " }}}
-" Key bindings {{{1
-let mapleader = "\<Space>"
-nnoremap Y y$
-inoremap jk <Esc>
-cnoremap jk <Esc>
-nnoremap <Leader>w :w<CR>
-nnoremap <leader>q :close<CR>
-nnoremap <leader>kb :bd<CR>
-nmap <Leader><Leader> V
-nmap j gj
-nmap k gk
-nnoremap <C-e> :Explore<CR>
-nnoremap <A-x> :Commands<CR>
-
-
-" Remove trailing whitespaces
-nnoremap<leader>S :%s/\s\+$//<cr>:let @/=''<CR>
-
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
-if exists(':tnoremap')
-    " Enter terminal insert mode on enter.
-    " augroup TerminalConfiguration
-    "     autocmd BufWinEnter,WinEnter term://* startinsert
-    "     autocmd BufLeave term://* stopinsert
-    " augroup END
-
-    tnoremap <C-h> <C-\><C-n><C-w>h
-    tnoremap <C-j> <C-\><C-n><C-w>j
-    tnoremap <C-k> <C-\><C-n><C-w>k
-    tnoremap <C-l> <C-\><C-n><C-w>l
-    tnoremap jk <C-\><C-n>
-endif
-
-nnoremap <silent> <S-t> :tab split<CR>
-nnoremap <silent> <C-t> :tabnew<CR>
-nnoremap <silent> <CR> :nohlsearch<CR><CR>
-nnoremap <leader><leader> V
-cmap w!! w !sudo tee % >/dev/null
-
 " Alt-based tab navigation {{{
 if !exists('$TMUX')
     nnoremap <A-1> <Esc>1gt
@@ -197,8 +194,6 @@ if !exists('$TMUX')
     inoremap <A-l> <Esc>:tabnext<CR>
     tnoremap <A-l> <C-\><C-n>:tabnext<CR>
 endif
-" }}}
-
 " }}}
 " Color setup {{{1
 colorscheme palenight
