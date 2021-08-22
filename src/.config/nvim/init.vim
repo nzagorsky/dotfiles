@@ -22,7 +22,7 @@ o.titlestring = "%F"
 o.cmdheight = 2
 o.shortmess="aoOtIWcFs"
 
-print("Lua must be working.")
+-- print("Lua must be working.")
 
 -- Hotkeys
 g.mapleader = ' '
