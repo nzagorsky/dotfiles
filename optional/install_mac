@@ -214,6 +214,7 @@ install_brew_packages() {
         neovim \
         libxmlsec1 \
         node \
+        ncdu \
         parallel \
         pulumi \
         openvpn \
