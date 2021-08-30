@@ -1,1 +1,10 @@
-bspwm >> $HOME/.cache/bspwm.log
+sxhkd -m 1 &
+
+eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
+export SSH_AUTH_SOCK
+
+setxkbmap -option grp:win_space_toggle us,ru -option ctrl:nocaps &
+pkill xcompmgr && xcompmgr &
+pkill blueman-applet && blueman-applet &
+
+exec bspwm

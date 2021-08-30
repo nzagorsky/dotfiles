@@ -1,4 +1,1 @@
 #!/bin/sh
-remaps &		# run the remaps script (~/.local/bin/remaps)
-xcompmgr &		# transparency
-dunst &			# notifications

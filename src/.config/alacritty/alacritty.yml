@@ -2,7 +2,7 @@ colors:
   # Default colors
   primary:
     # background: '0x151515'
-    background: '0x000000'
+    background: '0x101010'
     foreground: '0xd7d0c7'
 
   # Normal colors
@@ -27,7 +27,7 @@ colors:
     cyan:    '0x42717b'
     white:   '0xdddddd'
 
-background_opacity: 0.92
+background_opacity: 0.96
 live_config_reload: true
 
 window:
