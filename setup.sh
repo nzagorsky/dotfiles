@@ -134,6 +134,7 @@ setup_desktop() {
         qbittorrent \
         docker \
         networkmanager \
+        networkmanager-openvpn \
         xclip \
         telegram-desktop \
         mpv
