@@ -3,6 +3,7 @@
 super + Return
 	alacritty
 
+# TODO replace
 super + e
     nautilus
 
