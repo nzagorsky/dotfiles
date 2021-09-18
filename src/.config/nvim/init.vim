@@ -266,7 +266,7 @@ set splitright
 set wildmenu
 
 set foldenable
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevelstart=99
 set foldnestmax=10 " deepest fold is 10 levels
 

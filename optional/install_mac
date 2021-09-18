@@ -166,6 +166,7 @@ install_python_deps() {
         nptime \
         pgcli \
         pipenv \
+        saws \
         pulumi \
         pulumi-kubernetes \
         pulumi-aws \
@@ -200,6 +201,7 @@ install_brew_packages() {
         bat \
         font-dejavu \
         universal-ctags \
+        alt-tab \
         exa \
         fd \
         dbeaver-community \

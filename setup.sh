@@ -54,6 +54,7 @@ install_python_deps() {
         "django<3" \
         ipdb \
         ipython \
+        saws \
         neovim \
         requests \
         selenium \
