@@ -145,6 +145,7 @@ setup_desktop() {
         toptracker \
         google-chrome \
         fondo \
+        obsidian \
         megasync \
         mailspring
 
