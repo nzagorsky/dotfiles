@@ -76,6 +76,7 @@ setup_base() {
         curl \
         python-pip \
         xmlsec \
+        ncdu \
         docker \
         docker-compose \
         exa \
