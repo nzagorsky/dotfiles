@@ -104,6 +104,8 @@ setup_base() {
         zsh
 
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
+
+    go install github.com/cespare/reflex@latest
 }
 
 install_neovim_plugins() {
