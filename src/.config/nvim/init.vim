@@ -196,7 +196,6 @@ if !exists('$TMUX')
 endif
 " }}}
 " Color setup {{{1
-colorscheme palenight
 function! UpdateStyle() abort
     set background=dark
 
@@ -233,6 +232,7 @@ augroup EditorAppearance
     autocmd!
     autocmd ColorScheme * call UpdateStyle()
 augroup END
+colorscheme palenight
 " }}}
 " Editor setup {{{1
 syntax on
