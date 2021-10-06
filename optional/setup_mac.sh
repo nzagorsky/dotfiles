@@ -208,6 +208,7 @@ install_brew_packages() {
         dbeaver-community \
         go \
         htop \
+        wireguard-tools \
         watch \
         jq \
         kubectl \
