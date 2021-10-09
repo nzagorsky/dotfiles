@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 # Arch setup
 
 set -e

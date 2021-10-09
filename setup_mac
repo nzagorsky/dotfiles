@@ -6,14 +6,9 @@ GREEN='\033[0;32m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-cat ~/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
+cat ~/.config/zsh/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 
 set -ex
-
-install_lf() {
-    command -v lf > /dev/null && return 0
-    env CGO_ENABLED=0 GO111MODULE=on go get -u -ldflags="-s -w" github.com/gokcehan/lf
-}
 
 set_defaults() {
     # Command + Ctrl window movement
@@ -34,17 +29,11 @@ set_defaults() {
     # Remove the spring loading delay for directories
     defaults write NSGlobalDomain com.apple.springing.delay -float 0
 
-    # Speed up Mission Control animations # TODO: confirm if it still works on Big Sur
+    # Speed up Mission Control animations. Doesn't work with Big Sur.
     defaults write com.apple.dock expose-animation-duration -float 0.1
 
     # Always show scrollbar
     defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
-
-    # Save to disk (not to iCloud) by default
-    defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-    
-    # Disable the "Are you sure you want to open this application?" dialog
-    # defaults write com.apple.LaunchServices LSQuarantine -bool false
 
     # Speed up keyboard
     defaults write NSGlobalDomain KeyRepeat -int 1
@@ -76,14 +65,19 @@ set_defaults() {
 
     # Dock: Change minimize/maximize window effect
     defaults write com.apple.dock mineffect -string "scale"
+
     # Dock: Minimize windows into their application's icon
     defaults write com.apple.dock minimize-to-application -bool true
+
     # Dock: Remove the auto-hiding Dock delay
     defaults write com.apple.dock autohide-delay -float 0
+
     # Dock: Remove the animation when hiding/showing the Dock
     defaults write com.apple.dock autohide-time-modifier -float 0
+
     # Dock: Automatically hide and show the Dock
     defaults write com.apple.dock autohide -bool true
+
     # Dock: Don't show recent applications in Dock
     defaults write com.apple.dock show-recents -bool false
 
@@ -105,7 +99,7 @@ set_defaults() {
     defaults write com.apple.dock wvous-tl-corner -int 2
     defaults write com.apple.dock wvous-tl-modifier -int 0
     # Top right screen corner > Desktop
-    defaults write com.apple.dock wvous-tr-corner -int 4
+    defaults write com.apple.dock wvous-tr-corner -int 0
     defaults write com.apple.dock wvous-tr-modifier -int 0
     # Bottom left screen corner > Start screen saver
     # defaults write com.apple.dock wvous-bl-corner -int 5
@@ -114,11 +108,6 @@ set_defaults() {
     # Show all processes in Activity Monitor
     defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
-}
-
-rust_setup() {
-    rustup-init -y --default-toolchain stable
-    rustup target add armv7-unknown-linux-gnueabihf
 }
 
 install_neovim_plugins() {
@@ -145,37 +134,19 @@ install_python_deps() {
     pip3 install -U --user \
         "python-language-server[all]" \
         awscli \
-        bandit \
         black \
-        mkenv \
+        isort \
         boto3 \
-        bpytop \
         dataset \
         dateparser \
         django-stubs \
         "django<3" \
-        docker-compose \
-        flake8 \
-        flake8-polyfill \
         ipdb \
         ipython \
-        iredis \
-        jedi \
-        litecli \
         smart-open \
         neovim \
-        nptime \
-        pgcli \
         pipenv \
-        saws \
-        pulumi \
-        pulumi-kubernetes \
-        pulumi-aws \
-        pulumi-hcloud \
-        pydocstyle \
-        pyflakes \
         python-dateutil \
-        radon \
         requests \
         selenium \
         youtube-dl \
@@ -189,60 +160,46 @@ install_python_deps() {
 install_brew_packages() {
     brew tap homebrew/cask-fonts
 
-    brew install --cask easy-move-plus-resize
     brew install --cask chromedriver --no-quarantine
-    brew install --cask insomnia
-
-    # brew install --cask karabiner-elements
-    # brew install yqrashawn/goku/goku
-    # brew services start goku
 
     brew install \
-        arm-linux-gnueabihf-binutils \
         bat \
-        font-dejavu \
-        universal-ctags \
-        alt-tab \
+        curl \
         exa \
         fd \
-        dbeaver-community \
-        go \
+        font-dejavu \
         htop \
-        wireguard-tools \
-        watch \
         jq \
         kubectl \
-        postgresql \
+        libxmlsec1 \
         mosh \
         mysql \
-        neovim \
-        libxmlsec1 \
-        node \
         ncdu \
-        parallel \
-        pulumi \
+        neovim \
+        node \
         openvpn \
+        postgresql \
         python3 \
         rclone \
         ripgrep \
-        rustup-init \
         sqlite3 \
+        terraform \
         tmux \
+        universal-ctags \
+        watch \
         wget \
+        wireguard-tools \
         zsh-syntax-highlighting \
-        curl \
     && echo -e "${BOLD}Brew install success${NC}"
 }
 
 main() {
     set_defaults
     install_brew_packages
-    rust_setup
 
     install_npm_deps
     install_python_deps
     install_neovim_plugins
-    install_lf
 
     # Fix insecure directories
     # sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh

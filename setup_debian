@@ -9,30 +9,6 @@ NC='\033[0m'
 
 cat ~/.zshrc | grep PATH | grep -v brew > /tmp/dotenv && source /tmp/dotenv
 
-# TODO install nodejs separately in case of extremely old version in ubuntu repos
-install_base_fedora() {
-    sudo update-crypto-policies --set DEFAULT:FEDORA32
-
-    sudo dnf install -y \
-        nodejs \
-        zsh \
-        bat \
-        jq \
-        htop \
-        neovim \
-        parallel \
-        fd-find \
-        ripgrep \
-        tmux \
-        wget \
-        util-linux-user \
-
-    # pip installation deps
-    sudo dnf install -y \
-        postgresql-devel \
-        python3-devel
-}
-
 setup_kubectl() {
     command -v kubectl > /dev/null && return 0
 
@@ -57,7 +33,7 @@ setup_helm() {
     popd
 }
 
-setup_node_ubuntu() {
+setup_node_debian() {
     command -v node > /dev/null && return 0
 
     curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
@@ -65,7 +41,7 @@ setup_node_ubuntu() {
 }
 
 
-install_base_ubuntu () {
+install_base_debian () {
     sudo apt-get update -qq
 
     sudo apt-get install -y -qq \
@@ -76,26 +52,16 @@ install_base_ubuntu () {
         mosh \
         zsh \
         fd-find \
-        golang \
         htop \
         httpie \
         iotop \
         jq \
-        libfontconfig1-dev \
-        libfreetype6-dev \
-        libpq-dev \
-        libssl-dev \
-        libx11-dev \
-        libxcb-xfixes0-dev \
-        libxft-dev \
         lm-sensors \
         neovim \
         net-tools \
         openssh-server \
-        parallel \
         pkg-config \
         postgresql-client \
-        pv \
         python3 \
         python3-dev \
         python3-venv \
@@ -110,8 +76,7 @@ install_base_ubuntu () {
         wget \
         zip \
         && install_rust \
-        && install_lf \
-        && setup_node_ubuntu \
+        && setup_node_debian \
         && cargo install exa -q \
         && cargo install ripgrep -q \
         && cargo install du-dust -q \
@@ -128,10 +93,6 @@ install_base_ubuntu () {
     sudo sed -i '/PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 }
 
-install_lf() {
-    command -v lf > /dev/null && return 0
-    env CGO_ENABLED=0 GO111MODULE=on go get -u -ldflags="-s -w" github.com/gokcehan/lf
-}
 
 install_rust() {
     command -v rustup > /dev/null && return 0
@@ -140,16 +101,6 @@ install_rust() {
     sh /tmp/rustup_installer.sh -y
     rm /tmp/rustup_installer.sh
     rustup default stable
-
-    # Enable RPI development.
-    rustup target add armv7-unknown-linux-gnueabihf
-    sudo apt install -y gcc-arm-linux-gnueabihf
-}
-
-install_ubuntu_mainline() {
-    wget -q https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh
-    chmod +x ubuntu-mainline-kernel.sh
-    sudo mv ubuntu-mainline-kernel.sh /usr/local/bin/
 }
 
 
@@ -167,8 +118,8 @@ install_chromedriver() {
 
 
 install_npm_deps () {
-    sudo npm install -g --quiet --silent @bitwarden/cli > /dev/null 2>&1
-    sudo npm install -g --quiet --silent \
+    npm install -g --quiet --silent @bitwarden/cli > /dev/null 2>&1
+    npm install -g --quiet --silent \
         neovim \
         bash-language-server \
         dockerfile-language-server-nodejs \
@@ -178,43 +129,26 @@ install_npm_deps () {
         prettier \
         pyright \
         standard > /dev/null 2>&1 \
-    && echo -e "${BOLD}npm install success${NC}"
+        && echo -e "${BOLD}npm install success${NC}"
     }
 
 install_python_deps() {
-    pip3 install -U --user setuptools wheel --no-warn-script-location
-
     pip3 install -U --user \
         "python-language-server[all]" \
         awscli \
-        bandit \
         black \
+        isort \
         boto3 \
-        bpytop \
         dataset \
         dateparser \
         django-stubs \
-        docker-compose \
-        flake8 \
-        flake8-polyfill \
+        "django<3" \
         ipdb \
         ipython \
-        iredis \
-        litecli \
         smart-open \
         neovim \
-        nptime \
-        pgcli \
         pipenv \
-        pulumi \
-        pulumi-kubernetes \
-        pulumi-aws \
-        pulumi-hcloud \
-        pydocstyle \
-        pyflakes \
-        pyinotify \
         python-dateutil \
-        radon \
         requests \
         selenium \
         youtube-dl \
@@ -224,59 +158,25 @@ install_python_deps() {
         && echo -e "${BOLD}pip install success${NC}"
     }
 
-
-
-identify_os () {
-    . /etc/os-release
-    echo "$NAME" | tr '[:upper:]' '[:lower:]'
-}
-
-
 install_neovim_plugins() {
     nvim test.py --headless +UpdateRemotePlugins +q > /dev/null 2>&1
     echo -e "${BOLD}neovim install success${NC}"
 }
 
 configure_shell() {
-
     sudo chsh $(whoami) -s $(which zsh)
 }
 
 main () {
-    OS_DETECTED=$(identify_os)
+    install_base_debian
 
-    if [ "$OS_DETECTED" == "pop!_os" ]; then
-        echo -e "${GREEN}pop os detected${NC}"
-        install_base_ubuntu
-        install_ubuntu_mainline
-        setup_kubectl
-
-    elif [ "$OS_DETECTED" == "ubuntu" ]; then
-        echo -e "${GREEN}Ubuntu detected${NC}"
-        install_base_ubuntu
-        install_ubuntu_mainline
-        setup_kubectl
-
-    elif [ "$OS_DETECTED" == "fedora" ]; then
-        install_base_fedora
-    else
-        echo "Didn't detect OS"
-        exit 1
-    fi
-
-
-    export -f install_npm_deps
-    export -f install_python_deps
-    export -f install_chromedriver
-    export -f install_neovim_plugins
-    export -f configure_shell
-
-    parallel ::: \
-        install_npm_deps \
-        install_python_deps \
-        install_chromedriver \
-        install_neovim_plugins \
-        configure_shell
+    setup_kubectl
+    setup_helm
+    install_npm_deps
+    install_python_deps
+    install_chromedriver
+    install_neovim_plugins
+    configure_shell
 }
 
 
