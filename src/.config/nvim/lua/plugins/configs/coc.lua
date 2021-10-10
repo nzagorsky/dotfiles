@@ -48,7 +48,7 @@ vim.cmd(
     nmap <silent> <leader>rn <Plug>(coc-rename)
     nmap <silent> gd <Plug>(coc-definition)
     nnoremap <silent> K :call CocShowDocs()<CR>
-    nnoremap <silent> <F3>  :call CocFormatCode<CR>
+    nnoremap <silent> <F3>  :call CocFormatCode()<CR>
     nnoremap <silent> <F4>  :call CocFormatImports()<CR>
 
     " coc-git
