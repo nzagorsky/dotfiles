@@ -21,7 +21,10 @@ return packer.startup(function()
   end
 
   -- Style
-  use {'drewtempelmeyer/palenight.vim'}
+  use {
+      'drewtempelmeyer/palenight.vim',
+      config = function() require('colors') end
+  }
 
   -- Files navigation.
   use {'junegunn/fzf'}
