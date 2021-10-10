@@ -1,7 +1,5 @@
 local cmd = vim.cmd
 
-cmd "packadd packer.nvim"
-
 local present, packer = pcall(require, "packer")
 
 if not present then
@@ -41,7 +39,7 @@ packer.init {
    },
    auto_clean = true,
    compile_on_sync = true,
-   --    auto_reload_compiled = true
+   auto_reload_compiled = true
 }
 
 return packer
