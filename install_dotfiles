@@ -20,6 +20,12 @@ setup_shell() {
 
 }
 
+setup_neovim_plugin_manager() {
+    rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+        ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+}
+
 main () {
     pull_submodules || echo "Failed to pull submodules"
     setup_dots
