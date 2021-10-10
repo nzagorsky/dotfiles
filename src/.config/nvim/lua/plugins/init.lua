@@ -1,21 +1,19 @@
-vim.cmd [[packadd packer.nvim]]
+local present, packer = pcall(require, "plugins.packerInit")
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+if not present then
+   return false
+end
 
-return require('packer').startup(function()
-  -- Packer can manage itself
+local use = packer.use
+
+return packer.startup(function()
   use 'wbthomason/packer.nvim'
 
   -- Python modules.
   use {'numirias/semshi', ft = {"python"}}
   use {'raimon49/requirements.txt.vim', ft = {"requirements"}}
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Utility.
   if os.getenv("TMUX") == nil then
@@ -24,9 +22,6 @@ return require('packer').startup(function()
 
   -- Style
   use {'drewtempelmeyer/palenight.vim'}
-  use {'arcticicestudio/nord-vim'}
-  use {'w0ng/vim-hybrid'}
-  use {'rakr/vim-one'}
 
   -- Files navigation.
   use {'junegunn/fzf'}
@@ -68,7 +63,7 @@ return require('packer').startup(function()
   }
 
   -- Syntax highlightning for all languages.
-  use {'sheerun/vim-polyglot'}
+  use {'sheerun/vim-polyglot', setup=[[vim.cmd("let g:polyglot_disabled = ['python']")]]}
 
   -- Vim
   use {'Shougo/neco-vim', ft = {"vim"}}
@@ -80,7 +75,7 @@ return require('packer').startup(function()
   use {'jpalardy/vim-slime'}
 
   -- DB
-  use {'tpope/vim-dadbod'}
+  use {'tpope/vim-dadbod', opt = true}
   use {'kristijanhusak/vim-dadbod-ui', requires = {"tpope/vim-dadbod"}, cmd = {"DBUI"}}
 
 end)
