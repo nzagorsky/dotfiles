@@ -11,6 +11,9 @@ cat ~/.config/zsh/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
 set -ex
 
 set_defaults() {
+    # Disable mouse scaling
+    defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
     # Command + Ctrl window movement
     defaults write -g NSWindowShouldDragOnGesture -bool true
 

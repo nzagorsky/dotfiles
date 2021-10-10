@@ -46,10 +46,12 @@ SAVEHIST=5000
 HISTSIZE=2000
 HISTFILE=$ZDOTDIR/history
 
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-backward
+
 # }}}
 # Completion setup {{{
+
 zstyle ':completion:*' menu select
 # Case insensitive
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
@@ -60,7 +62,6 @@ zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suff
 # Enable completion module
 autoload -U compinit && compinit
 # }}}
-
 # Functions {{{
 function t {
     launch_param=$(pidof systemd > /dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
@@ -109,6 +110,7 @@ alias gst="git status"
 alias gdiff="git diff"
 alias python=python3
 alias rclone="rclone -P"
+alias tf="terraform"
 
 
 # Columns for piping
