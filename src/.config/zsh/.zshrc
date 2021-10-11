@@ -15,6 +15,8 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/include/cargo/bin"
 
+export PATH="$PATH:$HOME/.yarn/bin"
+
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git || find * -type f'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
