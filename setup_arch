@@ -71,6 +71,7 @@ setup_base() {
         bat \
         duplicity \
         ctags \
+        bind-tools \
         sshpass \
         postgresql-libs \
         mariadb-clients \
