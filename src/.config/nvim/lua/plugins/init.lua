@@ -10,7 +10,7 @@ return packer.startup(function()
   use 'wbthomason/packer.nvim'
 
   -- Python modules.
-  use {'numirias/semshi', ft = {"python"}}
+  use {'numirias/semshi', ft = {"python"}, run = vim.fn['remote#host#UpdateRemotePlugins']}
   use {'raimon49/requirements.txt.vim', ft = {"requirements"}}
 
   -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }

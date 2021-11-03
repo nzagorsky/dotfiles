@@ -22,6 +22,7 @@ vim.cmd(
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-sql',
+        \ 'coc-lua',
         \ 'coc-db',
         \ 'coc-prettier',
         \ 'coc-pyright',
