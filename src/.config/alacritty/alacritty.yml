@@ -43,7 +43,7 @@ scrolling:
   history: 100000
 
 font:
-  size: 13.0
+  size: 9.0
   normal:
     family: DejaVu Sans Mono
     style: Book
