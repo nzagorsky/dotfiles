@@ -56,6 +56,8 @@ install_base_debian () {
         httpie \
         iotop \
         jq \
+        fzy \
+        fzf \
         lm-sensors \
         neovim \
         net-tools \

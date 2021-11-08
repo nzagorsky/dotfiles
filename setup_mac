@@ -167,6 +167,8 @@ install_brew_packages() {
 
     brew install \
         bat \
+        sshuttle \
+        fzy \
         curl \
         exa \
         fd \
