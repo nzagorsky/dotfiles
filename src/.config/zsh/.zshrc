@@ -117,6 +117,8 @@ alias gdiff="git diff"
 alias python=python3
 alias rclone="rclone -P"
 alias tf="terraform"
+alias macncdu="ncdu --exclude /System/Volumes/Data -x /"
+alias git_search_all="g log --all -p --source -G"
 
 
 # Columns for piping

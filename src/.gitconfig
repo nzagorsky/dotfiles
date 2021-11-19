@@ -97,3 +97,5 @@
 	postBuffer = 157286400
 [pull]
 	rebase = false
+[init]
+	defaultBranch = master
