@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -xe
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -9,6 +9,16 @@ NC='\033[0m'
 
 cat ~/.zshrc | grep PATH | grep -v brew > /tmp/dotenv && source /tmp/dotenv
 
+setup_neovim() {
+    command -v neovim > /dev/null && return 0
+
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt-get update
+    sudo apt-get install -y neovim
+
+    nvim test.py --headless +UpdateRemotePlugins +q
+    echo -e "${BOLD}neovim install success${NC}"
+}
 setup_kubectl() {
     command -v kubectl > /dev/null && return 0
 
@@ -59,7 +69,6 @@ install_base_debian () {
         fzy \
         fzf \
         lm-sensors \
-        neovim \
         net-tools \
         openssh-server \
         pkg-config \
@@ -83,11 +92,6 @@ install_base_debian () {
         && cargo install ripgrep -q \
         && cargo install du-dust -q \
     && echo -e "${BOLD}Base install success${NC}"
-
-    command -v rclone > /dev/null 2>&1 || curl -s https://rclone.org/install.sh | sudo bash
-    command -v pulumi > /dev/null 2>&1 || curl -fsSL https://get.pulumi.com | sh
-
-    tldr -u > /dev/null 2>&1 || echo
 
     # Libs deps
     sudo apt-get install -y libmysqlclient-dev libxmlsec1-dev pkg-config
@@ -120,8 +124,9 @@ install_chromedriver() {
 
 
 install_npm_deps () {
-    npm install -g --quiet --silent @bitwarden/cli > /dev/null 2>&1
-    npm install -g --quiet --silent \
+    sudo npm install -g --quiet --silent @bitwarden/cli
+
+    sudo npm install -g --quiet --silent \
         neovim \
         bash-language-server \
         dockerfile-language-server-nodejs \
@@ -130,7 +135,7 @@ install_npm_deps () {
         marked \
         prettier \
         pyright \
-        standard > /dev/null 2>&1 \
+        standard \
         && echo -e "${BOLD}npm install success${NC}"
     }
 
@@ -160,11 +165,6 @@ install_python_deps() {
         && echo -e "${BOLD}pip install success${NC}"
     }
 
-install_neovim_plugins() {
-    nvim test.py --headless +UpdateRemotePlugins +q > /dev/null 2>&1
-    echo -e "${BOLD}neovim install success${NC}"
-}
-
 configure_shell() {
     sudo chsh $(whoami) -s $(which zsh)
 }
@@ -177,7 +177,7 @@ main () {
     install_npm_deps
     install_python_deps
     install_chromedriver
-    install_neovim_plugins
+    setup_neovim
     configure_shell
 }
 
