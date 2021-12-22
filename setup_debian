@@ -135,6 +135,7 @@ install_python_deps() {
         "python-language-server[all]" \
         awscli \
         black \
+        docker-compose \
         isort \
         boto3 \
         dataset \
