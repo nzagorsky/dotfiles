@@ -83,7 +83,6 @@ install_base_debian () {
         sshfs \
         tldr \
         tmux \
-        universal-ctags \
         cargo \
         unzip \
         wget \
