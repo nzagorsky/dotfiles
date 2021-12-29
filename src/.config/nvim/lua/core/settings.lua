@@ -1,7 +1,7 @@
 
 vim.cmd(
     [[
-
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 syntax on
 filetype indent on
 filetype plugin on

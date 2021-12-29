@@ -164,7 +164,6 @@ install_brew_packages() {
     brew tap homebrew/cask-fonts
 
     brew install --cask chromedriver --no-quarantine
-    brew install mutagen-io/mutagen/mutagen
 
     brew install \
         bat \

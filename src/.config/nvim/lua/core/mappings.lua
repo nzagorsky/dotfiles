@@ -7,6 +7,10 @@ vapi.nvim_set_keymap('i', 'jk', '<Esc>', {noremap=true})
 vapi.nvim_set_keymap('c', 'jk', '<Esc>', {noremap=true})
 vapi.nvim_set_keymap('t', 'jk', [[<C-\><C-n>]], {noremap=true})
 
+vapi.nvim_set_keymap('i', 'ол', '<Esc>', {noremap=true})
+vapi.nvim_set_keymap('c', 'ол', '<Esc>', {noremap=true})
+vapi.nvim_set_keymap('t', 'ол', [[<C-\><C-n>]], {noremap=true})
+
 vapi.nvim_set_keymap('n', 'j', 'gj', {})
 vapi.nvim_set_keymap('n', 'k', 'gk', {})
 
