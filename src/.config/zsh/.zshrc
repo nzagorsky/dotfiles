@@ -14,6 +14,7 @@ export PATH="$PATH:$GOPATH/bin"
 # Binary paths
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/include/cargo/bin"
+export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
 export PATH="$PATH:$HOME/.yarn/bin"
 
@@ -119,6 +120,7 @@ alias python=python3
 alias rclone="rclone -P"
 alias tf="terraform"
 alias macncdu="ncdu --exclude /System/Volumes/Data -x /"
+alias macdns="scutil --dns | egrep -i '(domain|nameserver)'"
 alias git_search_all="g log --all -p --source -G"
 
 
