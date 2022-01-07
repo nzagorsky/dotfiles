@@ -30,9 +30,6 @@
 
   "sh.enable": true,
 
-  "yaml.schemas": {
-    "kubernetes": "/*.yml"
-  },
   "yaml.trace.server": "verbose",
 
   "languageserver": {
