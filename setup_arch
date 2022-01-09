@@ -21,7 +21,7 @@ bspwm() {
 
 setup_yay() {
     command -v yay > /dev/null && return 0
-    sudo pacman -S --noconfirm --needed git base-devel
+    # sudo pacman -S --noconfirm --needed git base-devel
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
@@ -209,15 +209,11 @@ main () {
     setup_yay
     setup_base
 
-    setup_desktop
-    setup_media
-    install_chromedriver
 
     install_npm_deps
     install_python_deps
     install_neovim_plugins
     configure_shell
-    configure_gnome
 }
 
 
