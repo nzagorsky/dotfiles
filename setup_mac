@@ -171,6 +171,7 @@ install_brew_packages() {
         fzy \
         curl \
         exa \
+        terraform-ls \
         fd \
         font-dejavu \
         htop \

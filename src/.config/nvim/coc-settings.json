@@ -30,13 +30,5 @@
 
   "sh.enable": true,
 
-  "yaml.trace.server": "verbose",
-
-  "languageserver": {
-    "terraform": {
-      "command": "terraform-lsp",
-      "filetypes": ["terraform"],
-      "initializationOptions": {}
-    }
-  }
+  "yaml.trace.server": "verbose"
 }
