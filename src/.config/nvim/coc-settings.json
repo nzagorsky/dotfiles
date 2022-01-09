@@ -19,7 +19,11 @@
   "suggest.maxPreviewWidth": 100,
 
   "sql.database": "postgresql",
-  "sql.formatOptions": {"language": "postgresql", "uppercase": true, "indent": "    "},
+  "sql.formatOptions": {
+    "language": "postgresql",
+    "uppercase": true,
+    "indent": "    "
+  },
 
   "python.linting.pylintEnabled": false,
   "python.linting.mypyEnabled": false,
@@ -30,5 +34,14 @@
 
   "sh.enable": true,
 
-  "yaml.trace.server": "verbose"
+  "yaml.trace.server": "verbose",
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }
