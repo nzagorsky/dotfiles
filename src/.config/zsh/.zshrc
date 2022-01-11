@@ -77,6 +77,10 @@ function t {
     fi
 }
 
+function kconfig {
+    export KUBECONFIG="$HOME/.config/kube/$@"
+}
+
 function dutop  {
     du --max-depth=0 -h * | sort -hr | head -20;
 }

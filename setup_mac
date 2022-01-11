@@ -164,6 +164,7 @@ install_brew_packages() {
     brew tap homebrew/cask-fonts
 
     brew install --cask chromedriver --no-quarantine
+    brew install --cask hiddenbar
 
     brew install \
         bat \
@@ -176,6 +177,7 @@ install_brew_packages() {
         font-dejavu \
         htop \
         jq \
+        iina \
         kubectl \
         libxmlsec1 \
         mosh \
