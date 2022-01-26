@@ -27,7 +27,7 @@ colors:
     cyan:    '0x42717b'
     white:   '0xdddddd'
 
-background_opacity: 0.96
+background_opacity: 0.992
 live_config_reload: true
 
 window:

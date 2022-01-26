@@ -6,6 +6,7 @@ source ~/.config/credentials/secure > /dev/null 2>&1 || true
 export BROWSER=brave
 export EDITOR=nvim
 export TERM=xterm-256color
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # Go
 export GOPATH="$HOME/.local/include/go"
@@ -19,7 +20,7 @@ export PATH="$PATH:$HOME/.local/share/cargo/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 
 # FZF config
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git || find * -type f'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
@@ -98,6 +99,13 @@ function macnst (){
     netstat -Watnlv | grep LISTEN | awk '{"ps -o comm= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
 }
 
+function macnotify() {
+    # Usage: 
+    # $ macnotify Title "Long notification text"
+
+    osascript -e 'display notification "'$2'" with title "'$1'"'
+}
+
 # }}}
 # Alias setup {{{
 alias cp='cp -i'                          # confirm before overwriting something
@@ -111,7 +119,6 @@ alias lll='exa -lhs size'
 alias lla='exa -lahs size'
 alias ls='exa'
 alias p='ipython'
-alias k='kubectl'
 alias e='emacs -nw'
 alias g=git
 alias v=nvim
@@ -126,6 +133,30 @@ alias tf="terraform"
 alias macncdu="ncdu --exclude /System/Volumes/Data -x /"
 alias macdns="scutil --dns | egrep -i '(domain|nameserver)'"
 alias git_search_all="g log --all -p --source -G"
+alias manage="nvim ~/Documents/notes/tasks.md"
+alias maclaunchrebuild="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user"
+
+# K8s
+alias k='kubectl'
+alias kd='kubectl describe'
+alias kg='kubectl get'
+alias kl='kubectl logs'
+alias klf='kubectl logs -f'
+alias ke='kubectl exec'
+alias kgn='kubectl get namespaces'
+
+alias kda='kubectl describe --all-namespaces'
+alias kga='kubectl get --all-namespaces'
+
+alias kgp='kubectl get pod'
+alias kgd='kubectl get deployment'
+alias kgs='kubectl get service'
+
+alias kgpa='kubectl get pod --all-namespaces'
+alias kgda='kubectl get deployment --all-namespaces'
+
+alias kcuc='kubectl config use-context'
+alias kcur='kubectl config current-context'
 
 
 # Columns for piping
@@ -139,6 +170,10 @@ alias c6="awk '{print \$6}'"
 alias c7="awk '{print \$7}'"
 alias c8="awk '{print \$8}'"
 alias c9="awk '{print \$9}'"
+
+alias ...="../../"
+alias ....="../../../"
+alias .....="../../../../"
 
 
 # Plugins {{{

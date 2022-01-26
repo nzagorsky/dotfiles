@@ -139,6 +139,7 @@ install_python_deps() {
         awscli \
         black \
         isort \
+        mitogen \
         boto3 \
         dataset \
         dateparser \
@@ -165,10 +166,11 @@ install_brew_packages() {
 
     brew install --cask chromedriver --no-quarantine
     brew install --cask hiddenbar
+    # brew install --cask alt-tab
+    # brew install --cask cscreen --no-quarantine
 
     brew install \
         bat \
-        sshuttle \
         fzy \
         curl \
         exa \
@@ -179,6 +181,7 @@ install_brew_packages() {
         jq \
         iina \
         kubectl \
+        helm \
         libxmlsec1 \
         mosh \
         mysql \
@@ -199,6 +202,8 @@ install_brew_packages() {
         wireguard-tools \
         zsh-syntax-highlighting \
     && echo -e "${BOLD}Brew install success${NC}"
+
+    helm plugin install https://github.com/databus23/helm-diff
 }
 
 main() {
@@ -212,6 +217,8 @@ main() {
     # Fix insecure directories
     # sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh
     sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+    curl -Ls https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail > ~/.local/bin/kubetail
+    chmod +x ~/.local/bin/kubetail
 
 }
 
