@@ -74,6 +74,9 @@
                 git log --oneline $b..pr/$1; \
                 git update-ref -d refs/PR_MERGE_HEAD; \
                 }; f"
+        set-upstream = \
+           !git branch \
+               --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 [instaweb]
         httpd=webrick
 [push]

@@ -149,7 +149,9 @@ alias kda='kubectl describe --all-namespaces'
 alias kga='kubectl get --all-namespaces'
 
 alias kgp='kubectl get pod'
+alias kdp='kubectl describe pod'
 alias kgd='kubectl get deployment'
+alias kdd='kubectl describe deployment'
 alias kgs='kubectl get service'
 
 alias kgpa='kubectl get pod --all-namespaces'
