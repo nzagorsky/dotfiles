@@ -27,10 +27,10 @@ colors:
     cyan:    '0x42717b'
     white:   '0xdddddd'
 
-background_opacity: 0.992
 live_config_reload: true
 
 window:
+  opacity: 0.992
   # decorations: none
   dimensions:
     columns: 120
@@ -44,24 +44,25 @@ scrolling:
 
 font:
   size: 15.0
-  normal:
-    family: DejaVu Sans Mono
-    style: Book
-  bold:
-    family: DejaVu Sans Mono
-    style: Bold
-  italic:
-    family: DejaVu Sans Mono
-    style: Italic
-  bold_italic:
-    family: DejaVu Sans Mono
-    style: Bold Italic
+  # normal:
+  #   family: DejaVu Sans Mono
+  #   style: Book
+  # bold:
+  #   family: DejaVu Sans Mono
+  #   style: Bold
+  # italic:
+  #   family: DejaVu Sans Mono
+  #   style: Italic
+  # bold_italic:
+  #   family: DejaVu Sans Mono
+  #   style: Bold Italic
 
 env:
   TERM: xterm-24bits
 
 # Linux style bindings for Alt-like behavior.
 key_bindings:
+  # - { key: N, mods: Command, action: "CreateNewWindow" }
   - { key: F, mods: Command, chars: "\x1Bf" }
   - { key: B, mods: Command, chars: "\x1Bb" }
   - { key: H, mods: Command, chars: "\x1Bh" }

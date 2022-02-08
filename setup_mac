@@ -137,6 +137,7 @@ install_python_deps() {
     pip3 install -U --user \
         "python-language-server[all]" \
         awscli \
+        applescript \
         black \
         isort \
         mitogen \
@@ -172,6 +173,7 @@ install_brew_packages() {
     brew install \
         bat \
         fzy \
+        m-cli \
         curl \
         exa \
         terraform-ls \

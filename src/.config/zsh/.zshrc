@@ -8,6 +8,10 @@ export EDITOR=nvim
 export TERM=xterm-256color
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
+# Ansible settings
+export ANSIBLE_HOST_KEY_CHECKING=False
+export ANSIBLE_PIPELINING=True
+
 # Go
 export GOPATH="$HOME/.local/include/go"
 export PATH="$PATH:$GOPATH/bin"
@@ -126,6 +130,7 @@ alias reset_shell='env -i HOME="$HOME" zsh -l'
 
 alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > /etc/pacman.d/mirrorlist"'
 alias gst="git status"
+alias gpull="git pull"
 alias gdiff="git diff"
 alias python=python3
 alias rclone="rclone -P"
