@@ -30,12 +30,15 @@ export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 
-if command -v brew > /dev/null 2>&1 
-then
-    export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-    export PATH="$PATH:$HOME/Library/Python/3.9/bin"
-    export PATH=$(brew --prefix openvpn)/sbin:$PATH
-fi
+# if command -v brew > /dev/null 2>&1 
+# then
+#     # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+#     # export PATH=$(brew --prefix openvpn)/sbin:$PATH
+
+#     export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+#     export PATH="$PATH:/opt/homebrew/lib/python3.9/site-packages"
+#     export PATH="$PATH:/opt/homebrew/bin"
+# fi
 
 # }}}
 # Options {{{

@@ -16,9 +16,7 @@ return packer.startup(function()
   -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Utility.
-  if os.getenv("TMUX") == nil then
-      use {'christoomey/vim-tmux-navigator'}
-  end
+  use {'christoomey/vim-tmux-navigator'}
 
   -- Style
   use {

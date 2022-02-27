@@ -120,6 +120,7 @@ install_neovim_plugins() {
 
 install_npm_deps () {
     npm install -g --quiet --silent @bitwarden/cli > /dev/null 2>&1
+    npm install -g --quiet --silent @ansible/ansible-language-server > /dev/null 2>&1
     npm install -g --quiet --silent \
         neovim \
         bash-language-server \
@@ -137,6 +138,7 @@ install_python_deps() {
     pip3 install -U --user \
         "python-language-server[all]" \
         awscli \
+        pywinrm \
         applescript \
         black \
         isort \
@@ -167,6 +169,11 @@ install_brew_packages() {
 
     brew install --cask chromedriver --no-quarantine
     brew install --cask hiddenbar
+    brew install yqrashawn/goku/goku
+    brew install --cask karabiner-elements
+    # brew install --cask openvpn-connect
+    # brew services start goku
+    # arch -x86_64 brew install telnet
     # brew install --cask alt-tab
     # brew install --cask cscreen --no-quarantine
 
@@ -176,6 +183,7 @@ install_brew_packages() {
         m-cli \
         curl \
         exa \
+        autoconf \
         terraform-ls \
         fd \
         font-dejavu \
@@ -183,10 +191,12 @@ install_brew_packages() {
         jq \
         iina \
         kubectl \
+        automake \
         helm \
         libxmlsec1 \
         mosh \
         mysql \
+        postgresql \
         ncdu \
         neovim \
         node \
