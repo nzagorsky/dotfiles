@@ -1,4 +1,5 @@
 ; https://github.com/nikitavoloboev/dotfiles/blob/master/karabiner/karabiner.edn
+; https://github.com/rgomezcasas/dotfiles/blob/main/os/mac/karabiner-goku/karabiner.edn
 
 {:profiles
  {:goku {:default true
@@ -19,10 +20,13 @@
         {:des "tabkey"
          :rules [:tab-mode
                  [:f ["open ~"]]
-                 [:c [:openapp "iTerm.app"]]
+                 ; [:t [:openapp "iTerm.app"]]
                  [:b [:openapp "Firefox.app"]]
                  [:t [:openapp "Telegram.app"]]
                  [:m [:openapp "Mailspring.app"]]
+                 [:n [:openapp "Bear.app"]]
+
+                 [:r ["open /System/Applications/Reminders.app"]]
                  ]}
         ]}
 

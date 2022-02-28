@@ -12,34 +12,6 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_PIPELINING=True
 
-# Go
-export GOPATH="$HOME/.local/include/go"
-export PATH="$PATH:$GOPATH/bin"
-
-# Binary paths
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.local/include/cargo/bin"
-export PATH="$PATH:$HOME/.local/share/cargo/bin"
-
-export PATH="$PATH:$HOME/.yarn/bin"
-
-# FZF config
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
-export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
-
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
-
-
-# if command -v brew > /dev/null 2>&1 
-# then
-#     # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-#     # export PATH=$(brew --prefix openvpn)/sbin:$PATH
-
-#     export PATH="$PATH:$HOME/Library/Python/3.9/bin"
-#     export PATH="$PATH:/opt/homebrew/lib/python3.9/site-packages"
-#     export PATH="$PATH:/opt/homebrew/bin"
-# fi
-
 # }}}
 # Options {{{
 bindkey -e

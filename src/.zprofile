@@ -35,7 +35,37 @@ export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"  2>/dev/null
 
 # Start graphical server on user's current tty if not already running.
 # [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
+
+# Go
+export GOPATH="$HOME/.local/include/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# Binary paths
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/include/cargo/bin"
+export PATH="$PATH:$HOME/.local/share/cargo/bin"
+
+export PATH="$PATH:$HOME/.yarn/bin"
+
+# FZF config
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
+export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
+
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+
+
+if command -v brew > /dev/null 2>&1 
+then
+    # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+    # export PATH=$(brew --prefix openvpn)/sbin:$PATH
+
+    export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+    export PATH="$PATH:$HOME/Library/Python/3.10/bin"
+    export PATH="$PATH:/opt/homebrew/lib/python3.9/site-packages"
+    export PATH="$PATH:/opt/homebrew/lib/python3.10/site-packages"
+    # export PATH="$PATH:/opt/homebrew/bin"
+fi
