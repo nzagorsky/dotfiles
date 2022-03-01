@@ -3,10 +3,10 @@
 
 {:profiles
  {:goku {:default true
-         :alone   80 ; hold for .. ms to register single tap
-         :held    50 ; TODO: not sure what it's for
+         :alone   200 ; hold for .. ms to register single tap
+         :held    20 ; TODO: not sure what it's for
          :delay   0 ; time after which the key press is delayed
-         :sim     30}} ; keys need to be pressed within this threshold to be considered simultaneous
+         :sim     5}} ; keys need to be pressed within this threshold to be considered simultaneous
  :templates {:alfred "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
              :km "osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"%s\"'"
              :open "open \"%s\""
@@ -25,8 +25,11 @@
                  [:t [:openapp "Telegram.app"]]
                  [:m [:openapp "Mailspring.app"]]
                  [:n [:openapp "Bear.app"]]
+                 [:i [:openapp "Insomnia.app"]]
+                 [:l [:openapp "Lens.app"]]
 
                  [:r ["open /System/Applications/Reminders.app"]]
+                 [:c ["open /System/Applications/Calendar.app"]]
                  ]}
         ]}
 
