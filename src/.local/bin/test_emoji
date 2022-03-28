@@ -1,5 +1,0 @@
-echo "Must be snake:"
-echo -e "\xf0\x9f\x90\x8d"
-
-echo "Must be branch:"
-echo -e "\xee\x82\xa0"

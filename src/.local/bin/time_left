@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-upower -d | grep "time to" | tail -1 | sed 's/\s*time to empty:\s*//g'

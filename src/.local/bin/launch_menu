@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-# Toggle logic
-PROCESS_EXISTS=$(ps x | grep alacritty | grep fzfmenu | awk '{print $1}')
-[[ ! -z "$PROCESS_EXISTS" ]] && echo $PROCESS_EXISTS | xargs kill && exit
-
-alacritty --title fzfmenu -e ~/.scripts/launch_menu_app

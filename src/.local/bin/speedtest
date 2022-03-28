@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-wget http://cachefly.cachefly.net/100mb.test -O /dev/null 
