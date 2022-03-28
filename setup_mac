@@ -229,6 +229,7 @@ main() {
     # Fix insecure directories
     # sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh
     sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+
     curl -Ls https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail > ~/.local/bin/kubetail
     chmod +x ~/.local/bin/kubetail
 
