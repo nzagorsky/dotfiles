@@ -53,6 +53,12 @@ return packer.startup(function()
       cmd = {'Dispatch', 'Make', 'Focus', 'Start'}
   }
 
+  -- terminal
+  use {
+      'akinsho/toggleterm.nvim',
+      config=function() require("plugins.configs.term") end,
+}
+
   -- Tags
   use {
       'ludovicchabant/vim-gutentags'
