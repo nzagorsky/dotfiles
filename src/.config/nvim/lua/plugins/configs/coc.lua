@@ -30,8 +30,13 @@ vim.cmd(
         \ 'coc-tsserver',
         \ 'coc-vetur',
         \ 'coc-yaml',
+        \ '@yaegassy/coc-ansible',
         \ 'coc-vimlsp',
     \ ]
+
+    let g:coc_filetype_map = {
+      \ 'yaml.ansible': 'ansible',
+      \ }
 
 
     function! CocFormatImports()

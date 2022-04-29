@@ -30,7 +30,7 @@ colors:
 live_config_reload: true
 
 window:
-  opacity: 0.992
+  opacity: 0.92
   # decorations: none
   dimensions:
     columns: 120

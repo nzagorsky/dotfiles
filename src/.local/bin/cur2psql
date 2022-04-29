@@ -31,30 +31,35 @@ from typing import Tuple
 from zipfile import ZipFile
 
 import boto3
-import psycopg2
 import smart_open
+from trino.dbapi import connect
+from trino.exceptions import TrinoExternalError
 
 logging.basicConfig(level=logging.INFO)
 
 # Connection config
-DB_NAME = "postgres"
-DB_USER = "postgres"
-DB_PASSWORD = "1337"
-DB_HOST = "localhost"
-DB_PORT = "5435"
+connection = connect(
+    host="toltenos-ubuntu.local",
+    port="8080",
+    user="admin",
+    catalog="iceberg",
+    schema="billing",
+)
 
 # Ingestion config
-QUEUE_SIZE = 3000
 BATCH_SIZE = 500
-WORKER_COUNT = 4
+QUEUE_SIZE = BATCH_SIZE * 6
+WORKER_COUNT = 8
 LIMIT_TO = 1000000000000000
 
 queue = Queue(maxsize=QUEUE_SIZE)
 rows_queue = Queue(maxsize=QUEUE_SIZE)
 
-connection = psycopg2.connect(
-    f"dbname={DB_NAME} user={DB_USER} password={DB_PASSWORD} host={DB_HOST} port={DB_PORT}"
-)
+# connection = psycopg2.connect(
+#     f"dbname={DB_NAME} user={DB_USER} password={DB_PASSWORD} host={DB_HOST} port={DB_PORT}"
+# )
+
+logging.info("Database connection established successfully.")
 
 
 class IterationState:
@@ -112,13 +117,15 @@ def get_table_name(is_cur: bool, is_remote: bool, filepath: str) -> str:
 
 
 def create_table(table_name: str, columns: List[str]) -> None:
-    with connection.cursor() as cursor:
+    cursor = connection.cursor()
+    try:
         cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
+        cursor.fetchall()
+
         field_definitions = []
         for column in columns:
-
             if "blendedcost" in column.lower():
-                col_type = "NUMERIC"
+                col_type = "DOUBLE"
             else:
                 col_type = "VARCHAR(512)"
 
@@ -128,6 +135,9 @@ def create_table(table_name: str, columns: List[str]) -> None:
 
         schema_script = f"CREATE TABLE {table_name} ( {table_fields} )"
         cursor.execute(schema_script)
+        cursor.fetchall()
+    finally:
+        cursor.close()
 
     connection.commit()
 
@@ -141,22 +151,39 @@ def ingest_items(table_name: str, items: List[Dict[str, Any]]):
     INSERT INTO {table_name} ({','.join(keys)}) VALUES
     """
     for item in items:
-        values = ",".join([f"'{value}'" for value in item.values()])
+        values = ",".join(
+            [
+                f"'{value}'" if "blendedcost" not in key.lower() else f"{value}"
+                for key, value in item.items()
+            ]
+        )
         insertion_statement += f"\n ({values}),"
 
     insertion_statement = insertion_statement.rstrip(",")
 
-    with connection.cursor() as cursor:
-        cursor.execute(insertion_statement)
+    cursor = connection.cursor()
+
+    while True:
+        try:
+            cursor.execute(insertion_statement)
+            cursor.fetchall()
+            break
+        except TrinoExternalError:
+            print("error TrinoExternalError")
+            time.sleep(0.1)
+
+    cursor.close()
     connection.commit()
 
 
 def worker(table_name: str, state: IterationState) -> None:
     to_ingest = []
+    print("Starting ingest worker. Table:", table_name)
 
     while True:
         try:
             _element = queue.get(block=True, timeout=10)
+
             to_ingest.append(_element)
             if len(to_ingest) == BATCH_SIZE:
                 ingest_items(table_name=table_name, items=to_ingest)

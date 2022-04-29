@@ -7,6 +7,7 @@ end
 local use = packer.use
 
 return packer.startup(function()
+
   use 'wbthomason/packer.nvim'
 
   -- Python modules.
@@ -56,6 +57,7 @@ return packer.startup(function()
   -- terminal
   use {
       'akinsho/toggleterm.nvim',
+      branch='main',
       config=function() require("plugins.configs.term") end,
 }
 
@@ -70,7 +72,7 @@ return packer.startup(function()
   }
 
   -- Syntax highlightning for all languages.
-  use {'sheerun/vim-polyglot', setup=[[vim.cmd("let g:polyglot_disabled = ['python']")]]}
+  use {'sheerun/vim-polyglot'}
 
   -- Vim
   use {'Shougo/neco-vim', ft = {"vim"}}

@@ -137,7 +137,9 @@ install_npm_deps () {
 install_python_deps() {
     pip3 install -U --user \
         "python-language-server[all]" \
+        "ansible-lint" \
         awscli \
+        cytoolz \
         pywinrm \
         applescript \
         black \
@@ -147,7 +149,7 @@ install_python_deps() {
         dataset \
         dateparser \
         django-stubs \
-        "django<3" \
+        "django<4" \
         ipdb \
         ipython \
         smart-open \
@@ -167,46 +169,47 @@ install_python_deps() {
 install_brew_packages() {
     brew tap homebrew/cask-fonts
 
+    brew install datawire/blackbird/telepresence-arm64
+
+    brew remove chromedriver || true
     brew install --cask chromedriver --no-quarantine
-    brew install --cask hiddenbar
-    brew install yqrashawn/goku/goku
-    brew install --cask karabiner-elements
     # brew install --cask openvpn-connect
-    # brew services start goku
     # arch -x86_64 brew install telnet
     # brew install --cask alt-tab
     # brew install --cask cscreen --no-quarantine
 
     brew install \
+        autoconf \
+        automake \
+        ansible \
         bat \
-        fzy \
-        m-cli \
         curl \
         exa \
-        autoconf \
-        terraform-ls \
         fd \
         font-dejavu \
-        htop \
-        jq \
-        iina \
-        kubectl \
-        automake \
+        fzy \
+        llvm \
         helm \
+        htop \
+        iina \
+        jq \
+        kubectl \
         libxmlsec1 \
+        m-cli \
         mosh \
         mysql \
-        postgresql \
         ncdu \
         neovim \
         node \
         openvpn \
+        postgresql \
         postgresql \
         python3 \
         rclone \
         ripgrep \
         sqlite3 \
         terraform \
+        terraform-ls \
         tmux \
         universal-ctags \
         watch \
@@ -216,6 +219,7 @@ install_brew_packages() {
     && echo -e "${BOLD}Brew install success${NC}"
 
     helm plugin install https://github.com/databus23/helm-diff
+    ansible-galaxy collection install kubernetes.core
 }
 
 main() {
@@ -229,6 +233,9 @@ main() {
     # Fix insecure directories
     # sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh
     sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+
+    chmod -R 700 ~/.config/kube
+
 
     curl -Ls https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail > ~/.local/bin/kubetail
     chmod +x ~/.local/bin/kubetail

@@ -11,6 +11,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 # Ansible settings
 export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_PIPELINING=True
+export ANSIBLE_HOST_KEY_CHECKING=False
 
 # }}}
 # Options {{{
@@ -34,17 +35,15 @@ bindkey "^N" history-beginning-search-backward
 
 # }}}
 # Completion setup {{{
+# https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-zstyle ':completion:*' menu select
-# Case insensitive
-zstyle ':completion:*' matcher-list 'l:|=* r:|=*' 
-# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+  autoload -Uz compinit
+  compinit
+fi
 
-# partial completion suggestions
-zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suffix 
-
-# Enable completion module
-autoload -U compinit && compinit
 # }}}
 # Functions {{{
 function t {
@@ -115,6 +114,7 @@ alias macdns="scutil --dns | egrep -i '(domain|nameserver)'"
 alias git_search_all="g log --all -p --source -G"
 alias manage="nvim ~/Documents/notes/tasks.md"
 alias maclaunchrebuild="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user"
+alias telepresence_reconnect="telepresence quit && sleep 2 && telepresence connect"
 
 # K8s
 alias k='kubectl'
