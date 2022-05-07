@@ -61,6 +61,3 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
-
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -Wl,-rpath,/opt/homebrew/opt/llvm/lib"
-

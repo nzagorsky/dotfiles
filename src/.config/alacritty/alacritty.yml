@@ -44,18 +44,18 @@ scrolling:
 
 font:
   size: 15.0
-  # normal:
-  #   family: DejaVu Sans Mono
-  #   style: Book
-  # bold:
-  #   family: DejaVu Sans Mono
-  #   style: Bold
-  # italic:
-  #   family: DejaVu Sans Mono
-  #   style: Italic
-  # bold_italic:
-  #   family: DejaVu Sans Mono
-  #   style: Bold Italic
+  normal:
+    family: Hack Nerd Font Mono
+    style: Regular
+  bold:
+    family: Hack Nerd Font Mono
+    style: Bold
+  italic:
+    family: Hack Nerd Font Mono
+    style: Italic
+  bold_italic:
+    family: Hack Nerd Font Mono
+    style: Bold Italic
 
 env:
   TERM: xterm-24bits

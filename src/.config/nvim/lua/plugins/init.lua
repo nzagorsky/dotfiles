@@ -10,11 +10,21 @@ return packer.startup(function()
 
   use 'wbthomason/packer.nvim'
 
+  use 'lewis6991/impatient.nvim'
+
   -- Python modules.
   use {'numirias/semshi', ft = {"python"}, run = vim.fn['remote#host#UpdateRemotePlugins']}
   use {'raimon49/requirements.txt.vim', ft = {"requirements"}}
 
   -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config=function() require("plugins.configs.nvim-tree") end,
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    }
+}
 
   -- Utility.
   use {'christoomey/vim-tmux-navigator'}
@@ -44,6 +54,13 @@ return packer.startup(function()
   use {'tpope/vim-surround'}
   use {'tpope/vim-repeat'}
   use {'tpope/vim-commentary'}
+  -- use {
+  --     'numToStr/Comment.nvim',
+  --     config = function()
+  --         require('Comment').setup()
+  --     end
+  -- }
+
   use {'jiangmiao/auto-pairs'}
   use {'junegunn/goyo.vim'}
 

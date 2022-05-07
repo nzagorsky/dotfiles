@@ -169,6 +169,8 @@ install_python_deps() {
 install_brew_packages() {
     brew tap homebrew/cask-fonts
 
+    brew install --cask font-hack-nerd-font
+
     brew install datawire/blackbird/telepresence-arm64
 
     brew remove chromedriver || true
@@ -186,7 +188,6 @@ install_brew_packages() {
         curl \
         exa \
         fd \
-        font-dejavu \
         fzy \
         llvm \
         helm \

@@ -20,7 +20,7 @@ vapi.nvim_set_keymap('n', '<leader>q', ':q<cr>', {noremap=true})
 vapi.nvim_set_keymap('n', '<leader>kb', ':bd<cr>', {noremap=true})
 vapi.nvim_set_keymap('n', 'Y', 'y$', {noremap=true})
 
-vapi.nvim_set_keymap('n', '<c-e>', ':Explore<cr>', {noremap=true})
+vapi.nvim_set_keymap('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap=true})
 vapi.nvim_set_keymap('n', '<a-x>', ':Commands<cr>', {noremap=true})
 
 vapi.nvim_set_keymap('n', '<c-h>', '<C-w>h', {noremap=true})

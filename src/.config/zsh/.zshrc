@@ -115,6 +115,7 @@ alias git_search_all="g log --all -p --source -G"
 alias manage="nvim ~/Documents/notes/tasks.md"
 alias maclaunchrebuild="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user"
 alias telepresence_reconnect="telepresence quit && sleep 2 && telepresence connect"
+alias mac_flushdns="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
 
 # K8s
 alias k='kubectl'
