@@ -53,6 +53,7 @@ return packer.startup(function()
   -- Routine automation.
   use {'tpope/vim-surround'}
   use {'tpope/vim-repeat'}
+  use {'tpope/vim-rsi'}
   use {'tpope/vim-commentary'}
   -- use {
   --     'numToStr/Comment.nvim',

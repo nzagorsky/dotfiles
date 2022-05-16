@@ -137,6 +137,7 @@ alias kgs='kubectl get service'
 
 alias kgpa='kubectl get pod --all-namespaces'
 alias kgda='kubectl get deployment --all-namespaces'
+alias kgsa='kubectl get svc --all-namespaces'
 
 alias kcuc='kubectl config use-context'
 alias kcur='kubectl config current-context'
