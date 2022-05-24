@@ -49,7 +49,7 @@ font:
     style: Regular
   bold:
     family: Hack Nerd Font Mono
-    style: Bold
+    style: Regular
   italic:
     family: Hack Nerd Font Mono
     style: Italic

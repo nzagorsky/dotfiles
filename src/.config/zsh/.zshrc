@@ -56,6 +56,11 @@ function t {
     fi
 }
 
+
+function tt {
+    t $(echo $ITERM_SESSION_ID | cut -d : -f 1)
+}
+
 function kconfig {
     export KUBECONFIG="$HOME/.config/kube/$@"
 }
