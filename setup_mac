@@ -223,10 +223,17 @@ install_brew_packages() {
     ansible-galaxy collection install kubernetes.core
 }
 
+install_go_packages() {
+    # Restart on file change
+    # Example: reflex -s -v -- zsh -c 'go run . & reloadtab'
+    go install github.com/cespare/reflex@latest
+}
+
 main() {
     set_defaults
     install_brew_packages
 
+    install_go_packages
     install_npm_deps
     install_python_deps
     install_neovim_plugins
