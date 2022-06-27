@@ -175,6 +175,7 @@ install_brew_packages() {
 
     brew remove chromedriver || true
     brew install --cask chromedriver --no-quarantine
+    brew install --cask another-redis-desktop-manager --no-quarantine
     # brew install --cask openvpn-connect
     # arch -x86_64 brew install telnet
     # brew install --cask alt-tab
@@ -182,6 +183,7 @@ install_brew_packages() {
 
     brew install \
         autoconf \
+        dep \
         automake \
         ansible \
         bat \
