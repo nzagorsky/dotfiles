@@ -11,7 +11,7 @@ docker run \
     --user "$(id -u):$(id -g)" \
     --volume /etc/passwd:/etc/passwd:ro \
     -e PGDATA=/var/lib/postgresql/data/pgdata \
-    -p 127.0.0.1:5435:5432 \
+    -p 0.0.0.0:5435:5432 \
     --restart unless-stopped \
     --volume=$HOME/.local/lib/postgres:/var/lib/postgresql/data \
     postgres
