@@ -45,7 +45,7 @@ set_defaults() {
 
     # Enable subpixel font rendering on non-Apple LCDs
     # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
-    defaults write NSGlobalDomain AppleFontSmoothing -int 1
+    defaults -currentHost delete -g AppleFontSmoothing
 
     # Finder: show path bar
     defaults write com.apple.finder ShowPathbar -bool true
@@ -186,6 +186,9 @@ install_brew_packages() {
         dep \
         automake \
         ansible \
+        navi \
+        nushell \
+        gitui \
         bat \
         curl \
         exa \
@@ -229,6 +232,7 @@ install_go_packages() {
     # Restart on file change
     # Example: reflex -s -v -- zsh -c 'go run . & reloadtab'
     go install github.com/cespare/reflex@latest
+
 }
 
 main() {
