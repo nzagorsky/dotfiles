@@ -40,11 +40,12 @@ if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-  autoload -Uz compinit
-  compinit
+  autoload -Uz compinit && compinit
+  zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 fi
 
 # }}}
+
 # Functions {{{
 function t {
     launch_param=$(pidof systemd > /dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
@@ -107,20 +108,20 @@ alias g=git
 alias v=nvim
 alias reset_shell='env -i HOME="$HOME" zsh -l'
 
-alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > /etc/pacman.d/mirrorlist"'
-alias gst="git status"
-alias gpull="git pull"
 alias gdiff="git diff"
+alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > /etc/pacman.d/mirrorlist"'
+alias git_search_all="g log --all -p --source -G"
+alias gpull="git pull"
+alias gst="git status"
+alias mac_flushdns="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
+alias macdns="scutil --dns | egrep -i '(domain|nameserver)'"
+alias maclaunchrebuild="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user"
+alias macncdu="ncdu --exclude /System/Volumes/Data -x /"
+alias manage="nvim ~/Documents/notes/tasks.md"
 alias python=python3
 alias rclone="rclone -P"
-alias tf="terraform"
-alias macncdu="ncdu --exclude /System/Volumes/Data -x /"
-alias macdns="scutil --dns | egrep -i '(domain|nameserver)'"
-alias git_search_all="g log --all -p --source -G"
-alias manage="nvim ~/Documents/notes/tasks.md"
-alias maclaunchrebuild="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user"
 alias telepresence_reconnect="telepresence quit && sleep 2 && telepresence connect"
-alias mac_flushdns="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
+alias tf="terraform"
 
 # K8s
 alias k='kubectl'
