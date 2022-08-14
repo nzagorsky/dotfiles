@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+
+osascript -e 'tell application "Google Chrome"
+  reload active tab of window 1
+end tell'

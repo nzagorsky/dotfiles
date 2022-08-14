@@ -49,6 +49,8 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
 # Go
 export PATH="$PATH:$GOPATH/bin"
 
+export PATH="$PATH:$HOME/.krew/bin"
+
 # Binary paths
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/include/cargo/bin"
