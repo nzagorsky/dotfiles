@@ -13,6 +13,7 @@ Usage:
 import json
 import os
 import sys
+import shutil
 import uuid
 from typing import Iterator, Tuple
 import time
@@ -93,7 +94,7 @@ def download_cur(filepath: str) -> str:
     bucket_name = filepath.split("/")[2]
 
     billing_path = f"/tmp/billing/{uuid.uuid4()}"
-    os.mkdir(billing_path)
+    os.makedirs(billing_path)
 
     for report_key in get_report_keys(filepath=filepath):
         client.download_file(
@@ -108,7 +109,8 @@ def create_db_and_ingest(name: str, billing_path: str):
     con = duckdb.connect(name)
 
     results = con.execute(
-        f"""COPY (select * from read_csv_auto('{billing_path}/*.csv.zip', ALL_VARCHAR=1)) TO 'result-snappy.parquet' (FORMAT 'parquet'); """
+        # f"""COPY (select * from read_csv_auto('{billing_path}/*.csv.gz', ALL_VARCHAR=1)) TO 'result-snappy.parquet' (FORMAT 'parquet'); """
+        f"create table data as select * from read_csv_auto('{billing_path}/*.csv.gz', ALL_VARCHAR=1);"
     ).fetchall()
     return results
 
@@ -119,7 +121,12 @@ def main() -> None:
 
     start_time = time.time()
     billing_path = download_cur(filepath=filepath)
-    create_db_and_ingest(name=f"{table_name}.duckdb", billing_path=billing_path)
+
+    try:
+        create_db_and_ingest(name=f"{table_name}.duckdb", billing_path=billing_path)
+    finally:
+        shutil.rmtree(billing_path)
+
     print(f"Took {time.time() - start_time:.2f} seconds.")
 
 
