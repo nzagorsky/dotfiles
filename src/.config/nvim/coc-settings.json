@@ -17,6 +17,9 @@
 
   "suggest.enablePreview": true,
   "suggest.maxPreviewWidth": 100,
+  "suggest.noselect": true,
+
+  "inlayHint.enable": false,
 
   "sql.database": "postgresql",
   "sql.formatOptions": {
