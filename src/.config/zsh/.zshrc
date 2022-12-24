@@ -3,7 +3,7 @@
 # Environment {{{
 source ~/.config/credentials/secure > /dev/null 2>&1 || true
 
-export BROWSER=brave
+export BROWSER=open
 export EDITOR=nvim
 export TERM=xterm-256color
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -55,6 +55,14 @@ function t {
     else
         tmux -u attach -t $@ || zsh -c "$launch_param tmux -u new -s $@ 2> /dev/null"
     fi
+}
+
+function k_force_delete_ns {
+    NAMESPACE=$1
+    kubectl proxy &
+    kubectl get namespace $NAMESPACE -o json |jq '.spec = {"finalizers":[]}' > temp.json
+    curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+    rm temp.json
 }
 
 extract () {
