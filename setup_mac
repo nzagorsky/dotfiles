@@ -163,6 +163,7 @@ install_python_deps() {
         django \
         ipdb \
         ipython \
+        bpython \
         smart-open \
         neovim \
         pipenv \
