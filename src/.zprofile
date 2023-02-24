@@ -40,9 +40,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
-
-# export PATH="$HOME/Library/Python/3.9/bin:$PATH:"
-# export PATH="/opt/homebrew/lib/python3.9/site-packages:$PATH"
 export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
 
