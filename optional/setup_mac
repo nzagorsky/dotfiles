@@ -180,6 +180,7 @@ install_brew_packages() {
     brew tap hashicorp/tap
 
     brew install --cask font-hack-nerd-font
+
     brew install hashicorp/tap/vault
 
     brew install datawire/blackbird/telepresence-arm64
@@ -256,13 +257,9 @@ main() {
 
     # Fix insecure directories
     # sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh
-    sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+    # sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
 
-    chmod -R 700 ~/.config/kube
-
-
-    curl -Ls https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail > ~/.local/bin/kubetail
-    chmod +x ~/.local/bin/kubetail
+    # chmod -R 700 ~/.config/kube
 
 }
 
