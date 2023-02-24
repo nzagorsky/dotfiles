@@ -31,7 +31,7 @@ set_defaults() {
     defaults write com.apple.dock "mru-spaces" -bool "false"
 
     # Reduce motion to avoid sliding animations on desktop switch
-    defaults write com.apple.universalaccess reduceMotion -bool true
+    sudo defaults write com.apple.universalaccess reduceMotion -bool true
 
     # Finder: show hidden files by default
     defaults write com.apple.Finder AppleShowAllFiles -bool true
@@ -52,10 +52,6 @@ set_defaults() {
     defaults write NSGlobalDomain KeyRepeat -int 1
     defaults write NSGlobalDomain InitialKeyRepeat -int 15
     defaults write -g ApplePressAndHoldEnabled -bool false
-
-    # Enable subpixel font rendering on non-Apple LCDs
-    # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
-    defaults -currentHost delete -g AppleFontSmoothing
 
     # Finder: show path bar
     defaults write com.apple.finder ShowPathbar -bool true
@@ -149,6 +145,7 @@ install_python_deps() {
         "python-language-server[all]" \
         "ansible-lint" \
         awscli \
+        hcloud \
         cytoolz \
         duckdb \
         pywinrm \
@@ -180,8 +177,10 @@ install_python_deps() {
 
 install_brew_packages() {
     brew tap homebrew/cask-fonts
+    brew tap hashicorp/tap
 
     brew install --cask font-hack-nerd-font
+    brew install hashicorp/tap/vault
 
     brew install datawire/blackbird/telepresence-arm64
 
@@ -221,12 +220,11 @@ install_brew_packages() {
         node \
         openvpn \
         postgresql \
-        postgresql \
         python3 \
         rclone \
         ripgrep \
         sqlite3 \
-        terraform \
+        tfenv \
         terraform-ls \
         tmux \
         universal-ctags \
