@@ -49,6 +49,8 @@ export PATH="$PATH:$GOPATH/bin"
 
 export PATH="$PATH:$HOME/.krew/bin"
 
+export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
+
 # Binary paths
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/include/cargo/bin"
