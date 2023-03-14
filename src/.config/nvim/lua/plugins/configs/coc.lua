@@ -20,6 +20,7 @@ vim.cmd(
         \ 'coc-git',
         \ 'coc-go',
         \ 'coc-html',
+        \ 'coc-emmet',
         \ 'coc-json',
         \ 'coc-sql',
         \ 'coc-lua',
