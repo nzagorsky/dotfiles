@@ -14,7 +14,6 @@ return packer.startup(function()
 
   -- Python modules.
   use {'numirias/semshi', ft = {"python"}, run = vim.fn['remote#host#UpdateRemotePlugins']}
-  use {'raimon49/requirements.txt.vim', ft = {"requirements"}}
 
   -- HTLM
   use { 'mattn/emmet-vim' }
