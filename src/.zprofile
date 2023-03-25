@@ -53,6 +53,7 @@ export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
 
 # Binary paths
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/userscripts"
 export PATH="$PATH:$HOME/.local/include/cargo/bin"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
