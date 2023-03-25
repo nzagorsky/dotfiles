@@ -1,4 +1,5 @@
 set $mod Mod4
+set $mod1 Mod1
 set $left h
 set $down j
 set $up k
@@ -11,7 +12,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec $menu
+bindsym $mod1+space exec $menu
 floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -95,7 +96,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+    status_command while true; do ~/.local/userscripts/statusbar; sleep 1; done
 
     colors {
         statusline #ffffff
@@ -118,7 +119,12 @@ input type:touchpad {
 
 input "type:keyboard" {
     xkb_layout us,ru
-    xkb_options ctrl:nocaps,grp:alt_shift_toggle
+    xkb_options ctrl:nocaps,grp:win_space_toggle
+    repeat_delay 200
+    repeat_rate 50
 }
+
+bindsym --locked XF86MonBrightnessUp exec sudo light -A 10
+bindsym --locked XF86MonBrightnessDown exec sudo light -U 10
 
 # default_border none

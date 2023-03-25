@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+date=$(date +'%Y-%m-%d %I:%M %p')
+inputlang=$(swaymsg -t get_inputs | jq '.[0].xkb_active_layout_name' -r)
+echo "$inputlang      $date"
