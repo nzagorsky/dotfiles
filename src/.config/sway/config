@@ -96,7 +96,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while true; do ~/.local/userscripts/statusbar; sleep 1; done
+    status_command while true; do ~/.local/userscripts/statusbar; sleep 5; done
 
     colors {
         statusline #ffffff
@@ -128,3 +128,11 @@ bindsym --locked XF86MonBrightnessUp exec sudo light -A 10
 bindsym --locked XF86MonBrightnessDown exec sudo light -U 10
 
 default_border pixel 5
+ 
+# swaymsg -t get_outputs
+output DP-1 scale 2
+set $laptop eDP-1
+
+bindswitch lid:on output $laptop disable
+bindswitch lid:off output $laptop enable
+
