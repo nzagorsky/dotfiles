@@ -34,6 +34,9 @@ return packer.startup(function()
 		config = function()
 			require("plugins.configs.material")
 		end,
+		requires = {
+			{ "nvim-lualine/lualine.nvim" },
+		},
 	})
 
 	-- Navigation
@@ -106,6 +109,13 @@ return packer.startup(function()
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
+	})
+
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("plugins.configs.lualine")
+		end,
 	})
 
 	-- Routine automation.

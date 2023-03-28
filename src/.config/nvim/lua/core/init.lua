@@ -4,9 +4,6 @@ local o = vim.o
 -- mappings.lua
 require("core.mappings")
 
--- statusline.lua
-require("core.statusline")
-
 -- settings.lua
 require("core.settings")
 

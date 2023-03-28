@@ -1,9 +1,4 @@
 vim.cmd([[
-    function! GitBranch() abort
-        let l:stripped_git_status = matchstr(fugitive#statusline(), '(.*)')[1:-2]
-        return l:stripped_git_status
-    endfunction
-
     noremap <Leader>gs :Git<CR>
     noremap <Leader>gc :Git commit<CR>
     noremap <Leader>gpush :Git push<CR>
