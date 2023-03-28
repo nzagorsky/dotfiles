@@ -11,6 +11,6 @@ vim.cmd(
     noremap <Leader>gpull :Git pull<CR>
     noremap <Leader>gb :Git blame<CR>
     noremap <Leader>gd :Gvdiff<CR>
-    noremap <Leader>gr :Gremove<CR>
+    noremap <Leader>gr :GRemove<CR>
     ]]
 )
