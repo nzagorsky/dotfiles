@@ -2,7 +2,7 @@ require("lualine").setup({
     options = {
         icons_enabled = false,
         theme = "auto",
-        component_separators = { left = "", right = "" },
+        component_separators = { left = "", right = " " }, -- 
         section_separators = { left = "", right = "" },
         disabled_filetypes = {
             statusline = {},
@@ -21,8 +21,8 @@ require("lualine").setup({
         lualine_a = {},
         lualine_b = { "mode" },
         lualine_c = { "diff", "filename" },
-        lualine_x = {},
-        lualine_y = { "diagnostics", "location" },
+        lualine_x = { "diagnostics" },
+        lualine_y = { "filetype", "location" },
         lualine_z = {},
     },
     tabline = {},
