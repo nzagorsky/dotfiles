@@ -1,4 +1,7 @@
 local util = require "lspconfig/util"
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local configs = require "lspconfig/configs"
+local path = util.path
 
 require("mason").setup()
 
@@ -21,7 +24,23 @@ require("mason-lspconfig").setup {
     "yamlls",
   },
 }
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local function get_python_path(workspace)
+  -- Use activated virtualenv.
+  if vim.env.VIRTUAL_ENV then
+    return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+  end
+
+  -- Find and use virtualenv from pipenv in workspace directory.
+  local match = vim.fn.glob(path.join(workspace, "Pipfile"))
+  if match ~= "" then
+    local venv = vim.fn.trim(vim.fn.system("PIPENV_PIPFILE=" .. match .. " pipenv --venv"))
+    return path.join(venv, "bin", "python")
+  end
+
+  -- Fallback to system Python.
+  return vim.fn.exepath "python3" or vim.fn.exepath "python" or "python"
+end
 
 require("mason-lspconfig").setup_handlers {
 
@@ -39,6 +58,14 @@ require("mason-lspconfig").setup_handlers {
   ["pyre"] = function()
     require("lspconfig").pyre.setup {
       root_dir = util.root_pattern("pyproject.toml", "requirements.txt"),
+    }
+  end,
+
+  ["pyright"] = function()
+    require("lspconfig").pyright.setup {
+      before_init = function(_, config)
+        config.settings.python.pythonPath = get_python_path(config.root_dir)
+      end,
     }
   end,
 }
