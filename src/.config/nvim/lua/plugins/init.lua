@@ -11,10 +11,7 @@ return packer.startup(function()
 
     use 'lewis6991/impatient.nvim'
 
-    -- Python modules.
-    use { 'numirias/semshi', ft = { "python" }, run = vim.fn['remote#host#UpdateRemotePlugins'] }
-
-    -- HTLM
+    -- HTML
     use { 'mattn/emmet-vim' }
 
     -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -36,7 +33,7 @@ return packer.startup(function()
         config = function() require('colors') end
     }
 
-    -- Files navigation.
+    -- Navigation
     use { 'junegunn/fzf' }
     use {
         'junegunn/fzf.vim',
@@ -44,11 +41,25 @@ return packer.startup(function()
         config = function() require("plugins.configs.fzf") end
     }
 
-    -- Code check.
+    -- SDE extensions.
+    -- use {
+    --     'neoclide/coc.nvim',
+    --     config = function() require("plugins.configs.coc") end,
+    --     branch = 'release'
+    -- }
     use {
-        'neoclide/coc.nvim',
-        config = function() require("plugins.configs.coc") end,
-        branch = 'release'
+        "williamboman/mason.nvim",
+        run = ":MasonUpdate", -- :MasonUpdate updates registry contents
+        config = function() require("plugins.configs.mason") end
+    }
+    use {
+        "williamboman/mason-lspconfig.nvim",
+        config = function() require("plugins.configs.mason") end
+    }
+    use { 'neovim/nvim-lspconfig' }
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function() require("plugins.configs.null-ls") end
     }
 
     -- Routine automation.
@@ -56,15 +67,7 @@ return packer.startup(function()
     use { 'tpope/vim-repeat' }
     use { 'tpope/vim-rsi' }
     use { 'tpope/vim-commentary' }
-    -- use {
-    --     'numToStr/Comment.nvim',
-    --     config = function()
-    --         require('Comment').setup()
-    --     end
-    -- }
-
     use { 'jiangmiao/auto-pairs' }
-    use { 'junegunn/goyo.vim' }
 
     -- Async command execution
     use {

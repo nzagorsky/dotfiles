@@ -12,12 +12,8 @@ vim.cmd(
     set statusline+=\ %m
     set statusline+=%=
 
-    set statusline+=%3*
-    set statusline+=\ %{StatusDiagnostic()}  " coc diagnostic message
-    set statusline+=%*
-
     " Filetype
-    set statusline+=\ %Y\
+    set statusline+=%Y
 
     " Git branch data
     " set statusline+=%1*
