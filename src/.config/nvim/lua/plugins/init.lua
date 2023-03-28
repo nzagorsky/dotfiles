@@ -1,178 +1,200 @@
 local present, packer = pcall(require, "plugins.packerInit")
 
 if not present then
-	return false
+  return false
 end
 
 local use = packer.use
 
 return packer.startup(function()
-	use("wbthomason/packer.nvim")
+  use "wbthomason/packer.nvim"
 
-	use("lewis6991/impatient.nvim")
+  use "lewis6991/impatient.nvim"
 
-	-- HTML
-	use({ "mattn/emmet-vim" })
+  -- HTML
+  use { "mattn/emmet-vim" }
 
-	use({
-		"kyazdani42/nvim-tree.lua",
-		config = function()
-			require("plugins.configs.nvim-tree")
-		end,
-		requires = {
-			"kyazdani42/nvim-web-devicons", -- optional, for file icon
-		},
-	})
+  use {
+    "kyazdani42/nvim-tree.lua",
+    config = function()
+      require "plugins.configs.nvim-tree"
+    end,
+    requires = {
+      "kyazdani42/nvim-web-devicons", -- optional, for file icon
+    },
+  }
 
-	-- Utility.
-	use({ "christoomey/vim-tmux-navigator" })
-	use("nvim-lua/plenary.nvim")
+  -- Utility.
+  use {
+    "alexghergh/nvim-tmux-navigation",
+    config = function()
+      local nvim_tmux_nav = require "nvim-tmux-navigation"
 
-	-- Style
-	use({
-		"marko-cerovac/material.nvim",
-		config = function()
-			require("plugins.configs.material")
-		end,
-		requires = {
-			{ "nvim-lualine/lualine.nvim" },
-		},
-	})
+      vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+      vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+      vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+      vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+      vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+      vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+    end,
+  }
 
-	-- Navigation
-	use({ "junegunn/fzf" })
-	use({
-		"junegunn/fzf.vim",
-		-- config=function() require("plugins.configs.fzf") end
-		config = function()
-			require("plugins.configs.fzf")
-		end,
-	})
+  use "nvim-lua/plenary.nvim"
 
-	-- SDE extensions.
-	-- use {
-	--     'neoclide/coc.nvim',
-	--     config = function() require("plugins.configs.coc") end,
-	--     branch = 'release'
-	-- }
-	use({
-		"williamboman/mason.nvim",
-		run = ":MasonUpdate", -- :MasonUpdate updates registry contents
-	})
-	use({
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("plugins.configs.mason")
-		end,
-		requires = { { "hrsh7th/nvim-cmp" } },
-	})
-	use({
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("plugins.configs.lsp")
-		end,
-	})
-	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			require("plugins.configs.null-ls")
-		end,
-	})
+  -- Style
+  use {
+    "marko-cerovac/material.nvim",
+    config = function()
+      require "plugins.configs.material"
+    end,
+    requires = {
+      { "nvim-lualine/lualine.nvim" },
+    },
+  }
 
-	use({
-		"hrsh7th/nvim-cmp",
-		config = function()
-			require("plugins.configs.cmp")
-		end,
-		requires = {
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "hrsh7th/cmp-cmdline" },
-			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-		},
-	})
+  -- Navigation
+  use { "junegunn/fzf" }
+  use {
+    "junegunn/fzf.vim",
+    config = function()
+      require "plugins.configs.fzf"
+    end,
+  }
 
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("plugins.configs.treesitter")
-		end,
-		run = ":TSUpdate",
-	})
-	use({
-		"ThePrimeagen/refactoring.nvim",
-		config = function()
-			require("plugins.configs.refactoring")
-		end,
-		requires = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	})
+  -- SDE extensions.
+  use {
+    "williamboman/mason.nvim",
+    run = ":MasonUpdate", -- :MasonUpdate updates registry contents
+  }
+  use {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require "plugins.configs.mason"
+    end,
+    requires = { { "hrsh7th/nvim-cmp" } },
+  }
+  use {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require "plugins.configs.lsp"
+    end,
+  }
+  use {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      require "plugins.configs.null-ls"
+    end,
+  }
 
-	use({
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("plugins.configs.lualine")
-		end,
-	})
+  use {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require "plugins.configs.cmp"
+    end,
+    requires = {
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-cmdline" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+    },
+  }
 
-	-- Routine automation.
-	use({ "tpope/vim-surround" })
-	use({ "tpope/vim-repeat" })
-	use({ "tpope/vim-rsi" })
-	use({ "tpope/vim-commentary" })
-	use({ "jiangmiao/auto-pairs" })
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require "plugins.configs.treesitter"
+    end,
+    run = ":TSUpdate",
+  }
+  use {
+    "ThePrimeagen/refactoring.nvim",
+    config = function()
+      require "plugins.configs.refactoring"
+    end,
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-treesitter/nvim-treesitter" },
+    },
+  }
 
-	-- Async command execution
-	use({
-		"tpope/vim-dispatch",
-		opt = true,
-		cmd = { "Dispatch", "Make", "Focus", "Start" },
-	})
+  use {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require "plugins.configs.lualine"
+    end,
+  }
 
-	-- terminal
-	use({
-		"akinsho/toggleterm.nvim",
-		branch = "main",
-		config = function()
-			require("plugins.configs.term")
-		end,
-	})
+  -- Routine automation.
+  use { "tpope/vim-surround" }
+  use { "tpope/vim-repeat" }
+  use { "tpope/vim-rsi" }
 
-	-- Tags
-	use({
-		"ludovicchabant/vim-gutentags",
-	})
+  use {
+    "numToStr/Comment.nvim",
+    keys = { "gc", "gb" },
+    config = function()
+      require("Comment").setup {
+        toggler = {
+          ---Line-comment toggle keymap
+          line = "gc",
+          ---Block-comment toggle keymap
+          block = "gb",
+        },
+      }
+    end,
+  }
 
-	-- Git integration.
-	use({
-		"tpope/vim-fugitive",
-		config = function()
-			require("plugins.configs.fugitive")
-		end,
-	})
-	use({
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("plugins.configs.gitsigns")
-		end,
-	})
+  use { "jiangmiao/auto-pairs" }
 
-	-- Syntax highlightning for all languages.
-	use({ "sheerun/vim-polyglot" })
+  -- Async command execution
+  use {
+    "tpope/vim-dispatch",
+    opt = true,
+    cmd = { "Dispatch", "Make", "Focus", "Start" },
+  }
 
-	-- Vim
-	use({ "Shougo/neco-vim", ft = { "vim" } })
+  -- terminal
+  use {
+    "akinsho/toggleterm.nvim",
+    branch = "main",
+    config = function()
+      require "plugins.configs.term"
+    end,
+  }
 
-	-- JSON
-	use({ "elzr/vim-json", ft = { "json" } })
+  -- Tags
+  use {
+    "ludovicchabant/vim-gutentags",
+  }
 
-	-- REPL
-	use({ "jpalardy/vim-slime" })
+  -- Git integration.
+  use {
+    "tpope/vim-fugitive",
+    config = function()
+      require "plugins.configs.fugitive"
+    end,
+  }
+  use {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require "plugins.configs.gitsigns"
+    end,
+  }
 
-	-- DB
-	use({ "tpope/vim-dadbod", opt = true })
-	use({ "kristijanhusak/vim-dadbod-ui", requires = { "tpope/vim-dadbod" }, cmd = { "DBUI" } })
+  -- Syntax highlightning for all languages.
+  use { "sheerun/vim-polyglot" }
+
+  -- Vim
+  use { "Shougo/neco-vim", ft = { "vim" } }
+
+  -- JSON
+  use { "elzr/vim-json", ft = { "json" } }
+
+  -- REPL
+  use { "jpalardy/vim-slime" }
+
+  -- DB
+  use { "tpope/vim-dadbod", opt = true }
+  use { "kristijanhusak/vim-dadbod-ui", requires = { "tpope/vim-dadbod" }, cmd = { "DBUI" } }
 end)

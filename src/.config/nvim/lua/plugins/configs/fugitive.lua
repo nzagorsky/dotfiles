@@ -1,4 +1,4 @@
-vim.cmd([[
+vim.cmd [[
     noremap <Leader>gs :Git<CR>
     noremap <Leader>gc :Git commit<CR>
     noremap <Leader>gpush :Git push<CR>
@@ -6,4 +6,4 @@ vim.cmd([[
     noremap <Leader>gb :Git blame<CR>
     noremap <Leader>gd :Gvdiff<CR>
     noremap <Leader>gr :GRemove<CR>
-    ]])
+    ]]
