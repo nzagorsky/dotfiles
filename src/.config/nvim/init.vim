@@ -5,6 +5,7 @@ lua << EOF
 require('plugins.packerInit')
 
 -- lua/plugins/init.lua
+-- lua/plugins/configs/fzf.lua
 require('plugins')
 
 -- lua/core/init.lua

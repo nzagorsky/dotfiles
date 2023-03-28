@@ -1,31 +1,19 @@
 local null_ls = require("null-ls")
 
-local no_really = {
-    method = null_ls.methods.DIAGNOSTICS,
-    filetypes = { "markdown", "text" },
-    generator = {
-        fn = function(params)
-            local diagnostics = {}
-            -- sources have access to a params object
-            -- containing info about the current file and editor state
-            for i, line in ipairs(params.content) do
-                local col, end_col = line:find("really")
-                if col and end_col then
-                    -- null-ls fills in undefined positions
-                    -- and converts source diagnostics into the required format
-                    table.insert(diagnostics, {
-                        row = i,
-                        col = col,
-                        end_col = end_col + 1,
-                        source = "no-really",
-                        message = "Don't use 'really!'",
-                        severity = vim.diagnostic.severity.WARN,
-                    })
-                end
-            end
-            return diagnostics
-        end,
-    },
+local sources = {
+    null_ls.builtins.formatting.isort,
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.code_actions.refactoring,
+    null_ls.builtins.diagnostics.luacheck,
+    null_ls.builtins.diagnostics.selene,
+    null_ls.builtins.formatting.cmake_format,
+    null_ls.builtins.diagnostics.hadolint,
+    null_ls.builtins.diagnostics.ansiblelint
 }
 
-null_ls.register(no_really)
+null_ls.setup(
+    {
+        sources = sources
+    }
+)

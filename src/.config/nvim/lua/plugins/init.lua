@@ -12,12 +12,11 @@ return packer.startup(function()
     use 'lewis6991/impatient.nvim'
 
     -- HTML
-    use { 'mattn/emmet-vim' }
+    use { "mattn/emmet-vim" }
 
-    -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     use {
-        'kyazdani42/nvim-tree.lua',
+        "kyazdani42/nvim-tree.lua",
         config = function() require("plugins.configs.nvim-tree") end,
         requires = {
             'kyazdani42/nvim-web-devicons', -- optional, for file icon
@@ -25,12 +24,13 @@ return packer.startup(function()
     }
 
     -- Utility.
-    use { 'christoomey/vim-tmux-navigator' }
+    use { "christoomey/vim-tmux-navigator" }
+    use "nvim-lua/plenary.nvim"
 
     -- Style
     use {
-        'drewtempelmeyer/palenight.vim',
-        config = function() require('colors') end
+        'marko-cerovac/material.nvim',
+        config = function() require("plugins.configs.material") end
     }
 
     -- Navigation
@@ -75,6 +75,21 @@ return packer.startup(function()
         config = function() require("plugins.configs.cmp") end
     }
 
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        config = function() require("plugins.configs.treesitter") end,
+        run = ':TSUpdate'
+    }
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        config = function() require("plugins.configs.refactoring") end,
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        }
+    }
+
+
     -- Routine automation.
     use { 'tpope/vim-surround' }
     use { 'tpope/vim-repeat' }
@@ -104,6 +119,10 @@ return packer.startup(function()
     -- Git integration.
     use {
         'tpope/vim-fugitive', config = function() require("plugins.configs.fugitive") end
+    }
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function() require("plugins.configs.gitsigns") end
     }
 
     -- Syntax highlightning for all languages.
