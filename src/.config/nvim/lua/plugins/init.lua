@@ -50,16 +50,29 @@ return packer.startup(function()
     use {
         "williamboman/mason.nvim",
         run = ":MasonUpdate", -- :MasonUpdate updates registry contents
-        config = function() require("plugins.configs.mason") end
     }
     use {
         "williamboman/mason-lspconfig.nvim",
-        config = function() require("plugins.configs.mason") end
+        config = function() require("plugins.configs.mason") end,
+        requires = { { "hrsh7th/nvim-cmp" } }
     }
-    use { 'neovim/nvim-lspconfig' }
+    use {
+        'neovim/nvim-lspconfig',
+        config = function() require("plugins.configs.lsp") end
+    }
     use {
         'jose-elias-alvarez/null-ls.nvim',
         config = function() require("plugins.configs.null-ls") end
+
+    }
+
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use {
+        'hrsh7th/nvim-cmp',
+        config = function() require("plugins.configs.cmp") end
     }
 
     -- Routine automation.
