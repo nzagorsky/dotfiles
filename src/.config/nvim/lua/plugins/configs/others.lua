@@ -1,5 +1,4 @@
-vim.cmd(
-    [[
+vim.cmd([[
 
     " Dadbod
     let g:db_ui_winwidth = 30
@@ -18,5 +17,4 @@ vim.cmd(
     autocmd EditorAppearance BufEnter * call SemshiStyleUpdate()
 
 
-    ]]
-)
+    ]])

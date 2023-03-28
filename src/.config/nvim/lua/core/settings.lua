@@ -1,5 +1,4 @@
-vim.cmd(
-    [[
+vim.cmd([[
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 syntax on
 filetype indent on
@@ -46,5 +45,4 @@ if exists('$SHELL')
 else
     set shell=/bin/sh
 endif
-    ]]
-)
+    ]])

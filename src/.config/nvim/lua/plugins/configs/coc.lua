@@ -1,5 +1,4 @@
-vim.cmd(
-    [[
+vim.cmd([[
     function! CocShowDocs()
       if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
@@ -93,5 +92,4 @@ vim.cmd(
       endif
       return join(msgs, ' ')
     endfunction
-]]
-)
+]])
