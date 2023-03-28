@@ -1,4 +1,3 @@
-
 vim.cmd(
     [[
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -40,7 +39,7 @@ set foldnestmax=10 " deepest fold is 10 levels
 set noerrorbells  " No annoying errors
 set novisualbell
 
-set updatetime=250  
+set updatetime=250
 
 if exists('$SHELL')
     set shell=$SHELL
@@ -48,4 +47,4 @@ else
     set shell=/bin/sh
 endif
     ]]
-    )
+)

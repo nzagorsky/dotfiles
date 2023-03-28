@@ -1,4 +1,3 @@
-
 vim.cmd(
     [[
     function! UpdateStyle() abort
@@ -40,4 +39,3 @@ vim.cmd(
     colorscheme palenight
     ]]
 )
-

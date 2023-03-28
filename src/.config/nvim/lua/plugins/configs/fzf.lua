@@ -1,6 +1,5 @@
-
 vim.cmd(
-[[
+    [[
 function! FZFBuildQuickFixList(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
   copen
@@ -40,7 +39,7 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 "   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 "search word under cursor
-nnoremap <leader>A :Rg <C-r><C-w><CR>   
+nnoremap <leader>A :Rg <C-r><C-w><CR>
 
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>a :Rg<Space>

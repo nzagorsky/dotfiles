@@ -13,4 +13,4 @@ vim.cmd(
     noremap <Leader>gd :Gvdiff<CR>
     noremap <Leader>gr :Gremove<CR>
     ]]
-    )
+)

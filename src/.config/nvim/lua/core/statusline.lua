@@ -1,4 +1,3 @@
-
 vim.cmd(
     [[
 
@@ -18,7 +17,7 @@ vim.cmd(
     set statusline+=%*
 
     " Filetype
-    set statusline+=\ %Y\  
+    set statusline+=\ %Y\
 
     " Git branch data
     " set statusline+=%1*
@@ -31,4 +30,4 @@ vim.cmd(
     " set statusline+=%*
 
     ]]
-    )
+)
