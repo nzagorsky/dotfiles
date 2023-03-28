@@ -2,7 +2,7 @@
 local present, nvimtree = pcall(require, "nvim-tree")
 
 if not present then
-   return
+	return
 end
 
 -- globals must be set prior to requiring nvim-tree to function
@@ -45,38 +45,38 @@ local g = vim.g
 -- }
 
 local options = {
-   filters = {
-      dotfiles = false,
-   },
-   disable_netrw = true,
-   hijack_netrw = true,
-   open_on_tab = false,
-   hijack_cursor = true,
-   hijack_unnamed_buffer_when_opening = false,
-   update_cwd = true,
-   update_focused_file = {
-      enable = true,
-      update_cwd = false,
-   },
-   view = {
-      side = "left",
-      width = 25,
-      hide_root_folder = true,
-   },
-   git = {
-      enable = false,
-      ignore = false,
-   },
-   actions = {
-      open_file = {
-         resize_window = true,
-      },
-   },
-   renderer = {
-      indent_markers = {
-         enable = false,
-      },
-   },
+	filters = {
+		dotfiles = false,
+	},
+	disable_netrw = true,
+	hijack_netrw = true,
+	open_on_tab = false,
+	hijack_cursor = true,
+	hijack_unnamed_buffer_when_opening = false,
+	update_cwd = true,
+	update_focused_file = {
+		enable = true,
+		update_cwd = false,
+	},
+	view = {
+		side = "left",
+		width = 25,
+		hide_root_folder = true,
+	},
+	git = {
+		enable = false,
+		ignore = false,
+	},
+	actions = {
+		open_file = {
+			resize_window = true,
+		},
+	},
+	renderer = {
+		indent_markers = {
+			enable = false,
+		},
+	},
 }
 
 nvimtree.setup(options)

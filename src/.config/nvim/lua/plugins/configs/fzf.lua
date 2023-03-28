@@ -1,6 +1,4 @@
-
-vim.cmd(
-[[
+vim.cmd([[
 function! FZFBuildQuickFixList(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
   copen
@@ -40,7 +38,7 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 "   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 "search word under cursor
-nnoremap <leader>A :Rg <C-r><C-w><CR>   
+nnoremap <leader>A :Rg <C-r><C-w><CR>
 
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>a :Rg<Space>
@@ -54,9 +52,8 @@ nnoremap <leader>T :call UpdateTags()<CR>
 " Use ripgrep
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --hidden --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-]]
-)
+]])

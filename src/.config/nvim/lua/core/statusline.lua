@@ -1,6 +1,4 @@
-
-vim.cmd(
-    [[
+vim.cmd([[
 
     " To format status line wrap with `%#* and %*` where # is User number.
     set laststatus=2
@@ -13,12 +11,8 @@ vim.cmd(
     set statusline+=\ %m
     set statusline+=%=
 
-    set statusline+=%3*
-    set statusline+=\ %{StatusDiagnostic()}  " coc diagnostic message
-    set statusline+=%*
-
     " Filetype
-    set statusline+=\ %Y\  
+    set statusline+=%Y
 
     " Git branch data
     " set statusline+=%1*
@@ -30,5 +24,4 @@ vim.cmd(
     set statusline+=\ %l\/%L
     " set statusline+=%*
 
-    ]]
-    )
+    ]])

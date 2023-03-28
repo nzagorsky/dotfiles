@@ -1,6 +1,4 @@
-
-vim.cmd(
-    [[
+vim.cmd([[
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 syntax on
 filetype indent on
@@ -40,12 +38,9 @@ set foldnestmax=10 " deepest fold is 10 levels
 set noerrorbells  " No annoying errors
 set novisualbell
 
-set updatetime=250  
-
 if exists('$SHELL')
     set shell=$SHELL
 else
     set shell=/bin/sh
 endif
-    ]]
-    )
+    ]])
