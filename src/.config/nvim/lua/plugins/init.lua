@@ -1,9 +1,4 @@
-local present, packer = pcall(require, "plugins.packerInit")
-
-if not present then
-  return false
-end
-
+local packer = require "packer"
 local use = packer.use
 
 return packer.startup(function()
@@ -215,7 +210,7 @@ return packer.startup(function()
           \   <bang>0 ? fzf#vim#with_preview('up:60%')
           \           : fzf#vim#with_preview('right:50%:hidden', '?'),
           \   <bang>0)
-]]
+    ]]
     end,
   }
 
@@ -523,7 +518,11 @@ return packer.startup(function()
   use {
     "RRethy/vim-illuminate",
     config = function()
-      require("illuminate").configure()
+      require("illuminate").configure {
+        filetypes_denylist = {
+          "NvimTree",
+        },
+      }
     end,
   }
 
@@ -562,11 +561,21 @@ return packer.startup(function()
   use {
     "nvim-lualine/lualine.nvim",
     config = function()
+      local sections = {
+        lualine_a = {},
+        lualine_b = { "mode", { "filename", path = 1 }, "diff" },
+        lualine_c = {},
+        lualine_x = { "diagnostics" },
+        lualine_y = { "%y %l/%L" },
+        lualine_z = {},
+      }
+
       require("lualine").setup {
+
         options = {
           icons_enabled = false,
           theme = "auto",
-          component_separators = { left = "", right = " " }, -- 
+          component_separators = { left = " ", right = " " }, -- 
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
             statusline = {},
@@ -581,14 +590,8 @@ return packer.startup(function()
             winbar = 1000,
           },
         },
-        sections = {
-          lualine_a = {},
-          lualine_b = { "mode" },
-          lualine_c = { "diff", { "filename", path = 1 } },
-          lualine_x = { "diagnostics" },
-          lualine_y = { "filetype", "location" },
-          lualine_z = {},
-        },
+        sections = sections,
+        inactive_sections = sections,
         tabline = {},
         winbar = {},
         inactive_winbar = {},
@@ -784,7 +787,6 @@ return packer.startup(function()
     " Dadbod
     let g:db_ui_winwidth = 30
     let g:dbs = {
-    \  'localdocker': 'postgres://postgres:1337@localhost:5435/postgres',
     \  'local': 'postgres://toltenos:@localhost:5432/postgres'
     \ }
     ]]

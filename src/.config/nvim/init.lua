@@ -136,7 +136,7 @@ if os.getenv "TMUX" == nil then
 
     for num = 1, 10 do
         vapi.nvim_set_keymap("t", string.format("<A-%s>", num), string.format([[<C-\><C-n>%sgt]], num),
-        { noremap = true })
+            { noremap = true })
     end
 
     vapi.nvim_set_keymap("n", "<A-h>", "<Esc>:tabprevious<CR>", { noremap = true })
@@ -149,4 +149,5 @@ if os.getenv "TMUX" == nil then
 end
 
 
+require "plugins.packerInit"
 require "plugins"
