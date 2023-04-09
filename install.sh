@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -x
 
 pull_submodules () {
     git submodule update --init --recursive --depth 1
