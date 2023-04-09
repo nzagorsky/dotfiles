@@ -148,6 +148,4 @@ if os.getenv "TMUX" == nil then
     vapi.nvim_set_keymap("t", "<A-l>", [[<C-\><C-n>:tabnext<CR>]], { noremap = true })
 end
 
-
-require "plugins.packerInit"
 require "plugins"
