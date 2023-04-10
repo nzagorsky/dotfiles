@@ -9,10 +9,29 @@ local ensure_packer = function()
   return false
 end
 
-local packer_bootstrap = ensure_packer()
+local packer_installed = ensure_packer()
 
 local packer = require "packer"
 local use = packer.use
+
+local function get_python_path(workspace)
+  local util = require "lspconfig/util"
+  local path = util.path
+  -- Use activated virtualenv.
+  if vim.env.VIRTUAL_ENV then
+    return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+  end
+
+  -- Find and use virtualenv from pipenv in workspace directory.
+  local match = vim.fn.glob(path.join(workspace, "Pipfile"))
+  if match ~= "" then
+    local venv = vim.fn.trim(vim.fn.system("PIPENV_PIPFILE=" .. match .. " pipenv --venv"))
+    return path.join(venv, "bin", "python")
+  end
+
+  -- Fallback to system Python.
+  return vim.fn.exepath "python3" or vim.fn.exepath "python" or "python"
+end
 
 packer.startup(function()
   use "wbthomason/packer.nvim"
@@ -118,7 +137,7 @@ packer.startup(function()
         },
         plugins = { -- Uncomment the plugins that you use to highlight them
           -- Available plugins:
-          "dap",
+          -- "dap",
           -- "dashboard",
           "gitsigns",
           -- "hop",
@@ -130,7 +149,7 @@ packer.startup(function()
           "nvim-cmp",
           -- "nvim-navic",
           "nvim-tree",
-          -- "nvim-web-devicons",
+          "nvim-web-devicons",
           -- "sneak",
           -- "telescope",
           -- "trouble",
@@ -231,15 +250,15 @@ packer.startup(function()
   use {
     "williamboman/mason.nvim",
     run = ":MasonUpdate", -- :MasonUpdate updates registry contents
+    config = function()
+      require("mason").setup()
+    end,
   }
+
   use {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      local util = require "lspconfig/util"
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local path = util.path
-
-      require("mason").setup()
 
       require("mason-lspconfig").setup {
         ensure_installed = {
@@ -260,23 +279,6 @@ packer.startup(function()
           "yamlls",
         },
       }
-
-      local function get_python_path(workspace)
-        -- Use activated virtualenv.
-        if vim.env.VIRTUAL_ENV then
-          return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
-        end
-
-        -- Find and use virtualenv from pipenv in workspace directory.
-        local match = vim.fn.glob(path.join(workspace, "Pipfile"))
-        if match ~= "" then
-          local venv = vim.fn.trim(vim.fn.system("PIPENV_PIPFILE=" .. match .. " pipenv --venv"))
-          return path.join(venv, "bin", "python")
-        end
-
-        -- Fallback to system Python.
-        return vim.fn.exepath "python3" or vim.fn.exepath "python" or "python"
-      end
 
       require("mason-lspconfig").setup_handlers {
 
@@ -316,6 +318,7 @@ packer.startup(function()
       { "hrsh7th/nvim-cmp" },
     },
   }
+
   use {
     "neovim/nvim-lspconfig",
     config = function()
@@ -787,7 +790,7 @@ packer.startup(function()
     end,
   }
 
-  if packer_bootstrap then
+  if packer_installed then
     require("packer").sync()
   end
 
