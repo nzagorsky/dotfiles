@@ -201,6 +201,7 @@ install_brew_packages() {
         navi \
         nushell \
         gitui \
+        shfmt \
         bat \
         curl \
         exa \

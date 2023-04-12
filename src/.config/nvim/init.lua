@@ -17,7 +17,6 @@ local ensure_packer = function()
 end
 
 local packer_installed = ensure_packer()
-
 local packer = require "packer"
 local use = packer.use
 
@@ -72,8 +71,7 @@ local packer_config = function()
                 },
                 view = {
                     side = "left",
-                    width = 25,
-                    hide_root_folder = true,
+                    width = 30,
                 },
                 git = {
                     enable = false,
@@ -85,6 +83,7 @@ local packer_config = function()
                     },
                 },
                 renderer = {
+                    root_folder_label = false,
                     indent_markers = {
                         enable = false,
                     },
@@ -158,9 +157,9 @@ local packer_config = function()
                     "nvim-tree",
                     "nvim-web-devicons",
                     -- "sneak",
-                    -- "telescope",
+                    "telescope",
                     -- "trouble",
-                    -- "which-key",
+                    "which-key",
                 },
                 disable = {
                     colored_cursor = true, -- Disable the colored cursor
@@ -185,72 +184,82 @@ local packer_config = function()
             { "nvim-lualine/lualine.nvim" },
         },
     }
-
-    -- Navigation
-    use { "junegunn/fzf" }
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end,
+    }
 
     use {
-        "junegunn/fzf.vim",
+        "nvim-telescope/telescope.nvim",
+        version = "*",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+        },
         config = function()
-            vim.cmd [[
-        function! FZFBuildQuickFixList(lines)
-          call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-          copen
-          cc
-        endfunction
+            local actions = require "telescope.actions"
+            local telescope_mappings = {
+                ["jk"] = actions.close,
+                ["<leader>q"] = actions.close,
+                ["<Esc>"] = actions.close,
+                ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            }
 
-        let g:fzf_action = {
-          \ 'ctrl-q': function('FZFBuildQuickFixList'),
-          \ 'ctrl-t': 'tab split',
-          \ 'ctrl-x': 'split',
-          \ 'ctrl-v': 'vsplit' }
+            require("telescope").setup {
+                defaults = {
+                    file_ignore_patterns = { "node_modules", ".git" },
+                    vimgrep_arguments = {
+                        "rg",
+                        "-L",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                        "--hidden",
+                    },
+                    mappings = {
+                        i = telescope_mappings,
+                        n = telescope_mappings,
+                    },
+                },
+            }
 
-        function! UpdateTags() abort
-            :Start! ctags .<CR>
-        endfunction
+            local current_buffer_search = function()
+                -- You can pass additional configuration to telescope to change theme, layout, etc.
+                require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+                    winblend = 10,
+                    previewer = false,
+                })
+            end
 
-        function! FzfHighlights()
-          highlight fzf1 ctermbg=none
-          highlight fzf2 ctermbg=none
-          highlight fzf3 ctermbg=none
-        endfunction
+            -- See `:help telescope.builtin`
+            vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles)
+            vim.keymap.set("n", "<leader>b", require("telescope.builtin").buffers)
+            vim.keymap.set("n", "<leader>/", current_buffer_search)
+            vim.keymap.set("n", "<leader>f", ':lua require("telescope.builtin").find_files({hidden = true})<cr>')
+            vim.keymap.set("n", "<leader>h", require("telescope.builtin").help_tags)
+            vim.keymap.set("n", "<leader>t", require("telescope.builtin").tags)
+            vim.keymap.set("n", "<leader>a", ":Telescope grep_string search=")
+            vim.keymap.set("n", "<leader>A", require("telescope.builtin").grep_string)
+            vim.keymap.set("n", "<leader>d", require("telescope.builtin").diagnostics)
+            vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references)
+        end,
+    }
 
-        augroup FzfSettings
-            autocmd! FileType fzf tnoremap <buffer> jk <c-c>
-            autocmd! User FzfStatusLine call FzfHighlights()
-        augroup END
-
-        " TODO not woring currently, will wok in tmux 3.2
-        " if exists('$TMUX')
-        "   let g:fzf_layout = { 'tmux': '-p90%,60%' }
-        " else
-        " endif
-        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
-        " autocmd! FileType fzf
-        " autocmd  FileType fzf set laststatus=0 noshowmode noruler
-        "   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-        "search word under cursor
-        nnoremap <leader>A :Rg <C-r><C-w><CR>
-
-        nnoremap <leader>f :Files<CR>
-        nnoremap <leader>a :Rg<Space>
-        nnoremap <leader>b :Buffers<CR>
-        " nnoremap <leader>c :Commands<CR>
-        nnoremap <leader>h :Helptags<CR>
-        nnoremap <leader>l :Lines<CR>
-        nnoremap <leader>t :Tags<CR>
-        nnoremap <leader>T :call UpdateTags()<CR>
-
-        " Use ripgrep
-        command! -bang -nargs=* Rg
-          \ call fzf#vim#grep(
-          \   'rg --hidden --glob "!.git/" --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-          \   <bang>0 ? fzf#vim#with_preview('up:60%')
-          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-          \   <bang>0)
-    ]]
+    use {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make",
+        config = function()
+            require("telescope").load_extension "fzf"
         end,
     }
 
@@ -368,7 +377,6 @@ local packer_config = function()
                     vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
                     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                     vim.keymap.set("n", "<F3>", function()
                         vim.lsp.buf.format {
                             async = false,
@@ -425,6 +433,7 @@ local packer_config = function()
                 null_ls.builtins.formatting.isort,
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.formatting.stylua,
+                null_ls.builtins.formatting.shfmt,
                 null_ls.builtins.code_actions.refactoring,
                 null_ls.builtins.formatting.cmake_format,
                 null_ls.builtins.diagnostics.hadolint,
@@ -547,21 +556,20 @@ local packer_config = function()
                 -- one of "all", "maintained" (parsers with maintainers),
                 -- or a list of languages
                 ensure_installed = {
-                    "javascript",
+                    "bash",
                     "cmake",
-                    "ruby",
-                    "elixir",
                     "comment",
-                    "python",
-                    "lua",
-                    "vim",
+                    "dockerfile",
+                    "elixir",
+                    "gitignore",
+                    "go",
                     "html",
                     "htmldjango",
-                    "dockerfile",
+                    "javascript",
+                    "lua",
+                    "python",
+                    "vim",
                     "yaml",
-                    "go",
-                    "cmake",
-                    "gitignore",
                 },
                 highlight = {
                     enable = true,
@@ -938,6 +946,14 @@ augroup END
 
     ]]
 
+-- dont list quickfix buffers
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "qf",
+    callback = function()
+        vim.opt_local.buflisted = false
+    end,
+})
+
 -- Settings
 o.clipboard = "unnamedplus"
 o.autoread = true -- detect when a file is changed
@@ -953,7 +969,7 @@ o.history = 1000
 o.title = true
 o.titleold = "Terminal"
 o.titlestring = "%F"
-o.cmdheight = 2
+o.cmdheight = 0
 o.shortmess = "aoOtIWcFs"
 o.updatetime = 250
 
