@@ -561,7 +561,7 @@ local packer_config = function()
                     "yaml",
                     "go",
                     "cmake",
-                    "gitignore"
+                    "gitignore",
                 },
                 highlight = {
                     enable = true,
