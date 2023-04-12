@@ -20,25 +20,6 @@ local packer_installed = ensure_packer()
 local packer = require "packer"
 local use = packer.use
 
-local function get_python_path(workspace)
-    local util = require "lspconfig/util"
-    local path = util.path
-    -- Use activated virtualenv.
-    if vim.env.VIRTUAL_ENV then
-        return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
-    end
-
-    -- Find and use virtualenv from pipenv in workspace directory.
-    local match = vim.fn.glob(path.join(workspace, "Pipfile"))
-    if match ~= "" then
-        local venv = vim.fn.trim(vim.fn.system("PIPENV_PIPFILE=" .. match .. " pipenv --venv"))
-        return path.join(venv, "bin", "python")
-    end
-
-    -- Fallback to system Python.
-    return vim.fn.exepath "python3" or vim.fn.exepath "python" or "python"
-end
-
 local packer_config = function()
     use "wbthomason/packer.nvim"
 
@@ -250,7 +231,8 @@ local packer_config = function()
             vim.keymap.set("n", "<leader>t", require("telescope.builtin").tags)
             vim.keymap.set("n", "<leader>a", ":Telescope grep_string search=")
             vim.keymap.set("n", "<leader>A", require("telescope.builtin").grep_string)
-            vim.keymap.set("n", "<leader>d", require("telescope.builtin").diagnostics)
+            vim.keymap.set("n", "<leader>d", ':lua require("telescope.builtin").diagnostics({bufnr=0})<cr>')
+            vim.keymap.set("n", "<leader>dw", require("telescope.builtin").diagnostics)
             vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references)
         end,
     }
@@ -328,9 +310,24 @@ local packer_config = function()
                 end,
 
                 ["pyright"] = function()
+                    -- local pyright_capabilities = require("cmp_nvim_lsp").default_capabilities()
+                    local pyright_capabilities = vim.lsp.protocol.make_client_capabilities()
+                    pyright_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+
                     require("lspconfig").pyright.setup {
+                        capabilities = pyright_capabilities,
                         before_init = function(_, config)
-                            config.settings.python.pythonPath = get_python_path(config.root_dir)
+                            config.settings = {
+                                python = {
+                                    analysis = {
+                                        autoSearchPaths = true,
+                                        useLibraryCodeForTypes = true,
+                                        autoImportCompletions = true,
+                                        logLevel = "Warning",
+                                        diagnosticMode = "openFilesOnly",
+                                    },
+                                },
+                            }
                         end,
                     }
                 end,
@@ -410,7 +407,9 @@ local packer_config = function()
             })
 
             vim.diagnostic.config {
-                virtual_text = false,
+                virtual_text = {
+                    severity = { min = vim.diagnostic.severity.ERROR },
+                },
                 float = {
                     border = _border,
                 },
