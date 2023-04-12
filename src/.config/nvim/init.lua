@@ -407,12 +407,10 @@ local packer_config = function()
             })
 
             vim.diagnostic.config {
-                virtual_text = {
-                    severity = { min = vim.diagnostic.severity.ERROR },
-                },
                 float = {
                     border = _border,
                 },
+                virtual_text = false,
                 update_in_insert = false,
             }
 
