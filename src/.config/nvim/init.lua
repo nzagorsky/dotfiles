@@ -317,6 +317,7 @@ local packer_config = function()
                         },
                     }
                 end,
+
                 ["pyright"] = function()
                     require("lspconfig").pyright.setup {
                         before_init = function(_, config)
@@ -559,7 +560,8 @@ local packer_config = function()
                     "dockerfile",
                     "yaml",
                     "go",
-                    "make",
+                    "cmake",
+                    "gitignore"
                 },
                 highlight = {
                     enable = true,

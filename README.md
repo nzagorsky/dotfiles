@@ -11,7 +11,10 @@ Requirements
 Installation
 -------------
 
-    git clone https://github.com/nzagorsky/dotfiles.git ~/dotfiles
-    cd dotfiles
-    ./install_dotfiles
-    ./setup_mac
+```bash
+git clone https://github.com/nzagorsky/dotfiles.git ~/dotfiles
+cd dotfiles
+
+./install.sh
+./optional/setup_mac
+```

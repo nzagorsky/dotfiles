@@ -1,36 +1,11 @@
 colors:
-#   # Default colors
   primary:
-#     # background: '0x151515'
     background: '0x101010'
-#     foreground: '0xd7d0c7'
-
-#   # Normal colors
-#   normal:
-#     black:   '0x101010'
-#     red:     '0xe84f4f'
-#     green:   '0xb8d68c'
-#     yellow:  '0xe1aa5d'
-#     blue:    '0x7dc1cf'
-#     magenta: '0x9b64fb'
-#     cyan:    '0x6d878d'
-#     white:   '0xdddddd'
-
-#   # Bright colors
-#   bright:
-#     black:   '0x404040'
-#     red:     '0xd23d3d'
-#     green:   '0xa0cf5d'
-#     yellow:  '0xf39d21'
-#     blue:    '0x4e9fb1'
-#     magenta: '0x8542ff'
-#     cyan:    '0x42717b'
-#     white:   '0xdddddd'
 
 live_config_reload: true
 
 window:
-  opacity: 0.98
+  opacity: 0.985
   # decorations: none
   dimensions:
     columns: 120
@@ -63,24 +38,23 @@ font:
 # Linux style bindings for Alt-like behavior.
 key_bindings:
   # - { key: N, mods: Command, action: "CreateNewWindow" }
-  - { key: F, mods: Command, chars: "\x1Bf" }
-  - { key: B, mods: Command, chars: "\x1Bb" }
-  - { key: H, mods: Command, chars: "\x1Bh" }
-  - { key: J, mods: Command, chars: "\x1Bj" }
-  - { key: K, mods: Command, chars: "\x1Bk" }
-  - { key: L, mods: Command, chars: "\x1Bl" }
-  - { key: P, mods: Command, chars: "\x1Bp" }
-  - { key: W, mods: Command, chars: "\x1Bw" }
-  - { key: Key1, mods: Command, chars: "\x1B1" }
-  - { key: Key2, mods: Command, chars: "\x1B2" }
-  - { key: Key3, mods: Command, chars: "\x1B3" }
-  - { key: Key4, mods: Command, chars: "\x1B4" }
-  - { key: Key5, mods: Command, chars: "\x1B5" }
-  - { key: Key6, mods: Command, chars: "\x1B6" }
-  - { key: Key7, mods: Command, chars: "\x1B7" }
-  - { key: Key8, mods: Command, chars: "\x1B8" }
-  - { key: Key9, mods: Command, chars: "\x1B9" }
-
+  - { key: F, mods: Command, chars: "\ef" }
+  - { key: B, mods: Command, chars: "\eb" }
+  - { key: H, mods: Command, chars: "\eh" }
+  - { key: J, mods: Command, chars: "\ej" }
+  - { key: K, mods: Command, chars: "\ek" }
+  - { key: L, mods: Command, chars: "\el" }
+  - { key: P, mods: Command, chars: "\ep" }
+  - { key: W, mods: Command, chars: "\ew" }
+  - { key: Key1, mods: Command, chars: "\e1" }
+  - { key: Key2, mods: Command, chars: "\e2" }
+  - { key: Key3, mods: Command, chars: "\e3" }
+  - { key: Key4, mods: Command, chars: "\e4" }
+  - { key: Key5, mods: Command, chars: "\e5" }
+  - { key: Key6, mods: Command, chars: "\e6" }
+  - { key: Key7, mods: Command, chars: "\e7" }
+  - { key: Key8, mods: Command, chars: "\e8" }
+  - { key: Key9, mods: Command, chars: "\e9" }
   # - { key: F, mods: Option, chars: "\x1Bf" }
   # - { key: B, mods: Option, chars: "\x1Bb" }
   # - { key: H, mods: Option, chars: "\x1Bh" }
