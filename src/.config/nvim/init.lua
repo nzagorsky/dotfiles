@@ -211,6 +211,21 @@ local packer_config = function()
                         i = telescope_mappings,
                         n = telescope_mappings,
                     },
+                    sorting_strategy = "descending",
+                    layout_strategy = "horizontal",
+                    layout_config = {
+                        horizontal = {
+                            prompt_position = "bottom",
+                            preview_width = 0.35,
+                            results_width = 0.8,
+                        },
+                        vertical = {
+                            mirror = false,
+                        },
+                        width = 0.87,
+                        height = 0.5,
+                        preview_cutoff = 120,
+                    },
                 },
             }
 
