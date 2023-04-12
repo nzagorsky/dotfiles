@@ -30,7 +30,7 @@ colors:
 live_config_reload: true
 
 window:
-  opacity: 0.97
+  opacity: 0.98
   # decorations: none
   dimensions:
     columns: 120
@@ -43,7 +43,7 @@ scrolling:
   history: 100000
 
 font:
-  size: 14.0
+  size: 13.0
   normal:
     family: Hack Nerd Font Mono
     style: Regular
