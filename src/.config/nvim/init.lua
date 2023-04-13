@@ -981,7 +981,7 @@ o.history = 1000
 o.title = true
 o.titleold = "Terminal"
 o.titlestring = "%F"
-o.cmdheight = 0
+o.cmdheight = 1
 o.shortmess = "aoOtIWcFs"
 o.updatetime = 250
 
