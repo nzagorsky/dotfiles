@@ -216,6 +216,7 @@ install_brew_packages() {
         libxmlsec1 \
         m-cli \
         mosh \
+        krew \
         mysql \
         ncdu \
         neovim \
@@ -238,6 +239,7 @@ install_brew_packages() {
 
     helm plugin install https://github.com/databus23/helm-diff
     ansible-galaxy collection install kubernetes.core
+    kubectl krew install modify-secret
 }
 
 install_go_packages() {
