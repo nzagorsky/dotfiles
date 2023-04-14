@@ -381,9 +381,9 @@ local packer_config = function()
                 end,
 
                 ["pyright"] = function()
-                    -- local pyright_capabilities = require("cmp_nvim_lsp").default_capabilities()
-                    local pyright_capabilities = vim.lsp.protocol.make_client_capabilities()
-                    pyright_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+                    local pyright_capabilities = require("cmp_nvim_lsp").default_capabilities()
+                    -- local pyright_capabilities = vim.lsp.protocol.make_client_capabilities()
+                    -- pyright_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
 
                     require("lspconfig").pyright.setup {
                         capabilities = pyright_capabilities,
