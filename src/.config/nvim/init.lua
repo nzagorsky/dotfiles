@@ -95,76 +95,118 @@ local packer_config = function()
     use "nvim-lua/plenary.nvim"
 
     use {
-        "marko-cerovac/material.nvim",
+        "folke/tokyonight.nvim",
         config = function()
-            vim.g.material_style = "deep ocean"
-
-            require("material").setup {
-                contrast = {
-                    terminal = false, -- Enable contrast for the built-in terminal
-                    sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
-                    floating_windows = false, -- Enable contrast for floating windows
-                    cursor_line = false, -- Enable darker background for the cursor line
-                    non_current_windows = false, -- Enable darker background for non-current windows
-                    filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
-                },
+            require("tokyonight").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                light_style = "day", -- The theme is used when the background is set to light
+                transparent = true, -- Enable this to disable setting the background color
+                terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
                 styles = {
-                    -- Give comments style such as bold, italic, underline etc.
-                    comments = { --[[ italic = true ]]
-                    },
-                    strings = { --[[ bold = true ]]
-                    },
-                    keywords = { --[[ underline = true ]]
-                    },
-                    functions = { --[[ bold = true, undercurl = true ]]
-                    },
+                    -- Style to be applied to different syntax groups
+                    -- Value is any valid attr-list value for `:help nvim_set_hl`
+                    comments = { italic = true },
+                    keywords = { italic = true },
+                    functions = {},
                     variables = {},
-                    operators = {},
-                    types = {},
+                    -- Background styles. Can be "dark", "transparent" or "normal"
+                    sidebars = "transparent", -- style for sidebars, see below
+                    floats = "transparent", -- style for floating windows
                 },
-                plugins = { -- Uncomment the plugins that you use to highlight them
-                    -- Available plugins:
-                    -- "dap",
-                    -- "dashboard",
-                    "gitsigns",
-                    -- "hop",
-                    -- "indent-blankline",
-                    -- "lspsaga",
-                    -- "mini",
-                    -- "neogit",
-                    -- "neorg",
-                    "nvim-cmp",
-                    -- "nvim-navic",
-                    "nvim-tree",
-                    "nvim-web-devicons",
-                    -- "sneak",
-                    "telescope",
-                    -- "trouble",
-                    "which-key",
-                },
-                disable = {
-                    colored_cursor = true, -- Disable the colored cursor
-                    borders = false, -- Disable borders between verticaly split windows
-                    background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
-                    term_colors = false, -- Prevent the theme from setting terminal colors
-                    eob_lines = true, -- Hide the end-of-buffer lines
-                },
-                high_visibility = {
-                    lighter = false, -- Enable higher contrast text for lighter style
-                    darker = false, -- Enable higher contrast text for darker style
-                },
-                async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
-                custom_colors = nil, -- If you want to everride the default colors, set this to a function
-                custom_highlights = {}, -- Overwrite highlights with your own
-                lualine_style = "stealth",
-            }
+                sidebars = { "qf", "help", "packer", "NvimTree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+                day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+                hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+                dim_inactive = true, -- dims inactive windows
+                lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 
-            vim.cmd "colorscheme material"
+                --- You can override specific color groups to use other groups or a hex color
+                --- function will be called with a ColorScheme table
+                ---@param colors ColorScheme
+                on_colors = function(colors) end,
+
+                --- You can override specific highlights to use other groups or a hex color
+                --- function will be called with a Highlights and ColorScheme table
+                ---@param highlights Highlights
+                ---@param colors ColorScheme
+                on_highlights = function(highlights, colors) end,
+            }
+            vim.cmd [[colorscheme tokyonight-night]]
         end,
-        requires = {
-            { "nvim-lualine/lualine.nvim" },
-        },
     }
+
+    -- use {
+    --     "marko-cerovac/material.nvim",
+    --     config = function()
+    --         vim.g.material_style = "deep ocean"
+    --
+    --         require("material").setup {
+    --             contrast = {
+    --                 terminal = true, -- Enable contrast for the built-in terminal
+    --                 sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+    --                 floating_windows = true, -- Enable contrast for floating windows
+    --                 cursor_line = false, -- Enable darker background for the cursor line
+    --                 non_current_windows = true, -- Enable darker background for non-current windows
+    --                 filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
+    --             },
+    --             styles = {
+    --                 -- Give comments style such as bold, italic, underline etc.
+    --                 comments = { italic = true },
+    --                 strings = { --[[ bold = true ]]
+    --                 },
+    --                 keywords = { --[[ underline = true ]]
+    --                 },
+    --                 functions = { --[[ bold = true, undercurl = true ]]
+    --                 },
+    --                 variables = {},
+    --                 operators = {},
+    --                 types = {},
+    --             },
+    --             plugins = { -- Uncomment the plugins that you use to highlight them
+    --                 -- Available plugins:
+    --                 -- "dap",
+    --                 -- "dashboard",
+    --                 "gitsigns",
+    --                 -- "hop",
+    --                 -- "indent-blankline",
+    --                 -- "lspsaga",
+    --                 -- "mini",
+    --                 -- "neogit",
+    --                 -- "neorg",
+    --                 "nvim-cmp",
+    --                 -- "nvim-navic",
+    --                 "nvim-tree",
+    --                 "nvim-web-devicons",
+    --                 -- "sneak",
+    --                 "telescope",
+    --                 -- "trouble",
+    --                 "which-key",
+    --             },
+    --             disable = {
+    --                 colored_cursor = true, -- Disable the colored cursor
+    --                 borders = false, -- Disable borders between verticaly split windows
+    --                 background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+    --                 term_colors = false, -- Prevent the theme from setting terminal colors
+    --                 eob_lines = true, -- Hide the end-of-buffer lines
+    --             },
+    --             high_visibility = {
+    --                 lighter = false, -- Enable higher contrast text for lighter style
+    --                 darker = false, -- Enable higher contrast text for darker style
+    --             },
+    --             async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
+    --             custom_colors = nil, -- If you want to everride the default colors, set this to a function
+    --             custom_highlights = {}, -- Overwrite highlights with your own
+    --             lualine_style = "stealth",
+    --         }
+    --
+    --         vim.cmd "colorscheme material"
+    --     end,
+    --     requires = {
+    --         { "nvim-lualine/lualine.nvim" },
+    --     },
+    -- }
+
     use {
         "folke/which-key.nvim",
         config = function()
@@ -222,7 +264,7 @@ local packer_config = function()
                         vertical = {
                             mirror = false,
                         },
-                        width = 200,
+                        width = 230,
                         height = 40,
                         preview_cutoff = 120,
                     },
@@ -241,14 +283,28 @@ local packer_config = function()
             vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles)
             vim.keymap.set("n", "<leader>b", require("telescope.builtin").buffers)
             vim.keymap.set("n", "<leader>/", current_buffer_search)
-            vim.keymap.set("n", "<leader>f", ':lua require("telescope.builtin").find_files({hidden = true})<cr>')
+            vim.keymap.set("n", "<leader>f", function()
+                require("telescope.builtin").find_files { hidden = true }
+            end)
             vim.keymap.set("n", "<leader>h", require("telescope.builtin").help_tags)
-            vim.keymap.set("n", "<leader>t", require("telescope.builtin").tags)
-            vim.keymap.set("n", "<leader>a", require("telescope.builtin").live_grep)
+            vim.keymap.set("n", "<leader>t", function()
+                require("telescope.builtin").tags { fname_width = 50, show_line = false }
+            end)
+            vim.keymap.set("n", "<leader>a", function()
+                require("telescope.builtin").grep_string { search = "" }
+            end)
             vim.keymap.set("n", "<leader>A", require("telescope.builtin").grep_string)
-            vim.keymap.set("n", "<leader>d", ':lua require("telescope.builtin").diagnostics({bufnr=0})<cr>')
+            vim.keymap.set("n", "<leader>d", function()
+                require("telescope.builtin").diagnostics { bufnr = 0 }
+            end)
             vim.keymap.set("n", "<leader>dw", require("telescope.builtin").diagnostics)
-            vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references)
+            vim.keymap.set("n", "gr", function()
+                require("telescope.builtin").lsp_references {
+                    fname_width = 50,
+                    include_declaration = false,
+                    jump_type = "never",
+                }
+            end)
         end,
     }
 
@@ -433,7 +489,22 @@ local packer_config = function()
                 border = _border,
             }
 
-            vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+            vim.cmd [[autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+            vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+            vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+            vim.api.nvim_create_autocmd("CursorHold", {
+                command = "silent! lua vim.lsp.buf.document_highlight()",
+                buffer = bufnr,
+                group = "lsp_document_highlight",
+                desc = "Document Highlight",
+            })
+            vim.api.nvim_create_autocmd("CursorMoved", {
+                command = "silent! lua vim.lsp.buf.clear_references()",
+                buffer = bufnr,
+                group = "lsp_document_highlight",
+                desc = "Clear All the References",
+            })
         end,
     }
     use {
@@ -471,8 +542,11 @@ local packer_config = function()
                     and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
             end
 
+            local max_item_count = 10
+
             local all_buffers_source = {
                 name = "buffer",
+                max_item_count = max_item_count,
                 option = {
                     get_bufnrs = function()
                         return vim.api.nvim_list_bufs()
@@ -500,11 +574,11 @@ local packer_config = function()
                         end
                     end, { "i", "s" }),
                 },
+
                 sources = cmp.config.sources {
-                    { name = "nvim_lsp" },
-                    { name = "path" },
-                    { name = "nvim_lsp_signature_help" },
-                    { all_buffers_source },
+                    { name = "nvim_lsp", max_item_count = max_item_count },
+                    { name = "path", max_item_count = max_item_count },
+                    all_buffers_source,
                     -- { name = "vsnip" }, -- For vsnip users.
                     -- { name = 'luasnip' }, -- For luasnip users.
                     -- { name = 'ultisnips' }, -- For ultisnips users.
@@ -529,13 +603,26 @@ local packer_config = function()
                 },
             })
         end,
+
         requires = {
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-buffer" },
             { "hrsh7th/cmp-path" },
             { "hrsh7th/cmp-cmdline" },
-            { "hrsh7th/cmp-nvim-lsp-signature-help" },
         },
+    }
+
+    use {
+        "ray-x/lsp_signature.nvim",
+        config = function()
+            local signature_config = {
+                debug = true,
+                hint_enable = false,
+                handler_opts = { border = "rounded" },
+                max_width = 80,
+            }
+            require("lsp_signature").setup(signature_config)
+        end,
     }
 
     use {
@@ -567,22 +654,6 @@ local packer_config = function()
             }
         end,
         run = ":TSUpdate",
-    }
-
-    use {
-        "RRethy/vim-illuminate",
-        config = function()
-            require("illuminate").configure {
-                providers = {
-                    "lsp",
-                    "treesitter",
-                },
-                filetypes_denylist = {
-                    "NvimTree",
-                },
-                min_count_to_highlight = 2,
-            }
-        end,
     }
 
     use {
@@ -622,17 +693,14 @@ local packer_config = function()
         config = function()
             local sections = {
                 lualine_a = {},
-                lualine_b = {
+                lualine_b = {},
+                lualine_c = {
                     "mode",
-                    {
-                        "filename",
-                        path = 1,
-                    },
+                    { "filename", path = 1 },
                     "diff",
                 },
-                lualine_c = {},
-                lualine_x = { "diagnostics" },
-                lualine_y = { "%y %l/%L" },
+                lualine_x = { "diagnostics", "%y %l/%L" },
+                lualine_y = {},
                 lualine_z = {},
             }
 
@@ -645,8 +713,8 @@ local packer_config = function()
                         right = " ",
                     }, -- 
                     section_separators = {
-                        left = "",
-                        right = "",
+                        left = " ",
+                        right = " ",
                     },
                     disabled_filetypes = {
                         statusline = {},
