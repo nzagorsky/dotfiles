@@ -1,269 +1,141 @@
-#!/usr/bin/env zsh
-
+#!/usr/bin/env bash
+set -e
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-cat ~/.config/zsh/.zshrc | grep PATH > /tmp/dotenv && source /tmp/dotenv
-
-set -ex
-
-install_confluent_kafka() {
-    brew install librdkafka
-    VERSION=$(brew info --json=v1 librdkafka | jq ".[0].linked_keg" --raw-output)
-
-    export C_INCLUDE_PATH=/opt/homebrew/Cellar/librdkafka/$VERSION/include
-    export LIBRARY_PATH=/opt/homebrew/Cellar/librdkafka/$VERSION/lib
-
-    pip install confluent-kafka
-}
-
-set_defaults() {
-    # Disable mouse scaling
-    defaults write .GlobalPreferences com.apple.mouse.scaling -1
-
-    # Command + Ctrl window movement
-    defaults write -g NSWindowShouldDragOnGesture -bool true
-
-    # Keep spaces arrangement
-    defaults write com.apple.dock "mru-spaces" -bool "false"
-
-    # Reduce motion to avoid sliding animations on desktop switch
-    sudo defaults write com.apple.universalaccess reduceMotion -bool true
-
-    # Finder: show hidden files by default
-    defaults write com.apple.Finder AppleShowAllFiles -bool true
-
-    # Enable spring loading for directories
-    defaults write NSGlobalDomain com.apple.springing.enabled -bool true
-
-    # Remove the spring loading delay for directories
-    defaults write NSGlobalDomain com.apple.springing.delay -float 0
-
-    # Speed up Mission Control animations. Doesn't work with Big Sur.
-    defaults write com.apple.dock expose-animation-duration -float 0.1
-
-    # Always show scrollbar
-    defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
-
-    # Speed up keyboard
-    defaults write NSGlobalDomain KeyRepeat -int 1
-    defaults write NSGlobalDomain InitialKeyRepeat -int 15
-    defaults write -g ApplePressAndHoldEnabled -bool false
-
-    # Finder: show path bar
-    defaults write com.apple.finder ShowPathbar -bool true
-
-    # Display full POSIX path as Finder window title
-    defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-
-    # Keep folders on top when sorting by name
-    defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-    # When performing a search, search the current folder by default
-    defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
-    # Disable the warning when changing a file extension
-    defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-    # Avoid creating .DS_Store files on network or USB volumes
-    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-    defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-    # Dock: Change minimize/maximize window effect
-    defaults write com.apple.dock mineffect -string "scale"
-
-    # Dock: Minimize windows into their application's icon
-    defaults write com.apple.dock minimize-to-application -bool true
-
-    # Dock: Remove the auto-hiding Dock delay
-    defaults write com.apple.dock autohide-delay -float 0
-
-    # Dock: Remove the animation when hiding/showing the Dock
-    defaults write com.apple.dock autohide-time-modifier -float 0
-
-    # Dock: Automatically hide and show the Dock
-    defaults write com.apple.dock autohide -bool true
-
-    # Dock: Don't show recent applications in Dock
-    defaults write com.apple.dock show-recents -bool false
-
-    # Hot corners
-    # Possible values:
-    #  0: no-op
-    #  2: Mission Control
-    #  3: Show application windows
-    #  4: Desktop
-    #  5: Start screen saver
-    #  6: Disable screen saver
-    #  7: Dashboard
-    # 10: Put display to sleep
-    # 11: Launchpad
-    # 12: Notification Center
-    # 13: Lock Screen
-
-    # Top left screen corner > Mission Control
-    defaults write com.apple.dock wvous-tl-corner -int 2
-    defaults write com.apple.dock wvous-tl-modifier -int 0
-    # Top right screen corner > Desktop
-    defaults write com.apple.dock wvous-tr-corner -int 0
-    defaults write com.apple.dock wvous-tr-modifier -int 0
-    # Bottom left screen corner > Start screen saver
-    # defaults write com.apple.dock wvous-bl-corner -int 5
-    # defaults write com.apple.dock wvous-bl-modifier -int 0
-
-    # Show all processes in Activity Monitor
-    defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-}
+cat ~/.config/zsh/.zshrc | grep PATH >/tmp/dotenv && source /tmp/dotenv
 
 install_neovim_plugins() {
-    nvim test.py --headless +UpdateRemotePlugins +q > /dev/null 2>&1
-    echo -e "${BOLD}neovim install success${NC}"
+	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+	echo -e "${GREEN}neovim install success${NC}"
 }
 
-install_npm_deps () {
-    npm install -g --quiet --silent @bitwarden/cli > /dev/null 2>&1
-    npm install -g --quiet --silent @ansible/ansible-language-server > /dev/null 2>&1
-    npm install -g --quiet --silent \
-        neovim \
-        bash-language-server \
-        dockerfile-language-server-nodejs \
-        elasticdump \
-        javascript-typescript-langserver \
-        marked \
-        prettier \
-        pyright \
-        standard > /dev/null 2>&1 \
-        && echo -e "${BOLD}npm install success${NC}"
-    }
+install_npm_deps() {
+	npm install -g --quiet --silent @ansible/ansible-language-server >/dev/null 2>&1
+	npm install -g --quiet --silent \
+		neovim \
+		bash-language-server \
+		dockerfile-language-server-nodejs \
+		javascript-typescript-langserver \
+		marked \
+		prettier \
+		pyright \
+		standard >/dev/null 2>&1 &&
+		echo -e "${GREEN}npm install success${NC}"
+}
 
 install_python_deps() {
-    pip3 install -U --user \
-        "python-language-server[all]" \
-        "ansible-lint" \
-        awscli \
-        hcloud \
-        cytoolz \
-        duckdb \
-        pywinrm \
-        applescript \
-        black \
-        isort \
-        mitogen \
-        boto3 \
-        dataset \
-        dateparser \
-        django-stubs \
-        django \
-        ipdb \
-        ipython \
-        bpython \
-        smart-open \
-        neovim \
-        pipenv \
-        python-dateutil \
-        requests \
-        selenium \
-        youtube-dl \
-        vim-vint \
-        yamllint \
-        --no-warn-script-location \
-        && echo -e "${BOLD}pip install success${NC}"
-    }
-
+	pip3 install -q -U --user \
+		"python-language-server[all]" \
+		"ansible-lint" \
+		awscli \
+		hcloud \
+		cytoolz \
+		duckdb \
+		pywinrm \
+		applescript \
+		black \
+		isort \
+		mitogen \
+		boto3 \
+		dataset \
+		dateparser \
+		django-stubs \
+		django \
+		ipdb \
+		ipython \
+		bpython \
+		smart-open \
+		neovim \
+		pipenv \
+		python-dateutil \
+		requests \
+		selenium \
+		youtube-dl \
+		vim-vint \
+		yamllint \
+		--no-warn-script-location &&
+		echo -e "${GREEN}pip install success${NC}"
+}
 
 install_brew_packages() {
-    brew tap homebrew/cask-fonts
-    brew tap hashicorp/tap
+	brew tap homebrew/cask-fonts
+	brew tap hashicorp/tap
 
-    brew install --cask font-hack-nerd-font
+	brew install --quiet --cask font-hack-nerd-font
+	brew install --quiet --cask another-redis-desktop-manager --no-quarantine
 
-    brew install hashicorp/tap/vault
+	brew install --quiet \
+		ansible \
+		hashicorp/tap/vault \
+		datawire/blackbird/telepresence-arm64 \
+		autoconf \
+		automake \
+		bat \
+		curl \
+		dep \
+		exa \
+		fd \
+		fzy \
+		gitui \
+		helm \
+		htop \
+		iina \
+		jq \
+		krew \
+		kubectl \
+		libxmlsec1 \
+		llvm \
+		m-cli \
+		mosh \
+		mysql \
+		navi \
+		ncdu \
+		neovim \
+		node \
+		nushell \
+		openvpn \
+		postgresql@14 \
+		python3 \
+		rclone \
+		ripgrep \
+		shfmt \
+		sqlite3 \
+		terraform-ls \
+		tfenv \
+		tmux \
+		universal-ctags \
+		watch \
+		wget \
+		wireguard-tools \
+		zsh-syntax-highlighting &&
+		echo -e "${GREEN}Brew install success${NC}"
 
-    brew install datawire/blackbird/telepresence-arm64
-
-    brew remove chromedriver || true
-    brew install --cask chromedriver --no-quarantine
-    brew install --cask another-redis-desktop-manager --no-quarantine
-    # brew install --cask openvpn-connect
-    # arch -x86_64 brew install telnet
-    # brew install --cask alt-tab
-    # brew install --cask cscreen --no-quarantine
-
-    brew install \
-        autoconf \
-        dep \
-        automake \
-        ansible \
-        navi \
-        nushell \
-        gitui \
-        shfmt \
-        bat \
-        curl \
-        exa \
-        fd \
-        fzy \
-        llvm \
-        helm \
-        htop \
-        iina \
-        jq \
-        kubectl \
-        libxmlsec1 \
-        m-cli \
-        mosh \
-        krew \
-        mysql \
-        ncdu \
-        neovim \
-        node \
-        openvpn \
-        postgresql \
-        python3 \
-        rclone \
-        ripgrep \
-        sqlite3 \
-        tfenv \
-        terraform-ls \
-        tmux \
-        universal-ctags \
-        watch \
-        wget \
-        wireguard-tools \
-        zsh-syntax-highlighting \
-    && echo -e "${BOLD}Brew install success${NC}"
-
-    helm plugin install https://github.com/databus23/helm-diff
-    ansible-galaxy collection install kubernetes.core
-    kubectl krew install modify-secret
 }
 
 install_go_packages() {
-    # Restart on file change
-    # Example: reflex -s -v -- zsh -c 'go run . & reloadtab'
-    go install github.com/cespare/reflex@latest
+	# Restart on file change
+	# Example: reflex -s -v -- zsh -c 'go run . & reloadtab'
+	go install github.com/cespare/reflex@latest
 
 }
 
+install_extras() {
+	ansible-galaxy collection install kubernetes.core >/dev/null 2>&1
+	kubectl krew install modify-secret >/dev/null 2>&1
+}
+
 main() {
-    set_defaults
-    install_brew_packages
+	install_brew_packages
 
-    install_go_packages
-    install_npm_deps
-    install_python_deps
-    install_neovim_plugins
-
-    # Fix insecure directories
-    # sudo chmod -R 755 /usr/local/share/zsh; sudo chown -R root:staff /usr/local/share/zsh
-    # sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
-
-    # chmod -R 700 ~/.config/kube
-
+	install_go_packages
+	install_npm_deps
+	install_python_deps
+	install_neovim_plugins
+	install_extras
 }
 
 main
