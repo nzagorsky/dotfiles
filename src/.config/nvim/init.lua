@@ -1,41 +1,68 @@
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system {
-            "git",
-            "clone",
-            "--depth",
-            "1",
-            "https://github.com/wbthomason/packer.nvim",
-            install_path,
-        }
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
-end
-
-local packer_installed = ensure_packer()
-local packer = require "packer"
-local use = packer.use
-
-local packer_config = function()
-    use "wbthomason/packer.nvim"
-
-    use {
-        "lewis6991/impatient.nvim",
-        config = function()
-            require "impatient"
-        end,
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system {
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
     }
+end
+vim.opt.rtp:prepend(lazypath)
 
-    use {
-        "kyazdani42/nvim-tree.lua",
+require("lazy").setup {
+    {
+        "folke/tokyonight.nvim",
         config = function()
-            --
-            local nvimtree = require "nvim-tree"
+            require("tokyonight").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                light_style = "day", -- The theme is used when the background is set to light
+                transparent = true, -- Enable this to disable setting the background color
+                terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+                styles = {
+                    -- Style to be applied to different syntax groups
+                    -- Value is any valid attr-list value for `:help nvim_set_hl`
+                    comments = { italic = true },
+                    keywords = { italic = true },
+                    functions = {},
+                    variables = {},
+                    -- Background styles. Can be "dark", "transparent" or "normal"
+                    sidebars = "transparent", -- style for sidebars, see below
+                    floats = "transparent", -- style for floating windows
+                },
+                sidebars = { "qf", "help", "NvimTree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+                day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+                hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+                dim_inactive = true, -- dims inactive windows
+                lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 
+                --- You can override specific color groups to use other groups or a hex color
+                --- function will be called with a ColorScheme table
+                ---@param colors ColorScheme
+                on_colors = function(colors) end,
+
+                --- You can override specific highlights to use other groups or a hex color
+                --- function will be called with a Highlights and ColorScheme table
+                ---@param highlights Highlights
+                ---@param colors ColorScheme
+                on_highlights = function(highlights, colors) end,
+            }
+            vim.cmd [[colorscheme tokyonight-night]]
+        end,
+    },
+
+    {
+        "kyazdani42/nvim-tree.lua",
+        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+
+        init = function()
+            vim.api.nvim_set_keymap("n", "<c-n>", ":NvimTreeToggle<cr>", { noremap = true })
+        end,
+        config = function()
+            local nvimtree = require "nvim-tree"
             local options = {
                 filters = {
                     dotfiles = false,
@@ -73,12 +100,12 @@ local packer_config = function()
 
             nvimtree.setup(options)
         end,
-        requires = {
+        dependencies = {
             "kyazdani42/nvim-web-devicons", -- optional, for file icon
         },
-    }
+    },
 
-    use {
+    {
         "alexghergh/nvim-tmux-navigation",
         config = function()
             local nvim_tmux_nav = require "nvim-tmux-navigation"
@@ -90,125 +117,13 @@ local packer_config = function()
             vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
             vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
         end,
-    }
+    },
 
-    use "nvim-lua/plenary.nvim"
+    "nvim-lua/plenary.nvim",
 
-    use {
-        "folke/tokyonight.nvim",
-        config = function()
-            require("tokyonight").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-                light_style = "day", -- The theme is used when the background is set to light
-                transparent = true, -- Enable this to disable setting the background color
-                terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-                styles = {
-                    -- Style to be applied to different syntax groups
-                    -- Value is any valid attr-list value for `:help nvim_set_hl`
-                    comments = { italic = true },
-                    keywords = { italic = true },
-                    functions = {},
-                    variables = {},
-                    -- Background styles. Can be "dark", "transparent" or "normal"
-                    sidebars = "transparent", -- style for sidebars, see below
-                    floats = "transparent", -- style for floating windows
-                },
-                sidebars = { "qf", "help", "packer", "NvimTree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-                day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-                hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-                dim_inactive = true, -- dims inactive windows
-                lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-
-                --- You can override specific color groups to use other groups or a hex color
-                --- function will be called with a ColorScheme table
-                ---@param colors ColorScheme
-                on_colors = function(colors) end,
-
-                --- You can override specific highlights to use other groups or a hex color
-                --- function will be called with a Highlights and ColorScheme table
-                ---@param highlights Highlights
-                ---@param colors ColorScheme
-                on_highlights = function(highlights, colors) end,
-            }
-            vim.cmd [[colorscheme tokyonight-night]]
-        end,
-    }
-
-    -- use {
-    --     "marko-cerovac/material.nvim",
-    --     config = function()
-    --         vim.g.material_style = "deep ocean"
-    --
-    --         require("material").setup {
-    --             contrast = {
-    --                 terminal = true, -- Enable contrast for the built-in terminal
-    --                 sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
-    --                 floating_windows = true, -- Enable contrast for floating windows
-    --                 cursor_line = false, -- Enable darker background for the cursor line
-    --                 non_current_windows = true, -- Enable darker background for non-current windows
-    --                 filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
-    --             },
-    --             styles = {
-    --                 -- Give comments style such as bold, italic, underline etc.
-    --                 comments = { italic = true },
-    --                 strings = { --[[ bold = true ]]
-    --                 },
-    --                 keywords = { --[[ underline = true ]]
-    --                 },
-    --                 functions = { --[[ bold = true, undercurl = true ]]
-    --                 },
-    --                 variables = {},
-    --                 operators = {},
-    --                 types = {},
-    --             },
-    --             plugins = { -- Uncomment the plugins that you use to highlight them
-    --                 -- Available plugins:
-    --                 -- "dap",
-    --                 -- "dashboard",
-    --                 "gitsigns",
-    --                 -- "hop",
-    --                 -- "indent-blankline",
-    --                 -- "lspsaga",
-    --                 -- "mini",
-    --                 -- "neogit",
-    --                 -- "neorg",
-    --                 "nvim-cmp",
-    --                 -- "nvim-navic",
-    --                 "nvim-tree",
-    --                 "nvim-web-devicons",
-    --                 -- "sneak",
-    --                 "telescope",
-    --                 -- "trouble",
-    --                 "which-key",
-    --             },
-    --             disable = {
-    --                 colored_cursor = true, -- Disable the colored cursor
-    --                 borders = false, -- Disable borders between verticaly split windows
-    --                 background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
-    --                 term_colors = false, -- Prevent the theme from setting terminal colors
-    --                 eob_lines = true, -- Hide the end-of-buffer lines
-    --             },
-    --             high_visibility = {
-    --                 lighter = false, -- Enable higher contrast text for lighter style
-    --                 darker = false, -- Enable higher contrast text for darker style
-    --             },
-    --             async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
-    --             custom_colors = nil, -- If you want to everride the default colors, set this to a function
-    --             custom_highlights = {}, -- Overwrite highlights with your own
-    --             lualine_style = "stealth",
-    --         }
-    --
-    --         vim.cmd "colorscheme material"
-    --     end,
-    --     requires = {
-    --         { "nvim-lualine/lualine.nvim" },
-    --     },
-    -- }
-
-    use {
+    {
         "folke/which-key.nvim",
+        keys = { "<leader>", '"', "'", "`", "c", "v" },
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
@@ -218,14 +133,68 @@ local packer_config = function()
                 -- refer to the configuration section below
             }
         end,
-    }
+    },
 
-    use {
+    {
         "nvim-telescope/telescope.nvim",
-        version = "*",
-        requires = {
-            { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
         },
+        init = function()
+            local current_buffer_search = function()
+                require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+                    winblend = 10,
+                    previewer = false,
+                })
+            end
+
+            -- See `:help telescope.builtin`
+            vim.keymap.set("n", "<leader>?", function()
+                require("telescope.builtin").oldfiles()
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>b", function()
+                require("telescope.builtin").buffers()
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>/", current_buffer_search, { remap = true })
+
+            vim.keymap.set("n", "<leader>f", function()
+                require("telescope.builtin").find_files { hidden = true }
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>h", function()
+                require("telescope.builtin").help_tags()
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>t", function()
+                require("telescope.builtin").tags { fname_width = 50, show_line = false }
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>a", function()
+                require("telescope.builtin").grep_string { search = "" }
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>A", function()
+                require("telescope.builtin").grep_string()
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>d", function()
+                require("telescope.builtin").diagnostics { bufnr = 0 }
+            end, { remap = false })
+
+            vim.keymap.set("n", "<leader>dw", function()
+                require("telescope.builtin").diagnostics()
+            end, { remap = false })
+
+            vim.keymap.set("n", "gr", function()
+                require("telescope.builtin").lsp_references {
+                    fname_width = 50,
+                    include_declaration = false,
+                    jump_type = "never",
+                }
+            end, { remap = false })
+        end,
         config = function()
             local actions = require "telescope.actions"
             local telescope_mappings = {
@@ -270,61 +239,18 @@ local packer_config = function()
                     },
                 },
             }
-
-            local current_buffer_search = function()
-                -- You can pass additional configuration to telescope to change theme, layout, etc.
-                require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-                    winblend = 10,
-                    previewer = false,
-                })
-            end
-
-            -- See `:help telescope.builtin`
-            vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles)
-            vim.keymap.set("n", "<leader>b", require("telescope.builtin").buffers)
-            vim.keymap.set("n", "<leader>/", current_buffer_search)
-            vim.keymap.set("n", "<leader>f", function()
-                require("telescope.builtin").find_files { hidden = true }
-            end)
-            vim.keymap.set("n", "<leader>h", require("telescope.builtin").help_tags)
-            vim.keymap.set("n", "<leader>t", function()
-                require("telescope.builtin").tags { fname_width = 50, show_line = false }
-            end)
-            vim.keymap.set("n", "<leader>a", function()
-                require("telescope.builtin").grep_string { search = "" }
-            end)
-            vim.keymap.set("n", "<leader>A", require("telescope.builtin").grep_string)
-            vim.keymap.set("n", "<leader>d", function()
-                require("telescope.builtin").diagnostics { bufnr = 0 }
-            end)
-            vim.keymap.set("n", "<leader>dw", require("telescope.builtin").diagnostics)
-            vim.keymap.set("n", "gr", function()
-                require("telescope.builtin").lsp_references {
-                    fname_width = 50,
-                    include_declaration = false,
-                    jump_type = "never",
-                }
-            end)
         end,
-    }
+    },
 
-    use {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        run = "make",
-        config = function()
-            require("telescope").load_extension "fzf"
-        end,
-    }
-
-    use {
+    {
         "williamboman/mason.nvim",
-        run = ":MasonUpdate", -- :MasonUpdate updates registry contents
+        build = ":MasonUpdate", -- :MasonUpdate updates registry contents
         config = function()
             require("mason").setup()
         end,
-    }
+    },
 
-    use {
+    {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -404,12 +330,12 @@ local packer_config = function()
                 end,
             }
         end,
-        requires = {
-            { "hrsh7th/nvim-cmp" },
+        dependencies = {
+            "hrsh7th/nvim-cmp",
         },
-    }
+    },
 
-    use {
+    {
         "neovim/nvim-lspconfig",
         config = function()
             -- Global mappings.
@@ -506,8 +432,8 @@ local packer_config = function()
                 desc = "Clear All the References",
             })
         end,
-    }
-    use {
+    },
+    {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
             local null_ls = require "null-ls"
@@ -527,9 +453,9 @@ local packer_config = function()
                 sources = sources,
             }
         end,
-    }
+    },
 
-    use {
+    {
         "hrsh7th/nvim-cmp",
         config = function()
             -- Set up nvim-cmp.
@@ -604,15 +530,15 @@ local packer_config = function()
             })
         end,
 
-        requires = {
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-path" },
-            { "hrsh7th/cmp-cmdline" },
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
         },
-    }
+    },
 
-    use {
+    {
         "ray-x/lsp_signature.nvim",
         config = function()
             local signature_config = {
@@ -623,9 +549,9 @@ local packer_config = function()
             }
             require("lsp_signature").setup(signature_config)
         end,
-    }
+    },
 
-    use {
+    {
         "nvim-treesitter/nvim-treesitter",
         config = function()
             require("nvim-treesitter.configs").setup {
@@ -653,10 +579,10 @@ local packer_config = function()
                 },
             }
         end,
-        run = ":TSUpdate",
-    }
+        build = ":TSUpdate",
+    },
 
-    use {
+    {
         "ThePrimeagen/refactoring.nvim",
         config = function()
             require("refactoring").setup {
@@ -682,13 +608,13 @@ local packer_config = function()
                 print_var_statements = {},
             }
         end,
-        requires = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
         },
-    }
+    },
 
-    use {
+    {
         "nvim-lualine/lualine.nvim",
         config = function()
             local sections = {
@@ -737,13 +663,13 @@ local packer_config = function()
                 extensions = {},
             }
         end,
-    }
+    },
 
-    use { "tpope/vim-surround" }
-    use { "tpope/vim-repeat" }
-    use { "tpope/vim-rsi" }
+    { "tpope/vim-surround" },
+    { "tpope/vim-repeat" },
+    { "tpope/vim-rsi" },
 
-    use {
+    {
         "numToStr/Comment.nvim",
         keys = { "gc", "gb" },
         config = function()
@@ -756,9 +682,9 @@ local packer_config = function()
                 },
             }
         end,
-    }
+    },
 
-    use {
+    {
         "akinsho/toggleterm.nvim",
         branch = "main",
         config = function()
@@ -788,13 +714,13 @@ local packer_config = function()
                 },
             }
         end,
-    }
+    },
 
-    use {
+    {
         "ludovicchabant/vim-gutentags",
-    }
+    },
 
-    use {
+    {
         "tpope/vim-fugitive",
         config = function()
             vim.cmd [[
@@ -807,8 +733,8 @@ local packer_config = function()
                 noremap <Leader>gr :GRemove<CR>
             ]]
         end,
-    }
-    use {
+    },
+    {
         "lewis6991/gitsigns.nvim",
         config = function()
             require("gitsigns").setup {
@@ -899,9 +825,9 @@ local packer_config = function()
                 },
             }
         end,
-    }
+    },
 
-    use {
+    {
         "tpope/vim-dadbod",
         config = function()
             vim.cmd [[
@@ -912,31 +838,20 @@ local packer_config = function()
                 \ }
             ]]
         end,
-        opt = true,
-    }
-    use {
+        lazy = true,
+    },
+    {
         "kristijanhusak/vim-dadbod-ui",
-        requires = { "tpope/vim-dadbod" },
+        dependencies = { "tpope/vim-dadbod" },
         cmd = { "DBUI" },
-    }
-    use {
+    },
+    {
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup {}
         end,
-    }
-
-    if packer_installed then
-        require("packer").sync()
-    end
-
-    vim.cmd [[
-      augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost init.lua source <afile> | PackerCompile
-      augroup end
-]]
-end
+    },
+}
 
 local vim = vim
 local g = vim.g
@@ -1049,7 +964,6 @@ vapi.nvim_set_keymap("n", "<leader>q", ":q<cr>", { noremap = true })
 vapi.nvim_set_keymap("n", "<leader>kb", ":bd<cr>", { noremap = true })
 vapi.nvim_set_keymap("n", "Y", "y$", { noremap = true })
 
-vapi.nvim_set_keymap("n", "<c-n>", ":NvimTreeToggle<cr>", { noremap = true })
 vapi.nvim_set_keymap("n", "<a-x>", ":Commands<cr>", { noremap = true })
 
 vapi.nvim_set_keymap("n", "<c-h>", "<C-w>h", { noremap = true })
@@ -1099,5 +1013,3 @@ if os.getenv "TMUX" == nil then
     vapi.nvim_set_keymap("i", "<A-l>", "<Esc>:tabnext<CR>", { noremap = true })
     vapi.nvim_set_keymap("t", "<A-l>", [[<C-\><C-n>:tabnext<CR>]], { noremap = true })
 end
-
-packer.startup(packer_config)
