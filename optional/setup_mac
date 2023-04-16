@@ -31,6 +31,7 @@ install_python_deps() {
 	pip3 install -q -U --user \
 		"python-language-server[all]" \
 		"ansible-lint" \
+		ansible \
 		awscli \
 		hcloud \
 		cytoolz \
@@ -69,17 +70,16 @@ install_brew_packages() {
 	brew install --quiet --cask another-redis-desktop-manager --no-quarantine
 
 	brew install --quiet \
-		ansible \
 		hashicorp/tap/vault \
 		datawire/blackbird/telepresence-arm64 \
 		autoconf \
 		automake \
 		bat \
 		curl \
-		dep \
 		exa \
 		fd \
 		fzy \
+		go \
 		gitui \
 		helm \
 		htop \
