@@ -1,37 +1,31 @@
-local vim = vim
-local g = vim.g
-local o = vim.o
-local set = vim.opt
-local vapi = vim.api
-g.mapleader = " "
+vim.g.mapleader = " "
+vim.opt.lazyredraw = true
+vim.opt.scrolloff = 1
+vim.opt.textwidth = 0 -- Do not break the line while typing
+vim.opt.showcmd = true -- Show the (partial) command as it’s being typed
 
-set.lazyredraw = true
-set.scrolloff = 1
-set.textwidth = 0 -- Do not break the line while typing
-set.showcmd = true -- Show the (partial) command as it’s being typed
+vim.opt.smarttab = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
-set.smarttab = true
-set.expandtab = true
-set.tabstop = 4
-set.shiftwidth = 4
-set.softtabstop = 4
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.infercase = true
+vim.opt.showmatch = true
 
-set.incsearch = true
-set.hlsearch = true
-set.ignorecase = true
-set.smartcase = true
-set.infercase = true
-set.showmatch = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
-set.splitbelow = true
-set.splitright = true
+vim.opt.wildmenu = true
 
-set.wildmenu = true
-
-set.foldenable = true
-set.foldmethod = "indent"
-set.foldlevelstart = 99
-set.foldnestmax = 10 -- deepest fold is 10 levels
+vim.opt.foldenable = true
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 10 -- deepest fold is 10 levels
 
 vim.cmd [[
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -73,23 +67,23 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Settings
-o.clipboard = "unnamedplus"
-o.autoread = true -- detect when a file is changed
-o.signcolumn = "yes" --  no more text shifting
-o.hidden = true --  buffers
-o.wrap = true
-o.swapfile = false
-o.undofile = true
-o.undodir = vim.fn.expand "~" .. "/.cache/nvim/undo"
-o.backupdir = vim.fn.expand "~" .. "/.cache/nvim/backup"
-o.directory = vim.fn.expand "~" .. "/.cache/nvim/dir"
-o.history = 1000
-o.title = true
-o.titleold = "Terminal"
-o.titlestring = "%F"
-o.cmdheight = 1
-o.shortmess = "aoOtIWcFs"
-o.updatetime = 250
+vim.o.clipboard = "unnamedplus"
+vim.o.autoread = true -- detect when a file is changed
+vim.o.signcolumn = "yes" --  no more text shifting
+vim.o.hidden = true --  buffers
+vim.o.wrap = true
+vim.o.swapfile = false
+vim.o.undofile = true
+vim.o.undodir = vim.fn.expand "~" .. "/.cache/nvim/undo"
+vim.o.backupdir = vim.fn.expand "~" .. "/.cache/nvim/backup"
+vim.o.directory = vim.fn.expand "~" .. "/.cache/nvim/dir"
+vim.o.history = 1000
+vim.o.title = true
+vim.o.titleold = "Terminal"
+vim.o.titlestring = "%F"
+vim.o.cmdheight = 1
+vim.o.shortmess = "aoOtIWcFs"
+vim.o.updatetime = 250
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -460,16 +454,14 @@ require("lazy").setup {
             vim.cmd [[autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, {focus=false})]]
 
             vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-            vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+            vim.api.nvim_clear_autocmds { group = "lsp_document_highlight" }
             vim.api.nvim_create_autocmd("CursorHold", {
                 command = "silent! lua vim.lsp.buf.document_highlight()",
-                buffer = bufnr,
                 group = "lsp_document_highlight",
                 desc = "Document Highlight",
             })
             vim.api.nvim_create_autocmd("CursorMoved", {
                 command = "silent! lua vim.lsp.buf.clear_references()",
-                buffer = bufnr,
                 group = "lsp_document_highlight",
                 desc = "Clear All the References",
             })
@@ -594,10 +586,6 @@ require("lazy").setup {
                     { name = "nvim_lsp", max_item_count = max_item_count },
                     { name = "path", max_item_count = max_item_count },
                     all_buffers_source,
-                    -- { name = "vsnip" }, -- For vsnip users.
-                    -- { name = 'luasnip' }, -- For luasnip users.
-                    -- { name = 'ultisnips' }, -- For ultisnips users.
-                    -- { name = 'snippy' }, -- For snippy users.
                 },
             }
 
@@ -670,34 +658,6 @@ require("lazy").setup {
         end,
         build = ":TSUpdate",
     },
-
-    -- {
-    --     "ThePrimeagen/refactoring.nvim",
-    --     config = function()
-    --         require("refactoring").setup {
-    --             prompt_func_return_type = {
-    --                 go = false,
-    --                 java = false,
-    --                 cpp = false,
-    --                 c = false,
-    --                 h = false,
-    --                 hpp = false,
-    --                 cxx = false,
-    --             },
-    --             prompt_func_param_type = {
-    --                 go = false,
-    --                 java = false,
-    --                 cpp = false,
-    --                 c = false,
-    --                 h = false,
-    --                 hpp = false,
-    --                 cxx = false,
-    --             },
-    --             printf_statements = {},
-    --             print_var_statements = {},
-    --         }
-    --     end,
-    -- },
 
     {
         "nvim-lualine/lualine.nvim",
