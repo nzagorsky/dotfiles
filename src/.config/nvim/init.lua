@@ -318,7 +318,7 @@ require("lazy").setup {
                 ["jk"] = actions.close,
                 ["<leader>q"] = actions.close,
                 ["<Esc>"] = actions.close,
-                ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["<C-t>"] = actions.send_selected_to_qflist + actions.open_qflist,
             }
 
             require("telescope").setup {
@@ -334,6 +334,7 @@ require("lazy").setup {
                         "--column",
                         "--smart-case",
                         "--hidden",
+                        "--trim",
                     },
                     mappings = {
                         i = telescope_mappings,
@@ -353,6 +354,19 @@ require("lazy").setup {
                         width = 230,
                         height = 40,
                         preview_cutoff = 120,
+                    },
+                },
+                pickers = {
+
+                    find_files = {
+                        find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+                    },
+                    buffers = {
+                        mappings = {
+                            i = {
+                                ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+                            },
+                        },
                     },
                 },
             }
@@ -383,6 +397,7 @@ require("lazy").setup {
                 "dockerfile-language-server",
                 "docker-compose-language-service",
                 "gopls",
+                "yaml-language-server",
                 "html-lsp",
                 "json-lsp",
                 "marksman",
@@ -476,6 +491,10 @@ require("lazy").setup {
                 desc = "Clear All the References",
             })
 
+            local default_opts = {
+                capabilities = capabilities,
+            }
+
             require("lspconfig").pyright.setup {
                 capabilities = capabilities,
                 before_init = function(_, config)
@@ -519,9 +538,26 @@ require("lazy").setup {
                 },
             }
 
-            require("lspconfig").gopls.setup {}
+            require("lspconfig").yamlls.setup {
+                capabilities = capabilities,
+                settings = { yaml = { keyOrdering = false } },
+            }
+
+            require("lspconfig").gopls.setup(default_opts)
+            require("lspconfig").ansiblels.setup(default_opts)
+            require("lspconfig").docker_compose_language_service.setup(default_opts)
+            require("lspconfig").bashls.setup(default_opts)
+            require("lspconfig").cmake.setup(default_opts)
+            require("lspconfig").dockerls.setup(default_opts)
+            require("lspconfig").html.setup(default_opts)
+            require("lspconfig").jsonls.setup(default_opts)
+            require("lspconfig").marksman.setup(default_opts)
+            require("lspconfig").marksman.setup(default_opts)
+            require("lspconfig").sqlls.setup(default_opts)
+            require("lspconfig").terraformls.setup(default_opts)
         end,
     },
+
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -536,6 +572,7 @@ require("lazy").setup {
                 null_ls.builtins.formatting.cmake_format,
                 null_ls.builtins.diagnostics.hadolint,
                 null_ls.builtins.diagnostics.ansiblelint,
+                null_ls.builtins.formatting.prettier,
             }
 
             null_ls.setup {
@@ -581,9 +618,33 @@ require("lazy").setup {
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
+                    ["<CR>"] = cmp.mapping.confirm {
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = false,
+                    },
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
+                        elseif require("luasnip").expand_or_jumpable() then
+                            vim.fn.feedkeys(
+                                vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
+                                ""
+                            )
+                        elseif has_words_before() then
+                            cmp.complete()
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif require("luasnip").expand_or_jumpable() then
+                            vim.fn.feedkeys(
+                                vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true),
+                                ""
+                            )
                         elseif has_words_before() then
                             cmp.complete()
                         else
@@ -594,8 +655,14 @@ require("lazy").setup {
 
                 sources = cmp.config.sources {
                     { name = "nvim_lsp", max_item_count = max_item_count },
-                    { name = "path", max_item_count = max_item_count },
+                    { name = "luasnip", max_item_count = max_item_count },
                     all_buffers_source,
+                    { name = "path", max_item_count = max_item_count },
+                },
+                snippet = {
+                    expand = function(args)
+                        require("luasnip").lsp_expand(args.body)
+                    end,
                 },
             }
 
@@ -613,13 +680,65 @@ require("lazy").setup {
                 sources = cmp.config.sources {
                     { name = "path" },
                     { name = "cmdline" },
+                    { name = "nvim_lua", max_item_count = max_item_count },
                 },
             })
         end,
 
         dependencies = {
+            {
+                -- snippet plugin
+                "L3MON4D3/LuaSnip",
+                dependencies = "rafamadriz/friendly-snippets",
+                opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+                build = "make install_jsregexp",
+                config = function(_, opts)
+                    -- vscode format
+                    require("luasnip.loaders.from_vscode").lazy_load()
+                    require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
+
+                    -- snipmate format
+                    require("luasnip.loaders.from_snipmate").load()
+                    require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
+
+                    -- lua format
+                    require("luasnip.loaders.from_lua").load()
+                    require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
+
+                    vim.api.nvim_create_autocmd("InsertLeave", {
+                        callback = function()
+                            if
+                                require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+                                and not require("luasnip").session.jump_active
+                            then
+                                require("luasnip").unlink_current()
+                            end
+                        end,
+                    })
+                end,
+            },
+
+            -- autopairing of (){}[] etc
+            {
+                "windwp/nvim-autopairs",
+                opts = {
+                    fast_wrap = {},
+                    disable_filetype = { "TelescopePrompt", "vim" },
+                },
+
+                config = function(_, opts)
+                    require("nvim-autopairs").setup {}
+
+                    -- setup cmp for autopairs
+                    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+                    require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+                end,
+            },
+
+            "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
         },
@@ -647,9 +766,7 @@ require("lazy").setup {
                 ensure_installed = {
                     "bash",
                     "cmake",
-                    "comment",
                     "dockerfile",
-                    "elixir",
                     "gitignore",
                     "go",
                     "html",
@@ -897,12 +1014,6 @@ require("lazy").setup {
         "kristijanhusak/vim-dadbod-ui",
         dependencies = { "tpope/vim-dadbod" },
         cmd = { "DBUI" },
-    },
-    {
-        "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup {}
-        end,
     },
 }
 

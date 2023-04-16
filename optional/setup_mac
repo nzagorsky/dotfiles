@@ -80,6 +80,7 @@ install_brew_packages() {
 		fd \
 		fzy \
 		go \
+        yq \
 		gitui \
 		helm \
 		htop \
