@@ -227,17 +227,24 @@ require("lazy").setup {
             {
                 "<leader>b",
                 function()
-                    require("telescope.builtin").buffers()
+                    require("telescope.builtin").buffers { sort_mru = true }
                 end,
             },
 
             {
                 "<leader>/",
                 function()
-                    require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-                        winblend = 10,
-                        previewer = false,
-                    })
+                    require("telescope.builtin").current_buffer_fuzzy_find()
+                end,
+            },
+
+            {
+                "<leader>l",
+                function()
+                    require("telescope.builtin").live_grep {
+                        prompt_title = "find string in open buffers...",
+                        grep_open_files = true,
+                    }
                 end,
             },
 
@@ -265,7 +272,10 @@ require("lazy").setup {
             {
                 "<leader>a",
                 function()
-                    require("telescope.builtin").grep_string { search = "" }
+                    require("telescope.builtin").grep_string {
+                        search = vim.fn.input { prompt = "Search string: ", default = "" },
+                        disable_coordinates = true,
+                    }
                 end,
             },
 
