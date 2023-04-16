@@ -73,6 +73,7 @@ install_brew_packages() {
 		hashicorp/tap/vault \
 		datawire/blackbird/telepresence-arm64 \
 		autoconf \
+		marksman \
 		automake \
 		bat \
 		curl \
@@ -80,7 +81,7 @@ install_brew_packages() {
 		fd \
 		fzy \
 		go \
-        yq \
+		yq \
 		gitui \
 		helm \
 		htop \

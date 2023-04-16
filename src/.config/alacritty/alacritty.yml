@@ -1,12 +1,39 @@
-colors:
-  primary:
-    background: '0x101010'
+schemes:
+  tokyo-night: &tokyo-night
+    primary:
+      background: "#010101"
+      # background: '#1a1b26'  # original
+      foreground: "#a9b1d6"
+
+    # Normal colors
+    normal:
+      black: "#32344a"
+      red: "#f7768e"
+      green: "#9ece6a"
+      yellow: "#e0af68"
+      blue: "#7aa2f7"
+      magenta: "#ad8ee6"
+      cyan: "#449dab"
+      white: "#787c99"
+
+    # Bright colors
+    bright:
+      black: "#444b6a"
+      red: "#ff7a93"
+      green: "#b9f27c"
+      yellow: "#ff9e64"
+      blue: "#7da6ff"
+      magenta: "#bb9af7"
+      cyan: "#0db9d7"
+      white: "#acb0d0"
+
+colors: *tokyo-night
 
 live_config_reload: true
 
 window:
-  opacity: 0.985
   # decorations: none
+  opacity: 0.96
   dimensions:
     columns: 120
     lines: 30
@@ -31,9 +58,6 @@ font:
   bold_italic:
     family: Hack Nerd Font Mono
     style: Bold Italic
-
-# env:
-#   TERM: xterm-256color
 
 # Linux style bindings for Alt-like behavior.
 key_bindings:
@@ -73,7 +97,6 @@ key_bindings:
   # - { key: N, mods: Option, action: SpawnNewInstance }
 
 shell:
-  # program: /opt/homebrew/bin/fish
   program: /bin/zsh
   args:
     - --login

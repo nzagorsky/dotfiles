@@ -1,15 +1,11 @@
-dotfiles
-========
+# dotfiles
 
-Requirements
-------------
+## Requirements
 
     stow
     git
 
-  
-Installation
--------------
+## Installation
 
 ```bash
 git clone https://github.com/nzagorsky/dotfiles.git ~/dotfiles
