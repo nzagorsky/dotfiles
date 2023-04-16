@@ -1,6 +1,6 @@
 --recurse=yes
 
---languages=python,go
+--languages=python,go,lua,make,javascript
 --python-kinds=-i
 
 --exclude=*.bundle.*
