@@ -26,20 +26,12 @@ vim.opt.foldenable = true
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
 vim.opt.foldnestmax = 10 -- deepest fold is 10 levels
+vim.opt.errorbells = false
+vim.opt.visualbell = false
+vim.opt.startofline = false
 
+-- Creating parent folders if they doesn't exist on buffer save.
 vim.cmd [[
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-syntax on
-filetype indent on
-filetype plugin on
-filetype plugin indent on " Enable filetype plugins and indention
-
-set nostartofline " Don’t reset cursor to start of line when moving around.
-
-set noerrorbells " No annoying errors
-set novisualbell
-
-
 function! MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
@@ -49,14 +41,11 @@ function! MkNonExDir(file, buf)
     endif
 endfunction
 
-" Creating parent folders if they doesn't exist on buffer save.
 augroup AutomaticDirectoryCreation
     autocmd!
     autocmd BufWritePre * :call MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
-
-
-    ]]
+]]
 
 -- dont list quickfix buffers
 vim.api.nvim_create_autocmd("FileType", {
@@ -105,20 +94,15 @@ require("lazy").setup {
         "folke/tokyonight.nvim",
         config = function()
             require("tokyonight").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
                 style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
                 light_style = "day", -- The theme is used when the background is set to light
                 transparent = true, -- Enable this to disable setting the background color
                 terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
                 styles = {
-                    -- Style to be applied to different syntax groups
-                    -- Value is any valid attr-list value for `:help nvim_set_hl`
                     comments = { italic = true },
                     keywords = { italic = true },
                     functions = {},
                     variables = {},
-                    -- Background styles. Can be "dark", "transparent" or "normal"
                     sidebars = "transparent", -- style for sidebars, see below
                     floats = "transparent", -- style for floating windows
                 },
@@ -536,7 +520,6 @@ require("lazy").setup {
             require("lspconfig").html.setup(default_opts)
             require("lspconfig").jsonls.setup(default_opts)
             require("lspconfig").marksman.setup(default_opts)
-            require("lspconfig").marksman.setup(default_opts)
             require("lspconfig").sqlls.setup(default_opts)
             require("lspconfig").terraformls.setup(default_opts)
         end,
@@ -921,24 +904,12 @@ require("lazy").setup {
                     })
                 end,
                 signs = {
-                    add = {
-                        text = "│",
-                    },
-                    change = {
-                        text = "│",
-                    },
-                    delete = {
-                        text = "_",
-                    },
-                    topdelete = {
-                        text = "‾",
-                    },
-                    changedelete = {
-                        text = "~",
-                    },
-                    untracked = {
-                        text = "┆",
-                    },
+                    add = { text = "│" },
+                    change = { text = "│" },
+                    delete = { text = "_" },
+                    topdelete = { text = "‾" },
+                    changedelete = { text = "~" },
+                    untracked = { text = "┆" },
                 },
                 signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
                 numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -956,7 +927,7 @@ require("lazy").setup {
                     delay = 1000,
                     ignore_whitespace = false,
                 },
-                current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+                current_line_blame_formatter = "   <author>, <author_time:%Y-%m-%d> - <summary>",
                 sign_priority = 6,
                 update_debounce = 100,
                 status_formatter = nil, -- Use default
@@ -979,13 +950,10 @@ require("lazy").setup {
     {
         "tpope/vim-dadbod",
         config = function()
-            vim.cmd [[
-                " Dadbod
-                let g:db_ui_winwidth = 30
-                let g:dbs = {
-                \  'local': 'postgres://toltenos:@localhost:5432/postgres'
-                \ }
-            ]]
+            vim.g.db_ui_winwidth = 30
+            vim.g.dbs = {
+                localhost = "postgres://toltenos:@localhost:5432/postgres",
+            }
         end,
         lazy = true,
     },
@@ -1031,7 +999,7 @@ vim.keymap.set("n", "<cr>", ":nohlsearch<cr><cr>", { remap = false, silent = tru
 
 vim.keymap.set("n", "<leader>S", [[:%s/\s\+$//<cr>:let @/=''<CR>]], { remap = false, silent = true })
 
-vim.keymap.set("c", "w!!", "w !sudo tee % > /dev/null", {})
+vim.keymap.set("c", "w!!", "w !sudo tee % > /dev/null")
 
 vim.keymap.set("n", "gev", ":e $MYVIMRC<cr>", { remap = false })
 vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
