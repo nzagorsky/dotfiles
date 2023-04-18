@@ -148,7 +148,8 @@ alias e='emacs -nw'
 alias g=git
 alias v=nvim
 alias reset_shell='env -i HOME="$HOME" zsh -l'
-alias lofimpv='mpv "https://www.youtube.com/watch?v=jfKfPfyJRdk" --no-video'
+alias lofimpv='mpv --no-video "https://www.youtube.com/watch?v=jfKfPfyJRdk"'
+alias synthmpv='mpv --no-video "https://www.youtube.com/watch?v=MVPTGNGiI-4"'
 
 alias gdiff="git diff"
 alias getmirrors='sudo bash -c "reflector --sort rate -n 10 --threads 30 -a 3 > /etc/pacman.d/mirrorlist"'
