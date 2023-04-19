@@ -80,6 +80,7 @@ install_brew_packages() {
 		exa \
 		fd \
 		fzy \
+		hammerspoon \
 		go \
 		yq \
 		gitui \
