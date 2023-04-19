@@ -165,18 +165,10 @@ require("lazy").setup {
             "kyazdani42/nvim-web-devicons", -- optional, for file icon
         },
     },
-
     {
-        "alexghergh/nvim-tmux-navigation",
+        "aserowy/tmux.nvim",
         config = function()
-            local nvim_tmux_nav = require "nvim-tmux-navigation"
-
-            vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-            vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-            vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-            vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-            vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-            vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+            return require("tmux").setup()
         end,
     },
     {
@@ -250,7 +242,7 @@ require("lazy").setup {
             {
                 "<leader>A",
                 function()
-                    require("telescope.builtin").grep_string()
+                    require("telescope.builtin").grep_string { disable_coordinates = true }
                 end,
             },
 
@@ -292,18 +284,17 @@ require("lazy").setup {
             require("telescope").setup {
                 defaults = {
                     file_ignore_patterns = { "node_modules", ".git" },
-                    vimgrep_arguments = {
-                        "rg",
-                        "-L",
-                        "--color=never",
-                        "--no-heading",
-                        "--with-filename",
-                        "--line-number",
-                        "--column",
-                        "--smart-case",
-                        "--hidden",
-                        "--trim",
-                    },
+                    -- vimgrep_arguments = {
+                    --     "rg",
+                    --     "--column",
+                    --     "--line-number",
+                    --     "--no-heading",
+                    --     "--color=never",
+                    --     "--smart-case",
+                    --     "--follow",
+                    --     "--hidden",
+                    --     "--trim",
+                    -- },
                     mappings = {
                         i = telescope_mappings,
                         n = telescope_mappings,
