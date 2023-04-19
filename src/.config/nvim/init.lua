@@ -166,12 +166,6 @@ require("lazy").setup {
         },
     },
     {
-        "aserowy/tmux.nvim",
-        config = function()
-            return require("tmux").setup()
-        end,
-    },
-    {
         "nvim-telescope/telescope.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
