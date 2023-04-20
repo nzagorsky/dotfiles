@@ -17,7 +17,6 @@ install_npm_deps() {
 	npm install -g --quiet --silent @ansible/ansible-language-server >/dev/null 2>&1
 	npm install -g --quiet --silent \
 		neovim \
-        vscode-json-languageserver \
 		bash-language-server \
 		dockerfile-language-server-nodejs \
 		javascript-typescript-langserver \

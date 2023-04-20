@@ -314,6 +314,12 @@ require("lazy").setup {
                     find_files = {
                         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
                     },
+                    grep_string = {
+                        only_sort_text = true,
+                    },
+                    tags = {
+                        only_sort_tags = true,
+                    },
                     buffers = {
                         mappings = {
                             i = {
@@ -503,7 +509,6 @@ require("lazy").setup {
             require("lspconfig").cmake.setup(default_opts)
             require("lspconfig").dockerls.setup(default_opts)
             require("lspconfig").html.setup(default_opts)
-            require("lspconfig").jsonls.setup(default_opts)
             require("lspconfig").marksman.setup(default_opts)
             require("lspconfig").sqlls.setup(default_opts)
             require("lspconfig").terraformls.setup(default_opts)
