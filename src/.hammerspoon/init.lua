@@ -61,3 +61,6 @@ for i = 1, 9 do
 		MoveWindowToSpace(i)
 	end)
 end
+hs.hotkey.bind({ "alt", "shift" }, tostring(0), function()
+    MoveWindowToSpace(10)
+end)
