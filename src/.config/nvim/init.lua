@@ -478,6 +478,7 @@ require("lazy").setup {
                         diagnostics = {
                             globals = {
                                 "vim",
+                                "hs",
                             },
                         },
                         workspace = {
