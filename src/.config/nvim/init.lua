@@ -50,9 +50,7 @@ augroup END
 -- dont list quickfix buffers
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
-    callback = function()
-        vim.opt_local.buflisted = false
-    end,
+    callback = function() vim.opt_local.buflisted = false end,
 })
 
 -- Settings
@@ -173,23 +171,17 @@ require("lazy").setup {
         keys = {
             {
                 "<leader>?",
-                function()
-                    require("telescope.builtin").oldfiles()
-                end,
+                function() require("telescope.builtin").oldfiles() end,
             },
 
             {
                 "<leader>b",
-                function()
-                    require("telescope.builtin").buffers { sort_mru = true }
-                end,
+                function() require("telescope.builtin").buffers { sort_mru = true } end,
             },
 
             {
                 "<leader>/",
-                function()
-                    require("telescope.builtin").current_buffer_fuzzy_find()
-                end,
+                function() require("telescope.builtin").current_buffer_fuzzy_find() end,
             },
 
             {
@@ -204,23 +196,17 @@ require("lazy").setup {
 
             {
                 "<leader>f",
-                function()
-                    require("telescope.builtin").find_files { hidden = true }
-                end,
+                function() require("telescope.builtin").find_files { hidden = true } end,
             },
 
             {
                 "<leader>h",
-                function()
-                    require("telescope.builtin").help_tags()
-                end,
+                function() require("telescope.builtin").help_tags() end,
             },
 
             {
                 "<leader>t",
-                function()
-                    require("telescope.builtin").tags { fname_width = 50, show_line = false }
-                end,
+                function() require("telescope.builtin").tags { fname_width = 50, show_line = false } end,
             },
 
             {
@@ -235,23 +221,17 @@ require("lazy").setup {
 
             {
                 "<leader>A",
-                function()
-                    require("telescope.builtin").grep_string { disable_coordinates = true }
-                end,
+                function() require("telescope.builtin").grep_string { disable_coordinates = true } end,
             },
 
             {
                 "<leader>d",
-                function()
-                    require("telescope.builtin").diagnostics { bufnr = 0 }
-                end,
+                function() require("telescope.builtin").diagnostics { bufnr = 0 } end,
             },
 
             {
                 "<leader>dw",
-                function()
-                    require("telescope.builtin").diagnostics()
-                end,
+                function() require("telescope.builtin").diagnostics() end,
             },
 
             {
@@ -335,9 +315,7 @@ require("lazy").setup {
     {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
-        cond = function()
-            return vim.fn.executable "make" == 1
-        end,
+        cond = function() return vim.fn.executable "make" == 1 end,
     },
 
     {
@@ -363,9 +341,11 @@ require("lazy").setup {
                 "sqlls",
                 "terraform-ls",
             }
-            vim.api.nvim_create_user_command("MasonInstallAll", function()
-                vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
-            end, {})
+            vim.api.nvim_create_user_command(
+                "MasonInstallAll",
+                function() vim.cmd("MasonInstall " .. table.concat(ensure_installed, " ")) end,
+                {}
+            )
         end,
     },
 
@@ -391,11 +371,7 @@ require("lazy").setup {
                     vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
                     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
-                    vim.keymap.set("n", "<F3>", function()
-                        vim.lsp.buf.format {
-                            async = false,
-                        }
-                    end, opts)
+                    vim.keymap.set("n", "<F3>", function() vim.lsp.buf.format { async = false } end, opts)
                 end,
             })
 
@@ -559,9 +535,7 @@ require("lazy").setup {
                 name = "buffer",
                 max_item_count = max_item_count,
                 option = {
-                    get_bufnrs = function()
-                        return vim.api.nvim_list_bufs()
-                    end,
+                    get_bufnrs = function() return vim.api.nvim_list_bufs() end,
                 },
             }
 
@@ -618,9 +592,7 @@ require("lazy").setup {
                     { name = "path", max_item_count = max_item_count },
                 },
                 snippet = {
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
-                    end,
+                    expand = function(args) require("luasnip").lsp_expand(args.body) end,
                 },
             }
 
@@ -871,24 +843,16 @@ require("lazy").setup {
 
                     -- Navigation
                     map("n", "]c", function()
-                        if vim.wo.diff then
-                            return "]c"
-                        end
-                        vim.schedule(function()
-                            gs.next_hunk()
-                        end)
+                        if vim.wo.diff then return "]c" end
+                        vim.schedule(function() gs.next_hunk() end)
                         return "<Ignore>"
                     end, {
                         expr = true,
                     })
 
                     map("n", "[c", function()
-                        if vim.wo.diff then
-                            return "[c"
-                        end
-                        vim.schedule(function()
-                            gs.prev_hunk()
-                        end)
+                        if vim.wo.diff then return "[c" end
+                        vim.schedule(function() gs.prev_hunk() end)
                         return "<Ignore>"
                     end, {
                         expr = true,
