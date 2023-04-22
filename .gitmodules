@@ -1,3 +1,6 @@
 [submodule "src/.config/zsh/plugins/zsh-z"]
 	path = src/.config/zsh/plugins/zsh-z
 	url = https://github.com/agkozak/zsh-z
+[submodule "src/.hammerspoon/Spoons/SkyRocket.spoon"]
+	path = src/.hammerspoon/Spoons/SkyRocket.spoon
+	url = https://github.com/dbalatero/SkyRocket.spoon.git
