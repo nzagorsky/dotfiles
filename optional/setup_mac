@@ -9,7 +9,7 @@ NC='\033[0m'
 cat ~/.config/zsh/.zshrc | grep PATH >/tmp/dotenv && source /tmp/dotenv
 
 install_neovim_plugins() {
-	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+	nvim --headless "+Lazy! sync" +qa
 	echo -e "${GREEN}neovim install success${NC}"
 }
 
@@ -35,28 +35,19 @@ install_python_deps() {
 		awscli \
 		hcloud \
 		cytoolz \
-		duckdb \
-		pywinrm \
-		applescript \
 		black \
 		isort \
-		mitogen \
-		boto3 \
 		dataset \
 		dateparser \
 		django-stubs \
 		django \
 		ipdb \
 		ipython \
-		bpython \
-		smart-open \
 		neovim \
 		pipenv \
 		python-dateutil \
-		requests \
-		selenium \
+		httpx \
 		youtube-dl \
-		vim-vint \
 		yamllint \
 		--no-warn-script-location &&
 		echo -e "${GREEN}pip install success${NC}"

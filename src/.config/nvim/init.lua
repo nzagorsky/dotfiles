@@ -481,7 +481,6 @@ require("lazy").setup {
 
             require("lspconfig").gopls.setup(default_opts)
             require("lspconfig").ansiblels.setup(default_opts)
-            require("lspconfig").docker_compose_language_service.setup(default_opts)
             require("lspconfig").bashls.setup(default_opts)
             require("lspconfig").cmake.setup(default_opts)
             require("lspconfig").dockerls.setup(default_opts)
@@ -494,25 +493,38 @@ require("lazy").setup {
 
     {
         "jose-elias-alvarez/null-ls.nvim",
+        event = { "InsertEnter", "CmdlineEnter" },
+        dependencies = {
+            { "ThePrimeagen/refactoring.nvim" },
+        },
         config = function()
             local null_ls = require "null-ls"
 
             local sources = {
-                null_ls.builtins.formatting.isort,
-                null_ls.builtins.formatting.black,
-                null_ls.builtins.formatting.stylua,
-                null_ls.builtins.formatting.shfmt,
                 null_ls.builtins.code_actions.refactoring,
-                null_ls.builtins.formatting.cmake_format,
-                null_ls.builtins.diagnostics.hadolint,
                 null_ls.builtins.diagnostics.ansiblelint,
+                null_ls.builtins.diagnostics.hadolint,
+                null_ls.builtins.formatting.black,
+                null_ls.builtins.formatting.cmake_format,
+                null_ls.builtins.formatting.isort,
                 null_ls.builtins.formatting.prettier,
+                null_ls.builtins.formatting.shfmt,
+                null_ls.builtins.formatting.stylua,
             }
 
             null_ls.setup {
                 sources = sources,
             }
         end,
+    },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        event = { "InsertEnter", "CmdlineEnter" },
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" },
+        },
+        config = function() require("refactoring").setup {} end,
     },
 
     {
@@ -557,11 +569,6 @@ require("lazy").setup {
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
-                        elseif require("luasnip").expand_or_jumpable() then
-                            vim.fn.feedkeys(
-                                vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
-                                ""
-                            )
                         elseif has_words_before() then
                             cmp.complete()
                         else
@@ -572,11 +579,6 @@ require("lazy").setup {
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
-                        elseif require("luasnip").expand_or_jumpable() then
-                            vim.fn.feedkeys(
-                                vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true),
-                                ""
-                            )
                         elseif has_words_before() then
                             cmp.complete()
                         else
@@ -586,13 +588,9 @@ require("lazy").setup {
                 },
 
                 sources = cmp.config.sources {
-                    { name = "nvim_lsp", max_item_count = max_item_count },
-                    { name = "luasnip", max_item_count = max_item_count },
+                    { name = "nvim_lsp", max_item_count = max_item_count * 2 },
                     all_buffers_source,
                     { name = "path", max_item_count = max_item_count },
-                },
-                snippet = {
-                    expand = function(args) require("luasnip").lsp_expand(args.body) end,
                 },
             }
 
@@ -617,39 +615,6 @@ require("lazy").setup {
 
         dependencies = {
             {
-                -- snippet plugin
-                "L3MON4D3/LuaSnip",
-                dependencies = "rafamadriz/friendly-snippets",
-                opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-                build = "make install_jsregexp",
-                config = function(_, opts)
-                    -- vscode format
-                    require("luasnip.loaders.from_vscode").lazy_load()
-                    require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
-
-                    -- snipmate format
-                    require("luasnip.loaders.from_snipmate").load()
-                    require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
-
-                    -- lua format
-                    require("luasnip.loaders.from_lua").load()
-                    require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
-
-                    vim.api.nvim_create_autocmd("InsertLeave", {
-                        callback = function()
-                            if
-                                require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-                                and not require("luasnip").session.jump_active
-                            then
-                                require("luasnip").unlink_current()
-                            end
-                        end,
-                    })
-                end,
-            },
-
-            -- autopairing of (){}[] etc
-            {
                 "windwp/nvim-autopairs",
                 opts = {
                     fast_wrap = {},
@@ -664,8 +629,6 @@ require("lazy").setup {
                     require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
                 end,
             },
-
-            "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lua",
