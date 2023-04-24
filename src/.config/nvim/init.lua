@@ -474,11 +474,6 @@ require("lazy").setup {
                 },
             }
 
-            require("lspconfig").yamlls.setup {
-                capabilities = capabilities,
-                settings = { yaml = { keyOrdering = false } },
-            }
-
             require("lspconfig").gopls.setup(default_opts)
             require("lspconfig").ansiblels.setup(default_opts)
             require("lspconfig").bashls.setup(default_opts)
