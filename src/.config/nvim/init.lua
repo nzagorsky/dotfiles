@@ -505,6 +505,7 @@ require("lazy").setup {
                 null_ls.builtins.formatting.prettier,
                 null_ls.builtins.formatting.shfmt,
                 null_ls.builtins.formatting.stylua,
+                null_ls.builtins.diagnostics.mypy,
             }
 
             null_ls.setup {
