@@ -90,6 +90,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup {
     {
         "folke/tokyonight.nvim",
+        lazy = false,
         config = function()
             require("tokyonight").setup {
                 style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
@@ -165,151 +166,9 @@ require("lazy").setup {
     },
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        keys = {
-            {
-                "<leader>?",
-                function() require("telescope.builtin").oldfiles() end,
-            },
-
-            {
-                "<leader>b",
-                function() require("telescope.builtin").buffers { sort_mru = true } end,
-            },
-
-            {
-                "<leader>/",
-                function() require("telescope.builtin").current_buffer_fuzzy_find() end,
-            },
-
-            {
-                "<leader>l",
-                function()
-                    require("telescope.builtin").live_grep {
-                        prompt_title = "find string in open buffers...",
-                        grep_open_files = true,
-                    }
-                end,
-            },
-
-            {
-                "<leader>f",
-                function() require("telescope.builtin").find_files { hidden = true } end,
-            },
-
-            {
-                "<leader>h",
-                function() require("telescope.builtin").help_tags() end,
-            },
-
-            {
-                "<leader>t",
-                function() require("telescope.builtin").tags { fname_width = 50, show_line = false } end,
-            },
-
-            {
-                "<leader>a",
-                function()
-                    require("telescope.builtin").grep_string {
-                        search = vim.fn.input { prompt = "Search string: ", default = "" },
-                        disable_coordinates = true,
-                    }
-                end,
-            },
-
-            {
-                "<leader>A",
-                function() require("telescope.builtin").grep_string { disable_coordinates = true } end,
-            },
-
-            {
-                "<leader>d",
-                function() require("telescope.builtin").diagnostics { bufnr = 0 } end,
-            },
-
-            {
-                "<leader>dw",
-                function() require("telescope.builtin").diagnostics() end,
-            },
-
-            {
-                "gr",
-                function()
-                    require("telescope.builtin").lsp_references {
-                        fname_width = 50,
-                        include_declaration = false,
-                        jump_type = "never",
-                    }
-                end,
-            },
-        },
-        config = function()
-            pcall(require("telescope").load_extension, "fzf")
-            local actions = require "telescope.actions"
-            local telescope_mappings = {
-                ["jk"] = actions.close,
-                ["<leader>q"] = actions.close,
-                ["<Esc>"] = actions.close,
-                ["<C-t>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            }
-
-            require("telescope").setup {
-                defaults = {
-                    file_ignore_patterns = { "node_modules", ".git" },
-                    -- vimgrep_arguments = {
-                    --     "rg",
-                    --     "--column",
-                    --     "--line-number",
-                    --     "--no-heading",
-                    --     "--color=never",
-                    --     "--smart-case",
-                    --     "--follow",
-                    --     "--hidden",
-                    --     "--trim",
-                    -- },
-                    mappings = {
-                        i = telescope_mappings,
-                        n = telescope_mappings,
-                    },
-                    sorting_strategy = "descending",
-                    layout_strategy = "horizontal",
-                    layout_config = {
-                        horizontal = {
-                            prompt_position = "bottom",
-                            preview_width = 0.35,
-                            results_width = 0.8,
-                        },
-                        vertical = {
-                            mirror = false,
-                        },
-                        width = 230,
-                        height = 40,
-                        preview_cutoff = 120,
-                    },
-                },
-                pickers = {
-
-                    find_files = {
-                        find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
-                    },
-                    grep_string = {
-                        only_sort_text = true,
-                    },
-                    tags = {
-                        only_sort_tags = true,
-                    },
-                    buffers = {
-                        mappings = {
-                            i = {
-                                ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
-                            },
-                        },
-                    },
-                },
-            }
-        end,
+        dependencies = { "nvim-lua/plenary.nvim" },
+        keys = require("plugins.configs.telescope").keys,
+        config = require("plugins.configs.telescope").config,
     },
 
     {
@@ -351,152 +210,17 @@ require("lazy").setup {
 
     {
         "neovim/nvim-lspconfig",
-        config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-            vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-            vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
-            vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
-
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-                callback = function(ev)
-                    local opts = {
-                        buffer = ev.buf,
-                    }
-                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-                    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-                    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-                    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
-                    vim.keymap.set("n", "<F3>", function() vim.lsp.buf.format { async = false } end, opts)
-                end,
-            })
-
-            local signs = {
-                Error = " ",
-                Warn = " ",
-                Hint = " ",
-                Info = " ",
-            }
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, {
-                    text = icon,
-                    texthl = hl,
-                    numhl = "",
-                })
-            end
-
-            local _border = "single"
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-                border = _border,
-            })
-
-            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-                border = _border,
-            })
-
-            vim.diagnostic.config {
-                float = {
-                    border = _border,
-                },
-                virtual_text = false,
-                update_in_insert = false,
-            }
-
-            require("lspconfig.ui.windows").default_options = {
-                border = _border,
-            }
-
-            vim.cmd [[autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, {focus=false})]]
-
-            vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-            vim.api.nvim_clear_autocmds { group = "lsp_document_highlight" }
-            vim.api.nvim_create_autocmd("CursorHold", {
-                command = "silent! lua vim.lsp.buf.document_highlight()",
-                group = "lsp_document_highlight",
-                desc = "Document Highlight",
-            })
-            vim.api.nvim_create_autocmd("CursorMoved", {
-                command = "silent! lua vim.lsp.buf.clear_references()",
-                group = "lsp_document_highlight",
-                desc = "Clear All the References",
-            })
-
-            local default_opts = {
-                capabilities = capabilities,
-            }
-
-            require("lspconfig").pyright.setup {
-                capabilities = capabilities,
-                before_init = function(_, config)
-                    config.settings = {
-                        python = {
-                            analysis = {
-                                autoSearchPaths = true,
-                                useLibraryCodeForTypes = true,
-                                autoImportCompletions = true,
-                                logLevel = "Warning",
-                                diagnosticMode = "openFilesOnly",
-                            },
-                        },
-                    }
-                end,
-            }
-
-            require("lspconfig").lua_ls.setup {
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = {
-                                "vim",
-                                "hs",
-                            },
-                        },
-                        workspace = {
-                            library = {
-                                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-                                [vim.fn.stdpath "data" .. "/lazy/extensions/nvchad_types"] = true,
-                                [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
-                            },
-                            maxPreload = 100000,
-                            preloadFileSize = 10000,
-                        },
-                        format = {
-                            enable = false,
-                        },
-                    },
-                },
-            }
-
-            require("lspconfig").gopls.setup(default_opts)
-            require("lspconfig").ansiblels.setup(default_opts)
-            require("lspconfig").bashls.setup(default_opts)
-            require("lspconfig").cmake.setup(default_opts)
-            require("lspconfig").dockerls.setup(default_opts)
-            require("lspconfig").html.setup(default_opts)
-            require("lspconfig").marksman.setup(default_opts)
-            require("lspconfig").sqlls.setup(default_opts)
-            require("lspconfig").terraformls.setup(default_opts)
-        end,
+        config = require("plugins.configs.lspconfig").config,
     },
 
     {
         "jose-elias-alvarez/null-ls.nvim",
         event = { "InsertEnter", "CmdlineEnter" },
-        dependencies = {
-            { "ThePrimeagen/refactoring.nvim" },
-        },
         config = function()
             local null_ls = require "null-ls"
 
             local sources = {
-                null_ls.builtins.code_actions.refactoring,
+                -- null_ls.builtins.code_actions.refactoring,
                 null_ls.builtins.diagnostics.ansiblelint,
                 null_ls.builtins.diagnostics.hadolint,
                 null_ls.builtins.formatting.black,
@@ -505,7 +229,6 @@ require("lazy").setup {
                 null_ls.builtins.formatting.prettier,
                 null_ls.builtins.formatting.shfmt,
                 null_ls.builtins.formatting.stylua,
-                null_ls.builtins.diagnostics.mypy,
             }
 
             null_ls.setup {
@@ -514,101 +237,9 @@ require("lazy").setup {
         end,
     },
     {
-        "ThePrimeagen/refactoring.nvim",
-        event = { "InsertEnter", "CmdlineEnter" },
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" },
-        },
-        config = function() require("refactoring").setup {} end,
-    },
-
-    {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
-        config = function()
-            -- Set up nvim-cmp.
-            local cmp = require "cmp"
-
-            local has_words_before = function()
-                unpack = unpack or table.unpack
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0
-                    and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-            end
-
-            local max_item_count = 30
-
-            local all_buffers_source = {
-                name = "buffer",
-                max_item_count = max_item_count,
-                option = {
-                    get_bufnrs = function() return vim.api.nvim_list_bufs() end,
-                },
-            }
-
-            cmp.setup {
-                preselect = cmp.PreselectMode.None,
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                mapping = cmp.mapping.preset.insert {
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm {
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = false,
-                    },
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                },
-
-                sources = cmp.config.sources {
-                    { name = "nvim_lsp", max_item_count = max_item_count * 2 },
-                    all_buffers_source,
-                    { name = "path", max_item_count = max_item_count },
-                },
-            }
-
-            -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline({ "/", "?" }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "buffer" },
-                },
-            })
-
-            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources {
-                    { name = "path" },
-                    { name = "cmdline" },
-                    { name = "nvim_lua", max_item_count = max_item_count },
-                },
-            })
-        end,
-
+        config = require("plugins.configs.cmpconf").config,
         dependencies = {
             {
                 "windwp/nvim-autopairs",
@@ -618,9 +249,8 @@ require("lazy").setup {
                 },
 
                 config = function(_, opts)
-                    require("nvim-autopairs").setup {}
+                    require("nvim-autopairs").setup(opts)
 
-                    -- setup cmp for autopairs
                     local cmp_autopairs = require "nvim-autopairs.completion.cmp"
                     require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
                 end,
@@ -790,75 +420,7 @@ require("lazy").setup {
 
     {
         "lewis6991/gitsigns.nvim",
-        config = function()
-            require("gitsigns").setup {
-                on_attach = function(bufnr)
-                    local gs = package.loaded.gitsigns
-                    local function map(mode, l, r, opts)
-                        opts = opts or {}
-                        opts.buffer = bufnr
-                        vim.keymap.set(mode, l, r, opts)
-                    end
-
-                    -- Navigation
-                    map("n", "]c", function()
-                        if vim.wo.diff then return "]c" end
-                        vim.schedule(function() gs.next_hunk() end)
-                        return "<Ignore>"
-                    end, {
-                        expr = true,
-                    })
-
-                    map("n", "[c", function()
-                        if vim.wo.diff then return "[c" end
-                        vim.schedule(function() gs.prev_hunk() end)
-                        return "<Ignore>"
-                    end, {
-                        expr = true,
-                    })
-                end,
-                signs = {
-                    add = { text = "│" },
-                    change = { text = "│" },
-                    delete = { text = "_" },
-                    topdelete = { text = "‾" },
-                    changedelete = { text = "~" },
-                    untracked = { text = "┆" },
-                },
-                signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-                numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-                linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-                word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-                watch_gitdir = {
-                    interval = 1000,
-                    follow_files = true,
-                },
-                attach_to_untracked = true,
-                current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-                current_line_blame_opts = {
-                    virt_text = true,
-                    virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-                    delay = 1000,
-                    ignore_whitespace = false,
-                },
-                current_line_blame_formatter = "   <author>, <author_time:%Y-%m-%d> - <summary>",
-                sign_priority = 6,
-                update_debounce = 100,
-                status_formatter = nil, -- Use default
-                max_file_length = 40000, -- Disable if file is longer than this (in lines)
-                preview_config = {
-                    -- Options passed to nvim_open_win
-                    border = "single",
-                    style = "minimal",
-                    relative = "cursor",
-                    row = 0,
-                    col = 1,
-                },
-                yadm = {
-                    enable = false,
-                },
-            }
-        end,
+        config = require("plugins.configs.gitsigns").config,
     },
 
     {
