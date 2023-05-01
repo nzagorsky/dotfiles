@@ -32,13 +32,13 @@ colors: *tokyo-night
 live_config_reload: true
 
 window:
-  decorations: none
+  decorations: buttonless
   opacity: 0.96
   dimensions:
     columns: 120
     lines: 30
   padding:
-    x: 3
+    x: 0
     y: 0
 
 scrolling:
