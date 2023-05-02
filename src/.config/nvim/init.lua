@@ -215,7 +215,6 @@ require("lazy").setup {
 
     {
         "jose-elias-alvarez/null-ls.nvim",
-        event = { "InsertEnter", "CmdlineEnter" },
         config = function()
             local null_ls = require "null-ls"
 
@@ -229,6 +228,7 @@ require("lazy").setup {
                 null_ls.builtins.formatting.prettier,
                 null_ls.builtins.formatting.shfmt,
                 null_ls.builtins.formatting.stylua,
+                null_ls.builtins.formatting.sql_formatter,
             }
 
             null_ls.setup {
