@@ -28,7 +28,7 @@ local M = {
 
         {
             "<leader>f",
-            function() require("telescope.builtin").find_files { hidden = true } end,
+            function() require("telescope.builtin").find_files() end,
         },
 
         {
@@ -64,12 +64,20 @@ local M = {
 
         {
             "<leader>A",
-            function() require("telescope.builtin").grep_string { disable_coordinates = true } end,
+            function()
+                require("telescope.builtin").grep_string {
+                    disable_coordinates = true,
+                }
+            end,
         },
 
         {
             "<leader>d",
-            function() require("telescope.builtin").diagnostics { bufnr = 0 } end,
+            function()
+                require("telescope.builtin").diagnostics {
+                    bufnr = 0,
+                }
+            end,
         },
 
         {
@@ -101,18 +109,18 @@ local M = {
 
         require("telescope").setup {
             defaults = {
-                file_ignore_patterns = { "node_modules", ".git" },
-                -- vimgrep_arguments = {
-                --     "rg",
-                --     "--column",
-                --     "--line-number",
-                --     "--no-heading",
-                --     "--color=never",
-                --     "--smart-case",
-                --     "--follow",
-                --     "--hidden",
-                --     "--trim",
-                -- },
+                file_ignore_patterns = { "node_modules", ".git/" },
+                vimgrep_arguments = {
+                    "rg",
+                    "--column",
+                    "--line-number",
+                    "--no-heading",
+                    "--color=never",
+                    "--smart-case",
+                    "--follow",
+                    "--hidden",
+                    "--trim",
+                },
                 mappings = {
                     i = telescope_mappings,
                     n = telescope_mappings,
@@ -120,30 +128,16 @@ local M = {
                 sorting_strategy = "descending",
                 layout_strategy = "horizontal",
                 layout_config = {
-                    horizontal = {
-                        prompt_position = "bottom",
-                        preview_width = 0.35,
-                        results_width = 0.8,
-                    },
-                    vertical = {
-                        mirror = false,
-                    },
+                    horizontal = { prompt_position = "bottom", preview_width = 0.35, results_width = 0.8 },
+                    vertical = { mirror = false },
                     width = 230,
                     height = 40,
                     preview_cutoff = 120,
                 },
             },
             pickers = {
-                find_files = {
-                    find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
-                },
-                buffers = {
-                    mappings = {
-                        i = {
-                            ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
-                        },
-                    },
-                },
+                find_files = { find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden" } },
+                buffers = { mappings = { i = { ["<c-d>"] = actions.delete_buffer + actions.move_to_top } } },
             },
         }
     end,
