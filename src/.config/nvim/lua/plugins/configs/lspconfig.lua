@@ -22,10 +22,10 @@ local M = {
         })
 
         local signs = {
-            Error = " ",
-            Warn = " ",
-            Hint = " ",
-            Info = " ",
+            Error = "X ",
+            Warn = "! ",
+            Hint = ". ",
+            Info = ". ",
         }
         for type, icon in pairs(signs) do
             local hl = "DiagnosticSign" .. type
@@ -75,6 +75,9 @@ local M = {
         local default_opts = {
             capabilities = capabilities,
         }
+
+        require("lspconfig").rust_analyzer.setup { capabilities = capabilities }
+
         require("lspconfig").pyright.setup {
             capabilities = capabilities,
             settings = {

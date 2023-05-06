@@ -74,6 +74,8 @@ install_brew_packages() {
 		fzy \
 		hammerspoon \
 		go \
+		rust \
+		rust-analyzer \
 		yq \
 		gitui \
 		helm \
