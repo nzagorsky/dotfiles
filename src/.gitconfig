@@ -88,8 +88,9 @@
         smudge = git lfs smudge %f
         required = true
 [user]
-        email = toltenos@gmail.com
-	    name = Nikita Zagorsky
+        email = NIKITA.ZAGORSKII1@accesscfa.com
+	    name = Nikita Zagorskii
+	    signingkey = EAAED00159FC98DA216C5568DF3859FCAA7F1D2A
 [merge]
         tool = vimdiff3
 [mergetool "vimdiff3"]
@@ -102,3 +103,12 @@
 	rebase = false
 [init]
 	defaultBranch = master
+[commit]
+	gpgSign = true
+[url "git@github.com:"]
+    insteadOf = "https://github.com/"
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
+	guiPrompt = false
+[credential "https://dev.azure.com"]
+	useHttpPath = true
