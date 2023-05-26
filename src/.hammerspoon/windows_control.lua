@@ -1,6 +1,5 @@
 local module = {}
 
-local SkyRocket = hs.loadSpoon "SkyRocket"
 local spaces = require "hs.spaces"
 
 module.frameCache = {}
@@ -26,83 +25,6 @@ module.MoveWindowToSpace = function(sp)
     spaces.moveWindowToSpace(win:id(), spaceID)
 end
 
-module.units = {
-    right30 = { x = 0.70, y = 0.00, w = 0.30, h = 1.00 },
-    right50 = { x = 0.50, y = 0.00, w = 0.50, h = 1.00 },
-    right70 = { x = 0.30, y = 0.00, w = 0.70, h = 1.00 },
-    left30 = { x = 0.00, y = 0.00, w = 0.30, h = 1.00 },
-    left50 = { x = 0.00, y = 0.00, w = 0.50, h = 1.00 },
-    left70 = { x = 0.00, y = 0.00, w = 0.70, h = 1.00 },
-    top50 = { x = 0.00, y = 0.00, w = 1.00, h = 0.50 },
-    bot50 = { x = 0.00, y = 0.50, w = 1.00, h = 0.50 },
-    bot80 = { x = 0.00, y = 0.20, w = 1.00, h = 0.80 },
-    bot87 = { x = 0.00, y = 0.20, w = 1.00, h = 0.87 },
-    bot90 = { x = 0.00, y = 0.20, w = 1.00, h = 0.90 },
-    upright30 = { x = 0.70, y = 0.00, w = 0.30, h = 0.50 },
-    botright30 = { x = 0.70, y = 0.50, w = 0.30, h = 0.50 },
-    upleft70 = { x = 0.00, y = 0.00, w = 0.70, h = 0.50 },
-    botleft70 = { x = 0.00, y = 0.50, w = 0.70, h = 0.50 },
-    right70top80 = { x = 0.70, y = 0.00, w = 0.30, h = 0.80 },
-    maximum = { x = 0.00, y = 0.00, w = 1.00, h = 1.00 },
-    center = { x = 0.20, y = 0.10, w = 0.60, h = 0.80 },
-}
-
-module.sky = SkyRocket:new {
-    -- Opacity of resize canvas
-    opacity = 0.3,
-
-    -- Which modifiers to hold to move a window?
-    moveModifiers = { "cmd", "ctrl" },
-
-    -- Which mouse button to hold to move a window?
-    moveMouseButton = "left",
-
-    -- Which modifiers to hold to resize a window?
-    resizeModifiers = { "cmd", "ctrl" },
-
-    -- Which mouse button to hold to resize a window?
-    resizeMouseButton = "right",
-}
-
--- Takes a layout definition (e.g. 'layouts.work') and iterates through
--- each application definition, laying it out as speccified
-module.runLayout = function(layout)
-    for i = 1, #layout do
-        local t = layout[i]
-        local theapp = hs.application.get(t.name)
-        if win == nil then
-            hs.application.open(t.app)
-            theapp = hs.application.get(t.name)
-        end
-        local win = theapp:mainWindow()
-        local screen = nil
-        if t.screen ~= nil then screen = hs.screen.find(t.screen) end
-        win:move(t.unit, screen, true)
-    end
-end
-module.layouts = {
-
-    full_coding = {
-        { name = "Alacritty", app = "Alacritty.app", unit = module.units.maximum },
-    },
-    coding = {
-        { name = "Firefox", app = "Firefox.app", unit = module.units.left70 },
-        { name = "Alacritty", app = "Alacritty.app", unit = module.units.right30 },
-    },
-
-    coding_inverse = {
-        { name = "Firefox", app = "Firefox.app", unit = module.units.left30 },
-        { name = "Alacritty", app = "Alacritty.app", unit = module.units.right70 },
-    },
-    work = {
-        {
-            name = "Firefox",
-            app = "Firefox.app",
-            unit = module.units.maximum,
-            screen = "Thunderbolt Display",
-        },
-    },
-}
 
 -- Shortcuts
 hs.hotkey.bind({ "alt", "shift" }, tostring(0), function() module.MoveWindowToSpace(10) end)

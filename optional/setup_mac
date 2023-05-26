@@ -92,6 +92,7 @@ install_brew_packages() {
 		navi \
 		ncdu \
 		neovim \
+		rectangle \
 		node \
 		nushell \
 		openvpn \
