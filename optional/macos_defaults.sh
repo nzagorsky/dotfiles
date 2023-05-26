@@ -3,7 +3,7 @@ set_defaults() {
 	defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
 	# Command + Ctrl window movement
-	defaults write -g NSWindowShouldDragOnGesture -bool false
+	defaults write -g NSWindowShouldDragOnGesture -bool true
 
 	# Keep spaces arrangement
 	defaults write com.apple.dock "mru-spaces" -bool "false"

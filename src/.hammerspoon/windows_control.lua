@@ -1,6 +1,5 @@
 local module = {}
 
-local SkyRocket = hs.loadSpoon "SkyRocket"
 local spaces = require "hs.spaces"
 
 module.frameCache = {}
@@ -45,63 +44,6 @@ module.units = {
     right70top80 = { x = 0.70, y = 0.00, w = 0.30, h = 0.80 },
     maximum = { x = 0.00, y = 0.00, w = 1.00, h = 1.00 },
     center = { x = 0.20, y = 0.10, w = 0.60, h = 0.80 },
-}
-
-module.sky = SkyRocket:new {
-    -- Opacity of resize canvas
-    opacity = 0.3,
-
-    -- Which modifiers to hold to move a window?
-    moveModifiers = { "cmd", "ctrl" },
-
-    -- Which mouse button to hold to move a window?
-    moveMouseButton = "left",
-
-    -- Which modifiers to hold to resize a window?
-    resizeModifiers = { "cmd", "ctrl" },
-
-    -- Which mouse button to hold to resize a window?
-    resizeMouseButton = "right",
-}
-
--- Takes a layout definition (e.g. 'layouts.work') and iterates through
--- each application definition, laying it out as speccified
-module.runLayout = function(layout)
-    for i = 1, #layout do
-        local t = layout[i]
-        local theapp = hs.application.get(t.name)
-        if win == nil then
-            hs.application.open(t.app)
-            theapp = hs.application.get(t.name)
-        end
-        local win = theapp:mainWindow()
-        local screen = nil
-        if t.screen ~= nil then screen = hs.screen.find(t.screen) end
-        win:move(t.unit, screen, true)
-    end
-end
-module.layouts = {
-
-    full_coding = {
-        { name = "Alacritty", app = "Alacritty.app", unit = module.units.maximum },
-    },
-    coding = {
-        { name = "Firefox", app = "Firefox.app", unit = module.units.left70 },
-        { name = "Alacritty", app = "Alacritty.app", unit = module.units.right30 },
-    },
-
-    coding_inverse = {
-        { name = "Firefox", app = "Firefox.app", unit = module.units.left30 },
-        { name = "Alacritty", app = "Alacritty.app", unit = module.units.right70 },
-    },
-    work = {
-        {
-            name = "Firefox",
-            app = "Firefox.app",
-            unit = module.units.maximum,
-            screen = "Thunderbolt Display",
-        },
-    },
 }
 
 -- Shortcuts
