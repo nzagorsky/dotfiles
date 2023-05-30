@@ -289,6 +289,7 @@ require("lazy").setup {
                     "dockerfile",
                     "gitignore",
                     "go",
+                    "comment",
                     "html",
                     "htmldjango",
                     "javascript",
