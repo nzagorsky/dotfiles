@@ -9,9 +9,9 @@ local M = {
             return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
         end
 
-        local max_item_count = 30
+        local max_item_count = 20
 
-        local all_buffers_source = {
+        local buffer_words_source = {
             name = "buffer",
             max_item_count = max_item_count,
             option = {
@@ -25,6 +25,9 @@ local M = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
             },
+            snippet = {
+                expand = function(args) require("luasnip").lsp_expand(args.body) end,
+            },
             mapping = cmp.mapping.preset.insert {
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -37,6 +40,11 @@ local M = {
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
+                    elseif require("luasnip").expand_or_jumpable() then
+                        vim.fn.feedkeys(
+                            vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
+                            ""
+                        )
                     elseif has_words_before() then
                         cmp.complete()
                     else
@@ -47,6 +55,8 @@ local M = {
                 ["<S-Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
+                    elseif require("luasnip").jumpable(-1) then
+                        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
                     elseif has_words_before() then
                         cmp.complete()
                     else
@@ -57,8 +67,9 @@ local M = {
 
             sources = cmp.config.sources {
                 { name = "nvim_lsp", max_item_count = max_item_count * 2 },
-                all_buffers_source,
+                { name = "luasnip", max_item_count = 10 },
                 { name = "path", max_item_count = max_item_count },
+                buffer_words_source,
             },
         }
 
@@ -66,7 +77,7 @@ local M = {
         cmp.setup.cmdline({ "/", "?" }, {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
-                { name = "buffer" },
+                { name = "buffer", max_item_count = max_item_count },
             },
         })
 
@@ -74,8 +85,8 @@ local M = {
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources {
-                { name = "path" },
-                { name = "cmdline" },
+                { name = "path", max_item_count = max_item_count },
+                { name = "cmdline", max_item_count = max_item_count },
                 { name = "nvim_lua", max_item_count = max_item_count },
             },
         })
