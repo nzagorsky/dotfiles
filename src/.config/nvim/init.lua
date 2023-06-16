@@ -191,6 +191,7 @@ require("lazy").setup {
                 "rust-analyzer",
                 "bash-language-server",
                 "cmake-language-server",
+                "typescript-language-server",
                 "dockerfile-language-server",
                 "docker-compose-language-service",
                 "gopls",
@@ -518,6 +519,8 @@ vim.keymap.set("c", "w!!", "w !sudo tee % > /dev/null")
 
 vim.keymap.set("n", "gev", ":e $MYVIMRC<cr>", { remap = false })
 vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
+
+vim.keymap.set("n", "<C-]>", [[:tag <c-r>=expand("<cword>")<cr><cr>]], { remap = false })
 
 if os.getenv "TMUX" == nil then
     for num = 1, 10 do

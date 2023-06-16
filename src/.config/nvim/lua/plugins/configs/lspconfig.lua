@@ -1,15 +1,17 @@
 local M = {
     config = function()
+        local lspconfig = require "lspconfig"
+        local _border = "single"
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-        vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-        vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
-        vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(ev)
                 local opts = { buffer = ev.buf }
+
+                vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+                vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, opts)
+                vim.keymap.set("n", "]g", vim.diagnostic.goto_next, opts)
                 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -36,7 +38,6 @@ local M = {
             })
         end
 
-        local _border = "single"
         vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
             border = _border,
         })
@@ -76,9 +77,7 @@ local M = {
             capabilities = capabilities,
         }
 
-        require("lspconfig").rust_analyzer.setup { capabilities = capabilities }
-
-        require("lspconfig").pyright.setup {
+        lspconfig.pyright.setup {
             capabilities = capabilities,
             settings = {
                 python = {
@@ -92,8 +91,7 @@ local M = {
                 },
             },
         }
-
-        require("lspconfig").lua_ls.setup {
+        lspconfig.lua_ls.setup {
             capabilities = capabilities,
             settings = {
                 Lua = {
@@ -107,7 +105,6 @@ local M = {
                         library = {
                             [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                             [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-                            [vim.fn.stdpath "data" .. "/lazy/extensions/nvchad_types"] = true,
                             [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
                         },
                         maxPreload = 100000,
@@ -119,16 +116,28 @@ local M = {
                 },
             },
         }
-
-        require("lspconfig").gopls.setup(default_opts)
-        require("lspconfig").ansiblels.setup(default_opts)
-        require("lspconfig").bashls.setup(default_opts)
-        require("lspconfig").cmake.setup(default_opts)
-        require("lspconfig").dockerls.setup(default_opts)
-        require("lspconfig").html.setup(default_opts)
-        require("lspconfig").marksman.setup(default_opts)
-        require("lspconfig").sqlls.setup(default_opts)
-        require("lspconfig").terraformls.setup(default_opts)
+        lspconfig.tsserver.setup {
+            capabilities = capabilities,
+            filetypes = {
+                "javascript",
+                "javascriptreact",
+                "javascript.jsx",
+                "typescript",
+                "typescriptreact",
+                "typescript.tsx",
+                "astro",
+            },
+        }
+        lspconfig.rust_analyzer.setup(default_opts)
+        lspconfig.gopls.setup(default_opts)
+        lspconfig.ansiblels.setup(default_opts)
+        lspconfig.bashls.setup(default_opts)
+        lspconfig.cmake.setup(default_opts)
+        lspconfig.dockerls.setup(default_opts)
+        lspconfig.html.setup(default_opts)
+        lspconfig.marksman.setup(default_opts)
+        lspconfig.sqlls.setup(default_opts)
+        lspconfig.terraformls.setup(default_opts)
     end,
 }
 return M
