@@ -45,7 +45,6 @@ then
 fi
 
 # }}}
-
 # Functions {{{
 function t {
     launch_param=$(pidof systemd > /dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")

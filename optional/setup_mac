@@ -21,6 +21,8 @@ install_npm_deps() {
 		bash-language-server \
 		dockerfile-language-server-nodejs \
 		javascript-typescript-langserver \
+		typescript-language-server \
+		typescript \
 		marked \
 		prettier \
 		pyright \
