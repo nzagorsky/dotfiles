@@ -62,6 +62,7 @@ install_brew_packages() {
 
 	brew install --quiet --cask font-hack-nerd-font
 	brew install --quiet --cask another-redis-desktop-manager --no-quarantine
+	brew install --quiet --cask pomotroid
 
 	brew install --quiet \
 		hashicorp/tap/vault \
