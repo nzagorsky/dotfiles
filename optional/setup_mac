@@ -121,6 +121,7 @@ install_go_packages() {
 	# Restart on file change
 	# Example: reflex -s -v -- zsh -c 'go run . & reloadtab'
 	go install github.com/cespare/reflex@latest
+    go install github.com/go-delve/delve/cmd/dlv@latest
 
 }
 
