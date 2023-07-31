@@ -14,6 +14,9 @@ set_defaults() {
 	# Finder: show hidden files by default
 	defaults write com.apple.Finder AppleShowAllFiles -bool true
 
+    # Show hidden apps as dimmed.
+    defaults write com.apple.dock showhidden -bool TRUE
+
 	# Enable spring loading for directories
 	defaults write NSGlobalDomain com.apple.springing.enabled -bool true
 

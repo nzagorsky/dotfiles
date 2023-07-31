@@ -15,6 +15,7 @@ install_neovim_plugins() {
 
 install_npm_deps() {
 	npm install -g --quiet --silent @ansible/ansible-language-server >/dev/null 2>&1
+    npm install -g @microsoft/compose-language-service
 	npm install -g --quiet --silent \
 		neovim \
 		sql-formatter \
