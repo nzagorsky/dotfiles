@@ -105,7 +105,7 @@ require("lazy").setup {
                     sidebars = "transparent", -- style for sidebars, see below
                     floats = "transparent", -- style for floating windows
                 },
-                sidebars = { "qf", "help", "NvimTree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+                sidebars = { "qf", "help", "neo-tree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
                 day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
                 hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
                 dim_inactive = false, -- dims inactive windows
@@ -116,53 +116,24 @@ require("lazy").setup {
     },
 
     {
-        "kyazdani42/nvim-tree.lua",
-        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
         keys = {
-            { "<c-n>", ":NvimTreeToggle<cr>" },
+            { "<c-n>", ":Neotree toggle<CR>" },
+            { "<c-b>", ":Neotree source=buffers toggle<CR>" },
         },
-        config = function()
-            local nvimtree = require "nvim-tree"
-            local options = {
-                filters = {
-                    dotfiles = false,
-                },
-                disable_netrw = true,
-                hijack_netrw = true,
-                open_on_tab = false,
-                hijack_cursor = true,
-                hijack_unnamed_buffer_when_opening = false,
-                update_cwd = true,
-                update_focused_file = {
-                    enable = true,
-                    update_cwd = false,
-                },
-                view = {
-                    side = "left",
-                    width = 30,
-                },
-                git = {
-                    enable = false,
-                    ignore = false,
-                },
-                actions = {
-                    open_file = {
-                        resize_window = true,
-                    },
-                },
-                renderer = {
-                    root_folder_label = false,
-                    indent_markers = {
-                        enable = false,
-                    },
-                },
-            }
-
-            nvimtree.setup(options)
-        end,
         dependencies = {
-            "kyazdani42/nvim-web-devicons", -- optional, for file icon
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
         },
+
+        config = function()
+            require("neo-tree").setup {
+                window = { mappings = { ["o"] = "open" } },
+                filesystem = { follow_current_file = true },
+            }
+        end,
     },
     {
         "nvim-telescope/telescope.nvim",
@@ -305,7 +276,7 @@ require("lazy").setup {
             local signature_config = {
                 debug = true,
                 hint_enable = false,
-                handler_opts = { border = "rounded" },
+                handler_opts = { border = "single" }, -- double, rounded, single, shadow, none, or a table of borders
                 max_width = 80,
             }
             require("lsp_signature").setup(signature_config)
@@ -448,7 +419,7 @@ require("lazy").setup {
         "tpope/vim-fugitive",
         event = { "InsertEnter", "CmdlineEnter" },
         keys = {
-            { "<leader>gs", "<cmd>Git<cr>" },
+            { "<leader>gs", "<cmd>Git<cr>", desc = "Status" },
             { "<leader>gc", "<cmd>Git commit<cr>" },
             { "<leader>gpush", "<cmd>Git push<cr>" },
             { "<leader>gpull", "<cmd>Git pull<cr>" },
@@ -490,62 +461,6 @@ require("lazy").setup {
         end,
         lazy = true,
     },
-
-    -- {
-    --     "rcarriga/nvim-dap-ui",
-    --     config = function()
-    --         -- https://harrisoncramer.me/debugging-in-neovim/
-    --         -- https://alpha2phi.medium.com/modern-neovim-debugging-and-testing-8deda1da1411
-    --         --
-    --         require("dapui").setup()
-    --         require("dap-python").setup "python"
-    --         require("dap-go").setup()
-    --
-    --         local dap_ok, dap = pcall(require, "dap")
-    --         local dap_ui_ok, ui = pcall(require, "dapui")
-    --
-    --         if not (dap_ok and dap_ui_ok) then
-    --             require "notify"("nvim-dap or dap-ui not installed!", "warning") -- nvim-notify is a separate plugin, I recommend it too!
-    --             return
-    --         end
-    --
-    --         vim.fn.sign_define("DapBreakpoint", { text = "🐞" })
-    --
-    --         -- Start debugging session
-    --         vim.keymap.set("n", "<leader>ds", function()
-    --             dap.continue()
-    --             ui.toggle {}
-    --             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) -- Spaces buffers evenly
-    --         end)
-    --
-    --         -- Set breakpoints, get variable values, step into/out of functions, etc.
-    --         vim.keymap.set("n", "<leader>dl", require("dap.ui.widgets").hover)
-    --         vim.keymap.set("n", "<leader>dc", dap.continue)
-    --         vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
-    --         vim.keymap.set("n", "<leader>dn", dap.step_over)
-    --         vim.keymap.set("n", "<leader>di", dap.step_into)
-    --         vim.keymap.set("n", "<leader>do", dap.step_out)
-    --         vim.keymap.set("n", "<leader>dC", function()
-    --             dap.clear_breakpoints()
-    --             require "notify"("Breakpoints cleared", "info")
-    --         end)
-    --
-    --         -- Close debugger and clear breakpoints
-    --         vim.keymap.set("n", "<leader>de", function()
-    --             dap.clear_breakpoints()
-    --             ui.toggle {}
-    --             dap.terminate()
-    --             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
-    --             require "notify"("Debugger session ended", "info")
-    --         end)
-    --     end,
-    --
-    --     dependencies = {
-    --         "mfussenegger/nvim-dap",
-    --         "mfussenegger/nvim-dap-python",
-    --         "leoluz/nvim-dap-go",
-    --     },
-    -- },
 
     -- For Neovim LUA development
     {
