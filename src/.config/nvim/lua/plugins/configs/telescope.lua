@@ -111,16 +111,17 @@ local M = {
         require("telescope").setup {
             defaults = {
                 file_ignore_patterns = { "node_modules", ".git/" },
+                borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
                 vimgrep_arguments = {
                     "rg",
-                    "--column",
-                    "--line-number",
-                    "--no-heading",
                     "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
                     "--smart-case",
                     "--follow",
                     "--hidden",
-                    "--trim",
                 },
                 mappings = {
                     i = telescope_mappings,
@@ -131,8 +132,8 @@ local M = {
                 layout_config = {
                     horizontal = { prompt_position = "bottom", preview_width = 0.35, results_width = 0.8 },
                     vertical = { mirror = false },
-                    width = 230,
-                    height = 40,
+                    width = 1000,
+                    height = 1000,
                     preview_cutoff = 120,
                 },
             },
