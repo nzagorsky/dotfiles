@@ -131,7 +131,9 @@ require("lazy").setup {
         config = function()
             require("neo-tree").setup {
                 window = { mappings = { ["o"] = "open" } },
-                filesystem = { follow_current_file = true },
+                filesystem = { follow_current_file = {
+                    enabled = true,
+                } },
             }
         end,
     },
@@ -198,6 +200,7 @@ require("lazy").setup {
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.formatting.cmake_format,
                 null_ls.builtins.formatting.isort,
+                null_ls.builtins.diagnostics.mypy,
                 null_ls.builtins.formatting.prettier,
                 null_ls.builtins.formatting.shfmt,
                 null_ls.builtins.formatting.stylua,

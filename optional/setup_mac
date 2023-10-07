@@ -71,6 +71,7 @@ install_brew_packages() {
 		autoconf \
 		marksman \
 		automake \
+        lua-language-server \
 		bat \
 		curl \
 		exa \

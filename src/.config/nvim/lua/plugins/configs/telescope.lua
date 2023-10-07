@@ -58,6 +58,7 @@ local M = {
                 require("telescope.builtin").grep_string {
                     search = vim.fn.input { prompt = "Search string: ", default = "" },
                     disable_coordinates = true,
+                    hidden = true,
                 }
             end,
         },

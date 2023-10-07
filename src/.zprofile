@@ -64,3 +64,6 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/"
