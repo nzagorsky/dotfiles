@@ -99,3 +99,5 @@ set_defaults() {
 	defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
 }
+
+set_defaults
