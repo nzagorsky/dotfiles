@@ -41,7 +41,7 @@ scrolling:
 font:
   size: 13.0
   normal:
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
 
 key_bindings:
   - { key: F, mods: Command, chars: "\ef" }
