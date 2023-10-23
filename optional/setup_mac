@@ -36,6 +36,7 @@ install_python_deps() {
 		"python-language-server[all]" \
 		"ansible-lint" \
 		ansible \
+        pyusb \
 		awscli \
 		hcloud \
 		cytoolz \
@@ -103,6 +104,7 @@ install_brew_packages() {
 		openvpn \
 		postgresql@14 \
 		python3 \
+		python3-tk \
 		rclone \
 		ripgrep \
 		shfmt \
