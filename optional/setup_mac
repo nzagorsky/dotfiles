@@ -52,7 +52,6 @@ install_python_deps() {
 		pipenv \
 		python-dateutil \
 		httpx \
-		youtube-dl \
 		yamllint \
 		--no-warn-script-location &&
 		echo -e "${GREEN}pip install success${NC}"
@@ -72,6 +71,7 @@ install_brew_packages() {
 		autoconf \
 		marksman \
 		automake \
+        youtube-dl \
         lua-language-server \
 		bat \
 		curl \

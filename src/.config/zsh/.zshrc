@@ -95,6 +95,18 @@ function kconfig {
     export KUBECONFIG="$HOME/.config/kube/$@"
 }
 
+function kubuild {
+    kustomize build --enable-alpha-plugins $@
+}
+
+function kuapply {
+    kustomize build --enable-alpha-plugins $@ | kubectl apply -f -
+}
+
+function kudelete {
+    kustomize build --enable-alpha-plugins $@ | kubectl delete -f -
+}
+
 function dutop  {
     du --max-depth=0 -h * | sort -hr | head -20;
 }

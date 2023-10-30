@@ -116,24 +116,33 @@ require("lazy").setup {
     },
 
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
+        "nvim-tree/nvim-tree.lua",
         keys = {
-            { "<c-n>", ":Neotree toggle<CR>" },
-            { "<c-b>", ":Neotree source=buffers toggle<CR>" },
+            { "<c-n>", ":NvimTreeToggle<CR>" },
         },
         dependencies = {
-            "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
         },
 
         config = function()
-            require("neo-tree").setup {
-                window = { mappings = { ["o"] = "open" } },
-                filesystem = { follow_current_file = {
-                    enabled = true,
-                } },
+            -- disable netrw at the very start of your init.lua
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+
+            -- set termguicolors to enable highlight groups
+            vim.opt.termguicolors = true
+
+            require("nvim-tree").setup {
+                sort_by = "case_sensitive",
+                view = {
+                    width = 30,
+                },
+                renderer = {
+                    group_empty = true,
+                },
+                filters = {
+                    dotfiles = true,
+                },
             }
         end,
     },
@@ -395,7 +404,7 @@ require("lazy").setup {
         branch = "main",
         config = function()
             require("toggleterm").setup {
-                size = 30,
+                size = 50,
                 open_mapping = [[<a-j>]],
                 hide_numbers = true, -- hide the number column in toggleterm buffers
                 start_in_insert = true,
@@ -406,9 +415,11 @@ require("lazy").setup {
                 persist_size = true,
                 close_on_exit = true, -- close the terminal window when the process exits
                 shell = vim.o.shell, -- change the default shell
-                direction = "horizontal",
+                direction = "float",
                 float_opts = { -- This field is only relevant if direction is set to 'float'
-                    border = "curved",
+                    border = "single",
+                    width = function(term) return math.floor(vim.o.columns * 0.95) end,
+                    height = function(term) return math.floor(vim.o.lines * 0.8) end,
                 },
             }
         end,
