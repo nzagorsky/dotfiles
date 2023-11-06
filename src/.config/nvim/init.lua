@@ -119,6 +119,7 @@ require("lazy").setup {
         "nvim-tree/nvim-tree.lua",
         keys = {
             { "<c-n>", ":NvimTreeToggle<CR>" },
+            { "<c-b>", ":NvimTreeOpen<CR>:NvimTreeCollapseKeepBuffers<CR>" },
         },
         dependencies = {
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -135,15 +136,14 @@ require("lazy").setup {
             require("nvim-tree").setup {
                 sort_by = "case_sensitive",
                 view = {
-                    width = 30,
+                    width = 60,
                 },
                 renderer = {
-                    group_empty = true,
+                    group_empty = false,
                 },
                 filters = {
                     dotfiles = true,
                 },
-
                 update_focused_file = {
                     enable = true,
                 },
@@ -408,7 +408,6 @@ require("lazy").setup {
         branch = "main",
         config = function()
             require("toggleterm").setup {
-                size = 50,
                 open_mapping = [[<a-j>]],
                 hide_numbers = true, -- hide the number column in toggleterm buffers
                 start_in_insert = true,
@@ -422,8 +421,8 @@ require("lazy").setup {
                 direction = "float",
                 float_opts = { -- This field is only relevant if direction is set to 'float'
                     border = "single",
-                    width = function(term) return math.floor(vim.o.columns * 0.95) end,
-                    height = function(term) return math.floor(vim.o.lines * 0.8) end,
+                    width = function(term) return math.floor(vim.o.columns * 0.98) end,
+                    height = function(term) return math.floor(vim.o.lines * 0.97) end,
                 },
             }
         end,
