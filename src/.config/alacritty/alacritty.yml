@@ -30,7 +30,7 @@ colors: *tokyo-night
 live_config_reload: true
 
 window:
-  opacity: 0.90
+  opacity: 0.95
   dimensions:
     columns: 80
     lines: 24

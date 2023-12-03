@@ -19,7 +19,6 @@ local M = {
                 vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
                 vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
                 vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-                vim.keymap.set("n", "<F3>", function() vim.lsp.buf.format { async = false } end, opts)
             end,
         })
 
