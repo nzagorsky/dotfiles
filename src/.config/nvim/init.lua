@@ -195,35 +195,34 @@ require("lazy").setup {
             )
         end,
     },
-
+    {
+        "mfussenegger/nvim-lint",
+        config = function()
+            require("lint").linters_by_ft = {
+                markdown = { "vale" },
+                python = { "mypy" },
+                javascript = { "eslint" },
+            }
+        end,
+    },
+    {
+        "stevearc/conform.nvim",
+        keys = {
+            { "<F3>", function() require("conform").format() end },
+        },
+        config = function()
+            require("conform").setup {
+                formatters_by_ft = {
+                    lua = { "stylua" },
+                    python = { "isort", "black" },
+                    javascript = { { "prettierd", "prettier" } },
+                },
+            }
+        end,
+    },
     {
         "neovim/nvim-lspconfig",
         config = require("plugins.configs.lspconfig").config,
-    },
-
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            local null_ls = require "null-ls"
-
-            local sources = {
-                -- null_ls.builtins.code_actions.refactoring,
-                null_ls.builtins.diagnostics.ansiblelint,
-                null_ls.builtins.diagnostics.hadolint,
-                null_ls.builtins.formatting.black,
-                null_ls.builtins.formatting.cmake_format,
-                null_ls.builtins.formatting.isort,
-                null_ls.builtins.diagnostics.mypy,
-                null_ls.builtins.formatting.prettier,
-                null_ls.builtins.formatting.shfmt,
-                null_ls.builtins.formatting.stylua,
-                null_ls.builtins.formatting.sql_formatter,
-            }
-
-            null_ls.setup {
-                sources = sources,
-            }
-        end,
     },
     {
         "hrsh7th/nvim-cmp",
