@@ -23,7 +23,7 @@ for i = 0, 9, 1 do
 	})
 end
 
-local hotkeys = { "f", "b", "h", "j", "k", "l", "p", "w" }
+local hotkeys = { "f", "b", "h", "j", "k", "l", "p"}
 
 for _, v in pairs(hotkeys) do
 	print(v)
