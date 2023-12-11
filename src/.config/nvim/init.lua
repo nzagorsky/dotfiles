@@ -216,6 +216,8 @@ require("lazy").setup {
                     lua = { "stylua" },
                     python = { "isort", "black" },
                     javascript = { { "prettierd", "prettier" } },
+                    typescript = { { "prettierd", "prettier" } },
+                    json = { { "prettierd", "prettier" } },
                 },
             }
         end,
@@ -417,12 +419,13 @@ require("lazy").setup {
                 persist_size = true,
                 close_on_exit = true, -- close the terminal window when the process exits
                 shell = vim.o.shell, -- change the default shell
-                direction = "float",
-                float_opts = { -- This field is only relevant if direction is set to 'float'
-                    border = "single",
-                    width = function(term) return math.floor(vim.o.columns * 0.98) end,
-                    height = function(term) return math.floor(vim.o.lines * 0.97) end,
-                },
+                direction = "horizontal",
+                size=40,
+                -- float_opts = { -- This field is only relevant if direction is set to 'float'
+                --     border = "single",
+                --     width = function(term) return math.floor(vim.o.columns * 0.90) end,
+                --     height = function(term) return math.floor(vim.o.lines * 0.80) end,
+                -- },
             }
         end,
     },

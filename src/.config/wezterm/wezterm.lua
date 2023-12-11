@@ -6,7 +6,7 @@ end
 
 config.color_scheme = "Catppuccin Mocha"
 config.hide_tab_bar_if_only_one_tab = true
--- config.font = wezterm.font("Hack Nerd Font")
+config.font = wezterm.font("Hack Nerd Font")
 config.font_size = 13.0
 config.window_background_opacity = 0.975
 config.animation_fps = 1
@@ -23,7 +23,7 @@ for i = 0, 9, 1 do
 	})
 end
 
-local hotkeys = { "f", "b", "h", "j", "k", "l", "p", "w" }
+local hotkeys = { "f", "b", "h", "j", "k", "l", "p"}
 
 for _, v in pairs(hotkeys) do
 	print(v)
