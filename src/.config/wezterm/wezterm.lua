@@ -6,7 +6,7 @@ end
 
 config.color_scheme = "Catppuccin Mocha"
 config.hide_tab_bar_if_only_one_tab = true
--- config.font = wezterm.font("Hack Nerd Font")
+config.font = wezterm.font("Hack Nerd Font")
 config.font_size = 13.0
 config.window_background_opacity = 0.975
 config.animation_fps = 1
