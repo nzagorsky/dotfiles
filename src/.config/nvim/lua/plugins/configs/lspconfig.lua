@@ -138,6 +138,7 @@ local M = {
         lspconfig.terraformls.setup(default_opts)
         lspconfig.dockerls.setup(default_opts)
         lspconfig.docker_compose_language_service.setup(default_opts)
+        lspconfig.sourcekit.setup(default_opts)
     end,
 }
 return M

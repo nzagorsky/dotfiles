@@ -311,6 +311,7 @@ require("lazy").setup {
                     "cmake",
                     "dockerfile",
                     "gitignore",
+                    "swift",
                     "go",
                     "comment",
                     "html",
