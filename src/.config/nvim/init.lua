@@ -218,6 +218,7 @@ require("lazy").setup {
                     javascript = { { "prettierd", "prettier" } },
                     typescript = { { "prettierd", "prettier" } },
                     json = { { "prettierd", "prettier" } },
+                    swift = { { "swiftformat" } },
                 },
             }
         end,
