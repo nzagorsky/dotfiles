@@ -422,7 +422,7 @@ require("lazy").setup {
                 close_on_exit = true, -- close the terminal window when the process exits
                 shell = vim.o.shell, -- change the default shell
                 direction = "horizontal",
-                size=40,
+                size = 40,
                 -- float_opts = { -- This field is only relevant if direction is set to 'float'
                 --     border = "single",
                 --     width = function(term) return math.floor(vim.o.columns * 0.90) end,
