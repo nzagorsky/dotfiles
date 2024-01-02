@@ -81,6 +81,7 @@ install_brew_packages() {
 		fzy \
 		hammerspoon \
 		go \
+        swiftformat \
 		rust \
 		rust-analyzer \
 		yq \

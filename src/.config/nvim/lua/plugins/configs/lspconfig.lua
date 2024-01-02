@@ -1,6 +1,8 @@
+
 local M = {
     config = function()
         local lspconfig = require "lspconfig"
+        local util = require "lspconfig.util"
         local _border = "single"
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -138,6 +140,19 @@ local M = {
         lspconfig.terraformls.setup(default_opts)
         lspconfig.dockerls.setup(default_opts)
         lspconfig.docker_compose_language_service.setup(default_opts)
+
+        lspconfig.sourcekit.setup {
+            capabilities = capabilities,
+            cmd = {
+                "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+            },
+            root_dir = function(filename, _)
+                return util.root_pattern "buildServer.json"(filename)
+                    or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
+                    or util.find_git_ancestor(filename)
+                    or util.root_pattern "Package.swift"(filename)
+            end,
+        }
     end,
 }
 return M
