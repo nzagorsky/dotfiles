@@ -172,6 +172,7 @@ alias mac_flushdns="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHe
 alias macdns="scutil --dns | egrep -i '(domain|nameserver)'"
 alias maclaunchrebuild="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user"
 alias macncdu="ncdu --exclude /System/Volumes/Data -x /"
+alias reset_xcode_previews="xcrun simctl --set previews delete all"
 alias manage="nvim ~/Documents/notes/tasks.md"
 alias python=python3
 alias rclone="rclone -P"
