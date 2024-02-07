@@ -70,9 +70,9 @@ hs.hotkey.bind("alt", "k", function() hs.window.focusedWindow():focusWindowNorth
 hs.hotkey.bind("alt", "h", function() hs.window.focusedWindow():focusWindowWest(nil, false) end)
 hs.hotkey.bind("alt", "l", function() hs.window.focusedWindow():focusWindowEast(nil, false) end)
 
-hs.hotkey.bind("alt", "down", function() hs.window.focusedWindow():focusWindowSouth(nil, false) end)
-hs.hotkey.bind("alt", "up", function() hs.window.focusedWindow():focusWindowNorth(nil, false) end)
-hs.hotkey.bind("alt", "left", function() hs.window.focusedWindow():focusWindowWest(nil, false) end)
-hs.hotkey.bind("alt", "right", function() hs.window.focusedWindow():focusWindowEast(nil, false) end)
+-- hs.hotkey.bind("alt", "down", function() hs.window.focusedWindow():focusWindowSouth(nil, false) end)
+-- hs.hotkey.bind("alt", "up", function() hs.window.focusedWindow():focusWindowNorth(nil, false) end)
+-- hs.hotkey.bind("alt", "left", function() hs.window.focusedWindow():focusWindowWest(nil, false) end)
+-- hs.hotkey.bind("alt", "right", function() hs.window.focusedWindow():focusWindowEast(nil, false) end)
 
 return module
