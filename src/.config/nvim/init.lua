@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 vim.g.mapleader = " "
 vim.opt.lazyredraw = true
 vim.opt.scrolloff = 1
@@ -96,6 +98,12 @@ require("lazy").setup {
                 variant = "auto", -- auto, main, moon, or dawn
                 dark_variant = "main", -- main, moon, or dawn
                 dim_inactive_windows = true,
+
+                styles = {
+                    bold = true,
+                    italic = false,
+                    transparency = false,
+                },
             }
 
             vim.cmd "colorscheme rose-pine"
@@ -473,6 +481,8 @@ require("lazy").setup {
         ft = "lua",
         config = function() require("neodev").setup { library = { plugins = { "nvim-dap-ui" }, types = true } } end,
     },
+
+    { "karb94/neoscroll.nvim", config = function() require("neoscroll").setup {} end },
 }
 
 vim.keymap.set("i", "jk", "<Esc>", { remap = false })
