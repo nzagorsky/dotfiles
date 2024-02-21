@@ -12,6 +12,7 @@ config.window_background_opacity = 0.90
 config.animation_fps = 1
 config.adjust_window_size_when_changing_font_size = false
 config.check_for_updates = false
+config.window_decorations = "RESIZE"
 
 local keys = {}
 
