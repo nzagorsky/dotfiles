@@ -85,6 +85,7 @@ install_brew_packages() {
 		rust \
 		rust-analyzer \
 		yq \
+        vscode-langservers-extracted \
 		gitui \
 		helm \
 		htop \
