@@ -68,8 +68,8 @@ vim.o.backupdir = vim.fn.expand "~" .. "/.cache/nvim/backup"
 vim.o.directory = vim.fn.expand "~" .. "/.cache/nvim/dir"
 vim.o.history = 1000
 vim.o.title = true
-vim.o.titleold = "Terminal"
-vim.o.titlestring = "%F"
+vim.o.titlestring = "nvim"
+vim.o.titleold = "zsh"
 vim.o.cmdheight = 1
 vim.o.shortmess = "aoOtIWcFs"
 vim.o.updatetime = 250
@@ -482,7 +482,6 @@ require("lazy").setup {
         config = function() require("neodev").setup { library = { plugins = { "nvim-dap-ui" }, types = true } } end,
     },
 
-    { "karb94/neoscroll.nvim", config = function() require("neoscroll").setup {} end },
 }
 
 vim.keymap.set("i", "jk", "<Esc>", { remap = false })
