@@ -91,52 +91,27 @@ vim.opt.rtp:prepend(lazypath)
 --- PLUGINS
 require("lazy").setup {
     {
-        "rose-pine/neovim",
-        name = "rose-pine",
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
         config = function()
-            require("rose-pine").setup {
-                variant = "auto", -- auto, main, moon, or dawn
-                dark_variant = "main", -- main, moon, or dawn
-                dim_inactive_windows = true,
-
-                styles = {
-                    bold = true,
-                    italic = false,
-                    transparency = false,
+            require("catppuccin").setup {
+                integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    treesitter = true,
+                    notify = false,
+                    mini = {
+                        enabled = true,
+                        indentscope_color = "",
+                    },
+                    -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
                 },
             }
-
-            vim.cmd "colorscheme rose-pine"
+            vim.cmd "colorscheme catppuccin-mocha"
         end,
     },
-
-    -- {
-    --     "folke/tokyonight.nvim",
-    --     lazy = false,
-    --     config = function()
-    --         require("tokyonight").setup {
-    --             style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-    --             light_style = "day", -- The theme is used when the background is set to light
-    --             transparent = true, -- Enable this to disable setting the background color
-    --             terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-    --             styles = {
-    --                 comments = { italic = true },
-    --                 keywords = { italic = true },
-    --                 functions = {},
-    --                 variables = {},
-    --                 sidebars = "transparent", -- style for sidebars, see below
-    --                 floats = "transparent", -- style for floating windows
-    --             },
-    --             sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-    --             day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-    --             hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-    --             dim_inactive = false, -- dims inactive windows
-    --             lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-    --         }
-    --         vim.cmd [[colorscheme tokyonight-night]]
-    --     end,
-    -- },
-    --
 
     {
         "nvim-tree/nvim-tree.lua",
@@ -149,24 +124,8 @@ require("lazy").setup {
         },
 
         config = function()
-            -- disable netrw at the very start of your init.lua
-            vim.g.loaded_netrw = 1
-            vim.g.loaded_netrwPlugin = 1
-
-            -- set termguicolors to enable highlight groups
-            vim.opt.termguicolors = true
-
             require("nvim-tree").setup {
                 sort_by = "case_sensitive",
-                view = {
-                    width = 60,
-                },
-                renderer = {
-                    group_empty = false,
-                },
-                filters = {
-                    dotfiles = true,
-                },
                 update_focused_file = {
                     enable = true,
                 },
@@ -408,13 +367,11 @@ require("lazy").setup {
                 start_in_insert = true,
                 insert_mappings = true, -- whether or not the open mapping applies in insert mode
                 terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-                shade_terminals = true,
-                shading_factor = -30,
+                -- shade_terminals = true,
                 persist_size = true,
                 close_on_exit = true, -- close the terminal window when the process exits
                 shell = vim.o.shell, -- change the default shell
                 direction = "horizontal",
-                size = 40,
                 -- float_opts = { -- This field is only relevant if direction is set to 'float'
                 --     border = "single",
                 --     width = function(term) return math.floor(vim.o.columns * 0.90) end,
@@ -481,19 +438,15 @@ require("lazy").setup {
         ft = "lua",
         config = function() require("neodev").setup { library = { plugins = { "nvim-dap-ui" }, types = true } } end,
     },
-
 }
 
-vim.keymap.set("i", "jk", "<Esc>", { remap = false })
-vim.keymap.set("c", "jk", "<Esc>", { remap = false })
-vim.keymap.set("t", "jk", [[<C-\><C-n>]], { remap = false })
+vim.keymap.set("i", "jk", "<Esc>", { remap = false, nowait = true })
+vim.keymap.set("c", "jk", "<Esc>", { remap = false, nowait = true })
+vim.keymap.set("t", "jk", [[<C-\><C-n>]], { remap = false, nowait = true })
 
 vim.keymap.set("i", "ол", "<Esc>", { remap = false })
 vim.keymap.set("c", "ол", "<Esc>", { remap = false })
 vim.keymap.set("t", "ол", [[<C-\><C-n>]], { remap = false })
-
-vim.keymap.set("n", "j", "gj", {})
-vim.keymap.set("n", "k", "gk", {})
 
 vim.keymap.set("n", "<leader><leader>", "V", { remap = false })
 vim.keymap.set("n", "<leader>w", ":w<cr>", { remap = false })
