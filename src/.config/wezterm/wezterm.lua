@@ -7,7 +7,7 @@ end
 
 config.color_scheme = "catppuccin-mocha"
 config.hide_tab_bar_if_only_one_tab = true
-config.font = wezterm.font("Hack Nerd Font")
+-- config.font = wezterm.font("JetBrains Mono")
 config.font_size = 15.0
 config.check_for_updates = false
 config.show_update_window = false
