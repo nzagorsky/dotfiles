@@ -440,16 +440,13 @@ require("lazy").setup {
     },
 }
 
-vim.keymap.set("i", "jk", "<Esc>", { remap = false })
-vim.keymap.set("c", "jk", "<Esc>", { remap = false })
-vim.keymap.set("t", "jk", [[<C-\><C-n>]], { remap = false })
+vim.keymap.set("i", "jk", "<Esc>", { remap = false, nowait = true })
+vim.keymap.set("c", "jk", "<Esc>", { remap = false, nowait = true })
+vim.keymap.set("t", "jk", [[<C-\><C-n>]], { remap = false, nowait = true })
 
 vim.keymap.set("i", "ол", "<Esc>", { remap = false })
 vim.keymap.set("c", "ол", "<Esc>", { remap = false })
 vim.keymap.set("t", "ол", [[<C-\><C-n>]], { remap = false })
-
-vim.keymap.set("n", "j", "gj", {})
-vim.keymap.set("n", "k", "gk", {})
 
 vim.keymap.set("n", "<leader><leader>", "V", { remap = false })
 vim.keymap.set("n", "<leader>w", ":w<cr>", { remap = false })
