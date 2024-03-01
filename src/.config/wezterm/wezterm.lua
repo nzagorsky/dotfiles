@@ -12,7 +12,6 @@ config.color_scheme = "catppuccin-mocha"
 config.hide_tab_bar_if_only_one_tab = true
 
 config.check_for_updates = false
-config.show_update_window = false
 config.animation_fps = 1
 config.adjust_window_size_when_changing_font_size = false
 config.check_for_updates = false
