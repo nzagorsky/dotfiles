@@ -86,7 +86,7 @@ local M = {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources {
                 { name = "path", max_item_count = max_completion_item_count },
-                { name = "cmdline", max_item_count = max_completion_item_count },
+                { name = "cmdline", max_item_count = max_completion_item_count * 2 },
                 { name = "nvim_lua", max_item_count = max_completion_item_count },
             },
         })

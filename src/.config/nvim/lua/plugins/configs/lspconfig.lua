@@ -1,4 +1,3 @@
-
 local M = {
     config = function()
         local lspconfig = require "lspconfig"
