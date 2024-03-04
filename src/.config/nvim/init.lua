@@ -1,7 +1,6 @@
 vim.loader.enable()
 
 vim.g.mapleader = " "
-vim.opt.lazyredraw = true
 vim.opt.scrolloff = 1
 vim.opt.textwidth = 0 -- Do not break the line while typing
 vim.opt.showcmd = true -- Show the (partial) command as it’s being typed
@@ -120,7 +119,7 @@ require("lazy").setup {
             { "<c-b>", ":NvimTreeOpen<CR>:NvimTreeCollapseKeepBuffers<CR>" },
         },
         dependencies = {
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "nvim-tree/nvim-web-devicons",
         },
 
         config = function()
@@ -197,10 +196,23 @@ require("lazy").setup {
                 formatters_by_ft = {
                     lua = { "stylua" },
                     python = { "isort", "black" },
-                    javascript = { { "prettierd", "prettier" } },
-                    typescript = { { "prettierd", "prettier" } },
-                    json = { { "prettierd", "prettier" } },
                     swift = { { "swiftformat" } },
+                    ["javascript"] = { "prettier" },
+                    ["javascriptreact"] = { "prettier" },
+                    ["typescript"] = { "prettier" },
+                    ["typescriptreact"] = { "prettier" },
+                    ["vue"] = { "prettier" },
+                    ["css"] = { "prettier" },
+                    ["scss"] = { "prettier" },
+                    ["less"] = { "prettier" },
+                    ["html"] = { "prettier" },
+                    ["json"] = { "prettier" },
+                    ["jsonc"] = { "prettier" },
+                    ["yaml"] = { "prettier" },
+                    ["markdown"] = { "prettier" },
+                    ["markdown.mdx"] = { "prettier" },
+                    ["graphql"] = { "prettier" },
+                    ["handlebars"] = { "prettier" },
                 },
             }
         end,
@@ -240,19 +252,6 @@ require("lazy").setup {
     },
 
     {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-            local signature_config = {
-                debug = true,
-                hint_enable = false,
-                handler_opts = { border = "single" }, -- double, rounded, single, shadow, none, or a table of borders
-                max_width = 80,
-            }
-            require("lsp_signature").setup(signature_config)
-        end,
-    },
-
-    {
         "nvim-treesitter/nvim-treesitter",
         config = function()
             require("nvim-treesitter.configs").setup {
@@ -269,6 +268,10 @@ require("lazy").setup {
                     "html",
                     "htmldjango",
                     "javascript",
+                    "regex",
+                    "markdown",
+                    "markdown_inline",
+                    "sql",
                     "lua",
                     "python",
                     "rust",
@@ -283,6 +286,64 @@ require("lazy").setup {
             }
         end,
         build = ":TSUpdate",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-context",
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            {
+                "windwp/nvim-ts-autotag",
+                config = function()
+                    require("nvim-treesitter.configs").setup {
+                        autotag = {
+                            enable = true,
+                        },
+                    }
+                end,
+            },
+        },
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        config = function()
+            vim.keymap.set("n", "<leader>nh", function() require("noice").cmd "history" end)
+            vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
+                if not require("noice.lsp").scroll(4) then return "<c-f>" end
+            end, { silent = true, expr = true })
+
+            vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
+                if not require("noice.lsp").scroll(-4) then return "<c-b>" end
+            end, { silent = true, expr = true })
+
+            require("noice").setup {
+
+                lsp = {
+                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                    },
+                },
+
+                -- you can enable a preset for easier configuration
+                presets = {
+                    bottom_search = true, -- use a classic bottom cmdline for search
+                    command_palette = true, -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = true, -- add a border to hover docs and signature help
+                },
+            }
+        end,
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        },
     },
 
     {
