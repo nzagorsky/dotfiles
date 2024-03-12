@@ -56,6 +56,7 @@ export PATH="$PATH:$HOME/.local/include/cargo/bin"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
 export PATH="$PATH:$HOME/.yarn/bin"
+export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 
 # FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
