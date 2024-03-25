@@ -66,3 +66,13 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/"
+
+
+
+# Okta aws cli
+export OKTA_AWSCLI_ORG_DOMAIN=cfahome.okta.com
+export OKTA_AWSCLI_OIDC_CLIENT_ID=0oawmbockqlLNiJNm1t7
+export OKTA_AWSCLI_AWS_ACCOUNT_FEDERATION_APP_ID=0oawmbpv1uxr6srRW1t7
+export OKTA_AWSCLI_OPEN_BROWSER=true
+export OKTA_AWSCLI_WRITE_AWS_CREDENTIALS=true
+export OKTA_AWSCLI_AWS_REGION=us-east-1
