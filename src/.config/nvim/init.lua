@@ -443,10 +443,6 @@ require("lazy").setup {
         config = function() require("neodev").setup { library = { plugins = { "nvim-dap-ui" }, types = true } } end,
     },
 
-    {
-        "aserowy/tmux.nvim",
-        config = function() return require("tmux").setup() end,
-    },
 }
 
 vim.keymap.set("i", "jk", "<Esc>", { remap = false, nowait = true })
@@ -487,25 +483,3 @@ vim.keymap.set("n", "gev", ":e $MYVIMRC<cr>", { remap = false })
 vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
 
 vim.keymap.set("n", "<C-]>", [[:tag <c-r>=expand("<cword>")<cr><cr>]], { remap = false })
-
--- if os.getenv "TMUX" == nil then
---     for num = 1, 10 do
---         vim.keymap.set("n", string.format("<A-%s>", num), string.format("<Esc>%sgt", num), { remap = false })
---     end
---
---     for num = 1, 10 do
---         vim.keymap.set("i", string.format("<A-%s>", num), string.format("<Esc>%sgt", num), { remap = false })
---     end
---
---     for num = 1, 10 do
---         vim.keymap.set("t", string.format("<A-%s>", num), string.format([[<C-\><C-n>%sgt]], num), { remap = false })
---     end
---
---     vim.keymap.set("n", "<A-h>", "<Esc>:tabprevious<CR>", { remap = false })
---     vim.keymap.set("i", "<A-h>", "<Esc>:tabprevious<CR>", { remap = false })
---     vim.keymap.set("t", "<A-h>", [[<C-\><C-n>:tabprevious<CR>]], { remap = false })
---
---     vim.keymap.set("n", "<A-l>", "<Esc>:tabnext<CR>", { remap = false })
---     vim.keymap.set("i", "<A-l>", "<Esc>:tabnext<CR>", { remap = false })
---     vim.keymap.set("t", "<A-l>", [[<C-\><C-n>:tabnext<CR>]], { remap = false })
--- end
