@@ -8,8 +8,10 @@ end
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14.0
 
-config.color_scheme = "catppuccin-mocha"
+-- config.color_scheme = 'Ayu Dark (Gogh)'
+config.color_scheme = "carbonfox"
 config.hide_tab_bar_if_only_one_tab = true
+config.window_background_opacity = 0.925
 
 config.check_for_updates = false
 config.animation_fps = 1

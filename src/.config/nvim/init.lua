@@ -90,25 +90,20 @@ vim.opt.rtp:prepend(lazypath)
 --- PLUGINS
 require("lazy").setup {
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        priority = 1000,
+        "EdenEast/nightfox.nvim",
+        name = "nightfox",
         config = function()
-            require("catppuccin").setup {
-                integrations = {
-                    cmp = true,
-                    gitsigns = true,
-                    nvimtree = true,
-                    treesitter = true,
-                    notify = false,
-                    mini = {
-                        enabled = true,
-                        indentscope_color = "",
-                    },
-                    -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+            -- Default options
+            require("nightfox").setup {
+                options = {
+                    transparent = true,
+                    terminal_colors = true,
+                    dim_inactive = false,
+                    module_default = true,
                 },
             }
-            vim.cmd "colorscheme catppuccin-mocha"
+
+            vim.cmd "colorscheme carbonfox"
         end,
     },
 
@@ -146,7 +141,7 @@ require("lazy").setup {
 
     {
         "williamboman/mason.nvim",
-        cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+        -- cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
         build = ":MasonUpdate", -- :MasonUpdate updates registry contents
         config = function()
             require("mason").setup()
@@ -154,6 +149,7 @@ require("lazy").setup {
             local ensure_installed = {
                 "lua-language-server",
                 "pyright",
+                "taplo",
                 "ansible-language-server",
                 "rust-analyzer",
                 "bash-language-server",
@@ -169,6 +165,7 @@ require("lazy").setup {
                 "sqlls",
                 "terraform-ls",
             }
+
             vim.api.nvim_create_user_command(
                 "MasonInstallAll",
                 function() vim.cmd("MasonInstall " .. table.concat(ensure_installed, " ")) end,
@@ -184,6 +181,12 @@ require("lazy").setup {
                 python = { "mypy" },
                 javascript = { "eslint" },
             }
+
+            local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+                group = lint_augroup,
+                callback = function() require("lint").try_lint() end,
+            })
         end,
     },
     {
@@ -203,6 +206,7 @@ require("lazy").setup {
                     ["typescriptreact"] = { "prettier" },
                     ["vue"] = { "prettier" },
                     ["css"] = { "prettier" },
+                    ["toml"] = { "taplo" },
                     ["scss"] = { "prettier" },
                     ["less"] = { "prettier" },
                     ["html"] = { "prettier" },
@@ -300,7 +304,6 @@ require("lazy").setup {
             },
         },
     },
-
     {
         "nvim-lualine/lualine.nvim",
         config = function()
@@ -320,7 +323,6 @@ require("lazy").setup {
             require("lualine").setup {
                 options = {
                     icons_enabled = false,
-                    -- theme = "tokyonight",
                     component_separators = {
                         left = " ",
                         right = " ",
@@ -435,24 +437,15 @@ require("lazy").setup {
         dependencies = { "tpope/vim-dadbod" },
         cmd = { "DBUI" },
     },
-
-    {
-        "rcarriga/nvim-notify",
-        config = function()
-            require("notify").setup {
-                background_colour = "#000000",
-                render = "compact",
-                stages = "static",
-            }
-        end,
-        lazy = true,
-    },
-
-    -- For Neovim LUA development
     {
         "folke/neodev.nvim",
         ft = "lua",
         config = function() require("neodev").setup { library = { plugins = { "nvim-dap-ui" }, types = true } } end,
+    },
+
+    {
+        "aserowy/tmux.nvim",
+        config = function() return require("tmux").setup() end,
     },
 }
 
@@ -495,24 +488,24 @@ vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
 
 vim.keymap.set("n", "<C-]>", [[:tag <c-r>=expand("<cword>")<cr><cr>]], { remap = false })
 
-if os.getenv "TMUX" == nil then
-    for num = 1, 10 do
-        vim.keymap.set("n", string.format("<A-%s>", num), string.format("<Esc>%sgt", num), { remap = false })
-    end
-
-    for num = 1, 10 do
-        vim.keymap.set("i", string.format("<A-%s>", num), string.format("<Esc>%sgt", num), { remap = false })
-    end
-
-    for num = 1, 10 do
-        vim.keymap.set("t", string.format("<A-%s>", num), string.format([[<C-\><C-n>%sgt]], num), { remap = false })
-    end
-
-    vim.keymap.set("n", "<A-h>", "<Esc>:tabprevious<CR>", { remap = false })
-    vim.keymap.set("i", "<A-h>", "<Esc>:tabprevious<CR>", { remap = false })
-    vim.keymap.set("t", "<A-h>", [[<C-\><C-n>:tabprevious<CR>]], { remap = false })
-
-    vim.keymap.set("n", "<A-l>", "<Esc>:tabnext<CR>", { remap = false })
-    vim.keymap.set("i", "<A-l>", "<Esc>:tabnext<CR>", { remap = false })
-    vim.keymap.set("t", "<A-l>", [[<C-\><C-n>:tabnext<CR>]], { remap = false })
-end
+-- if os.getenv "TMUX" == nil then
+--     for num = 1, 10 do
+--         vim.keymap.set("n", string.format("<A-%s>", num), string.format("<Esc>%sgt", num), { remap = false })
+--     end
+--
+--     for num = 1, 10 do
+--         vim.keymap.set("i", string.format("<A-%s>", num), string.format("<Esc>%sgt", num), { remap = false })
+--     end
+--
+--     for num = 1, 10 do
+--         vim.keymap.set("t", string.format("<A-%s>", num), string.format([[<C-\><C-n>%sgt]], num), { remap = false })
+--     end
+--
+--     vim.keymap.set("n", "<A-h>", "<Esc>:tabprevious<CR>", { remap = false })
+--     vim.keymap.set("i", "<A-h>", "<Esc>:tabprevious<CR>", { remap = false })
+--     vim.keymap.set("t", "<A-h>", [[<C-\><C-n>:tabprevious<CR>]], { remap = false })
+--
+--     vim.keymap.set("n", "<A-l>", "<Esc>:tabnext<CR>", { remap = false })
+--     vim.keymap.set("i", "<A-l>", "<Esc>:tabnext<CR>", { remap = false })
+--     vim.keymap.set("t", "<A-l>", [[<C-\><C-n>:tabnext<CR>]], { remap = false })
+-- end

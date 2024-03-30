@@ -13,23 +13,6 @@ install_neovim_plugins() {
 	echo -e "${GREEN}neovim install success${NC}"
 }
 
-install_npm_deps() {
-	npm install -g --quiet --silent @ansible/ansible-language-server >/dev/null 2>&1
-    npm install -g @microsoft/compose-language-service
-	npm install -g --quiet --silent \
-		neovim \
-		sql-formatter \
-		bash-language-server \
-		dockerfile-language-server-nodejs \
-		javascript-typescript-langserver \
-		typescript-language-server \
-		typescript \
-		marked \
-		prettier \
-		pyright \
-		standard >/dev/null 2>&1 &&
-		echo -e "${GREEN}npm install success${NC}"
-}
 
 install_python_deps() {
 	pip3 install -q -U --user \
@@ -141,7 +124,6 @@ main() {
 	install_brew_packages
 
 	install_go_packages
-	install_npm_deps
 	install_python_deps
 	install_neovim_plugins
 	install_extras
