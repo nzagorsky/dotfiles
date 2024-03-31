@@ -1,107 +1,12 @@
-vim.loader.enable()
+local plugins = {
+    { "David-Kunz/gen.nvim" },
 
-vim.g.mapleader = " "
-vim.opt.scrolloff = 1
-vim.opt.textwidth = 0 -- Do not break the line while typing
-vim.opt.showcmd = true -- Show the (partial) command as it’s being typed
-
-vim.opt.smarttab = true
-vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.infercase = true
-vim.opt.showmatch = true
-
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
-vim.opt.wildmenu = true
-
-vim.opt.foldenable = true
-vim.opt.foldmethod = "indent"
-vim.opt.foldlevelstart = 99
-vim.opt.foldnestmax = 10 -- deepest fold is 10 levels
-vim.opt.errorbells = false
-vim.opt.visualbell = false
-vim.opt.startofline = false
-
--- Creating parent folders if they doesn't exist on buffer save.
-vim.cmd [[
-function! MkNonExDir(file, buf)
-    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
-    endif
-endfunction
-
-augroup AutomaticDirectoryCreation
-    autocmd!
-    autocmd BufWritePre * :call MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
-]]
-
--- dont list quickfix buffers
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "qf",
-    callback = function() vim.opt_local.buflisted = false end,
-})
-
--- Settings
-vim.o.clipboard = "unnamedplus"
-vim.o.autoread = true -- detect when a file is changed
-vim.o.signcolumn = "yes" --  no more text shifting
-vim.o.hidden = true --  buffers
-vim.o.wrap = true
-vim.o.swapfile = false
-vim.o.undofile = true
-vim.o.undodir = vim.fn.expand "~" .. "/.cache/nvim/undo"
-vim.o.backupdir = vim.fn.expand "~" .. "/.cache/nvim/backup"
-vim.o.directory = vim.fn.expand "~" .. "/.cache/nvim/dir"
-vim.o.history = 1000
-vim.o.title = true
-vim.o.titlestring = "nvim"
-vim.o.titleold = "zsh"
-vim.o.cmdheight = 1
-vim.o.shortmess = "aoOtIWcFs"
-vim.o.updatetime = 250
-
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system {
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    }
-end
-vim.opt.rtp:prepend(lazypath)
-
---- PLUGINS
-require("lazy").setup {
     {
         "EdenEast/nightfox.nvim",
         name = "nightfox",
         config = function()
             -- Default options
-            require("nightfox").setup {
-                options = {
-                    transparent = true,
-                    terminal_colors = true,
-                    dim_inactive = false,
-                    module_default = true,
-                },
-            }
+            require("nightfox").setup {}
 
             vim.cmd "colorscheme carbonfox"
         end,
@@ -182,11 +87,11 @@ require("lazy").setup {
                 javascript = { "eslint" },
             }
 
-            local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-                group = lint_augroup,
-                callback = function() require("lint").try_lint() end,
-            })
+            -- local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+            -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+            --     group = lint_augroup,
+            --     callback = function() require("lint").try_lint() end,
+            -- })
         end,
     },
     {
@@ -442,8 +347,99 @@ require("lazy").setup {
         ft = "lua",
         config = function() require("neodev").setup { library = { plugins = { "nvim-dap-ui" }, types = true } } end,
     },
-
 }
+
+vim.loader.enable()
+
+vim.g.mapleader = " "
+vim.opt.scrolloff = 1
+vim.opt.textwidth = 0 -- Do not break the line while typing
+vim.opt.showcmd = true -- Show the (partial) command as it’s being typed
+
+vim.opt.smarttab = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.infercase = true
+vim.opt.showmatch = true
+
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+vim.opt.wildmenu = true
+
+vim.opt.foldenable = true
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 10 -- deepest fold is 10 levels
+vim.opt.errorbells = false
+vim.opt.visualbell = false
+vim.opt.startofline = false
+
+-- Creating parent folders if they doesn't exist on buffer save.
+vim.cmd [[
+function! MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+
+augroup AutomaticDirectoryCreation
+    autocmd!
+    autocmd BufWritePre * :call MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+]]
+
+-- dont list quickfix buffers
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "qf",
+    callback = function() vim.opt_local.buflisted = false end,
+})
+
+-- Settings
+vim.o.clipboard = "unnamedplus"
+vim.o.autoread = true -- detect when a file is changed
+vim.o.signcolumn = "yes" --  no more text shifting
+vim.o.hidden = true --  buffers
+vim.o.wrap = true
+vim.o.swapfile = false
+vim.o.undofile = true
+vim.o.undodir = vim.fn.expand "~" .. "/.cache/nvim/undo"
+vim.o.backupdir = vim.fn.expand "~" .. "/.cache/nvim/backup"
+vim.o.directory = vim.fn.expand "~" .. "/.cache/nvim/dir"
+vim.o.history = 1000
+vim.o.title = true
+vim.o.titlestring = "nvim"
+vim.o.titleold = "zsh"
+vim.o.cmdheight = 1
+vim.o.shortmess = "aoOtIWcFs"
+vim.o.updatetime = 250
+
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system {
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    }
+end
+vim.opt.rtp:prepend(lazypath)
+
+--- PLUGINS
+require("lazy").setup(plugins)
 
 vim.keymap.set("i", "jk", "<Esc>", { remap = false, nowait = true })
 vim.keymap.set("c", "jk", "<Esc>", { remap = false, nowait = true })
@@ -455,8 +451,7 @@ vim.keymap.set("t", "ол", [[<C-\><C-n>]], { remap = false })
 
 vim.keymap.set("n", "<leader><leader>", "V", { remap = false })
 vim.keymap.set("n", "<leader>w", ":w<cr>", { remap = false })
-vim.keymap.set("n", "<leader>q", ":q<cr>", { remap = false })
-vim.keymap.set("n", "<leader>kb", ":bd<cr>", { remap = false })
+vim.keymap.set("n", "<leader>q", ":bd<cr>", { remap = false })
 vim.keymap.set("n", "Y", "y$", { remap = false })
 
 vim.keymap.set("n", "<a-x>", ":Commands<cr>", { remap = false })
