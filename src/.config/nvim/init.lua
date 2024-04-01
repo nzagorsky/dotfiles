@@ -2,6 +2,25 @@ local plugins = {
     { "David-Kunz/gen.nvim" },
 
     {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+
+            -- -- OPTIONAL:
+            -- --   `nvim-notify` is only needed, if you want to use the notification view.
+            -- --   If not available, we use `mini` as the fallback
+            -- "rcarriga/nvim-notify",
+
+            { "echasnovski/mini.nvim", version = false },
+        },
+    },
+
+    {
         "EdenEast/nightfox.nvim",
         name = "nightfox",
         config = function()
@@ -451,7 +470,7 @@ vim.keymap.set("t", "ол", [[<C-\><C-n>]], { remap = false })
 
 vim.keymap.set("n", "<leader><leader>", "V", { remap = false })
 vim.keymap.set("n", "<leader>w", ":w<cr>", { remap = false })
-vim.keymap.set("n", "<leader>q", ":bd<cr>", { remap = false })
+vim.keymap.set("n", "<leader>q", ":q<cr>", { remap = false })
 vim.keymap.set("n", "Y", "y$", { remap = false })
 
 vim.keymap.set("n", "<a-x>", ":Commands<cr>", { remap = false })

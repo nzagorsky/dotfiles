@@ -75,6 +75,7 @@ install_brew_packages() {
 		iina \
 		jq \
 		krew \
+        starship \
 		kubectl \
 		libxmlsec1 \
 		llvm \
