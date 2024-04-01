@@ -50,15 +50,14 @@ local M = {
             float = {
                 border = _border,
             },
-            virtual_text = false,
+            virtual_text = true,
+            underline = false,
             update_in_insert = false,
         }
 
         require("lspconfig.ui.windows").default_options = {
             border = _border,
         }
-
-        vim.cmd [[autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, {focus=false})]]
 
         vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
         vim.api.nvim_clear_autocmds { group = "lsp_document_highlight" }

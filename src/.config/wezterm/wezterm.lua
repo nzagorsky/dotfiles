@@ -8,8 +8,10 @@ end
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14.0
 
-config.color_scheme = "catppuccin-mocha"
+-- config.color_scheme = 'Ayu Dark (Gogh)'
+config.color_scheme = "carbonfox"
 config.hide_tab_bar_if_only_one_tab = true
+config.window_background_opacity = 1
 
 config.check_for_updates = false
 config.animation_fps = 1
@@ -34,7 +36,7 @@ config.colors = {
 }
 
 local keys = {}
-local hotkeys = { "f", "b", "h", "j", "k", "l", "p" }
+local hotkeys = { "f", "b", "h", "j", "k", "l", "p", "t", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }
 
 for _, v in pairs(hotkeys) do
 	print(v)

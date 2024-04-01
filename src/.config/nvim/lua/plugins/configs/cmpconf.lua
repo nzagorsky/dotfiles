@@ -66,7 +66,7 @@ local M = {
             },
 
             sources = cmp.config.sources {
-                { name = "nvim_lsp", max_item_count = max_completion_item_count * 2 },
+                { name = "nvim_lsp", max_item_count = max_completion_item_count * 6 },
                 { name = "luasnip", max_item_count = 10 },
                 { name = "path", max_item_count = max_completion_item_count },
                 buffer_words_source,
