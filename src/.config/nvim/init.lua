@@ -4,14 +4,11 @@ local plugins = {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
         dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             "MunifTanjim/nui.nvim",
-
-            -- -- OPTIONAL:
-            -- --   `nvim-notify` is only needed, if you want to use the notification view.
-            -- --   If not available, we use `mini` as the fallback
-            -- "rcarriga/nvim-notify",
 
             { "echasnovski/mini.nvim", version = false },
         },
@@ -442,9 +439,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
---- PLUGINS
-require("lazy").setup(plugins)
-
 vim.keymap.set("i", "jk", "<Esc>", { remap = false, nowait = true })
 vim.keymap.set("c", "jk", "<Esc>", { remap = false, nowait = true })
 vim.keymap.set("t", "jk", [[<C-\><C-n>]], { remap = false, nowait = true })
@@ -482,3 +476,6 @@ vim.keymap.set("n", "gev", ":e $MYVIMRC<cr>", { remap = false })
 vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
 
 vim.keymap.set("n", "<C-]>", [[:tag <c-r>=expand("<cword>")<cr><cr>]], { remap = false })
+
+--- PLUGINS
+require("lazy").setup(plugins)
