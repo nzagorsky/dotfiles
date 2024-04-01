@@ -4,9 +4,6 @@ local plugins = {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
         dependencies = {
             -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             "MunifTanjim/nui.nvim",
@@ -18,6 +15,24 @@ local plugins = {
 
             { "echasnovski/mini.nvim", version = false },
         },
+    },
+
+    {
+        "alexghergh/nvim-tmux-navigation",
+        config = function()
+            local nvim_tmux_nav = require "nvim-tmux-navigation"
+
+            nvim_tmux_nav.setup {
+                keybindings = {
+                    left = "<C-h>",
+                    down = "<C-j>",
+                    up = "<C-k>",
+                    right = "<C-l>",
+                    last_active = "<C-\\>",
+                    next = "<C-Space>",
+                },
+            }
+        end,
     },
 
     {
@@ -106,11 +121,11 @@ local plugins = {
                 javascript = { "eslint" },
             }
 
-            -- local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-            -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-            --     group = lint_augroup,
-            --     callback = function() require("lint").try_lint() end,
-            -- })
+            local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+                group = lint_augroup,
+                callback = function() require("lint").try_lint() end,
+            })
         end,
     },
     {
@@ -205,6 +220,7 @@ local plugins = {
                     "rust",
                     "toml",
                     "vim",
+                    "vimdoc",
                     "yaml",
                 },
                 highlight = {
@@ -294,37 +310,6 @@ local plugins = {
                 },
             }
         end,
-    },
-
-    {
-        "akinsho/toggleterm.nvim",
-        keys = {
-            { "<a-j>", "<cmd>ToggleTerm<cr>" },
-        },
-        branch = "main",
-        config = function()
-            require("toggleterm").setup {
-                open_mapping = [[<a-j>]],
-                hide_numbers = true, -- hide the number column in toggleterm buffers
-                start_in_insert = true,
-                insert_mappings = true, -- whether or not the open mapping applies in insert mode
-                terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-                -- shade_terminals = true,
-                persist_size = true,
-                close_on_exit = true, -- close the terminal window when the process exits
-                shell = vim.o.shell, -- change the default shell
-                direction = "horizontal",
-                -- float_opts = { -- This field is only relevant if direction is set to 'float'
-                --     border = "single",
-                --     width = function(term) return math.floor(vim.o.columns * 0.90) end,
-                --     height = function(term) return math.floor(vim.o.lines * 0.80) end,
-                -- },
-            }
-        end,
-    },
-
-    {
-        "ludovicchabant/vim-gutentags",
     },
 
     {
@@ -475,10 +460,10 @@ vim.keymap.set("n", "Y", "y$", { remap = false })
 
 vim.keymap.set("n", "<a-x>", ":Commands<cr>", { remap = false })
 
-vim.keymap.set("n", "<c-h>", "<C-w>h", { remap = false })
-vim.keymap.set("n", "<c-j>", "<C-w>j", { remap = false })
-vim.keymap.set("n", "<c-k>", "<C-w>k", { remap = false })
-vim.keymap.set("n", "<c-l>", "<C-w>l", { remap = false })
+-- vim.keymap.set("n", "<c-h>", "<C-w>h", { remap = true })
+-- vim.keymap.set("n", "<c-j>", "<C-w>j", { remap = true })
+-- vim.keymap.set("n", "<c-k>", "<C-w>k", { remap = true })
+-- vim.keymap.set("n", "<c-l>", "<C-w>l", { remap = true })
 
 vim.keymap.set("t", "<c-h>", [[<C-\><C-n><C-w>h]], { remap = false })
 vim.keymap.set("t", "<c-j>", [[<C-\><C-n><C-w>j]], { remap = false })
