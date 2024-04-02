@@ -1,5 +1,4 @@
 local plugins = {
-    { "David-Kunz/gen.nvim" },
 
     {
         "folke/noice.nvim",
@@ -62,6 +61,7 @@ local plugins = {
             }
         end,
     },
+
     {
         "nvim-telescope/telescope.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -109,6 +109,7 @@ local plugins = {
             )
         end,
     },
+
     {
         "mfussenegger/nvim-lint",
         config = function()
@@ -125,6 +126,7 @@ local plugins = {
             })
         end,
     },
+
     {
         "stevearc/conform.nvim",
         keys = {
@@ -157,10 +159,12 @@ local plugins = {
             }
         end,
     },
+
     {
         "neovim/nvim-lspconfig",
         config = require("plugins.configs.lspconfig").config,
     },
+
     {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
@@ -182,6 +186,13 @@ local plugins = {
                     require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
                 end,
             },
+
+            {
+                "Exafunction/codeium.nvim",
+                dependencies = { "nvim-lua/plenary.nvim" },
+                config = function() require("codeium").setup {} end,
+            },
+
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
@@ -241,6 +252,7 @@ local plugins = {
             },
         },
     },
+
     {
         "nvim-lualine/lualine.nvim",
         config = function()

@@ -1,5 +1,3 @@
-local max_completion_item_count = 5
-
 local has_words_before = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -8,7 +6,6 @@ end
 
 local buffer_words_source = {
     name = "buffer",
-    max_item_count = max_completion_item_count,
     option = {
         get_bufnrs = function() return vim.api.nvim_list_bufs() end,
     },
@@ -28,6 +25,7 @@ local M = {
             snippet = {
                 expand = function(args) require("luasnip").lsp_expand(args.body) end,
             },
+
             mapping = cmp.mapping.preset.insert {
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -66,9 +64,10 @@ local M = {
             },
 
             sources = cmp.config.sources {
-                { name = "nvim_lsp", max_item_count = max_completion_item_count * 6 },
-                { name = "luasnip", max_item_count = 10 },
-                { name = "path", max_item_count = max_completion_item_count },
+                { name = "codeium" },
+                { name = "nvim_lsp" },
+                { name = "luasnip" },
+                { name = "path" },
                 buffer_words_source,
             },
         }
@@ -77,7 +76,7 @@ local M = {
         cmp.setup.cmdline({ "/", "?" }, {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
-                { name = "buffer", max_item_count = max_completion_item_count },
+                { name = "buffer" },
             },
         })
 
@@ -85,9 +84,9 @@ local M = {
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources {
-                { name = "path", max_item_count = max_completion_item_count },
-                { name = "cmdline", max_item_count = max_completion_item_count * 2 },
-                { name = "nvim_lua", max_item_count = max_completion_item_count },
+                { name = "path" },
+                { name = "cmdline" },
+                { name = "nvim_lua" },
             },
         })
     end,
