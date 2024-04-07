@@ -1,14 +1,14 @@
 local plugins = {
+    {
+        "RRethy/vim-illuminate",
+    },
 
     {
         "folke/noice.nvim",
         event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
+        opts = {},
         dependencies = {
             "MunifTanjim/nui.nvim",
-
             { "echasnovski/mini.nvim", version = false },
         },
     },
@@ -114,7 +114,6 @@ local plugins = {
         "mfussenegger/nvim-lint",
         config = function()
             require("lint").linters_by_ft = {
-                markdown = { "vale" },
                 python = { "mypy" },
                 javascript = { "eslint" },
             }
@@ -190,7 +189,11 @@ local plugins = {
             {
                 "Exafunction/codeium.nvim",
                 dependencies = { "nvim-lua/plenary.nvim" },
-                config = function() require("codeium").setup {} end,
+                config = function()
+                    require("codeium").setup {
+                        enable_chat = true,
+                    }
+                end,
             },
 
             "saadparwaiz1/cmp_luasnip",
