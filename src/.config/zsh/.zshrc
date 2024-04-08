@@ -5,7 +5,6 @@ source ~/.config/credentials/secure > /dev/null 2>&1 || true
 
 export BROWSER=open
 export EDITOR=nvim
-export TERM=xterm-256color
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # Ansible settings
@@ -225,9 +224,6 @@ alias .....="../../../../"
 # Plugins {{{
 source $ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# POLYGLOT_PROMPT_DIRTRIM=2
-# . ~/.local/bin/polyglot.sh
 
 eval "$(starship init zsh)"
 # }}}

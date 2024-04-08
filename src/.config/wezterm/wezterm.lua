@@ -8,8 +8,11 @@ end
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14.0
 
--- config.color_scheme = 'Ayu Dark (Gogh)'
-config.color_scheme = "carbonfox"
+local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
+custom.background = "#181818"
+config.color_schemes = { ["PatchedMocha"] = custom }
+config.color_scheme = "PatchedMocha"
+
 config.hide_tab_bar_if_only_one_tab = true
 config.window_background_opacity = 1
 

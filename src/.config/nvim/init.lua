@@ -1,4 +1,22 @@
 local plugins = {
+
+    {
+        "catppuccin/nvim",
+        config = function()
+            require("catppuccin").setup {
+                flavour = "mocha", -- latte, frappe, macchiato, mocha
+                color_overrides = {
+                    mocha = {
+                        base = "#181818",
+                        crust = "#111111",
+                        mantle = "#161616",
+                    },
+                },
+            }
+            vim.cmd.colorscheme "catppuccin-mocha"
+        end,
+    },
+
     {
         "RRethy/vim-illuminate",
     },
@@ -28,17 +46,6 @@ local plugins = {
                     next = "<C-Space>",
                 },
             }
-        end,
-    },
-
-    {
-        "EdenEast/nightfox.nvim",
-        name = "nightfox",
-        config = function()
-            -- Default options
-            require("nightfox").setup {}
-
-            vim.cmd "colorscheme carbonfox"
         end,
     },
 

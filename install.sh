@@ -14,7 +14,11 @@ setup_shell() {
 	mkdir -p ~/.local/bin/
 	mkdir -p ~/.config/wget/
 	touch ~/.config/wget/wgetrc
-	curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh >~/.local/bin/polyglot.sh
+
+}
+
+install_tpm() {
+    if cd ~/.config/tmux/plugins/tpm; then git pull; else git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm; fi
 }
 
 main() {
