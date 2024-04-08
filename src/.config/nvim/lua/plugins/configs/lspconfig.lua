@@ -59,18 +59,6 @@ local M = {
             border = _border,
         }
 
-        vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-        vim.api.nvim_clear_autocmds { group = "lsp_document_highlight" }
-        vim.api.nvim_create_autocmd("CursorHold", {
-            command = "silent! lua vim.lsp.buf.document_highlight()",
-            group = "lsp_document_highlight",
-            desc = "Document Highlight",
-        })
-        vim.api.nvim_create_autocmd("CursorMoved", {
-            command = "silent! lua vim.lsp.buf.clear_references()",
-            group = "lsp_document_highlight",
-            desc = "Clear All the References",
-        })
 
         local default_opts = {
             capabilities = capabilities,

@@ -1,14 +1,32 @@
 local plugins = {
 
     {
+        "catppuccin/nvim",
+        config = function()
+            require("catppuccin").setup {
+                flavour = "mocha", -- latte, frappe, macchiato, mocha
+                color_overrides = {
+                    mocha = {
+                        base = "#181818",
+                        crust = "#111111",
+                        mantle = "#161616",
+                    },
+                },
+            }
+            vim.cmd.colorscheme "catppuccin-mocha"
+        end,
+    },
+
+    {
+        "RRethy/vim-illuminate",
+    },
+
+    {
         "folke/noice.nvim",
         event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
+        opts = {},
         dependencies = {
             "MunifTanjim/nui.nvim",
-
             { "echasnovski/mini.nvim", version = false },
         },
     },
@@ -28,17 +46,6 @@ local plugins = {
                     next = "<C-Space>",
                 },
             }
-        end,
-    },
-
-    {
-        "EdenEast/nightfox.nvim",
-        name = "nightfox",
-        config = function()
-            -- Default options
-            require("nightfox").setup {}
-
-            vim.cmd "colorscheme carbonfox"
         end,
     },
 
@@ -114,7 +121,6 @@ local plugins = {
         "mfussenegger/nvim-lint",
         config = function()
             require("lint").linters_by_ft = {
-                markdown = { "vale" },
                 python = { "mypy" },
                 javascript = { "eslint" },
             }
@@ -190,7 +196,16 @@ local plugins = {
             {
                 "Exafunction/codeium.nvim",
                 dependencies = { "nvim-lua/plenary.nvim" },
-                config = function() require("codeium").setup {} end,
+                config = function()
+                    require("codeium").setup {
+                        enable_chat = true,
+                    }
+                end,
+            },
+
+            {
+                "tzachar/cmp-tabnine",
+                build = "./install.sh",
             },
 
             "saadparwaiz1/cmp_luasnip",

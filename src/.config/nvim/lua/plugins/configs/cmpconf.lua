@@ -66,6 +66,7 @@ local M = {
             sources = cmp.config.sources {
                 { name = "codeium" },
                 { name = "nvim_lsp" },
+                { name = "cmp_tabnine" },
                 { name = "luasnip" },
                 { name = "path" },
                 buffer_words_source,
