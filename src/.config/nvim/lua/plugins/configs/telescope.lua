@@ -18,9 +18,10 @@ local M = {
         {
             "<leader>l",
             function()
-                require("telescope.builtin").live_grep {
-                    prompt_title = "find string in open buffers...",
+                require("telescope.builtin").grep_string {
+                    search = "",
                     disable_coordinates = true,
+                    hidden = true,
                     grep_open_files = true,
                 }
             end,
