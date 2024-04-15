@@ -1,4 +1,12 @@
 local plugins = {
+    {
+        "stevearc/oil.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("oil").setup()
+            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+        end,
+    },
 
     {
         "catppuccin/nvim",
@@ -51,10 +59,6 @@ local plugins = {
 
     {
         "nvim-tree/nvim-tree.lua",
-        keys = {
-            { "<c-n>", ":NvimTreeToggle<CR>" },
-            { "<c-b>", ":NvimTreeOpen<CR>:NvimTreeCollapseKeepBuffers<CR>" },
-        },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
