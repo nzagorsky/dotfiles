@@ -2,7 +2,7 @@ local M = {
     config = function()
         local lspconfig = require "lspconfig"
         local util = require "lspconfig.util"
-        local _border = "single"
+        local _border = "rounded"
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
         vim.api.nvim_create_autocmd("LspAttach", {
@@ -29,6 +29,7 @@ local M = {
             Hint = ". ",
             Info = ". ",
         }
+
         for type, icon in pairs(signs) do
             local hl = "DiagnosticSign" .. type
             vim.fn.sign_define(hl, {
@@ -37,11 +38,11 @@ local M = {
                 numhl = "",
             })
         end
-
+        --
         vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
             border = _border,
         })
-
+        --
         vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
             border = _border,
         })
@@ -51,14 +52,11 @@ local M = {
                 border = _border,
             },
             virtual_text = true,
-            underline = false,
-            update_in_insert = false,
         }
 
         require("lspconfig.ui.windows").default_options = {
             border = _border,
         }
-
 
         local default_opts = {
             capabilities = capabilities,
@@ -74,6 +72,7 @@ local M = {
                         autoImportCompletions = true,
                         logLevel = "Warning",
                         diagnosticMode = "openFilesOnly",
+                        typeCheckingMode = "off",
                     },
                 },
             },

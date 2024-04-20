@@ -30,16 +30,6 @@ local plugins = {
     },
 
     {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {},
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            { "echasnovski/mini.nvim", version = false },
-        },
-    },
-
-    {
         "alexghergh/nvim-tmux-navigation",
         config = function()
             local nvim_tmux_nav = require "nvim-tmux-navigation"
@@ -58,37 +48,22 @@ local plugins = {
     },
 
     {
-        "nvim-tree/nvim-tree.lua",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-
-        config = function()
-            require("nvim-tree").setup {
-                sort_by = "case_sensitive",
-                update_focused_file = {
-                    enable = true,
-                },
-            }
-        end,
-    },
-
-    {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
         keys = require("plugins.configs.telescope").keys,
         config = require("plugins.configs.telescope").config,
-    },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
 
-    {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        cond = function() return vim.fn.executable "make" == 1 end,
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
+                cond = function() return vim.fn.executable "make" == 1 end,
+            },
+        },
     },
 
     {
         "williamboman/mason.nvim",
-        -- cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
         build = ":MasonUpdate", -- :MasonUpdate updates registry contents
         config = function()
             require("mason").setup()
@@ -197,20 +172,6 @@ local plugins = {
                 end,
             },
 
-            {
-                "Exafunction/codeium.nvim",
-                dependencies = { "nvim-lua/plenary.nvim" },
-                config = function()
-                    require("codeium").setup {
-                        enable_chat = true,
-                    }
-                end,
-            },
-
-            {
-                "tzachar/cmp-tabnine",
-                build = "./install.sh",
-            },
 
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
@@ -227,29 +188,7 @@ local plugins = {
             require("nvim-treesitter.configs").setup {
                 -- one of "all", "maintained" (parsers with maintainers),
                 -- or a list of languages
-                ensure_installed = {
-                    "bash",
-                    "cmake",
-                    "dockerfile",
-                    "gitignore",
-                    "swift",
-                    "go",
-                    "comment",
-                    "html",
-                    "htmldjango",
-                    "javascript",
-                    "regex",
-                    "markdown",
-                    "markdown_inline",
-                    "sql",
-                    "lua",
-                    "python",
-                    "rust",
-                    "toml",
-                    "vim",
-                    "vimdoc",
-                    "yaml",
-                },
+                ensure_installed = "all",
                 highlight = {
                     enable = true,
                     use_languagetree = true,
@@ -406,10 +345,14 @@ vim.opt.splitright = true
 
 vim.opt.wildmenu = true
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.opt.foldnestmax = 4
 vim.opt.foldenable = true
-vim.opt.foldmethod = "indent"
-vim.opt.foldlevelstart = 99
-vim.opt.foldnestmax = 10 -- deepest fold is 10 levels
+vim.opt.foldcolumn = "0"
+
 vim.opt.errorbells = false
 vim.opt.visualbell = false
 vim.opt.startofline = false

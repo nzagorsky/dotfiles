@@ -112,7 +112,8 @@ local M = {
         require("telescope").setup {
             defaults = {
                 file_ignore_patterns = { "node_modules", ".git/" },
-                borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+                -- { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+                borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
                 vimgrep_arguments = {
                     "rg",
                     "--color=never",
