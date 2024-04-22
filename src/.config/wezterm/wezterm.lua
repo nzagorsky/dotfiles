@@ -5,6 +5,7 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+-- config.font = wezterm.font("Hack Nerd Font")
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14.0
 
