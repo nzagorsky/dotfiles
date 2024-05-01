@@ -1,33 +1,43 @@
 #!/usr/bin/env bash
+set -ex
 
 sudo apt-get update
-
-
 sudo apt-get install -y \
     git \
+    git-lfs \
     stow \
     zsh-syntax-highlighting \
     pipx \
     make \
     docker.io \
+    eza \
+    fzf \
+    fd-find \
+    jq \
+    ripgrep \
+    npm \
+    golang \
+    unzip \
     avahi-daemon \
     zsh \
     build-essential \
     tmux \
-    poetry \
     neovim
 
-pipx install poetry
-
+sudo ln -s $(which fdfind) /usr/bin/fd
 sudo gpasswd -a $USER docker
-
 sudo chsh $USER -s $(which zsh)
-
 curl -sS https://starship.rs/install.sh | sh
 
 
+# Pyenv
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+curl https://pyenv.run | bash
+pipx install poetry
+
+# Finalize
 nvim --headless "+Lazy! sync" +qa
-nvim --headless "+MasonInstallAll" +qa
+
 
 # git clone https://github.com/nzagorsky/dotfiles
 # cd dotfiles
