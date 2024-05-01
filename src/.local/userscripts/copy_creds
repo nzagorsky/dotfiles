@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# SSH_OPTIONS="-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
+SSH_OPTIONS=""
+
+rsync -av -e "ssh $SSH_OPTIONS" \
+    --exclude='.#*' \
+    --exclude='S.*' \
+    --exclude='*.conf' \
+    $HOME/.gnupg/ $1@$2:~/.gnupg
+
+
+rsync -av -e "ssh $SSH_OPTIONS" \
+    --exclude='environment' \
+    $HOME/.ssh/ $1@$2:~/.ssh
+
+rsync -av -e "ssh $SSH_OPTIONS" \
+    --exclude='environment' \
+    $HOME/.config/credentials/ $1@$2:~/.config/credentials/

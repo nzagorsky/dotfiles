@@ -50,6 +50,8 @@ install_brew_packages() {
 
 	brew install --quiet \
 		hashicorp/tap/vault \
+        docker-credential-helper \
+        git-lfs \
 		datawire/blackbird/telepresence-arm64 \
 		autoconf \
 		marksman \
