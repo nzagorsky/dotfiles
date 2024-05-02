@@ -109,3 +109,5 @@ function macnotify
     # Usage: $ macnotify Title "Long notification text"
     osascript -e 'display notification "'$2'" with title "'$1'"'
 end
+
+pyenv init - | source
