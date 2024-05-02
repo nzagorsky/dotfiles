@@ -21,4 +21,3 @@ setup_shell() {
 pull_submodules || echo "Failed to pull submodules"
 setup_dots
 setup_shell
-install_tpm

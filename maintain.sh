@@ -3,7 +3,10 @@ set -ex
 git fetch
 git merge origin/master
 
-if type brew &>/dev/null; then
+if ! command -v brew &> /dev/null
+then
+    echo "no brew"
+else
 	brew update
 	brew upgrade
 	brew cleanup
