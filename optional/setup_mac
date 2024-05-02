@@ -1,135 +1,65 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env zsh
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BOLD='\033[1m'
-NC='\033[0m'
-
-cat ~/.config/zsh/.zshrc | grep PATH >/tmp/dotenv && source /tmp/dotenv
+set -ex
 
 install_neovim_plugins() {
 	nvim --headless "+Lazy! sync" +qa
-	echo -e "${GREEN}neovim install success${NC}"
-}
-
-
-install_python_deps() {
-	pip3 install -q -U --user \
-		"python-language-server[all]" \
-		"ansible-lint" \
-		ansible \
-        pyusb \
-		awscli \
-		hcloud \
-		cytoolz \
-		black \
-		isort \
-		dataset \
-		dateparser \
-		django-stubs \
-		django \
-		ipdb \
-		ipython \
-		neovim \
-		pipenv \
-		python-dateutil \
-		httpx \
-		yamllint \
-		--no-warn-script-location &&
-		echo -e "${GREEN}pip install success${NC}"
 }
 
 install_brew_packages() {
 	brew tap homebrew/cask-fonts
-	brew tap hashicorp/tap
 
 	brew install --quiet --cask font-hack-nerd-font
 	brew install --quiet --cask another-redis-desktop-manager --no-quarantine
-	brew install --quiet --cask pomotroid
 
 	brew install --quiet \
-		hashicorp/tap/vault \
-        docker-credential-helper \
-        git-lfs \
-		datawire/blackbird/telepresence-arm64 \
 		autoconf \
-		marksman \
+		autoenv \
 		automake \
-        youtube-dl \
-        lua-language-server \
 		bat \
 		curl \
+		docker-credential-helper \
 		exa \
 		fd \
-        wezterm \
+		fish \
 		fzy \
-		hammerspoon \
+		git-lfs \
 		go \
-        swiftformat \
-		rust \
-		rust-analyzer \
-		yq \
-        vscode-langservers-extracted \
-		gitui \
+		hammerspoon \
 		helm \
 		htop \
 		iina \
 		jq \
-		krew \
-        starship \
 		kubectl \
 		libxmlsec1 \
 		llvm \
 		m-cli \
 		mosh \
 		mysql \
-		navi \
 		ncdu \
 		neovim \
-		rectangle \
 		node \
-		nushell \
 		openvpn \
-		postgresql@14 \
-		python3 \
-		python3-tk \
+		postgresql \
+		pyenv \
 		rclone \
+		rectangle \
 		ripgrep \
+		rustup-init \
 		shfmt \
 		sqlite3 \
-		terraform-ls \
-		tfenv \
+		swiftformat \
 		tmux \
 		universal-ctags \
 		watch \
+		wezterm \
 		wget \
 		wireguard-tools \
-		zsh-syntax-highlighting &&
-		echo -e "${GREEN}Brew install success${NC}"
+		youtube-dl \
+		yq &&
+		echo -e "Brew install success"
 
 }
 
-install_go_packages() {
-	# Restart on file change
-	# Example: reflex -s -v -- zsh -c 'go run . & reloadtab'
-	go install github.com/cespare/reflex@latest
-    go install github.com/go-delve/delve/cmd/dlv@latest
-
-}
-
-install_extras() {
-	ansible-galaxy collection install kubernetes.core >/dev/null 2>&1
-	kubectl krew install modify-secret >/dev/null 2>&1
-}
-
-main() {
-	install_brew_packages
-
-	install_go_packages
-	install_python_deps
-	install_neovim_plugins
-	install_extras
-}
-
-main
+install_brew_packages
+install_neovim_plugins

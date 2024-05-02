@@ -140,6 +140,9 @@ local plugins = {
                     ["markdown.mdx"] = { "prettier" },
                     ["graphql"] = { "prettier" },
                     ["handlebars"] = { "prettier" },
+                    ["sh"] = { "shfmt" },
+                    ["bash"] = { "shfmt" },
+                    ["zsh"] = { "shfmt" },
                 },
             }
         end,
@@ -171,7 +174,6 @@ local plugins = {
                     require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
                 end,
             },
-
 
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",

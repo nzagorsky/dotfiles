@@ -26,6 +26,7 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
+
 SAVEHIST=5000
 HISTSIZE=2000
 HISTFILE=$ZDOTDIR/history
@@ -146,6 +147,7 @@ function macnotify() {
 # Alias setup {{{
 alias cp='cp -i'                          # confirm before overwriting something
 alias cya='systemctl suspend'
+alias senv='export $(xargs < .env)'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --color=tty -d skip'
