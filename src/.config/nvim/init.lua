@@ -77,6 +77,7 @@ local plugins = {
                 "bash-language-server",
                 "cmake-language-server",
                 "typescript-language-server",
+                "stylua",
                 "dockerfile-language-server",
                 "docker-compose-language-service",
                 "gopls",
@@ -191,6 +192,9 @@ local plugins = {
                 -- one of "all", "maintained" (parsers with maintainers),
                 -- or a list of languages
                 ensure_installed = "all",
+                indent = {
+                    enable = true,
+                },
                 highlight = {
                     enable = true,
                     use_languagetree = true,
