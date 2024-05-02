@@ -3,9 +3,11 @@ set -ex
 git fetch
 git merge origin/master
 
-brew update
-brew upgrade
-brew cleanup
+if type brew &>/dev/null; then
+	brew update
+	brew upgrade
+	brew cleanup
+fi
 
 ./install.sh
 
