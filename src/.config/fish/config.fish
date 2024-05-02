@@ -10,8 +10,8 @@ if status is-interactive
     fish_add_path /opt/homebrew/sbin
     fish_add_path $HOME/.local/bin
     fish_add_path $HOME/.local/include/cargo/bin
-    fish_add_path $HOME/.local/share/cargo/bin
     fish_add_path $HOME/.yarn/bin
+    fish_add_path $HOME/.local/share/cargo/bin
 
     # FZF config
     set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
