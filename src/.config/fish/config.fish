@@ -63,10 +63,10 @@ set -x OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
 set -x ANSIBLE_HOST_KEY_CHECKING False
 set -x ANSIBLE_PIPELINING True
 
-
 alias g=git
 alias v=nvim
 alias p=ipython
+alias t=zellij
 
 alias k='kubectl'
 alias kd='kubectl describe'
@@ -74,7 +74,8 @@ alias kg='kubectl get'
 alias kl='kubectl logs'
 alias klf='kubectl logs -f'
 alias ke='kubectl exec'
-alias kgn='kubectl get namespaces'
+alias kgn='kubectl get nodes'
+alias kgns='kubectl get namespaces'
 
 alias kda='kubectl describe --all-namespaces'
 alias kga='kubectl get --all-namespaces'
@@ -87,11 +88,24 @@ alias kgs='kubectl get service'
 
 alias kgpa='kubectl get pod --all-namespaces'
 alias kgda='kubectl get deployment --all-namespaces'
+alias kgsa='kubectl get svc --all-namespaces'
 
 alias kcuc='kubectl config use-context'
 alias kcur='kubectl config current-context'
 
 
+alias gpull="git pull"
+alias gst="git status"
+
+alias lofimpv='mpv --no-video "https://www.youtube.com/watch?v=jfKfPfyJRdk"'
+alias wowmpv='mpv --no-video "https://www.youtube.com/Meisio/live"'
+
+
 function kconfig
     set -x KUBECONFIG "$HOME/.config/kube/$argv"
+end
+
+function macnotify 
+    # Usage: $ macnotify Title "Long notification text"
+    osascript -e 'display notification "'$2'" with title "'$1'"'
 end

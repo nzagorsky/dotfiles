@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 set -ex
 
@@ -14,12 +14,11 @@ install_brew_packages() {
 
 	brew install --quiet \
 		autoconf \
-		autoenv \
 		automake \
 		bat \
 		curl \
 		docker-credential-helper \
-		exa \
+		eza \
 		fd \
 		fish \
 		fzy \
@@ -33,7 +32,6 @@ install_brew_packages() {
 		kubectl \
 		libxmlsec1 \
 		llvm \
-		m-cli \
 		mosh \
 		mysql \
 		ncdu \
@@ -49,16 +47,14 @@ install_brew_packages() {
 		shfmt \
 		sqlite3 \
 		swiftformat \
-		tmux \
 		universal-ctags \
 		watch \
 		wezterm \
 		wget \
 		wireguard-tools \
 		youtube-dl \
-		yq &&
-		echo -e "Brew install success"
-
+		yq \
+		zellij
 }
 
 install_brew_packages
