@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -ex
+
+sudo apt-get update
+sudo apt-get install -y \
+	avahi-daemon \
+	build-essential \
+	docker.io \
+	eza \
+	fd-find \
+	fish \
+	fzf \
+	git \
+	git-lfs \
+	golang \
+	jq \
+	make \
+	neovim \
+	npm \
+	rustup \
+	pipx \
+	ripgrep \
+	shfmt \
+	stow \
+	tmux \
+	unzip
+
+sudo ln -s $(which fdfind) /usr/bin/fd
+sudo gpasswd -a $USER docker
+sudo chsh $USER -s $(which fish)
+
+# Pyenv
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+curl https://pyenv.run | bash
+pipx install poetry
+
+# Docker: Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+	sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+sudo apt-get update
+sudo apt-get install -y docker-compose-plugin
+
+# Rust stuff:
+rustup default stable
+cargo install --locked zellij
+
+# Finalize
+nvim --headless "+Lazy! sync" +qa

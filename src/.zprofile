@@ -1,4 +1,3 @@
-
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export ZSHZ_DATA="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zdata"
 
@@ -31,16 +30,16 @@ export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
 export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
 
 # Other program settings:
-export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
-export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
-export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
-export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
+export QT_QPA_PLATFORMTHEME="gtk2"        # Have QT use gtk2 theme.
+export MOZ_USE_XINPUT2="1"                # Mozilla smooth scrolling/touchpads.
+export AWT_TOOLKIT="MToolkit wmname LG3D" #May have to install wmname
+export _JAVA_AWT_WM_NONREPARENTING=1      # Fix for Java applications in dwm
 
-# eval "$(/opt/homebrew/bin/brew shellenv)"  2>/dev/null
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
-export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
+eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null
+# export PATH="/opt/homebrew/bin:$PATH"
+# export PATH="/opt/homebrew/sbin:$PATH"
+# export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+# export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
 
 # Go
 export PATH="$PATH:$GOPATH/bin"
