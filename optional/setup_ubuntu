@@ -11,6 +11,7 @@ sudo apt-get install -y \
 	fish \
 	fzf \
 	git \
+	universal-ctags \
 	git-lfs \
 	golang \
 	jq \

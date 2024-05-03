@@ -97,6 +97,7 @@ alias kcur='kubectl config current-context'
 
 alias gpull="git pull"
 alias gst="git status"
+alias gdiff="git diff"
 
 alias lofimpv='mpv --no-video "https://www.youtube.com/watch?v=jfKfPfyJRdk"'
 alias wowmpv='mpv --no-video "https://www.youtube.com/Meisio/live"'
