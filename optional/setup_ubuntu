@@ -49,9 +49,5 @@ echo \
 sudo apt-get update
 sudo apt-get install -y docker-compose-plugin
 
-# Rust stuff:
-rustup default stable
-cargo install --locked zellij
-
 # Finalize
 nvim --headless "+Lazy! sync" +qa

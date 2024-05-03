@@ -66,7 +66,6 @@ set -x ANSIBLE_PIPELINING True
 alias g=git
 alias v=nvim
 alias p=ipython
-alias t=zellij
 
 alias k='kubectl'
 alias kd='kubectl describe'
@@ -108,6 +107,14 @@ end
 function macnotify 
     # Usage: $ macnotify Title "Long notification text"
     osascript -e 'display notification "'$2'" with title "'$1'"'
+end
+
+function t
+    if test -z "$argv"
+        tmux -u attach -t default; or zsh -c "tmux -u new -s default 2> /dev/null"
+    else
+        tmux -u attach -t $argv; or zsh -c "tmux -u new -s $argv 2> /dev/null"
+    end
 end
 
 pyenv init - | source
