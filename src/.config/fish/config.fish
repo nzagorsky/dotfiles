@@ -4,6 +4,7 @@ if status is-interactive
     set fish_greeting
 
     set -x GOPATH "$HOME/.local/share/go"
+    set -x PYENV_ROOT "$HOME/.pyenv"
 
     fish_add_path $GOPATH/bin
     fish_add_path /opt/homebrew/bin
@@ -12,10 +13,11 @@ if status is-interactive
     fish_add_path $HOME/.local/include/cargo/bin
     fish_add_path $HOME/.yarn/bin
     fish_add_path $HOME/.local/share/cargo/bin
+    fish_add_path $PYENV_ROOT/bin
 
     # FZF config
     set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
-    set -x FZF_DEFAULT_OPTS "--inline-info --preview 'bat {}'"
+    set -x FZF_DEFAULT_OPTS "--inline-info --preview 'bat --color=always --style plain --theme Nord {}'"
 
     set -x NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
@@ -66,7 +68,6 @@ set -x ANSIBLE_PIPELINING True
 alias g=git
 alias v=nvim
 alias p=ipython
-alias t=zellij
 
 alias k='kubectl'
 alias kd='kubectl describe'
@@ -96,6 +97,7 @@ alias kcur='kubectl config current-context'
 
 alias gpull="git pull"
 alias gst="git status"
+alias gdiff="git diff"
 
 alias lofimpv='mpv --no-video "https://www.youtube.com/watch?v=jfKfPfyJRdk"'
 alias wowmpv='mpv --no-video "https://www.youtube.com/Meisio/live"'
@@ -109,3 +111,26 @@ function macnotify
     # Usage: $ macnotify Title "Long notification text"
     osascript -e 'display notification "'$2'" with title "'$1'"'
 end
+
+function tmux_attach
+    if test -z "$argv"
+        set processList $(ps x | grep "tmux -L")
+        set sessionName $(string match -rg --  '-L\s+(\S+)' $processList |  string replace -r -- '-L\s+(\S+)' '$1' | fzf)
+
+        if test -z "$sessionName"
+            echo "Empty picker"
+            return
+        end
+
+        echo Picked: $sessionName
+        tmux -L $sessionName attach -t $sessionName
+    else
+        tmux -L $argv attach -t $argv ; or zsh -c "tmux -L $argv new -s $argv  2> /dev/null"
+    end
+end
+
+function t
+    FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" tmux_attach $argv
+end
+
+eval "$(pyenv init -)"

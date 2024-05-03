@@ -16,6 +16,7 @@ install_brew_packages() {
 		autoconf \
 		automake \
 		bat \
+		colima \
 		curl \
 		docker-credential-helper \
 		eza \
@@ -47,14 +48,14 @@ install_brew_packages() {
 		shfmt \
 		sqlite3 \
 		swiftformat \
+		tmux \
 		universal-ctags \
 		watch \
 		wezterm \
 		wget \
 		wireguard-tools \
 		youtube-dl \
-		yq \
-		zellij
+		yq
 }
 
 install_brew_packages
