@@ -4,6 +4,7 @@ if status is-interactive
     set fish_greeting
 
     set -x GOPATH "$HOME/.local/share/go"
+    set -x PYENV_ROOT "$HOME/.pyenv"
 
     fish_add_path $GOPATH/bin
     fish_add_path /opt/homebrew/bin
@@ -12,6 +13,7 @@ if status is-interactive
     fish_add_path $HOME/.local/include/cargo/bin
     fish_add_path $HOME/.yarn/bin
     fish_add_path $HOME/.local/share/cargo/bin
+    fish_add_path $PYENV_ROOT/bin
 
     # FZF config
     set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
@@ -130,4 +132,4 @@ function t
     FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" tmux_attach $argv
 end
 
-pyenv init - | source
+eval "$(pyenv init -)"
