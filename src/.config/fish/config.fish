@@ -15,7 +15,7 @@ if status is-interactive
 
     # FZF config
     set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
-    set -x FZF_DEFAULT_OPTS "--inline-info --preview 'bat {}'"
+    set -x FZF_DEFAULT_OPTS "--inline-info --preview 'bat --color=always --style plain --theme Nord {}'"
 
     set -x NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
@@ -109,12 +109,25 @@ function macnotify
     osascript -e 'display notification "'$2'" with title "'$1'"'
 end
 
-function t
+function tmux_attach
     if test -z "$argv"
-        tmux -u attach -t default; or zsh -c "tmux -u new -s default 2> /dev/null"
+        set processList $(ps x | grep "tmux -L")
+        set sessionName $(string match -rg --  '-L\s+(\S+)' $processList |  string replace -r -- '-L\s+(\S+)' '$1' | fzf)
+
+        if test -z "$sessionName"
+            echo "Empty picker"
+            return
+        end
+
+        echo Picked: $sessionName
+        tmux -L $sessionName attach -t $sessionName
     else
-        tmux -u attach -t $argv; or zsh -c "tmux -u new -s $argv 2> /dev/null"
+        tmux -L $argv attach -t $argv ; or zsh -c "tmux -L $argv new -s $argv  2> /dev/null"
     end
+end
+
+function t
+    FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" tmux_attach $argv
 end
 
 pyenv init - | source
