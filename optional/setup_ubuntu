@@ -17,6 +17,7 @@ sudo apt-get install -y \
 	make \
 	neovim \
 	npm \
+	cmake \
 	rustup \
 	pipx \
 	ripgrep \
