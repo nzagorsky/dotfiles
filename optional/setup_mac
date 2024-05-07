@@ -19,6 +19,7 @@ install_brew_packages() {
 		colima \
 		curl \
 		docker-credential-helper \
+		direnv \
 		eza \
 		fd \
 		fish \
@@ -40,7 +41,6 @@ install_brew_packages() {
 		node \
 		openvpn \
 		postgresql \
-		pyenv \
 		rclone \
 		rectangle \
 		ripgrep \
