@@ -104,7 +104,7 @@ local plugins = {
             }
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+            vim.api.nvim_create_autocmd({ "BufWritePost" }, {
                 group = lint_augroup,
                 callback = function() require("lint").try_lint() end,
             })
@@ -377,12 +377,6 @@ augroup AutomaticDirectoryCreation
     autocmd BufWritePre * :call MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 ]]
-
--- dont list quickfix buffers
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "qf",
-    callback = function() vim.opt_local.buflisted = false end,
-})
 
 -- Settings
 vim.o.clipboard = "unnamedplus"
