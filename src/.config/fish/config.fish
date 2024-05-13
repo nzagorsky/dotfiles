@@ -115,7 +115,7 @@ end
 function tmux_attach
     if test -z "$argv"
         set processList $(ps x | grep "tmux -L" | grep "new")
-        set sessionName $(string match -rg --  '-L\s+(\S+)' $processList |  string replace -r -- '-L\s+(\S+)' '$1' | fzf --height=80% --layout=reverse --info=inline --border --margin=1 --padding=1)
+        set sessionName $(string match -rg --  '-L\s+(\S+)' $processList |  string replace -r -- '-L\s+(\S+)' '$1' | fzf --height=50% --layout=reverse --info=inline --border --margin=1 --padding=1)
 
         if test -z "$sessionName"
             echo "Empty picker"
