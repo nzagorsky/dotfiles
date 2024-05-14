@@ -12,6 +12,7 @@ sudo apt-get install -y \
 	fzf \
 	git \
 	universal-ctags \
+	wireguard \
 	git-lfs \
 	golang \
 	jq \
@@ -27,7 +28,7 @@ sudo apt-get install -y \
 	tmux \
 	unzip
 
-sudo ln -s $(which fdfind) /usr/bin/fd
+sudo ln -sf $(which fdfind) /usr/bin/fd
 sudo gpasswd -a $USER docker
 sudo chsh $USER -s $(which fish)
 
