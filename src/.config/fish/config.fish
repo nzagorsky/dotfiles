@@ -6,14 +6,6 @@ if status is-interactive
     set -x GOPATH "$HOME/.local/share/go"
     set -x PYENV_ROOT "$HOME/.pyenv"
 
-    fish_add_path $GOPATH/bin
-    fish_add_path /opt/homebrew/bin
-    fish_add_path /opt/homebrew/sbin
-    fish_add_path $HOME/.local/bin
-    fish_add_path $HOME/.local/include/cargo/bin
-    fish_add_path $HOME/.yarn/bin
-    fish_add_path $HOME/.local/share/cargo/bin
-    fish_add_path $PYENV_ROOT/bin
 
     # FZF config
     set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
@@ -51,6 +43,18 @@ if status is-interactive
     set -x HISTFILE "$HOME/.local/share/history"
     set -x MBSYNCRC "$HOME/.config/mbsync/config"
     set -x ELECTRUMDIR "$HOME/.local/share/electrum"
+
+    fish_add_path --path $GOPATH/bin
+    fish_add_path --path /opt/homebrew/bin
+    fish_add_path --path /opt/homebrew/sbin
+    fish_add_path --path $HOME/.local/bin
+    fish_add_path --path $HOME/.yarn/bin
+    fish_add_path --path $HOME/.local/include/cargo/bin
+    fish_add_path --path $HOME/.local/share/cargo/bin
+    fish_add_path --path $PYENV_ROOT/bin
+    fish_add_path --path $HOME/.pyenv/shims
+
+    direnv hook fish | source
 end
 
 
@@ -132,6 +136,3 @@ end
 function t
     FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" tmux_attach $argv
 end
-
-eval "$(pyenv init -)"
-direnv hook fish | source
