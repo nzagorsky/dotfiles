@@ -99,7 +99,7 @@ local plugins = {
         "mfussenegger/nvim-lint",
         config = function()
             require("lint").linters_by_ft = {
-                python = { "mypy" },
+                python = { "mypy", "ruff" },
                 javascript = { "eslint" },
             }
 
