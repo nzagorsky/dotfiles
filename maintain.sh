@@ -14,5 +14,5 @@ fi
 
 ./install.sh
 
-nvim --headless "+Lazy! sync" +qa
+nvim --headless "+Lazy! restore" +qa
 nvim --headless "+TSUpdateSync" +qa
