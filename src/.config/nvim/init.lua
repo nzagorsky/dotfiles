@@ -120,7 +120,7 @@ local plugins = {
             require("conform").setup {
                 formatters_by_ft = {
                     lua = { "stylua" },
-                    python = { "isort", "ruff_format" },
+                    python = { "ruff_fix", "ruff_format" },
                     swift = { { "swiftformat" } },
                     ["javascript"] = { "prettier" },
                     ["javascriptreact"] = { "prettier" },
