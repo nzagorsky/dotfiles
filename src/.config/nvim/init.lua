@@ -191,7 +191,7 @@ local plugins = {
                 -- or a list of languages
                 ensure_installed = "all",
                 indent = {
-                    enable = true,
+                    enable = false,
                 },
                 highlight = {
                     enable = true,
