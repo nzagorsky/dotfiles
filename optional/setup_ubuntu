@@ -55,3 +55,8 @@ sudo apt-get install -y docker-compose-plugin
 
 # Finalize
 nvim --headless "+Lazy! sync" +qa
+
+# Remove that idiocy
+sudo systemctl disable --now systemd-resolved
+sudo rm /etc/resolv.conf
+sudo bash -c "echo 'nameserver 1.1.1.1' > /etc/resolv.conf"
