@@ -69,6 +69,7 @@ local plugins = {
             local ensure_installed = {
                 "lua-language-server",
                 "pyright",
+                "golangci-lint",
                 "taplo",
                 "ansible-language-server",
                 "rust-analyzer",
@@ -101,6 +102,7 @@ local plugins = {
             require("lint").linters_by_ft = {
                 python = { "mypy", "ruff" },
                 javascript = { "eslint" },
+                go = { "golangcilint" },
             }
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -125,6 +127,7 @@ local plugins = {
                     ["javascript"] = { "prettier" },
                     ["javascriptreact"] = { "prettier" },
                     ["typescript"] = { "prettier" },
+                    ["go"] = { "goimports", "gofmt" },
                     ["typescriptreact"] = { "prettier" },
                     ["vue"] = { "prettier" },
                     ["css"] = { "prettier" },
@@ -187,9 +190,7 @@ local plugins = {
         "nvim-treesitter/nvim-treesitter",
         config = function()
             require("nvim-treesitter.configs").setup {
-                -- one of "all", "maintained" (parsers with maintainers),
-                -- or a list of languages
-                ensure_installed = "all",
+                auto_install = true,
                 indent = {
                     enable = false,
                 },
