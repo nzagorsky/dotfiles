@@ -114,8 +114,23 @@ local M = {
                 "astro",
             },
         }
+
+        lspconfig.gopls.setup {
+            capabilities = capabilities,
+            cmd = { "gopls" },
+            filetypes = { "go", "gomod", "gowork", "gotmpl" },
+            root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+            settings = {
+                gopls = {
+                    completeUnimported = true,
+                    usePlaceholders = true,
+                    analyses = {
+                        unusedparams = true,
+                    },
+                },
+            },
+        }
         lspconfig.rust_analyzer.setup(default_opts)
-        lspconfig.gopls.setup(default_opts)
         lspconfig.ansiblels.setup(default_opts)
         lspconfig.bashls.setup(default_opts)
         lspconfig.cmake.setup(default_opts)
