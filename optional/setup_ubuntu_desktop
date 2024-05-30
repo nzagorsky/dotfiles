@@ -85,4 +85,4 @@ install_slack
 disable_dock_hotkeys
 enable_ssh
 
-sudo apt install -y alacritty gnome-tweaks firefox xclip wezterm wl-clipboard gnome-shell-extensions mpv
+sudo apt install -y alacritty gnome-tweaks firefox xclip wezterm wl-clipboard gnome-shell-extensions mpv lm-sensors
