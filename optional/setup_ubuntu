@@ -3,9 +3,11 @@ set -ex
 
 sudo apt-get update
 sudo apt-get install -y \
+	htop \
 	avahi-daemon \
 	build-essential \
 	docker.io \
+	direnv \
 	eza \
 	fd-find \
 	fish \
