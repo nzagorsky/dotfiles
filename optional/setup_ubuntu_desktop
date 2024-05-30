@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+install_wezterm() {
+	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+	echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+	sudo apt update
+}
+
+install_slack() {
+	mkdir -p /tmp/slackinstall
+	cd /tmp/slackinstall
+
+	wget https://downloads.slack-edge.com/desktop-releases/linux/x64/4.38.125/slack-desktop-4.38.125-amd64.deb
+	sudo apt install ./slack-desktop-*.deb
+
+	rm -rf /tmp/slackinstall
+}
+
+disable_dock_hotkeys() {
+	gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+
+	gsettings set org.gnome.shell.keybindings open-new-window-application-1 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-2 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-3 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-4 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-5 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-6 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-7 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-8 []
+	gsettings set org.gnome.shell.keybindings open-new-window-application-9 []
+
+	gsettings set org.gnome.shell.keybindings switch-to-application-1 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-2 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-3 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-4 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-5 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-6 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-7 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-8 []
+	gsettings set org.gnome.shell.keybindings switch-to-application-9 []
+}
+
+configure_desktop_shortcuts() {
+	gsettings set org.gnome.desktop.wm.keybindings maximize "['<Control><Super>Return']"
+	gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Control><Super>BackSpace']"
+
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Control><Super>1']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Control><Super>2']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Control><Super>3']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Control><Super>4']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Control><Super>5']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Control><Super>6']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-7 "['<Control><Super>7']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-8 "['<Control><Super>8']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Control><Super>9']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-10 "['<Control><Super>0']"
+
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
+
+	gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
+	gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
+}
+
+configure_desktop() {
+	gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
+	gsettings set org.gnome.desktop.interface enable-animations false
+}
+
+enable_ssh() {
+    sudo apt install -y openssh-server
+	sudo systemctl enable sshd --now
+	curl https://github.com/nzagorsky.keys | tee -a ~/.ssh/authorized_keys
+}
+
+install_wezterm
+install_slack
+disable_dock_hotkeys
+enable_ssh
+
+sudo apt install -y alacritty gnome-tweaks firefox xclip wezterm wl-clipboard gnome-shell-extensions mpv
