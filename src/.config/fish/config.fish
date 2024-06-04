@@ -13,10 +13,6 @@ if status is-interactive
 
     set -x NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
-
-    set -x ZDOTDIR "$HOME/.config/zsh"
-    set -x ZSHZ_DATA "$HOME/.config/zsh/.zdata"
-
     set -x XDG_CONFIG_HOME "$HOME/.config"
     set -x XDG_DATA_HOME "$HOME/.local/share"
     set -x XDG_CACHE_HOME "$HOME/.cache"
@@ -130,7 +126,7 @@ function tmux_attach
         echo Picked: $sessionName
         tmux -L $sessionName attach -t $sessionName
     else
-        tmux -L $argv attach -t $argv ; or zsh -c "tmux -L $argv new -s $argv  2> /dev/null"
+        tmux -L $argv attach -t $argv ; or fish -c "tmux -L $argv new -s $argv  2> /dev/null"
     end
 end
 
