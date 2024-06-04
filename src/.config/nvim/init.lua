@@ -13,6 +13,7 @@ local plugins = {
         config = function()
             require("catppuccin").setup {
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
+                transparent_background = true, -- disables setting the background color.
                 color_overrides = {
                     mocha = {
                         base = "#181818",

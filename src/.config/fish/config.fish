@@ -113,7 +113,7 @@ function macnotify
     osascript -e 'display notification "'$2'" with title "'$1'"'
 end
 
-function tmux_attach
+function __tmux_attach
     if test -z "$argv"
         set processList $(ps x | grep "tmux -L" | grep "new")
         set sessionName $(string match -rg --  '-L\s+(\S+)' $processList |  string replace -r -- '-L\s+(\S+)' '$1' | fzf --height=50% --layout=reverse --info=inline --border --margin=1 --padding=1)
@@ -130,6 +130,15 @@ function tmux_attach
     end
 end
 
+function tfzf
+    FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" __tmux_attach $argv
+end
+
+
 function t
-    FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" tmux_attach $argv
+    if test -z "$argv"
+        tmux -u attach -t default; or zsh -c "tmux -u new -s default 2> /dev/null"
+    else
+        tmux -u attach -t $argv; or zsh -c "tmux -u new -s $argv 2> /dev/null"
+    end
 end
