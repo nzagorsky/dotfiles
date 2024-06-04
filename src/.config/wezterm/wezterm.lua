@@ -15,7 +15,8 @@ config.color_schemes = { ["PatchedMocha"] = custom }
 config.color_scheme = "PatchedMocha"
 
 config.hide_tab_bar_if_only_one_tab = true
-config.window_background_opacity = 1
+config.window_background_opacity = 0.92
+config.macos_window_background_blur = 20
 
 config.check_for_updates = false
 config.animation_fps = 1

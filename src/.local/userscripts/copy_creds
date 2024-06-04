@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -xe
+# Usage: copy_creds root 192.168.1.1 
 # SSH_OPTIONS="-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 SSH_OPTIONS=""
