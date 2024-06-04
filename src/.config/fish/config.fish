@@ -48,6 +48,7 @@ if status is-interactive
     fish_add_path --path /opt/homebrew/bin
     fish_add_path --path /opt/homebrew/sbin
     fish_add_path --path $HOME/.local/bin
+    fish_add_path --path $HOME/.local/userscripts
     fish_add_path --path $HOME/.yarn/bin
     fish_add_path --path $HOME/.local/include/cargo/bin
     fish_add_path --path $HOME/.local/share/cargo/bin
