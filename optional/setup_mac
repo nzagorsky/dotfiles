@@ -10,6 +10,7 @@ install_brew_packages() {
 	brew tap homebrew/cask-fonts
 
 	brew install --quiet --cask font-hack-nerd-font
+	brew install --cask nikitabobko/tap/aerospace
 	brew install --quiet --cask another-redis-desktop-manager --no-quarantine
 
 	brew install --quiet \
@@ -26,7 +27,6 @@ install_brew_packages() {
 		fzy \
 		git-lfs \
 		go \
-		hammerspoon \
 		helm \
 		htop \
 		iina \
@@ -42,7 +42,6 @@ install_brew_packages() {
 		openvpn \
 		postgresql \
 		rclone \
-		rectangle \
 		ripgrep \
 		rustup-init \
 		shfmt \
