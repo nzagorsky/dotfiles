@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -xe
-# Usage: copy_creds root 192.168.1.1 
+# Usage: copy_creds root 192.168.1.1
 # SSH_OPTIONS="-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 SSH_OPTIONS=""
@@ -8,15 +8,19 @@ SSH_OPTIONS=""
 ssh $SSH_OPTIONS $1@$2 "mkdir -p ~/.config/credentials"
 
 rsync -av -e "ssh $SSH_OPTIONS" \
-    --exclude='.#*' \
-    --exclude='S.*' \
-    --exclude='*.conf' \
-    $HOME/.gnupg/ $1@$2:~/.gnupg
+	--exclude='.#*' \
+	--exclude='S.*' \
+	--exclude='*.conf' \
+	$HOME/.gnupg/ $1@$2:~/.gnupg
 
 rsync -av -e "ssh $SSH_OPTIONS" \
-    --exclude='environment' \
-    $HOME/.ssh/ $1@$2:~/.ssh
+	--exclude='environment' \
+	$HOME/.ssh/ $1@$2:~/.ssh
 
 rsync -av -e "ssh $SSH_OPTIONS" \
-    --exclude='environment' \
-    $HOME/.config/credentials/ $1@$2:~/.config/credentials/
+	--exclude='environment' \
+	$HOME/.config/credentials/ $1@$2:~/.config/credentials/
+
+rsync -av -e "ssh $SSH_OPTIONS" \
+	--exclude='environment' \
+	$HOME/.local/userscripts/ $1@$2:~/.local/userscripts/
