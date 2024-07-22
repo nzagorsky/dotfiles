@@ -6,7 +6,6 @@ if status is-interactive
     set -x GOPATH "$HOME/.local/share/go"
     set -x PYENV_ROOT "$HOME/.pyenv"
 
-
     # FZF config
     set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
     set -x FZF_DEFAULT_OPTS "--inline-info --preview 'bat --color=always --style plain --theme Nord {}'"
@@ -52,6 +51,7 @@ if status is-interactive
     fish_add_path --path $HOME/.pyenv/shims
 
     direnv hook fish | source
+    pyenv init - | source
 end
 
 
