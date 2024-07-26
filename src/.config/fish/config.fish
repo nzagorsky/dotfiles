@@ -42,6 +42,7 @@ if status is-interactive
     fish_add_path --path $GOPATH/bin
     fish_add_path --path /opt/homebrew/bin
     fish_add_path --path /opt/homebrew/sbin
+    fish_add_path --path /opt/homebrew/opt/make/libexec/gnubin  # modern Make
     fish_add_path --path $HOME/.local/bin
     fish_add_path --path $HOME/.local/userscripts
     fish_add_path --path $HOME/.yarn/bin
@@ -49,6 +50,7 @@ if status is-interactive
     fish_add_path --path $HOME/.local/share/cargo/bin
     fish_add_path --path $PYENV_ROOT/bin
     fish_add_path --path $HOME/.pyenv/shims
+
 
     direnv hook fish | source
     pyenv init - | source

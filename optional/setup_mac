@@ -16,6 +16,7 @@ install_brew_packages() {
 	brew install --quiet \
 		autoconf \
 		automake \
+        make \
 		bat \
 		colima \
 		curl \
