@@ -11,6 +11,7 @@ install_brew_packages() {
 
 	brew install --quiet --cask font-hack-nerd-font
 	brew install --cask nikitabobko/tap/aerospace
+	brew install --cask bruno
 	brew install --quiet --cask another-redis-desktop-manager --no-quarantine
 
 	brew install --quiet \
