@@ -176,6 +176,8 @@ program = "/bin/zsh"
 
 [window]
 opacity = 0.96
+dynamic_padding = true
+decorations = 'Buttonless'
 
 [window.dimensions]
 columns = 120
