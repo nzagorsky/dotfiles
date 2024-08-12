@@ -18,7 +18,7 @@ outer.right = 10
 
 
 [mode.main.binding]
-alt-enter = 'exec-and-forget open -n /Applications/WezTerm.app'
+alt-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 alt-shift-enter = 'exec-and-forget open ~'
 
 alt-h = 'focus left'
