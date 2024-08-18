@@ -69,3 +69,23 @@ export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+export BROWSER=open
+export EDITOR=nvim
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# Ansible settings
+export ANSIBLE_HOST_KEY_CHECKING=False
+export ANSIBLE_PIPELINING=True
+export ANSIBLE_HOST_KEY_CHECKING=False
+export PYTHONDONTWRITEBYTECODE=1
+
+bindkey -e
+setopt AUTO_CD
+setopt NO_CASE_GLOB
+setopt EXTENDED_HISTORY
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS

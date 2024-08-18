@@ -23,6 +23,7 @@ install_brew_packages() {
         curl \
         direnv \
         docker-credential-helper \
+        zsh-autocomplete \
         eza \
         fd \
         fish \

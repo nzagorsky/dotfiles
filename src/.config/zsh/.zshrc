@@ -1,51 +1,13 @@
 #!/bin/zsh
 
-# Environment {{{
 source ~/.config/credentials/secure >/dev/null 2>&1 || true
 
-export BROWSER=open
-export EDITOR=nvim
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-
-# Ansible settings
-export ANSIBLE_HOST_KEY_CHECKING=False
-export ANSIBLE_PIPELINING=True
-export ANSIBLE_HOST_KEY_CHECKING=False
-export PYTHONDONTWRITEBYTECODE=1
-
-# }}}
-# Options {{{
-bindkey -e
-setopt AUTO_CD
-setopt NO_CASE_GLOB
-
-# History settings
-setopt EXTENDED_HISTORY
-setopt SHARE_HISTORY
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_REDUCE_BLANKS
-
-SAVEHIST=5000
-HISTSIZE=2000
-HISTFILE=$ZDOTDIR/history
+autoload -U compinit
+compinit
 
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-backward
 
-# }}}
-# Completion setup {{{
-# https://docs.brew.sh/Shell-Completion
-if type brew &>/dev/null; then
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-    autoload -Uz compinit && compinit
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-fi
-
-# }}}
-# Functions {{{
 function t {
     launch_param=$(pidof systemd >/dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
 
@@ -208,8 +170,7 @@ alias .....="../../../../"
 source $ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-eval "$(starship init zsh)"
-
+. ~/.local/bin/polyglot.sh
 eval "$(direnv hook zsh)"
 # }}}
 
