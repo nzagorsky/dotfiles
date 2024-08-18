@@ -27,6 +27,9 @@ setup_shell() {
 
     rm -rf ~/.config/zsh/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
+
+    rm -rf ~/.config/zsh/plugins/zsh-history-substring-search
+    git clone https://github.com/zsh-users/zsh-history-substring-search ~/.config/zsh/plugins/zsh-history-substring-search
 }
 
 setup_completions() {

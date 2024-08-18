@@ -5,8 +5,9 @@ source ~/.config/credentials/secure >/dev/null 2>&1 || true
 fpath=($ZDOTDIR/completions $fpath)
 autoload -Uz compinit && compinit -i
 
-bindkey "^P" history-beginning-search-backward
-bindkey "^N" history-beginning-search-backward
+bindkey "^P" history-substring-search-up
+bindkey "^N" history-substring-search-down
+# history-beginning-search-backward
 
 function t {
     launch_param=$(pidof systemd >/dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
@@ -169,6 +170,7 @@ alias .....="../../../../"
 source $ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 . ~/.local/bin/polyglot.sh
 eval "$(direnv hook zsh)"
