@@ -2,8 +2,8 @@
 
 source ~/.config/credentials/secure >/dev/null 2>&1 || true
 
-autoload -U compinit
-compinit
+fpath=($ZDOTDIR/completions $fpath)
+autoload -Uz compinit && compinit -i
 
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-backward
@@ -166,13 +166,18 @@ alias ...="../../"
 alias ....="../../../"
 alias .....="../../../../"
 
-# Plugins {{{
 source $ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 . ~/.local/bin/polyglot.sh
 eval "$(direnv hook zsh)"
-# }}}
 
-# Kukareku.
+# Additional completions
+# source <(kubectl completion zsh)
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+# Kukareku!
 # vim:foldmethod=marker
