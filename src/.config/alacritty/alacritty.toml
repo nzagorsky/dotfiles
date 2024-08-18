@@ -170,9 +170,9 @@ mods = "Command"
 [scrolling]
 history = 100000
 
-[shell]
-args = ["--login"]
-program = "/bin/zsh"
+# [shell]
+# args = ["--login"]
+# program = "/bin/zsh"
 
 [window]
 opacity = 0.96
