@@ -12,14 +12,19 @@ pull_submodules() {
 setup_dots() {
     cd src
     stow -t ~ .
-}
 
-setup_shell() {
     mkdir -p ~/.local/bin/
     mkdir -p ~/.config/wget/
+}
+
+setup_fish() {
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+    fisher install jethrokuan/z
+}
+
+setup_shell_zsh() {
 
     curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh >~/.local/bin/polyglot.sh
-
     touch ~/.config/wget/wgetrc
 
     rm -rf ~/.config/zsh/plugins/zsh-syntax-highlighting/
@@ -39,5 +44,5 @@ setup_completions() {
 
 pull_submodules || echo "Failed to pull submodules"
 setup_dots
-setup_shell
+setup_shell_fish
 setup_completions
