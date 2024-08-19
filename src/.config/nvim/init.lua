@@ -304,6 +304,8 @@ local plugins = {
         config = require("plugins.configs.gitsigns").config,
     },
 
+    { "isobit/vim-caddyfile" },
+
     {
         "tpope/vim-dadbod",
         config = function()
