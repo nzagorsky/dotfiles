@@ -1,4 +1,4 @@
-start-at-login = true
+start-at-login = false
 after-login-command = []
 after-startup-command = []
 enable-normalization-flatten-containers = false
