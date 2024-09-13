@@ -145,4 +145,4 @@ function t
     end
 end
 
-source (wmill completions fish | psub)
+# source (wmill completions fish | psub)
