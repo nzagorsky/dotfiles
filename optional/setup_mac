@@ -10,7 +10,11 @@ install_brew_packages() {
     brew tap homebrew/cask-fonts
 
     brew install --quiet --cask font-hack-nerd-font
-    brew install --cask nikitabobko/tap/aerospace
+    # brew install --cask nikitabobko/tap/aerospace
+
+    brew install --cask rectangle
+    brew install --cask hammerspoon
+
     brew install --cask bruno
     brew install --quiet --cask another-redis-desktop-manager --no-quarantine
 

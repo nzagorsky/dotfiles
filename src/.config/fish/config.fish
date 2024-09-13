@@ -50,6 +50,7 @@ if status is-interactive
     fish_add_path --path $HOME/.local/share/cargo/bin
     fish_add_path --path $PYENV_ROOT/bin
     fish_add_path --path $HOME/.pyenv/shims
+    fish_add_path --path $HOME/.deno/bin
 
     direnv hook fish | source
     # pyenv init - | source
@@ -143,3 +144,5 @@ function t
         tmux -u attach -t $argv; or zsh -c "tmux -u new -s $argv 2> /dev/null"
     end
 end
+
+source (wmill completions fish | psub)
