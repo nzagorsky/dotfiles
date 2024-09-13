@@ -88,7 +88,7 @@
         smudge = git lfs smudge %f
         required = true
 [user]
-        email = toltenos@gmail.com
+        email = nikita@zagorsky.dev
 	    name = Nikita Zagorsky
 [merge]
         tool = vimdiff3
