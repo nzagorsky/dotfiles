@@ -1,2 +1,3 @@
-hs.hotkey.bind("alt", "return", function() hs.execute "open -n /Applications/WezTerm.app" end)
-hs.hotkey.bind("alt", "e", function() hs.execute "open ~" end)
+-- hs.hotkey.bind("alt", "return", function() hs.execute "open -n /Applications/Alacritty.app" end)
+hs.hotkey.bind("alt", "return", function() hs.execute("open -n /Applications/Alacritty.app", true) end)
+hs.hotkey.bind("alt", "e", function() hs.execute("open ~", true) end)
