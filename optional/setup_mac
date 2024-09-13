@@ -21,6 +21,7 @@ install_brew_packages() {
         bat \
         colima \
         curl \
+        cmake \
         direnv \
         docker-credential-helper \
         zsh-autocomplete \

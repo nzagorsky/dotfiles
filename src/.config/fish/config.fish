@@ -52,7 +52,7 @@ if status is-interactive
     fish_add_path --path $HOME/.pyenv/shims
 
     direnv hook fish | source
-    # pyenv init - | source
+    pyenv init - | source
 end
 
 
