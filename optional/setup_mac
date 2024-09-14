@@ -24,6 +24,7 @@ install_brew_packages() {
         automake \
         bat \
         colima \
+        macfuse \
         curl \
         direnv \
         docker-credential-helper \

@@ -286,6 +286,16 @@ local plugins = {
     },
 
     {
+        "akinsho/toggleterm.nvim",
+        version = "*",
+        config = function()
+            require("toggleterm").setup {
+                open_mapping = [[<c-\>]],
+            }
+        end,
+    },
+
+    {
         "tpope/vim-fugitive",
         event = { "InsertEnter", "CmdlineEnter" },
         keys = {
