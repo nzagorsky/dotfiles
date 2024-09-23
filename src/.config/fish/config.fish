@@ -21,9 +21,11 @@ if status is-interactive
     set -x KUBECONFIG "$HOME/.config/kube/config"
     set -x B2_ACCOUNT_INFO "$HOME/.config/b2_account_info"
 
+    set -x EDITOR nvim
     set -x LESSHISTFILE "-"
     set -x GNUPGHOME "$HOME/.config/gnupg"
     set -x WGETRC "$HOME/.config/wget/wgetrc"
+    set -x COLIMA_HOME "$HOME/.config/colima"
     set -x AWS_CONFIG_FILE "$HOME/.config/aws/config"
     set -x IPYTHONDIR "$HOME/.config/ipython"
     set -x INPUTRC "$HOME/.config/shell/inputrc"
@@ -62,7 +64,6 @@ source ~/.config/credentials/secure > /dev/null 2>&1 || true
 
 # set -x TERM xterm-256color
 set -x BROWSER open
-set -x EDITOR nvim
 set -x OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
 
 set -x ANSIBLE_HOST_KEY_CHECKING False

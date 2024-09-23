@@ -27,6 +27,7 @@ install_brew_packages() {
         macfuse \
         curl \
         cmake \
+        shellcheck \
         direnv \
         docker-credential-helper \
         zsh-autocomplete \
