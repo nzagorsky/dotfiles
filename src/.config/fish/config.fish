@@ -4,7 +4,6 @@ if status is-interactive
     set fish_greeting
 
     set -x GOPATH "$HOME/.local/share/go"
-    set -x PYENV_ROOT "$HOME/.pyenv"
 
     # FZF config
     set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
@@ -50,12 +49,9 @@ if status is-interactive
     fish_add_path --path $HOME/.yarn/bin
     fish_add_path --path $HOME/.local/include/cargo/bin
     fish_add_path --path $HOME/.local/share/cargo/bin
-    fish_add_path --path $PYENV_ROOT/bin
-    fish_add_path --path $HOME/.pyenv/shims
     fish_add_path --path $HOME/.deno/bin
 
     direnv hook fish | source
-    # pyenv init - | source
 end
 
 
