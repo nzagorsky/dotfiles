@@ -142,4 +142,6 @@ function t
     end
 end
 
+mise activate fish | source
+
 # source (wmill completions fish | psub)
