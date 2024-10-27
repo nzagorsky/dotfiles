@@ -24,16 +24,15 @@ install_brew_packages() {
         automake \
         bat \
         colima \
-        macfuse \
         curl \
         cmake \
         shellcheck \
         direnv \
         docker-credential-helper \
-        zsh-autocomplete \
         eza \
         fd \
         fish \
+        fisher \
         fzy \
         git-lfs \
         go \
@@ -44,7 +43,9 @@ install_brew_packages() {
         kubectl \
         libxmlsec1 \
         llvm \
+        macfuse \
         make \
+        mise \
         mosh \
         mysql \
         ncdu \
@@ -55,9 +56,11 @@ install_brew_packages() {
         rclone \
         ripgrep \
         rustup-init \
+        shellcheck \
         shfmt \
         sqlite3 \
         starship \
+        zsh-autocomplete \
         swiftformat \
         tmux \
         universal-ctags \
