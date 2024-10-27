@@ -18,8 +18,7 @@ setup_dots() {
 }
 
 setup_fish() {
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-    fisher install jethrokuan/z
+    fish -c "fisher install jethrokuan/z"
 }
 
 setup_shell_zsh() {
@@ -44,5 +43,5 @@ setup_completions() {
 
 pull_submodules || echo "Failed to pull submodules"
 setup_dots
-setup_shell_fish
+setup_fish
 setup_completions

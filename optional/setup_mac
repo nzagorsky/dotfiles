@@ -30,6 +30,7 @@ install_brew_packages() {
         eza \
         fd \
         fish \
+        fisher \
         fzy \
         git-lfs \
         go \
