@@ -5,9 +5,9 @@ git merge origin/master
 
 if ! command -v brew &> /dev/null
 then
-    echo "no brew"
+    echo "Brew was not found, consider installing it"
 else
-	brew update
+	brew bundle install
 	brew upgrade
 	brew cleanup
 fi
