@@ -1,4 +1,4 @@
-start-at-login = true
+start-at-login = false
 after-login-command = []
 after-startup-command = []
 enable-normalization-flatten-containers = false
@@ -15,6 +15,11 @@ outer.left = 10
 outer.bottom = 10
 outer.top = 10
 outer.right = 10
+
+# Float everything
+[[on-window-detected]]
+check-further-callbacks = true
+run = 'layout floating'
 
 
 [mode.main.binding]
