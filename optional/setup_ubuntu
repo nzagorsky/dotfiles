@@ -23,7 +23,6 @@ sudo apt-get install -y \
 	npm \
 	mosh \
 	cmake \
-	rustup \
 	pipx \
 	ripgrep \
 	shfmt \

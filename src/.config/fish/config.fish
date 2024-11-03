@@ -69,6 +69,8 @@ alias g=git
 alias v=nvim
 alias p=ipython
 
+alias limacreate="limactl create --name=default ~/dotfiles/optional/lima/default.yaml"
+
 alias k='kubectl'
 alias kd='kubectl describe'
 alias kg='kubectl get'
