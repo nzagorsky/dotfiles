@@ -69,8 +69,6 @@ alias g=git
 alias v=nvim
 alias p=ipython
 
-alias limacreate="limactl create --name=default ~/dotfiles/optional/lima/default.yaml"
-
 alias k='kubectl'
 alias kd='kubectl describe'
 alias kg='kubectl get'
@@ -133,6 +131,13 @@ end
 
 function tfzf
     FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" __tmux_attach $argv
+end
+
+function limarecreate
+    limactl stop default
+    limactl delete default
+    limactl create --name=default ~/dotfiles/optional/lima/default.yaml
+    limactl start default
 end
 
 
