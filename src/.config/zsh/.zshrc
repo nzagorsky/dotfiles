@@ -7,6 +7,7 @@ autoload -Uz compinit && compinit -i
 
 bindkey "^P" history-substring-search-up
 bindkey "^N" history-substring-search-down
+bindkey '^E' autosuggest-accept
 # history-beginning-search-backward
 
 function t {
@@ -174,6 +175,7 @@ source $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-searc
 
 . ~/.local/bin/polyglot.sh
 eval "$(direnv hook zsh)"
+eval "$(mise activate zsh)"
 
 # Additional completions
 source <(kubectl completion zsh)

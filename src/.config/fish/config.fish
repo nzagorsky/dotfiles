@@ -51,6 +51,7 @@ if status is-interactive
     fish_add_path --path $HOME/.local/share/cargo/bin
     fish_add_path --path $HOME/.deno/bin
 
+    # mise activate fish | source
     direnv hook fish | source
 end
 
@@ -148,7 +149,3 @@ function t
         tmux -u attach -t $argv; or zsh -c "tmux -u new -s $argv 2> /dev/null"
     end
 end
-
-mise activate fish | source
-
-# source (wmill completions fish | psub)

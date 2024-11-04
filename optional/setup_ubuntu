@@ -10,7 +10,6 @@ sudo apt-get install -y \
 	direnv \
 	eza \
 	fd-find \
-	fish \
 	fzf \
 	git \
 	universal-ctags \
@@ -32,11 +31,8 @@ sudo apt-get install -y \
 
 sudo ln -sf $(which fdfind) /usr/bin/fd
 sudo gpasswd -a $USER docker
-sudo chsh $USER -s $(which fish)
 
-# Pyenv
 sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-curl https://pyenv.run | bash
 pipx install poetry
 
 # Docker: Add Docker's official GPG key:
