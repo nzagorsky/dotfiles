@@ -2,13 +2,15 @@
 
 source ~/.config/credentials/secure >/dev/null 2>&1 || true
 
-fpath=($ZDOTDIR/completions $fpath)
-autoload -Uz compinit && compinit -i
-
-bindkey "^P" history-substring-search-up
-bindkey "^N" history-substring-search-down
-bindkey '^E' autosuggest-accept
-# history-beginning-search-backward
+# Source: https://github.com/thoughtbot/dotfiles/blob/main/zsh/configs/keybindings.zsh
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^K" kill-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^Y" accept-and-hold
+bindkey "^N" insert-last-word
+bindkey "^Q" push-line-or-edit
 
 function t {
     launch_param=$(pidof systemd >/dev/null 2>&1 && echo "systemd-run --scope --user" || echo "")
@@ -170,18 +172,14 @@ alias .....="../../../../"
 
 source $ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 . ~/.local/bin/polyglot.sh
+
 eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
 
-# Additional completions
-source <(kubectl completion zsh)
+bindkey -e
 
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 # Kukareku!
 # vim:foldmethod=marker

@@ -36,16 +36,10 @@ export AWT_TOOLKIT="MToolkit wmname LG3D" #May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1      # Fix for Java applications in dwm
 
 eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null
-# export PATH="/opt/homebrew/bin:$PATH"
-# export PATH="/opt/homebrew/sbin:$PATH"
-# export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
-# export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
 
 # Go
 export PATH="$PATH:$GOPATH/bin"
-
 export PATH="$PATH:$HOME/.krew/bin"
-
 export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
 
 # Binary paths
@@ -57,17 +51,11 @@ export PATH="$PATH:$HOME/.local/share/cargo/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 
-# FZF config
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
-
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/"
-
-export BROWSER=open
-export EDITOR=nvim
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # Ansible settings
@@ -75,8 +63,8 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_PIPELINING=True
 export ANSIBLE_HOST_KEY_CHECKING=False
 export PYTHONDONTWRITEBYTECODE=1
+export EDITOR=nvim
 
-bindkey -e
 setopt AUTO_CD
 setopt NO_CASE_GLOB
 setopt EXTENDED_HISTORY
