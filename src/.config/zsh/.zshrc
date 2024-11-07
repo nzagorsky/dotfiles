@@ -178,6 +178,8 @@ source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
 
+bindkey -e
+
 
 # Kukareku!
 # vim:foldmethod=marker
