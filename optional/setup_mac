@@ -2,74 +2,7 @@
 
 set -ex
 
-install_neovim_plugins() {
-    nvim --headless "+Lazy! sync" +qa
-}
+nvim --headless "+Lazy! sync" +qa
+nvim --headless "+TSUpdateSync" +qa
+brew bundle install
 
-install_brew_packages() {
-    brew tap homebrew/cask-fonts
-
-    brew install --quiet --cask font-hack-nerd-font
-    # brew install --cask nikitabobko/tap/aerospace
-
-    brew install --cask rectangle
-    brew install --cask hammerspoon
-
-    brew install --cask bruno
-    brew install --quiet --cask another-redis-desktop-manager --no-quarantine
-
-    brew install --quiet \
-        alacritty \
-        autoconf \
-        automake \
-        bat \
-        colima \
-        curl \
-        cmake \
-        shellcheck \
-        direnv \
-        docker-credential-helper \
-        eza \
-        fd \
-        fish \
-        fisher \
-        fzy \
-        git-lfs \
-        go \
-        helm \
-        htop \
-        iina \
-        jq \
-        kubectl \
-        libxmlsec1 \
-        llvm \
-        macfuse \
-        make \
-        mise \
-        mosh \
-        mysql \
-        ncdu \
-        neovim \
-        node \
-        openvpn \
-        postgresql \
-        rclone \
-        ripgrep \
-        rustup-init \
-        shellcheck \
-        shfmt \
-        sqlite3 \
-        starship \
-        zsh-autocomplete \
-        swiftformat \
-        tmux \
-        universal-ctags \
-        watch \
-        wget \
-        wireguard-tools \
-        youtube-dl \
-        yq
-}
-
-install_brew_packages
-install_neovim_plugins

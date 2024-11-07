@@ -51,6 +51,7 @@ if status is-interactive
     fish_add_path --path $HOME/.local/share/cargo/bin
     fish_add_path --path $HOME/.deno/bin
 
+    # mise activate fish | source
     direnv hook fish | source
 end
 
@@ -133,6 +134,13 @@ function tfzf
     FZF_DEFAULT_OPTS="--preview 'tmux -L {} lsw'" __tmux_attach $argv
 end
 
+function limarecreate
+    limactl stop default
+    limactl delete default
+    limactl create --name=default ~/dotfiles/optional/lima/default.yaml
+    limactl start default
+end
+
 
 function t
     if test -z "$argv"
@@ -141,7 +149,3 @@ function t
         tmux -u attach -t $argv; or zsh -c "tmux -u new -s $argv 2> /dev/null"
     end
 end
-
-mise activate fish | source
-
-# source (wmill completions fish | psub)

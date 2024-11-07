@@ -17,9 +17,6 @@ setup_dots() {
     mkdir -p ~/.config/wget/
 }
 
-setup_fish() {
-    fish -c "fisher install jethrokuan/z"
-}
 
 setup_shell_zsh() {
 
@@ -43,5 +40,4 @@ setup_completions() {
 
 pull_submodules || echo "Failed to pull submodules"
 setup_dots
-setup_fish
 setup_completions

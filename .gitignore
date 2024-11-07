@@ -3,3 +3,4 @@ disabled
 *.orig
 .DS_Store
 yay
+Brewfile.lock.json
