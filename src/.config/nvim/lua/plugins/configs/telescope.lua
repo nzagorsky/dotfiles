@@ -131,13 +131,6 @@ local M = {
                 },
                 sorting_strategy = "descending",
                 layout_strategy = "horizontal",
-                layout_config = {
-                    horizontal = { prompt_position = "bottom", preview_width = 0.35, results_width = 0.8 },
-                    vertical = { mirror = false },
-                    width = 1000,
-                    height = 1000,
-                    preview_cutoff = 120,
-                },
             },
             pickers = {
                 find_files = { find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden" } },

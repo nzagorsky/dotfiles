@@ -1,5 +1,6 @@
 # A template to use Docker (rootful) and Podman (rootful) instead of containerd & nerdctl
 vmType: "vz"
+memory: 2GiB
 
 rosetta:
   # Enable Rosetta for Linux.
