@@ -119,10 +119,10 @@ chars = "\u001Bp"
 key = "P"
 mods = "Command"
 
-[[keyboard.bindings]]
-chars = "\u001Bw"
-key = "W"
-mods = "Command"
+# [[keyboard.bindings]]
+# chars = "\u001Bw"
+# key = "W"
+# mods = "Command"
 
 [[keyboard.bindings]]
 chars = "\u001B1"
