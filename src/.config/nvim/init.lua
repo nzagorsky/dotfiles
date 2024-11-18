@@ -291,6 +291,7 @@ local plugins = {
         config = function()
             require("toggleterm").setup {
                 open_mapping = [[<a-j>]],
+                direction = "float"
             }
         end,
     },
