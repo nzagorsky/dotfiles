@@ -14,7 +14,6 @@ local plugins = {
             require("catppuccin").setup {
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
                 transparent_background = true, -- disables setting the background color.
-                integrations = { blink_cmp = true },
                 color_overrides = {
                     mocha = {
                         base = "#181818",
@@ -290,21 +289,14 @@ local plugins = {
         end,
     },
 
-    { "tpope/vim-surround" },
     { "tpope/vim-repeat" },
     { "tpope/vim-rsi" },
-
     {
-        "numToStr/Comment.nvim",
+        "echasnovski/mini.nvim",
         config = function()
-            require("Comment").setup {
-                toggler = {
-                    ---Line-comment toggle keymap
-                    line = "gc",
-                    ---Block-comment toggle keymap
-                    block = "gb",
-                },
-            }
+            require("mini.comment").setup {}
+            require("mini.surround").setup {}
+            require("mini.pairs").setup {}
         end,
     },
 
@@ -313,7 +305,7 @@ local plugins = {
         version = "*",
         config = function()
             require("toggleterm").setup {
-                open_mapping = [[<a-j>]],
+                open_mapping = [[<c-\>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
                 direction = "float",
             }
         end,
@@ -338,7 +330,7 @@ local plugins = {
         config = require("plugins.configs.gitsigns").config,
     },
 
-    { "isobit/vim-caddyfile" },
+    -- { "isobit/vim-caddyfile" },
     {
         "MeanderingProgrammer/render-markdown.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
@@ -348,29 +340,14 @@ local plugins = {
     },
 
     {
-        "tpope/vim-dadbod",
-        config = function()
-            vim.g.db_ui_winwidth = 30
-            vim.g.dbs = {
-                localhost = "postgres://toltenos:@localhost:5432/postgres",
-            }
-        end,
-        lazy = true,
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
     },
-    {
-        "kristijanhusak/vim-dadbod-ui",
-        dependencies = { "tpope/vim-dadbod" },
-        cmd = { "DBUI" },
-    },
-  {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    opts = {
-      library = {
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-      },
-    },
-  },
 }
 
 vim.loader.enable()
@@ -497,6 +474,11 @@ vim.keymap.set("n", "gev", ":e $MYVIMRC<cr>", { remap = false })
 vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
 
 vim.keymap.set("n", "<C-]>", [[:tag <c-r>=expand("<cword>")<cr><cr>]], { remap = false })
+
+vim.keymap.set("n", "<a-j>", "<cmd>cnext<cr>")
+vim.keymap.set("n", "<a-J>", "<cmd>cnfile<cr>")
+vim.keymap.set("n", "<a-k>", "<cmd>cprev<cr>")
+vim.keymap.set("n", "<a-K>", "<cmd>cNfile<cr>")
 
 --- PLUGINS
 require("lazy").setup(plugins)
