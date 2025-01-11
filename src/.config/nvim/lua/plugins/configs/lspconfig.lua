@@ -3,7 +3,7 @@ local M = {
         local lspconfig = require "lspconfig"
         local util = require "lspconfig.util"
         local _border = "rounded"
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),

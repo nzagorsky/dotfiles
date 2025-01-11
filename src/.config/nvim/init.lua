@@ -1,7 +1,7 @@
 local plugins = {
     {
         "stevearc/oil.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { { "echasnovski/mini.icons" } },
         config = function()
             require("oil").setup()
             vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -14,6 +14,7 @@ local plugins = {
             require("catppuccin").setup {
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
                 transparent_background = true, -- disables setting the background color.
+                integrations = { blink_cmp = true },
                 color_overrides = {
                     mocha = {
                         base = "#181818",
@@ -47,17 +48,34 @@ local plugins = {
             }
         end,
     },
-
     {
-        "nvim-telescope/telescope.nvim",
-        keys = require("plugins.configs.telescope").keys,
-        config = require("plugins.configs.telescope").config,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-            },
+        "ibhagwan/fzf-lua",
+        dependencies = { "echasnovski/mini.icons" },
+        config = function()
+            require("fzf-lua").setup {
+                defaults = {
+                    file_icons = "mini",
+                },
+                keymap = {
+                    builtin = {
+                        true,
+                        ["jk"] = "hide",
+                    },
+                },
+            }
+        end,
+        keys = {
+            { "<leader>b", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>" },
+            { "<leader>l", "<cmd>FzfLua lines<cr>" },
+            { "<leader>f", "<cmd>FzfLua files<cr>" },
+            { "<leader>c", "<cmd>FzfLua commands<cr>" },
+            { "<leader>h", "<cmd>FzfLua help_tags<cr>" },
+            { "<leader>t", "<cmd>FzfLua tags<cr>" },
+            { "<leader>a", "<cmd>FzfLua grep<cr>" },
+            { "<leader>A", "<cmd>FzfLua grep_cword<cr>" },
+            { "<leader>:", "<cmd>FzfLua command_history<cr>" },
+            { "<leader>dw", "<cmd>FzfLua lsp_document_diagnostics<cr>" },
+            { "gr", "<cmd>FzfLua lsp_references<cr>" },
         },
     },
 
@@ -117,7 +135,7 @@ local plugins = {
     {
         "stevearc/conform.nvim",
         keys = {
-            { "<F3>", function() require("conform").format() end },
+            { "<C-f>", function() require("conform").format() end },
         },
         config = function()
             require("conform").setup {
@@ -155,37 +173,72 @@ local plugins = {
         "neovim/nvim-lspconfig",
         config = require("plugins.configs.lspconfig").config,
     },
-
     {
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
+        dependencies = "rafamadriz/friendly-snippets",
         event = { "InsertEnter", "CmdlineEnter" },
-        config = require("plugins.configs.cmpconf").config,
-        dependencies = {
-            { "L3MON4D3/LuaSnip" },
+        version = "*",
 
-            {
-                "windwp/nvim-autopairs",
-                opts = {
-                    fast_wrap = {},
-                    disable_filetype = { "TelescopePrompt", "vim" },
-                },
-
-                config = function(_, opts)
-                    require("nvim-autopairs").setup(opts)
-
-                    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-                    require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-                end,
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = { preset = "super-tab" },
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
             },
-
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
+            signature = { window = { border = "rounded" } },
+            completion = {
+                accept = {
+                    auto_brackets = {
+                        enabled = true,
+                    },
+                },
+                menu = {
+                    border = "rounded",
+                    draw = {
+                        treesitter = { "lsp" },
+                    },
+                },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 50,
+                    window = { border = "rounded" },
+                },
+            },
         },
+
+        opts_extend = { "sources.default" },
     },
+
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     config = require("plugins.configs.cmpconf").config,
+    --     dependencies = {
+    --         { "L3MON4D3/LuaSnip" },
+    --
+    --         {
+    --             "windwp/nvim-autopairs",
+    --             opts = {
+    --                 fast_wrap = {},
+    --                 disable_filetype = { "vim" },
+    --             },
+    --
+    --             config = function(_, opts)
+    --                 require("nvim-autopairs").setup(opts)
+    --
+    --                 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+    --                 require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    --             end,
+    --         },
+    --
+    --         "saadparwaiz1/cmp_luasnip",
+    --         "hrsh7th/cmp-nvim-lsp",
+    --         "hrsh7th/cmp-buffer",
+    --         "hrsh7th/cmp-nvim-lua",
+    --         "hrsh7th/cmp-path",
+    --         "hrsh7th/cmp-cmdline",
+    --     },
+    -- },
 
     {
         "nvim-treesitter/nvim-treesitter",
@@ -291,7 +344,7 @@ local plugins = {
         config = function()
             require("toggleterm").setup {
                 open_mapping = [[<a-j>]],
-                direction = "float"
+                direction = "float",
             }
         end,
     },
@@ -316,6 +369,13 @@ local plugins = {
     },
 
     { "isobit/vim-caddyfile" },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {},
+    },
 
     {
         "tpope/vim-dadbod",
