@@ -476,9 +476,7 @@ vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
 vim.keymap.set("n", "<C-]>", [[:tag <c-r>=expand("<cword>")<cr><cr>]], { remap = false })
 
 vim.keymap.set("n", "<a-j>", "<cmd>cnext<cr>")
-vim.keymap.set("n", "<a-J>", "<cmd>cnfile<cr>")
 vim.keymap.set("n", "<a-k>", "<cmd>cprev<cr>")
-vim.keymap.set("n", "<a-K>", "<cmd>cNfile<cr>")
 
 --- PLUGINS
 require("lazy").setup(plugins)
