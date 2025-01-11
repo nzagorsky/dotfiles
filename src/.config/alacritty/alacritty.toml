@@ -79,8 +79,9 @@ color = "#f5e0dc"
 [font]
 size = 13.0
 
-# [font.normal]
+[font.normal]
 # family = "Hack Nerd Font Mono"
+family = "JetBrainsMono Nerd Font"
 
 [[keyboard.bindings]]
 chars = "\u001Bf"
