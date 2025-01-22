@@ -41,3 +41,4 @@ setup_completions() {
 pull_submodules || echo "Failed to pull submodules"
 setup_dots
 setup_completions
+setup_shell_zsh

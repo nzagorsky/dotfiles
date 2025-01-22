@@ -309,7 +309,7 @@ local plugins = {
         version = "*",
         config = function()
             require("toggleterm").setup {
-                open_mapping = [[<c-\>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
+                open_mapping = [[<a-j>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
                 direction = "float",
             }
         end,
@@ -479,8 +479,8 @@ vim.keymap.set("n", "gsv", ":so $MYVIMRC <bar> bufdo e<CR>", { remap = false })
 
 vim.keymap.set("n", "<C-]>", [[:tag <c-r>=expand("<cword>")<cr><cr>]], { remap = false })
 
-vim.keymap.set("n", "<a-j>", "<cmd>cnext<cr>")
-vim.keymap.set("n", "<a-k>", "<cmd>cprev<cr>")
+vim.keymap.set("n", "<leader>]", "<cmd>cnext<cr>")
+vim.keymap.set("n", "<leader>[", "<cmd>cprev<cr>")
 
 --- PLUGINS
 require("lazy").setup(plugins)
