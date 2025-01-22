@@ -55,6 +55,10 @@ local plugins = {
                 defaults = {
                     file_icons = "mini",
                 },
+                winopts = {
+                    fullscreen = true,
+
+                },
                 keymap = {
                     builtin = {
                         true,

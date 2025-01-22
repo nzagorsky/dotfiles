@@ -2,8 +2,6 @@
 
 source ~/.config/credentials/secure >/dev/null 2>&1 || true
 
-
-
 source "$ZDOTDIR/configs/functions.zsh"
 source "$ZDOTDIR/configs/keybindings.zsh"
 source "$ZDOTDIR/configs/alias.zsh"
@@ -12,15 +10,13 @@ source "$ZDOTDIR/configs/options.zsh"
 
 source "$ZDOTDIR/configs/completion.zsh"
 
-
-
 source "$ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh"
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
 
 eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
 
+direnv reload 2>/dev/null || true
 
 # Kukareku!
 # vim:foldmethod=marker
