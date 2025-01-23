@@ -16,7 +16,6 @@ setup_dots() {
 }
 
 setup_shell_zsh() {
-
     curl -s https://raw.githubusercontent.com/agkozak/polyglot/master/polyglot.sh >~/.local/bin/polyglot.sh
     touch ~/.config/wget/wgetrc
 
@@ -25,9 +24,6 @@ setup_shell_zsh() {
 
     rm -rf ~/.config/zsh/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
-
-    rm -rf ~/.config/zsh/plugins/zsh-history-substring-search
-    git clone https://github.com/zsh-users/zsh-history-substring-search ~/.config/zsh/plugins/zsh-history-substring-search
 
     rm -rf ~/.config/zsh/plugins/zsh-autocomplete
     git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ~/.config/zsh/plugins/zsh-autocomplete
