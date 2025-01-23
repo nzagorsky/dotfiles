@@ -2,8 +2,6 @@
 
 set -ex
 
-export ZDOTDIR="$HOME/.config/zsh"
-
 pull_submodules() {
     git submodule update --init --recursive --depth 1
     git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
@@ -16,7 +14,6 @@ setup_dots() {
     mkdir -p ~/.local/bin/
     mkdir -p ~/.config/wget/
 }
-
 
 setup_shell_zsh() {
 
@@ -31,11 +28,14 @@ setup_shell_zsh() {
 
     rm -rf ~/.config/zsh/plugins/zsh-history-substring-search
     git clone https://github.com/zsh-users/zsh-history-substring-search ~/.config/zsh/plugins/zsh-history-substring-search
+
+    rm -rf ~/.config/zsh/plugins/zsh-autocomplete
+    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ~/.config/zsh/plugins/zsh-autocomplete
 }
 
 setup_completions() {
-    mkdir -p $ZDOTDIR/completions
-    curl -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker >$ZDOTDIR/completions/_docker
+    mkdir -p $HOME/.config/zsh/completion
+    curl -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker >$HOME/.config/zsh/completion/_docker
 }
 
 pull_submodules || echo "Failed to pull submodules"
