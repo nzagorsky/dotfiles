@@ -1,6 +1,5 @@
-
-setopt autocd 
-setopt nomatch 
+setopt autocd
+setopt nomatch
 setopt extendedglob
 
 setopt AUTO_CD

@@ -89,25 +89,26 @@ local plugins = {
             require("mason").setup()
 
             local ensure_installed = {
-                "lua-language-server",
-                "pyright",
-                "golangci-lint",
-                "taplo",
                 "ansible-language-server",
-                "rust-analyzer",
                 "bash-language-server",
                 "cmake-language-server",
-                "typescript-language-server",
-                "stylua",
-                "dockerfile-language-server",
                 "docker-compose-language-service",
+                "dockerfile-language-server",
+                "golangci-lint",
                 "gopls",
-                "yaml-language-server",
                 "html-lsp",
                 "json-lsp",
+                "lua-language-server",
                 "marksman",
+                "pyright",
+                "rust-analyzer",
+                "shfmt",
                 "sqlls",
+                "stylua",
+                "taplo",
                 "terraform-ls",
+                "typescript-language-server",
+                "yaml-language-server",
             }
 
             vim.api.nvim_create_user_command(

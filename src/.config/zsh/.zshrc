@@ -1,17 +1,16 @@
 #!/bin/zsh
+source "$HOME/.config/credentials/secure" >/dev/null 2>&1 || true
 
-source ~/.config/credentials/secure >/dev/null 2>&1 || true
+source "$HOME/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh"
+source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOME/.config/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
-source "$ZDOTDIR/configs/functions.zsh"
-source "$ZDOTDIR/configs/keybindings.zsh"
-source "$ZDOTDIR/configs/alias.zsh"
-source "$ZDOTDIR/configs/prompt.zsh"
-source "$ZDOTDIR/configs/options.zsh"
-
-source "$ZDOTDIR/configs/completion.zsh"
-
-source "$ZDOTDIR/plugins/zsh-z/zsh-z.plugin.zsh"
-source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOME/.config/zsh/configs/functions.zsh"
+source "$HOME/.config/zsh/configs/keybindings.zsh"
+source "$HOME/.config/zsh/configs/alias.zsh"
+source "$HOME/.config/zsh/configs/prompt.zsh"
+source "$HOME/.config/zsh/configs/options.zsh"
+source "$HOME/.config/zsh/configs/completion.zsh"
 
 eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"

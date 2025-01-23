@@ -1,14 +1,16 @@
 # load our own completion functions
-fpath=($ZDOTDIR/completion /usr/local/share/zsh/site-functions $fpath)
+fpath=($HOME/.config/zsh/completion /usr/local/share/zsh/site-functions $fpath)
 
 # completion; use cache if updated within 24h
-autoload -Uz compinit
-if [[ -n $ZDOTDIR/.zcompdump(#qN.mh+24) ]]; then
-  compinit -d $ZDOTDIR/.zcompdump;
-else
-  compinit -C;
-fi;
+# autoload -Uz compinit
+# if [[ -n $HOME/.config/zsh/.zcompdump(#qN.mh+24) ]]; then
+#   compinit -d $HOME/.config/zsh/.zcompdump;
+# else
+#   compinit -C;
+# fi;
+#
+# # disable zsh bundled function mtools command mcd
+# # which causes a conflict.
 
-# disable zsh bundled function mtools command mcd
-# which causes a conflict.
+skip_global_compinit=1
 compdef -d mcd
