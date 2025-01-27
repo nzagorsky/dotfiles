@@ -6,3 +6,5 @@ bindkey "^E" end-of-line
 bindkey "^K" kill-line
 bindkey "^Y" accept-and-hold
 bindkey "^Q" push-line-or-edit
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward

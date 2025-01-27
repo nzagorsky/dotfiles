@@ -3,7 +3,6 @@ source "$HOME/.config/credentials/secure" >/dev/null 2>&1 || true
 
 source "$HOME/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh"
 source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$HOME/.config/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 source "$HOME/.config/zsh/configs/functions.zsh"
 source "$HOME/.config/zsh/configs/keybindings.zsh"
