@@ -96,7 +96,7 @@ local plugins = {
                 "json-lsp",
                 "lua-language-server",
                 "marksman",
-                "pyright",
+                "basedpyright",
                 "rust-analyzer",
                 "shfmt",
                 "sqlls",
@@ -112,21 +112,6 @@ local plugins = {
                 function() vim.cmd("MasonInstall " .. table.concat(ensure_installed, " ")) end,
                 {}
             )
-        end,
-    },
-
-    {
-        "nvimtools/none-ls.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
-        config = function()
-            local null_ls = require "null-ls"
-
-            null_ls.setup {
-                sources = {
-                    null_ls.builtins.diagnostics.mypy,
-                    null_ls.builtins.code_actions.refactoring,
-                },
-            }
         end,
     },
 
