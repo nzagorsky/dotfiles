@@ -100,7 +100,7 @@ local plugins = {
                 "json-lsp",
                 "lua-language-server",
                 "marksman",
-                "pyright",
+                "basedpyright",
                 "rust-analyzer",
                 "shfmt",
                 "sqlls",
@@ -116,23 +116,6 @@ local plugins = {
                 function() vim.cmd("MasonInstall " .. table.concat(ensure_installed, " ")) end,
                 {}
             )
-        end,
-    },
-
-    {
-        "mfussenegger/nvim-lint",
-        config = function()
-            require("lint").linters_by_ft = {
-                python = { "mypy", "ruff" },
-                javascript = { "eslint" },
-                go = { "golangcilint" },
-            }
-
-            local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-            vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-                group = lint_augroup,
-                callback = function() require("lint").try_lint() end,
-            })
         end,
     },
 
@@ -186,7 +169,9 @@ local plugins = {
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            keymap = { preset = "super-tab" },
+            keymap = {
+                preset = "super-tab",
+            },
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
             },
@@ -300,7 +285,6 @@ local plugins = {
         "echasnovski/mini.nvim",
         config = function()
             require("mini.comment").setup {}
-            require("mini.surround").setup {}
             require("mini.pairs").setup {}
         end,
     },
@@ -313,6 +297,19 @@ local plugins = {
                 open_mapping = [[<a-j>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
                 direction = "float",
             }
+
+            -- https://github.com/akinsho/toggleterm.nvim/issues/610
+            vim.api.nvim_create_augroup("disable_folding_toggleterm", { clear = true })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = "disable_folding_toggleterm",
+                pattern = "toggleterm",
+                callback = function(ev)
+                    local bufnr = ev.buf
+                    vim.api.nvim_buf_set_option(bufnr, "foldmethod", "manual")
+                    vim.api.nvim_buf_set_option(bufnr, "foldtext", "foldtext()")
+                end,
+            })
         end,
     },
 
@@ -328,6 +325,11 @@ local plugins = {
             { "<leader>gd", "<cmd>Gvdiff<cr>" },
             { "<leader>gr", "<cmd>GRemove<cr>" },
         },
+    },
+
+    {
+        "tpope/vim-surround",
+        event = { "InsertEnter", "CmdlineEnter" },
     },
 
     {

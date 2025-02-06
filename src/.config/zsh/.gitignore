@@ -1,4 +1,7 @@
 history
-plugins/zsh-syntax-highlighting
+plugins/*
 .zdata
 .zcompdump
+.zsh_history
+.zsh_sessions/
+completion/
