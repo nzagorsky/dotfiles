@@ -182,7 +182,6 @@ local plugins = {
         opts = {
             keymap = {
                 preset = "super-tab",
-                ["<CR>"] = { "accept", "fallback" },
             },
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
@@ -297,7 +296,6 @@ local plugins = {
         "echasnovski/mini.nvim",
         config = function()
             require("mini.comment").setup {}
-            require("mini.surround").setup {}
             require("mini.pairs").setup {}
         end,
     },
@@ -310,6 +308,19 @@ local plugins = {
                 open_mapping = [[<a-j>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
                 direction = "float",
             }
+
+            -- https://github.com/akinsho/toggleterm.nvim/issues/610
+            vim.api.nvim_create_augroup("disable_folding_toggleterm", { clear = true })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = "disable_folding_toggleterm",
+                pattern = "toggleterm",
+                callback = function(ev)
+                    local bufnr = ev.buf
+                    vim.api.nvim_buf_set_option(bufnr, "foldmethod", "manual")
+                    vim.api.nvim_buf_set_option(bufnr, "foldtext", "foldtext()")
+                end,
+            })
         end,
     },
 
@@ -325,6 +336,11 @@ local plugins = {
             { "<leader>gd", "<cmd>Gvdiff<cr>" },
             { "<leader>gr", "<cmd>GRemove<cr>" },
         },
+    },
+
+    {
+        "tpope/vim-surround",
+        event = { "InsertEnter", "CmdlineEnter" },
     },
 
     {
@@ -377,8 +393,8 @@ vim.opt.splitright = true
 
 vim.opt.wildmenu = true
 
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
 vim.opt.foldlevel = 99
 vim.opt.foldnestmax = 4
