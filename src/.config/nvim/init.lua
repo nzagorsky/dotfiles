@@ -116,19 +116,17 @@ local plugins = {
     },
 
     {
-        "mfussenegger/nvim-lint",
+        "nvimtools/none-ls.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
         config = function()
-            require("lint").linters_by_ft = {
-                python = { "mypy", "ruff" },
-                javascript = { "eslint" },
-                go = { "golangcilint" },
-            }
+            local null_ls = require "null-ls"
 
-            local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-            vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-                group = lint_augroup,
-                callback = function() require("lint").try_lint() end,
-            })
+            null_ls.setup {
+                sources = {
+                    null_ls.builtins.diagnostics.mypy,
+                    null_ls.builtins.code_actions.refactoring,
+                },
+            }
         end,
     },
 
@@ -182,7 +180,10 @@ local plugins = {
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            keymap = { preset = "super-tab" },
+            keymap = {
+                preset = "super-tab",
+                ["<CR>"] = { "accept", "fallback" },
+            },
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
             },
