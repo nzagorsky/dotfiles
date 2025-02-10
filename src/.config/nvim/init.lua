@@ -333,15 +333,6 @@ local plugins = {
         config = require("plugins.configs.gitsigns").config,
     },
 
-    -- { "isobit/vim-caddyfile" },
-    {
-        "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {},
-    },
-
     {
         "folke/lazydev.nvim",
         ft = "lua",
