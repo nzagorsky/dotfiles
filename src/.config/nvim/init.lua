@@ -201,7 +201,7 @@ local plugins = {
             require("nvim-treesitter.configs").setup {
                 auto_install = true,
                 indent = {
-                    enable = false,
+                    enable = true,
                 },
                 highlight = {
                     enable = true,
