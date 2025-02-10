@@ -100,7 +100,6 @@ local plugins = {
                 "json-lsp",
                 "lua-language-server",
                 "marksman",
-                "basedpyright",
                 "rust-analyzer",
                 "shfmt",
                 "sqlls",
@@ -203,9 +202,10 @@ local plugins = {
         "nvim-treesitter/nvim-treesitter",
         config = function()
             require("nvim-treesitter.configs").setup {
+                ensure_installed = { "comment" },
                 auto_install = true,
                 indent = {
-                    enable = false,
+                    enable = true,
                 },
                 highlight = {
                     enable = true,
@@ -335,15 +335,6 @@ local plugins = {
     {
         "lewis6991/gitsigns.nvim",
         config = require("plugins.configs.gitsigns").config,
-    },
-
-    -- { "isobit/vim-caddyfile" },
-    {
-        "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {},
     },
 
     {

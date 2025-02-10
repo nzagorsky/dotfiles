@@ -64,18 +64,18 @@ local M = {
 
         lspconfig.basedpyright.setup {
             capabilities = capabilities,
-            -- settings = {
-            --     python = {
-            --         analysis = {
-            --             autoSearchPaths = true,
-            --             useLibraryCodeForTypes = true,
-            --             autoImportCompletions = true,
-            --             logLevel = "Warning",
-            --             diagnosticMode = "openFilesOnly",
-            --             typeCheckingMode = "off",
-            --         },
-            --     },
-            -- },
+            settings = {
+                basedpyright = {
+                    analysis = {
+                        -- autoSearchPaths = true,
+                        -- useLibraryCodeForTypes = true,
+                        -- autoImportCompletions = true,
+                        -- logLevel = "Warning",
+                        -- diagnosticMode = "openFilesOnly",
+                        typeCheckingMode = "off",
+                    },
+                },
+            },
         }
         lspconfig.lua_ls.setup {
             capabilities = capabilities,
