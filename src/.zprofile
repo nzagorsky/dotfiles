@@ -61,6 +61,8 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 export PYTHONDONTWRITEBYTECODE=1
 export EDITOR=nvim
 
+export PATH="$PATH:/opt/homebrew/bin"
+
 if type brew &>/dev/null; then
     eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null  || true
     export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
