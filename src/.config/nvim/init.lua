@@ -200,9 +200,9 @@ local plugins = {
             require("nvim-treesitter.configs").setup {
                 ensure_installed = { "comment" },
                 auto_install = true,
-                indent = {
-                    enable = true,
-                },
+                -- indent = {
+                --     enable = true,
+                -- },
                 highlight = {
                     enable = true,
                     use_languagetree = true,
