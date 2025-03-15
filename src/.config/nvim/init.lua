@@ -95,6 +95,7 @@ local plugins = {
                 "html-lsp",
                 "json-lsp",
                 "lua-language-server",
+                "basedpyright",
                 "marksman",
                 "rust-analyzer",
                 "shfmt",
