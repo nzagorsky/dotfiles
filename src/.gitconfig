@@ -107,3 +107,5 @@
 	gpgsign = true
 [tag]
 	gpgSign = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
