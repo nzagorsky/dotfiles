@@ -90,7 +90,7 @@
 [user]
         email = nikita@zagorsky.dev
 	    name = Nikita Zagorsky
-	signingkey = 8E034B42985DF63B
+        signingkey = 8E034B42985DF63B
 [merge]
         tool = vimdiff3
 [mergetool "vimdiff3"]
