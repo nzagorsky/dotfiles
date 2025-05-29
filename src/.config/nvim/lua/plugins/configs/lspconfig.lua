@@ -72,7 +72,7 @@ local M = {
                         -- autoImportCompletions = true,
                         -- logLevel = "Warning",
                         -- diagnosticMode = "openFilesOnly",
-                        typeCheckingMode = "off",
+                        typeCheckingMode = "basic",
                     },
                 },
             },
