@@ -13,14 +13,14 @@ local plugins = {
         config = function()
             require("catppuccin").setup {
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
-                transparent_background = true, -- disables setting the background color.
-                color_overrides = {
-                    mocha = {
-                        base = "#181818",
-                        crust = "#111111",
-                        mantle = "#161616",
-                    },
-                },
+                -- transparent_background = true, -- disables setting the background color.
+                -- color_overrides = {
+                --     mocha = {
+                --         base = "#181818",
+                --         crust = "#111111",
+                --         mantle = "#161616",
+                --     },
+                -- },
             }
             vim.cmd.colorscheme "catppuccin-mocha"
         end,
@@ -57,7 +57,6 @@ local plugins = {
                 },
                 winopts = {
                     fullscreen = true,
-
                 },
                 keymap = {
                     builtin = {
@@ -175,7 +174,7 @@ local plugins = {
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
             },
-            signature = { window = { border = "rounded" } },
+            signature = { window = { border = "single" } },
             completion = {
                 accept = {
                     auto_brackets = {
@@ -183,7 +182,7 @@ local plugins = {
                     },
                 },
                 menu = {
-                    border = "rounded",
+                    border = "single",
                     draw = {
                         treesitter = { "lsp" },
                     },
@@ -191,7 +190,7 @@ local plugins = {
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 50,
-                    window = { border = "rounded" },
+                    window = { border = "single" },
                 },
             },
         },
@@ -421,6 +420,7 @@ vim.o.titleold = "zsh"
 vim.o.cmdheight = 1
 vim.o.shortmess = "aoOtIWcFs"
 vim.o.updatetime = 250
+vim.o.winborder = "single"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
