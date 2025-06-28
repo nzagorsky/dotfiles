@@ -86,3 +86,7 @@ function macnotify() {
 
     osascript -e 'display notification "'$2'" with title "'$1'"'
 }
+
+function openwin() {
+    osascript -e "tell application \"$1\" to activate" -e 'tell application "System Events" to keystroke "n" using command down'
+}

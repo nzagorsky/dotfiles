@@ -9,20 +9,20 @@ default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 
 [gaps]
-inner.horizontal = 0
-inner.vertical = 0
-outer.left = 0
-outer.bottom = 0
-outer.top = 0
-outer.right = 0
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
 
 # # Float everything
-[[on-window-detected]]
-check-further-callbacks = true
-run = 'layout floating'
-
+# [[on-window-detected]]
+# check-further-callbacks = true
+# run = 'layout floating'
 
 [mode.main.binding]
+alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 alt-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 alt-shift-enter = 'exec-and-forget open ~'
 
@@ -44,8 +44,6 @@ alt-f = 'fullscreen'
 alt-s = 'layout v_accordion'               # 'layout stacking' in i3
 alt-w = 'layout h_accordion'               # 'layout tabbed' in i3
 alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
-
-alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
