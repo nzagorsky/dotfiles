@@ -90,3 +90,11 @@ function macnotify() {
 function openwin() {
     osascript -e "tell application \"$1\" to activate" -e 'tell application "System Events" to keystroke "n" using command down'
 }
+
+function aiwebui() {
+    mkdir -p ~/.local/share/webui
+    cd ~/.local/share/webui
+    mise use python@3.11
+    pip3 install uv
+    uvx open-webui serve
+}
