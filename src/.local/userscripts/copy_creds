@@ -11,7 +11,7 @@ rsync -av -e "ssh $SSH_OPTIONS" \
 	--exclude='.#*' \
 	--exclude='S.*' \
 	--exclude='*.conf' \
-	$HOME/.gnupg/ $1@$2:~/.gnupg
+	$HOME/.config/gnupg/ $1@$2:~/.config/gnupg
 
 rsync -av -e "ssh $SSH_OPTIONS" \
 	--exclude='environment' \

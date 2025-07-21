@@ -16,10 +16,6 @@ outer.bottom = 5
 outer.top = 5
 outer.right = 5
 
-# # Float everything
-# [[on-window-detected]]
-# check-further-callbacks = true
-# run = 'layout floating'
 
 [mode.main.binding]
 alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3

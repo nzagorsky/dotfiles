@@ -55,6 +55,9 @@ local plugins = {
                 defaults = {
                     file_icons = "mini",
                 },
+                winopts = {
+                    fullscreen = true,
+                },
                 keymap = {
                     builtin = {
                         true,
@@ -171,7 +174,7 @@ local plugins = {
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
             },
-            signature = { window = { border = "rounded" } },
+            signature = { window = { border = "single" } },
             completion = {
                 accept = {
                     auto_brackets = {
@@ -179,7 +182,7 @@ local plugins = {
                     },
                 },
                 menu = {
-                    border = "rounded",
+                    border = "single",
                     draw = {
                         treesitter = { "lsp" },
                     },
@@ -187,7 +190,7 @@ local plugins = {
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 50,
-                    window = { border = "rounded" },
+                    window = { border = "single" },
                 },
             },
         },
@@ -417,6 +420,7 @@ vim.o.titleold = "zsh"
 vim.o.cmdheight = 1
 vim.o.shortmess = "aoOtIWcFs"
 vim.o.updatetime = 250
+vim.o.winborder = "single"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 

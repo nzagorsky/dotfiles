@@ -46,6 +46,7 @@ export PATH="$PATH:$HOME/.local/include/cargo/bin"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
 export PATH="$PATH:$HOME/.yarn/bin"
+export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
