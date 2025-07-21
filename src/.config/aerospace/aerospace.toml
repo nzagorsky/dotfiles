@@ -17,9 +17,9 @@ outer.top = 0
 outer.right = 0
 
 # # Float everything
-[[on-window-detected]]
-check-further-callbacks = true
-run = 'layout floating'
+# [[on-window-detected]]
+# check-further-callbacks = true
+# run = 'layout floating'
 
 
 [mode.main.binding]
