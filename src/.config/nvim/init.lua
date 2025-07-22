@@ -126,29 +126,29 @@ local plugins = {
         config = function()
             require("conform").setup {
                 formatters_by_ft = {
-                    lua = { "stylua" },
-                    python = { "ruff_fix", "ruff_format" },
-                    swift = { { "swiftformat" } },
-                    ["javascript"] = { "prettier" },
-                    ["javascriptreact"] = { "prettier" },
-                    ["typescript"] = { "prettier" },
-                    ["go"] = { "goimports", "gofmt" },
-                    ["typescriptreact"] = { "prettier" },
-                    ["vue"] = { "prettier" },
+                    ["bash"] = { "shfmt" },
                     ["css"] = { "prettier" },
-                    ["toml"] = { "taplo" },
-                    ["scss"] = { "prettier" },
-                    ["less"] = { "prettier" },
-                    ["html"] = { "prettier" },
-                    ["json"] = { "prettier" },
-                    ["jsonc"] = { "prettier" },
-                    ["yaml"] = { "prettier" },
-                    ["markdown"] = { "prettier" },
-                    ["markdown.mdx"] = { "prettier" },
+                    ["go"] = { "goimports", "gofmt" },
                     ["graphql"] = { "prettier" },
                     ["handlebars"] = { "prettier" },
+                    ["html"] = { "prettier" },
+                    ["javascript"] = { "prettier" },
+                    ["javascriptreact"] = { "prettier" },
+                    ["json"] = { "prettier" },
+                    ["jsonc"] = { "prettier" },
+                    ["less"] = { "prettier" },
+                    ["lua"] = { "stylua" },
+                    ["markdown"] = { "prettier" },
+                    ["markdown.mdx"] = { "prettier" },
+                    ["python"] = { "ruff_fix", "ruff_format" },
+                    ["scss"] = { "prettier" },
                     ["sh"] = { "shfmt" },
-                    ["bash"] = { "shfmt" },
+                    ["swift"] = { "swiftformat" },
+                    ["toml"] = { "taplo" },
+                    ["typescript"] = { "prettier" },
+                    ["typescriptreact"] = { "prettier" },
+                    ["vue"] = { "prettier" },
+                    ["yaml"] = { "prettier" },
                     ["zsh"] = { "shfmt" },
                 },
             }
@@ -165,8 +165,6 @@ local plugins = {
         event = { "InsertEnter", "CmdlineEnter" },
         version = "*",
 
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
         opts = {
             keymap = {
                 preset = "super-tab",
@@ -335,16 +333,6 @@ local plugins = {
     {
         "lewis6991/gitsigns.nvim",
         config = require("plugins.configs.gitsigns").config,
-    },
-
-    {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {
-            library = {
-                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-            },
-        },
     },
 }
 
