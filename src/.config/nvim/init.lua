@@ -130,16 +130,16 @@ vim.keymap.set("n", "<leader>[", "<cmd>cprev<cr>")
 --- PLUGINS
 -- require("lazy").setup(plugins)
 
-require("lazy").setup({
-  -- defaults = {
-  --   lazy = true
-  -- },
-  spec = {
-    { import = "plugins" },
-  },
-  -- install = { colorscheme = { "tokyonight" } },
-  -- checker = { enabled = false },
-  -- change_detection = {
-  --   notify = false
-  -- },
-})
+require("lazy").setup {
+    defaults = {
+        lazy = true,
+    },
+    spec = {
+        { import = "plugins" },
+    },
+    install = { colorscheme = { "catppuccin" } },
+    checker = { enabled = false },
+    change_detection = {
+        notify = false,
+    },
+}
