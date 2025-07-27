@@ -1,1 +1,5 @@
-return { "tpope/vim-repeat" }
+return {
+    "tpope/vim-repeat",
+
+    event = "BufWinEnter",
+}
