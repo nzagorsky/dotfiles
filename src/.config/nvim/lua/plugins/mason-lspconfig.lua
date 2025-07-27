@@ -53,18 +53,21 @@ return {
         }
 
         local ensure_installed = {
-            "ansible-language-server",
+            "basedpyright",
             "bash-language-server",
             "cmake-language-server",
             "docker-compose-language-service",
             "dockerfile-language-server",
             "golangci-lint",
             "gopls",
+            "helm-ls",
             "html-lsp",
             "json-lsp",
+            "kube-linter",
             "lua-language-server",
-            "basedpyright",
             "marksman",
+            "mypy",
+            "ruff",
             "rust-analyzer",
             "shfmt",
             "sqlls",
