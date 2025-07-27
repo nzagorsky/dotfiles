@@ -1,5 +1,5 @@
 require "config.vim"
 require "config.keymap"
-require "custom.auto-dir-create"
+require "custom"
 require "core.lazy"
 require "lsp"
