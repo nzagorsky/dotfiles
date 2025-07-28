@@ -1,0 +1,5 @@
+require "config.vim"
+require "config.keymap"
+require "custom"
+require "core.lazy"
+require "lsp"
