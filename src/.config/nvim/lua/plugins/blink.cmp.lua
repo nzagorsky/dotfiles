@@ -2,12 +2,6 @@ return {
     {
         "saghen/blink.cmp",
         dependencies = {
-            {
-                "fang2hou/blink-copilot",
-                opts = {
-                    debounce = 100,
-                },
-            },
             { "rafamadriz/friendly-snippets" },
         },
         event = { "InsertEnter", "CmdlineEnter" },
@@ -18,7 +12,6 @@ return {
                 default = {
                     "lazydev",
                     "lsp",
-                    "copilot",
                     "path",
                     "snippets",
                 },
@@ -30,12 +23,6 @@ return {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
-                    },
-                    copilot = {
-                        name = "copilot",
-                        module = "blink-copilot",
-                        score_offset = -100,
-                        async = true,
                     },
                 },
             },
