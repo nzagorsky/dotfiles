@@ -22,11 +22,8 @@ setup_shell_zsh() {
     rm -rf ~/.config/zsh/plugins/zsh-syntax-highlighting/
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/plugins/zsh-syntax-highlighting
 
-
     rm -rf ~/.config/zsh/plugins/zsh-defer/
     git clone https://github.com/romkatv/zsh-defer.git ~/.config/zsh/plugins/zsh-defer/
-
-
 
     rm -rf ~/.config/zsh/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
