@@ -6,7 +6,6 @@ sudo apt-get install -y \
 	avahi-daemon \
 	build-essential \
 	cmake \
-	direnv \
 	docker.io \
 	eza \
 	fd-find \
