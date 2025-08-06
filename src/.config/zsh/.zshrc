@@ -11,15 +11,9 @@ source "$HOME/.config/zsh/configs/prompt.zsh"
 source "$HOME/.config/zsh/configs/options.zsh"
 source "$HOME/.config/zsh/configs/completion.zsh"
 
-if type direnv &>/dev/null; then
-    eval "$(direnv hook zsh)"
-fi
-
 if type mise &>/dev/null; then
     eval "$(mise activate zsh)"
 fi
-
-direnv reload 2>/dev/null || true
 
 # Kukareku!
 # vim:foldmethod=marker
