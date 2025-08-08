@@ -14,22 +14,6 @@ vim.lsp.config("basedpyright", {
     },
 })
 
-vim.lsp.config("basedpyright", {
-    capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    settings = {
-        basedpyright = {
-            analysis = {
-                -- autoSearchPaths = true,
-                -- useLibraryCodeForTypes = true,
-                -- autoImportCompletions = true,
-                -- logLevel = "Warning",
-                -- diagnosticMode = "openFilesOnly",
-                typeCheckingMode = "basic",
-            },
-        },
-    },
-})
-
 vim.lsp.config("lua_ls.setup ", {
     capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
     settings = {
