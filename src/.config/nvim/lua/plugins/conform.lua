@@ -8,7 +8,7 @@ return {
             formatters_by_ft = {
                 ["bash"] = { "shfmt" },
                 ["css"] = { "prettier" },
-                ["go"] = { "goimports", "gofmt" },
+                ["go"] = { "goimports", "gofumpt" },
                 ["graphql"] = { "prettier" },
                 ["handlebars"] = { "prettier" },
                 ["html"] = { "prettier" },

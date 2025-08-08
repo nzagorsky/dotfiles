@@ -2,13 +2,18 @@ return {
     {
         "saghen/blink.cmp",
         dependencies = {
+            { "rafamadriz/friendly-snippets" },
+            { "saghen/blink.compat" },
             {
-                "fang2hou/blink-copilot",
+                "supermaven-inc/supermaven-nvim",
                 opts = {
-                    debounce = 100,
+                    keymaps = {
+                        accept_suggestion = nil,
+                    },
+                    disable_inline_completion = true,
+                    ignore_filetypes = { "bigfile", "snacks_input", "snacks_notif" },
                 },
             },
-            { "rafamadriz/friendly-snippets" },
         },
         event = { "InsertEnter", "CmdlineEnter" },
         version = "1.*",
@@ -17,24 +22,28 @@ return {
             sources = {
                 default = {
                     "lazydev",
+                    "supermaven",
                     "lsp",
-                    "copilot",
                     "path",
                     "snippets",
+                    "buffer",
                 },
                 providers = {
-                    lsp = {
-                        score_offset = 10,
-                    },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
                     },
-                    copilot = {
-                        name = "copilot",
-                        module = "blink-copilot",
-                        score_offset = -100,
+                    lsp = {
+                        score_offset = 10,
+                    },
+                    buffer = {
+                        score_offset = -10,
+                    },
+                    supermaven = {
+                        name = "supermaven",
+                        module = "blink.compat.source",
+                        score_offset = -20,
                         async = true,
                     },
                 },

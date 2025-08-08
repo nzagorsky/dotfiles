@@ -71,3 +71,5 @@ if type brew &>/dev/null; then
     export HOMEBREW_CASK_OPTS="--no-quarantine"
     export HOMEBREW_NO_ANALYTICS=1
 fi
+
+export UV_ENV_FILE=.env

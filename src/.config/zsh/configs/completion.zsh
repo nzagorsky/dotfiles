@@ -5,7 +5,5 @@ fpath=(/opt/homebrew/share/zsh-completions $HOME/.config/zsh/completion /usr/loc
 compinit -C
 
 if type kubectl &>/dev/null; then
-  source <(kubectl completion zsh)
+    source <(kubectl completion zsh)
 fi
-
-

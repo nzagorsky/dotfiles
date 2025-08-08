@@ -1,7 +1,6 @@
 return {
     "alexghergh/nvim-tmux-navigation",
     lazy = false,
-    cond = vim.env.TMUX ~= nil,
     config = function()
         local nvim_tmux_nav = require "nvim-tmux-navigation"
 
