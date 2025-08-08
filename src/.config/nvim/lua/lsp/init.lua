@@ -67,3 +67,22 @@ vim.lsp.config("gopls", {
         },
     },
 })
+
+vim.lsp.config("yamlls", {
+    capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    filetypes = { "yaml" },
+    settings = {
+        yaml = {
+            schemas = {
+                kubernetes = "k8s-*.yaml",
+                ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+                ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+                ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/**/*.{yml,yaml}",
+                ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+                ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+                ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+                ["https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/external-secrets.io/externalsecret_v1beta1.json"] = "external-secret.{yml,yaml}",
+            },
+        },
+    },
+})

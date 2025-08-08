@@ -60,7 +60,6 @@ return {
             "dockerfile-language-server",
             "golangci-lint",
             "gopls",
-            "helm-ls",
             "html-lsp",
             "json-lsp",
             "kube-linter",
@@ -83,6 +82,5 @@ return {
             function() vim.cmd("MasonInstall " .. table.concat(ensure_installed, " ")) end,
             {}
         )
-
     end,
 }
