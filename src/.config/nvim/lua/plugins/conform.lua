@@ -1,7 +1,7 @@
 return {
     "stevearc/conform.nvim",
     keys = {
-        { "<C-f>", function() require("conform").format() end },
+        { "<C-f>", function() require("conform").format { async = true, lsp_format = "fallback" } end },
     },
     config = function()
         require("conform").setup {
@@ -25,11 +25,13 @@ return {
                 ["sh"] = { "shfmt" },
                 ["swift"] = { "swiftformat" },
                 ["toml"] = { "taplo" },
+                ["terraform"] = { "terraform_fmt" },
                 ["typescript"] = { "prettier" },
                 ["typescriptreact"] = { "prettier" },
                 ["vue"] = { "prettier" },
                 ["yaml"] = { "prettier" },
                 ["zsh"] = { "shfmt" },
+                ["*"] = { "codespell", "trim_whitespace", "typos" },
             },
         }
     end,
