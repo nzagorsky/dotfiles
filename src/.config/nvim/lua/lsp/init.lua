@@ -96,7 +96,7 @@ vim.lsp.config("yamlls", {
                 ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
 
                 -- CRDs: https://github.com/datreeio/CRDs-catalog/tree/main/karpenter.sh
-                ["https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/external-secrets.io/externalsecret_v1beta1.json"] = "external-secret.{yml,yaml}",
+                ["https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/external-secrets.io/externalsecret_v1.json"] = "external-secret.{yml,yaml}",
                 ["https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/karpenter.sh/nodepool_v1.json"] = "*nodepool*.{yml,yaml}",
             },
         },
