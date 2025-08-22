@@ -51,6 +51,19 @@ debug:
     - -c
     - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.13 --share-processes -- bash"
 
+debugcrashing:
+  shortCut: Ctrl-D
+  description: Create debug pod for a crashing container
+  dangerous: true
+  scopes:
+    - containers
+  command: bash
+  background: false
+  confirm: true
+  args:
+    - -c
+    - "kubectl --kubeconfig=$KUBECONFIG debug -n $NAMESPACE pod/$POD --copy-to=${POD}-debug --container=$NAME -- sleep 365d"
+
 edit-secret:
   shortCut: Ctrl-X
   confirm: false
