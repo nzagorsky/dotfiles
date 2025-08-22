@@ -1,43 +1,3 @@
-bunyanlogsp:
-  shortCut: Ctrl-L
-  confirm: false
-  description: "Logs (bunyan)"
-  scopes:
-    - pod
-  command: bash
-  background: false
-  args:
-    - -ic
-    - |
-      kubectl logs -f $NAME -n $NAMESPACE --context $CONTEXT | bunyan -o short
-      exit 0
-bunyanlogsd:
-  shortCut: Ctrl-L
-  confirm: false
-  description: "Logs (bunyan)"
-  scopes:
-    - deployment
-  command: bash
-  background: false
-  args:
-    - -ic
-    - |
-      kubectl logs -f deployment/$NAME -n $NAMESPACE --context $CONTEXT | bunyan -o short
-      exit 0
-bunyanlogss:
-  shortCut: Ctrl-L
-  confirm: false
-  description: "Logs (bunyan)"
-  scopes:
-    - service
-  command: bash
-  background: false
-  args:
-    - -ic
-    - |
-      kubectl logs -f service/$NAME -n $NAMESPACE --context $CONTEXT | bunyan -o short
-      exit 0
-
 debug:
   shortCut: Shift-D
   description: Add debug container
@@ -51,7 +11,7 @@ debug:
     - -c
     - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.13 --share-processes -- bash"
 
-debugcrashing:
+debug-crashing:
   shortCut: Ctrl-D
   description: Create debug pod for a crashing container
   dangerous: true
@@ -103,47 +63,3 @@ refresh-push-secrets:
   args:
     - -c
     - "kubectl annotate pushsecrets.external-secrets.io -n $NAMESPACE $NAME force-sync=$(date +%s) --overwrite"
-
-krr:
-  shortCut: Shift-K
-  description: Get krr
-  scopes:
-    - deployments
-    - daemonsets
-    - statefulsets
-    - cronjobs
-  command: bash
-  background: false
-  confirm: false
-  args:
-    - -c
-    - |
-      LABELS=$(kubectl get $RESOURCE_NAME $NAME -n $NAMESPACE  --context $CONTEXT  --show-labels | awk '{print $NF}' | awk '{if(NR>1)print}')
-      krr simple --cluster $CONTEXT --selector $LABELS
-      echo "Press 'q' to exit"
-      while : ; do
-      read -n 1 k <&1
-      if [[ $k = q ]] ; then
-      break
-      fi
-      done
-
-krr-ns:
-  shortCut: Shift-K
-  description: Get krr
-  scopes:
-    - namespaces
-  command: bash
-  background: false
-  confirm: false
-  args:
-    - -c
-    - |
-      krr simple --cluster $CONTEXT -n $RESOURCE_NAME
-      echo "Press 'q' to exit"
-      while : ; do
-      read -n 1 k <&1
-      if [[ $k = q ]] ; then
-      break
-      fi
-      done
