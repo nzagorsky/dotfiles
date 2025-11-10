@@ -98,3 +98,9 @@ function aiwebui() {
     pip3 install uv
     uvx open-webui serve
 }
+
+function dbibackend() {
+    brew install libusb || true
+    /opt/homebrew/bin/python3 -m pip install pyusb --break-system-packages
+    /opt/homebrew/bin/python3 $HOME/Documents/Archive/old/legacy/dbibackend
+}
