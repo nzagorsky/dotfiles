@@ -9,9 +9,8 @@ size = 13.0
 # family = "Hack Nerd Font Mono"
 family = "JetBrainsMono Nerd Font"
 
-
 [window]
-opacity = 0.90
+opacity = 0.92
 dynamic_padding = true
 decorations = 'Buttonless'
 
@@ -21,10 +20,6 @@ lines = 30
 
 [general]
 live_config_reload = true
-import = [
-  "~/.config/alacritty/catppuccin-latte.toml",
-  # "~/.config/alacritty/catppuccin-mocha.toml"
-]
 
 [[keyboard.bindings]]
 chars = "\u001Bf"
