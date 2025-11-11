@@ -67,7 +67,6 @@ brew "yq"
 brew "zsh"
 brew "oven-sh/bun/bun"
 
-cask "alacritty"
 cask "another-redis-desktop-manager"
 cask "appcleaner"
 cask "bruno"
