@@ -10,7 +10,7 @@ size = 13.0
 family = "JetBrainsMono Nerd Font"
 
 [window]
-opacity = 0.92
+opacity = 0.9875
 dynamic_padding = true
 decorations = 'Buttonless'
 
