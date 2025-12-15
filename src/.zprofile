@@ -46,7 +46,6 @@ export PATH="$PATH:$HOME/.local/include/cargo/bin"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
 export PATH="$PATH:$HOME/.yarn/bin"
-export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
@@ -62,12 +61,8 @@ export PYTHONDONTWRITEBYTECODE=1
 export EDITOR=nvim
 
 export PATH="$PATH:/opt/homebrew/bin"
-
 if type brew &>/dev/null; then
-    eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null  || true
-    export PATH="$PATH:/opt/homebrew/opt/libpq/bin"
-    export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-
+    eval "$(brew shellenv)" 2>/dev/null || true
     export HOMEBREW_CASK_OPTS="--no-quarantine"
     export HOMEBREW_NO_ANALYTICS=1
 fi
