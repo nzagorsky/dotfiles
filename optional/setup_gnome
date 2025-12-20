@@ -2,16 +2,20 @@
 gsettings set org.gnome.desktop.wm.keybindings maximize "['<Control><Super>Return']"
 gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Control><Super>BackSpace']"
 
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Control><Super>1']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Control><Super>2']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Control><Super>3']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Control><Super>4']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Control><Super>5']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Control><Super>6']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-7 "['<Control><Super>7']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-8 "['<Control><Super>8']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Control><Super>9']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-10 "['<Control><Super>0']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Shift><Super>1']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Shift><Super>2']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Shift><Super>3']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Shift><Super>4']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Shift><Super>5']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Shift><Super>6']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-7 "['<Shift><Super>7']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-8 "['<Shift><Super>8']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Shift><Super>9']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-10 "['<Shift><Super>0']"
+
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>j']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Super>k']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"  # disable Super+L
 
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
@@ -63,4 +67,3 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'Files'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command 'nautilus --new-window'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Super>e'
-
