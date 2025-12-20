@@ -12,7 +12,7 @@ family = "JetBrainsMono Nerd Font"
 [window]
 opacity = 0.9875
 dynamic_padding = true
-decorations = 'Buttonless'
+decorations = 'None'
 
 [window.dimensions]
 columns = 120
