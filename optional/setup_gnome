@@ -17,6 +17,11 @@ gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>j']"
 gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Super>k']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"  # disable Super+L
 
+gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Control><Super>h']"
+gsettings set org.gnome.mutter.keybindings toggle-tiled-right "['<Control><Super>l']"
+
+gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
