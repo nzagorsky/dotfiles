@@ -64,17 +64,6 @@ function kudelete {
     kustomize build --enable-alpha-plugins $@ | kubectl delete -f -
 }
 
-function fancy-ctrl-z() {
-    if [[ $#BUFFER -eq 0 ]]; then
-        BUFFER="fg"
-        zle accept-line -w
-    else
-        zle push-input -w
-        zle clear-screen -w
-    fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
 
 function macnst() {
     netstat -Watnlv | grep LISTEN | awk '{"ps -o comm= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
@@ -103,4 +92,18 @@ function dbibackend() {
     brew install libusb || true
     /opt/homebrew/bin/python3 -m pip install pyusb --break-system-packages
     /opt/homebrew/bin/python3 $HOME/Documents/Archive/old/legacy/dbibackend
+}
+
+function bwsecrets() {
+    if ! bw login --check >/dev/null; then
+        export BW_SESSION="$(bw login --raw)"
+    fi
+
+    if ! bw unlock --check >/dev/null; then
+        export BW_SESSION="$(bw unlock --raw)"
+    fi
+
+    bw sync
+
+    source <(bw get item "credentials.secure" | jq -r '.notes')
 }

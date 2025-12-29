@@ -16,7 +16,7 @@ alias v=nvim
 alias reset_shell='env -i HOME="$HOME" zsh -l'
 alias lofimpv='mpv --no-video "https://www.youtube.com/watch?v=jfKfPfyJRdk"'
 alias wowmpv='mpv --no-video "https://www.youtube.com/Meisio/live"'
-
+alias bwses='export BW_SESSION=$(bw unlock --raw)'
 alias gdiff="git diff"
 alias git_search_all="g log --all -p --source -G"
 alias gpull="git pull"
