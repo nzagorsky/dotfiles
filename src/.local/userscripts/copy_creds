@@ -5,22 +5,16 @@ set -xe
 
 SSH_OPTIONS=""
 
-ssh $SSH_OPTIONS $1@$2 "mkdir -p ~/.config/credentials"
+rsync -av -e "ssh $SSH_OPTIONS" \
+    --exclude='.#*' \
+    --exclude='S.*' \
+    --exclude='*.conf' \
+    $HOME/.config/gnupg/ $1@$2:~/.config/gnupg
 
 rsync -av -e "ssh $SSH_OPTIONS" \
-	--exclude='.#*' \
-	--exclude='S.*' \
-	--exclude='*.conf' \
-	$HOME/.config/gnupg/ $1@$2:~/.config/gnupg
+    --exclude='environment' \
+    $HOME/.ssh/ $1@$2:~/.ssh
 
 rsync -av -e "ssh $SSH_OPTIONS" \
-	--exclude='environment' \
-	$HOME/.ssh/ $1@$2:~/.ssh
-
-rsync -av -e "ssh $SSH_OPTIONS" \
-	--exclude='environment' \
-	$HOME/.config/credentials/ $1@$2:~/.config/credentials/
-
-rsync -av -e "ssh $SSH_OPTIONS" \
-	--exclude='environment' \
-	$HOME/.local/userscripts/ $1@$2:~/.local/userscripts/
+    --exclude='environment' \
+    $HOME/.local/userscripts/ $1@$2:~/.local/userscripts/

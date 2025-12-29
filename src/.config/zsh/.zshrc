@@ -1,7 +1,6 @@
 #!/bin/zsh
 source "$HOME/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh"
 
-source "$HOME/.config/credentials/secure" >/dev/null 2>&1 || true
 source "$HOME/.config/zsh/configs/functions.zsh"
 source "$HOME/.config/zsh/configs/keybindings.zsh"
 source "$HOME/.config/zsh/configs/alias.zsh"
