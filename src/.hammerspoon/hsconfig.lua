@@ -1,1 +1,1 @@
-hs.window.animationDuration = 0 -- Disable animations
+-- hs.window.animationDuration = 0 -- Disable animations
