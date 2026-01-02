@@ -64,7 +64,6 @@ function kudelete {
     kustomize build --enable-alpha-plugins $@ | kubectl delete -f -
 }
 
-
 function macnst() {
     netstat -Watnlv | grep LISTEN | awk '{"ps -o comm= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
 }
@@ -106,4 +105,15 @@ function bwsecrets() {
     bw sync
 
     source <(bw get item "credentials.secure" | jq -r '.notes')
+}
+
+function ccurl() {
+    curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+        -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7" \
+        -H "Accept-Language: en-US,en;q=0.9" \
+        -H "Connection: keep-alive" \
+        -L \
+        --compressed \
+        --cookie-jar /tmp/cookies.txt \
+        $@
 }
