@@ -65,14 +65,14 @@ local module = {}
 -- hs.hotkey.bind({ "alt", "shift" }, "k", function() hs.window.focusedWindow():move(module.units.top50, nil, true) end)
 -- hs.hotkey.bind({ "alt", "shift" }, "l", function() hs.window.focusedWindow():move(module.units.right50, nil, true) end)
 
--- hs.hotkey.bind("alt", "j", function() hs.window.focusedWindow():focusWindowSouth(nil, false) end)
--- hs.hotkey.bind("alt", "k", function() hs.window.focusedWindow():focusWindowNorth(nil, false) end)
--- hs.hotkey.bind("alt", "h", function() hs.window.focusedWindow():focusWindowWest(nil, false) end)
--- hs.hotkey.bind("alt", "l", function() hs.window.focusedWindow():focusWindowEast(nil, false) end)
+hs.hotkey.bind("alt", "j", function() hs.window.focusedWindow():focusWindowSouth(nil, false) end)
+hs.hotkey.bind("alt", "k", function() hs.window.focusedWindow():focusWindowNorth(nil, false) end)
+hs.hotkey.bind("alt", "h", function() hs.window.focusedWindow():focusWindowWest(nil, false) end)
+hs.hotkey.bind("alt", "l", function() hs.window.focusedWindow():focusWindowEast(nil, false) end)
 
--- hs.hotkey.bind("alt", "down", function() hs.window.focusedWindow():focusWindowSouth(nil, false) end)
--- hs.hotkey.bind("alt", "up", function() hs.window.focusedWindow():focusWindowNorth(nil, false) end)
--- hs.hotkey.bind("alt", "left", function() hs.window.focusedWindow():focusWindowWest(nil, false) end)
--- hs.hotkey.bind("alt", "right", function() hs.window.focusedWindow():focusWindowEast(nil, false) end)
+hs.hotkey.bind("alt", "down", function() hs.window.focusedWindow():focusWindowSouth(nil, false) end)
+hs.hotkey.bind("alt", "up", function() hs.window.focusedWindow():focusWindowNorth(nil, false) end)
+hs.hotkey.bind("alt", "left", function() hs.window.focusedWindow():focusWindowWest(nil, false) end)
+hs.hotkey.bind("alt", "right", function() hs.window.focusedWindow():focusWindowEast(nil, false) end)
 
 return module

@@ -54,6 +54,7 @@ alias kgsa='kubectl get svc --all-namespaces'
 
 alias kcuc='kubectl config use-context'
 alias kcur='kubectl config current-context'
+alias kshell='kubectl run tmp-shell --rm -it --restart=Never --image=alpine sh'
 
 # Columns for piping
 # Example: cat test.txt | c2 | xargs echo
