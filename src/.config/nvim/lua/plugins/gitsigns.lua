@@ -27,6 +27,9 @@ return {
                 end, {
                     expr = true,
                 })
+
+                map("n", "<leader>gbl", function() gs.blame { full = true } end, { desc = "Git blame line" })
+                map("n", "<leader>gd", gs.diffthis, { desc = "Git diff" })
             end,
             signs = {
                 add = { text = "│" },
