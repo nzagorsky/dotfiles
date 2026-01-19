@@ -111,5 +111,10 @@ chars = "\u001B9"
 key = "Key9"
 mods = "Command"
 
+[[keyboard.bindings]]
+chars = "\n"
+key = "Return"
+mods = "Shift"
+
 [scrolling]
 history = 100000
