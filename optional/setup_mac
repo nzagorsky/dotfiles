@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-
 set -ex
+
+brew bundle install
 
 nvim --headless "+Lazy! sync" +qa
 nvim --headless "+TSUpdateSync" +qa
-brew bundle install
-

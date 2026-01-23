@@ -117,3 +117,10 @@ function ccurl() {
         --cookie-jar /tmp/cookies.txt \
         $@
 }
+
+function setup_ssh_git_dotfiles() {
+    cd ~/.config/dotfiles
+    git remote rm origin
+    git remote add origin git@github.com:nzagorsky/dotfiles.git
+    git branch --set-upstream-to=origin/master master
+}
