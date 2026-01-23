@@ -10,28 +10,28 @@
   "icon_theme": {
     "mode": "light",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)"
+    "dark": "Zed (Default)",
   },
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "base_keymap": "Emacs",
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
   "agent": {
     "default_model": {
       "provider": "openrouter",
-      "model": "x-ai/grok-code-fast-1"
+      "model": "x-ai/grok-code-fast-1",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
+    "diagnostics": false,
   },
   "vim_mode": true,
   "ui_font_size": 16,
@@ -39,6 +39,6 @@
   "theme": {
     "mode": "dark",
     "light": "Gruvbox Light",
-    "dark": "Ayu Light"
-  }
+    "dark": "Ayu Light",
+  },
 }
