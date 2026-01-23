@@ -71,4 +71,4 @@ if type brew &>/dev/null; then
 fi
 
 export UV_ENV_FILE=.env
-export SSH_AUTH_SOCK=$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"

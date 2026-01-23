@@ -1,0 +1,30 @@
+[
+  {
+    "context": "vim_mode == insert && !menu",
+    "bindings": {
+      "j k": ["workspace::SendKeystrokes", "escape"],
+      "о л": ["workspace::SendKeystrokes", "escape"],
+    },
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "space w": "workspace::Save",
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
+      "alt-x": "command_palette::Toggle",
+      "c ]": "editor::GoToDefinition",
+      "space ]": "editor::GoToDiagnostic",
+      "space [": "editor::GoToPreviousDiagnostic",
+      "space f": "file_finder::Toggle",
+      "space c": "command_palette::Toggle",
+      "-": "project_panel::ToggleFocus",
+      "space g d": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "space g d": "workspace::ToggleRightDock",
+    },
+  },
+]

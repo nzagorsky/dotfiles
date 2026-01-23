@@ -4,3 +4,4 @@ disabled
 .DS_Store
 yay
 Brewfile.lock.json
+tags*

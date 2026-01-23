@@ -52,6 +52,15 @@ setup_completions() {
     curl -fSL https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker >$HOME/.config/zsh/completion/_docker
 }
 
+configure_git() {
+    mkdir -p ~/.config/git/
+    git config --global gpg.format ssh
+    git config --global commit.gpgsign true
+    git config gpg.ssh.allowedSignersFile "~/.config/git/allowed-signers"
+    echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/U9J4gbyz+Tu3MGcsgbSEA7I4T06+UA/66d7LD55uk" >$HOME/.ssh/key.pub
+    echo "nikita@zagorsky.dev $(cat ~/.ssh/key.pub)" >~/.config/git/allowed-signers
+}
+
 require_cmd git
 require_cmd curl
 require_cmd stow
