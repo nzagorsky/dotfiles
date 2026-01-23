@@ -7,6 +7,21 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cursor_blink": false,
+  "gutter": {
+    "line_numbers": false,
+  },
+  "scrollbar": {
+    "show": "never",
+  },
+  "vertical_scroll_margin": 0,
+  "tab_bar": {
+    "show": false,
+  },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": false,
+  },
   "icon_theme": {
     "mode": "light",
     "light": "Zed (Default)",
@@ -39,6 +54,6 @@
   "theme": {
     "mode": "dark",
     "light": "Gruvbox Light",
-    "dark": "Ayu Light",
+    "dark": "Ayu Dark",
   },
 }
