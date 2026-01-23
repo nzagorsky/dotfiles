@@ -87,10 +87,16 @@
         clean = git lfs clean %f
         smudge = git lfs smudge %f
         required = true
+[gpg]
+	format = ssh
 [user]
-        email = NIKITA.ZAGORSKII1@accesscfa.com
-	    name = Nikita Zagorskii
-	    signingkey = EAAED00159FC98DA216C5568DF3859FCAA7F1D2A
+    email = nikita@zagorsky.dev
+	name = Nikita Zagorsky
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/U9J4gbyz+Tu3MGcsgbSEA7I4T06+UA/66d7LD55uk
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
 [merge]
         tool = vimdiff3
 [mergetool "vimdiff3"]
@@ -103,14 +109,3 @@
 	rebase = false
 [init]
 	defaultBranch = master
-[commit]
-	gpgSign = true
-[url "git@github.com:"]
-    insteadOf = "https://github.com/"
-[credential]
-	guiPrompt = false
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
-[gpg]
-	program = /opt/homebrew/bin/gpg
