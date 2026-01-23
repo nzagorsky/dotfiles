@@ -9,27 +9,28 @@
   {
     "context": "vim_mode == normal && !menu",
     "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-f": "editor::Format",
-      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
       "space w": "workspace::Save",
-      "shift-y": ["workspace::SendKeystrokes", "y $"],
-      "alt-x": "command_palette::Toggle",
-      "gd": "editor::GoToDefinition",
 
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
+
+      "gd": "editor::GoToDefinition",
       "g ]": "editor::GoToDiagnostic",
       "g [": "editor::GoToPreviousDiagnostic",
+
       "space q": "pane::CloseActiveItem",
 
       "space g b l": "git::Blame",
+      "space g s t": "git_panel::ToggleFocus",
+
       "shift-k": "editor::Hover",
       "space f": "file_finder::Toggle",
       "space b": "tab_switcher::Toggle",
-      "space /": "workspace::NewSearch",
-      "n": "search::SelectNextMatch",
-      "shift-n": "search::SelectPreviousMatch",
+      "space a": "workspace::NewSearch",
     },
   },
 ]
