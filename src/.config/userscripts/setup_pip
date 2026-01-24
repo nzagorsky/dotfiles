@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-pip3 install wheel "django<4"
-pip3 install isort black neovim django-stubs

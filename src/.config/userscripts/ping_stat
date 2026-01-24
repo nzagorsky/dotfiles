@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-ping google.com -c 1 | cut -d ' ' -f 8,9 | grep ms | sed s/time=//
