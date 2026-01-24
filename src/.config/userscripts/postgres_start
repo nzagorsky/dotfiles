@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# On local runs on port 5435 to avoid conflicts.
+# User: postgres
+# Password: 1337
+
+docker run \
+    -d \
+    --name local-postgres \
+    -e POSTGRES_PASSWORD=1337 \
+    --user "$(id -u):$(id -g)" \
+    --volume /etc/passwd:/etc/passwd:ro \
+    -e PGDATA=/var/lib/postgresql/data/pgdata \
+    -p 0.0.0.0:5435:5432 \
+    --restart unless-stopped \
+    --volume=$HOME/.local/lib/postgres:/var/lib/postgresql/data \
+    postgres
+
+sudo chown -R $USER ~/.local/lib/postgres

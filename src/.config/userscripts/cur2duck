@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+
+"""
+Ingests CUR/DBR from current folder to PostgreSQL and drops tags
+
+Usage:
+
+    cur2psql /cur/path
+    cur2psql  # in CUR folder
+    cur2psql dbr.csv.zip
+    AWS_PROFILE=profilename cur2psql s3://cur/path
+"""
+import json
+import os
+import sys
+import shutil
+import uuid
+from typing import Iterator, Tuple
+import time
+
+import boto3
+import duckdb
+import smart_open
+
+
+def get_boto3_session() -> boto3.Session:
+    if "AWS_PROFILE" in os.environ:
+        session = boto3.Session(profile_name=os.environ["AWS_PROFILE"])
+    else:
+        session = boto3.Session()
+    return session
+
+
+def process_input_parameters() -> Tuple[bool, bool, str]:
+    is_cur = False
+    is_remote = False
+
+    if len(sys.argv) > 1:
+        filepath = sys.argv[1]
+
+        if "s3://" in filepath:
+            is_cur = not filepath.endswith(".csv.zip")
+            is_remote = True
+            if is_cur and not filepath.endswith("/"):
+                filepath += "/"
+            return is_cur, is_remote, filepath
+
+        filepath = os.path.join(os.getcwd(), sys.argv[1])
+    else:
+        is_cur = True
+        filepath = os.getcwd()
+
+    return is_cur, is_remote, filepath
+
+
+def get_table_name(is_cur: bool, is_remote: bool, filepath: str) -> str:
+    if is_cur:
+        if is_remote:
+            cur_date = filepath.split("/")[5].split("-")[0]
+            report_name = filepath.split("/")[4]
+            table_identifier = "_".join([report_name, cur_date])
+        else:
+            table_identifier = filepath.split("/")[-1]
+
+        table_name = f"cur_csv_{table_identifier}".replace("-", "_")
+    else:
+        filename = filepath.split("/")[-1].replace("-", "_").strip(".csv.zip")
+        filename_elements = filename.split("_")
+        table_name = f"dbr_csv_{filename_elements[0]}_"  # Account number
+        table_name += "_".join(filename_elements[-2:])  # Date
+
+    print(f"Using {table_name} table")
+    return table_name
+
+
+def get_report_keys(filepath: str) -> Iterator[str]:
+    session = get_boto3_session()
+    client = session.client("s3")
+    # bucket_name = filepath.split("/")[2]
+    # prefix = "/".join(filepath.split("/")[3:])
+    manifest_name = filepath.split("/")[4]
+    manifest_path = f"{filepath}{manifest_name}-Manifest.json"
+
+    with smart_open.open(manifest_path, transport_params={"client": client}) as f:  # type: ignore
+        manifest_data = json.load(f)
+
+    for key in manifest_data["reportKeys"]:
+        yield key
+
+
+def download_cur(filepath: str) -> str:
+    session = get_boto3_session()
+    client = session.client("s3")
+    bucket_name = filepath.split("/")[2]
+
+    billing_path = f"/tmp/billing/{uuid.uuid4()}"
+    os.makedirs(billing_path)
+
+    for report_key in get_report_keys(filepath=filepath):
+        client.download_file(
+            bucket_name,
+            report_key,
+            os.path.join(billing_path, report_key.split("/")[-1]),
+        )
+    return billing_path
+
+
+def create_db_and_ingest(name: str, billing_path: str):
+    con = duckdb.connect(name)
+
+    results = con.execute(
+        # f"""COPY (select * from read_csv_auto('{billing_path}/*.csv.gz', ALL_VARCHAR=1)) TO 'result-snappy.parquet' (FORMAT 'parquet'); """
+        f"create table data as select * from read_csv_auto('{billing_path}/*.csv.gz', ALL_VARCHAR=1);"
+    ).fetchall()
+    return results
+
+
+def main() -> None:
+    is_cur, is_remote, filepath = process_input_parameters()
+    table_name = get_table_name(is_cur=is_cur, is_remote=is_remote, filepath=filepath)
+
+    start_time = time.time()
+    billing_path = download_cur(filepath=filepath)
+
+    try:
+        create_db_and_ingest(name=f"{table_name}.duckdb", billing_path=billing_path)
+    finally:
+        shutil.rmtree(billing_path)
+
+    print(f"Took {time.time() - start_time:.2f} seconds.")
+
+
+if __name__ == "__main__":
+    main()

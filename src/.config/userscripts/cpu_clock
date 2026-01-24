@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+lscpu | grep "CPU MHz" | sed 's/CPU MHz:\s*/MHz: /g'

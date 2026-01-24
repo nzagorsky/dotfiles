@@ -41,7 +41,7 @@ export PATH="$PATH:$HOME/.krew/bin"
 
 # Binary paths
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.local/userscripts"
+export PATH="$PATH:$HOME/.config/userscripts"
 export PATH="$PATH:$HOME/.local/include/cargo/bin"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
 

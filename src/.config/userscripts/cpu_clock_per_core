@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cat /proc/cpuinfo | grep "MHz\|processor" | awk 'NR%2{printf "%s ",$0;next;}1' | sort -r -k7
