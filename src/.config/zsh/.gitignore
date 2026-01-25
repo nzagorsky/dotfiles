@@ -5,3 +5,4 @@ plugins/*
 .zsh_history
 .zsh_sessions/
 completion/
+.zcompcache
