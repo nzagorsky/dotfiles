@@ -1,5 +1,5 @@
 #!/bin/zsh
-source $HOME/.config/credentials/secure || true
+source $HOME/.config/secure || true
 source "$HOME/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh"
 
 source "$HOME/.config/zsh/configs/functions.zsh"

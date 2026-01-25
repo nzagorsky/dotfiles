@@ -35,6 +35,7 @@ setup_dots() {
 
     mkdir -p ~/.local/bin/
     mkdir -p ~/.config/wget/
+    touch $HOME/.config/secure
 }
 
 setup_shell_zsh() {
