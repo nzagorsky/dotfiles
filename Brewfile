@@ -19,7 +19,6 @@ brew "yt-dlp"
 
 cask "alacritty"
 cask "appcleaner"
-cask "bitwarden"
 cask "bruno"
 cask "craft"
 cask "dbeaver-community"
