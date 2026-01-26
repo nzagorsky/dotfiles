@@ -28,7 +28,8 @@ alias reset_xcode_previews="xcrun simctl --set previews delete all"
 alias rclone="rclone -P"
 alias telepresence_reconnect="telepresence quit && sleep 2 && telepresence connect"
 alias tf="terraform"
-alias oc=opencode
+alias oc="opencode"
+alias ocweb="opencode web --hostname 0.0.0.0"
 
 # K8s
 alias k='kubectl'
