@@ -1,0 +1,18 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "searxng": {
+      "type": "local",
+      "command": ["npx", "-y", "mcp-searxng"],
+      "enabled": true,
+      "environment": {
+        "SEARXNG_URL": "https://search.home.zagorsky.dev"
+      }
+    },
+    "crawl4ai": {
+      "type": "remote",
+      "url": "https://crawl.home.zagorsky.dev/mcp/sse",
+      "enabled": true
+    }
+  }
+}
