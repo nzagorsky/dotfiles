@@ -3,15 +3,15 @@ return {
     event = { "BufRead", "BufNewFile" },
     cmd = { "TSUpdateSync" },
     opts = {
-            ensure_installed = { "comment" },
-            auto_install = true,
-            indent = {
-                enable = true,
-            },
-            highlight = {
-                enable = true,
-                use_languagetree = true,
-            },
+        ensure_installed = { "comment" },
+        auto_install = true,
+        indent = {
+            enable = true,
+        },
+        highlight = {
+            enable = true,
+            use_languagetree = true,
+        },
     },
     -- branch = "main",
     build = ":TSUpdate",
@@ -19,9 +19,9 @@ return {
         {
             "windwp/nvim-ts-autotag",
             opts = {
-                    autotag = {
-                        enable = true,
-                    },
+                autotag = {
+                    enable = true,
+                },
             },
         },
     },

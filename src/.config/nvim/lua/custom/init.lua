@@ -1,2 +1,2 @@
-require "custom.auto-dir-create"
-require "custom.filetype-detection"
+require("custom.auto-dir-create")
+require("custom.filetype-detection")
