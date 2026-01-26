@@ -124,3 +124,12 @@ function setup_ssh_git_dotfiles() {
     git remote add origin git@github.com:nzagorsky/dotfiles.git
     git branch --set-upstream-to=origin/master master
 }
+
+
+function init_ssh() {
+    ssh-keygen -t ed25519 -a 64 -f ~/.ssh/id_ed25519 || true; cat ~/.ssh/id_ed25519.pub
+    git config --global gpg.format ssh
+    git config --global user.signingkey ~/.ssh/id_ed25519.pub
+    git config --global commit.gpgsign true
+    git config --global tag.gpgSign true
+}
