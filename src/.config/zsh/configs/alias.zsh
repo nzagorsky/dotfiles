@@ -28,6 +28,8 @@ alias reset_xcode_previews="xcrun simctl --set previews delete all"
 alias rclone="rclone -P"
 alias telepresence_reconnect="telepresence quit && sleep 2 && telepresence connect"
 alias tf="terraform"
+alias oc=opencode
+alias init_ssh='ssh-keygen -t ed25519 -a 64 -f ~/.ssh/id_ed25519'
 
 # K8s
 alias k='kubectl'
