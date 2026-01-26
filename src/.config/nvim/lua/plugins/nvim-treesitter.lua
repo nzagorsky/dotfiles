@@ -2,10 +2,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufRead", "BufNewFile" },
     cmd = { "TSUpdateSync" },
-    -- branch = "main",
-    build = ":TSUpdate",
-    config = function()
-        require("nvim-treesitter.configs").setup {
+    opts = {
             ensure_installed = { "comment" },
             auto_install = true,
             indent = {
@@ -15,19 +12,17 @@ return {
                 enable = true,
                 use_languagetree = true,
             },
-        }
-    end,
+    },
+    -- branch = "main",
+    build = ":TSUpdate",
     dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
         {
             "windwp/nvim-ts-autotag",
-            config = function()
-                require("nvim-treesitter.configs").setup {
+            opts = {
                     autotag = {
                         enable = true,
                     },
-                }
-            end,
+            },
         },
     },
 }
