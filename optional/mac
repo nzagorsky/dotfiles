@@ -5,3 +5,6 @@ brew bundle install
 
 nvim --headless "+Lazy! sync" +qa
 nvim --headless "+TSUpdateSync" +qa
+
+
+brew install --cask alacritty appcleaner bruno dbeaver-community font-hack-nerd-font font-jetbrains-mono-nerd-font hammerspoon iina rectangle the-unarchiver
