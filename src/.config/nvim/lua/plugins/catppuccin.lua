@@ -4,6 +4,7 @@ return {
     priority = 1000,
     config = function()
         require("catppuccin").setup {
+            compile_path = vim.fn.expand "~" .. "/.local/share/nvim/catppuccin",
             flavour = "mocha", -- latte, frappe, macchiato, mocha
             transparent_background = true,
             float = {

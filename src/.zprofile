@@ -2,12 +2,13 @@ export ZDOTDIR="$HOME/.config/zsh"
 export ZSHZ_DATA="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zdata"
 
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.local/cache"
 export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc"
-export XAUTHORITY="${XDG_CONFIG_HOME:-$HOME/.config}/X11/Xauthority"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="$HOME/.local/runtime"
 
 export KUBECONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/kube/config"
+export KUBECACHEDIR="$XDG_CACHE_HOME/kube"
 export B2_ACCOUNT_INFO="${XDG_CONFIG_HOME:-$HOME/.config}/b2_account_info"
 
 export LESSHISTFILE="-"
@@ -29,35 +30,16 @@ export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
 export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
 
-# Other program settings
-export QT_QPA_PLATFORMTHEME="gtk2"        # Have QT use gtk2 theme.
-export MOZ_USE_XINPUT2="1"                # Mozilla smooth scrolling/touchpads.
-export AWT_TOOLKIT="MToolkit wmname LG3D" #May have to install wmname
-export _JAVA_AWT_WM_NONREPARENTING=1      # Fix for Java applications in dwm
-
-# Go
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.krew/bin"
 
-# Binary paths
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.config/userscripts"
-export PATH="$PATH:$HOME/.local/include/cargo/bin"
-export PATH="$PATH:$HOME/.local/share/cargo/bin"
-
-export PATH="$PATH:$HOME/.yarn/bin"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-
-# Ansible settings
-export ANSIBLE_HOST_KEY_CHECKING=False
-export ANSIBLE_PIPELINING=True
-export ANSIBLE_HOST_KEY_CHECKING=False
-
-export PYTHONDONTWRITEBYTECODE=1
 export EDITOR=nvim
 
 export PATH="$PATH:/opt/homebrew/bin"

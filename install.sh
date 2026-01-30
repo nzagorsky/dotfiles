@@ -34,6 +34,7 @@ setup_dots() {
     stow -t ~ .
 
     mkdir -p ~/.local/bin/
+    mkdir -p ~/.local/runtime/
     mkdir -p ~/.config/wget/
     touch $HOME/.config/secure
 }

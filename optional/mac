@@ -8,3 +8,7 @@ nvim --headless "+TSUpdateSync" +qa
 
 
 brew install --cask alacritty appcleaner bruno dbeaver-community font-hack-nerd-font font-jetbrains-mono-nerd-font hammerspoon iina rectangle the-unarchiver
+
+
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+
