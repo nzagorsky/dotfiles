@@ -12,11 +12,6 @@
       "environment": {
         "SEARXNG_URL": "https://search.home.zagorsky.dev"
       }
-    },
-    "crawl4ai": {
-      "type": "remote",
-      "url": "https://crawl.home.zagorsky.dev/mcp/sse",
-      "enabled": true
     }
   },
   "plugin": [
