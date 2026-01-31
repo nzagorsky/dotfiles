@@ -48,7 +48,7 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 
 if type brew &>/dev/null; then
     eval "$(brew shellenv)" 2>/dev/null || true
-    export HOMEBREW_CASK_OPTS="--no-quarantine"
+    # export HOMEBREW_CASK_OPTS="--no-quarantine"
     export HOMEBREW_NO_ANALYTICS=1
 fi
 
