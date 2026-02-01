@@ -35,6 +35,7 @@ export PATH="$PATH:$HOME/.krew/bin"
 
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.config/userscripts"
+export PATH="$PATH:$HOME/.rd/bin/"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
