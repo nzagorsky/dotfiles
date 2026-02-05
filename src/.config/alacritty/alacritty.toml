@@ -112,7 +112,7 @@ key = "Key9"
 mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\n"
+chars = "\u001b[13;2u"
 key = "Return"
 mods = "Shift"
 
