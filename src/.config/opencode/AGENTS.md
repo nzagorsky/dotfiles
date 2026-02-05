@@ -1,0 +1,2 @@
+- Use `searxng` tool to do a web search and fetch pages. Your knowledge is outdated, be sure to ground yourself using search. If you're unsure always use search.
+- When comitting always follow existing git message style, same for creating PRs. Never stand out from the rest.
