@@ -86,3 +86,6 @@ defaults write com.apple.dock wvous-tr-modifier -int 0
 
 # Show all processes in Activity Monitor
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Disable click to show the desktop
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
