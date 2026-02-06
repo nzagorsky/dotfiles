@@ -89,3 +89,6 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
 # Disable click to show the desktop
 defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+
+# cleanup dock
+defaults write com.apple.dock persistent-apps -array; killall Dock
