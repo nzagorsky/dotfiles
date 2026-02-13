@@ -15,6 +15,9 @@ sudo defaults write com.apple.universalaccess reduceMotion -bool true
 # Finder: show hidden files by default
 defaults write com.apple.Finder AppleShowAllFiles -bool true
 
+# Always show scrollbars
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
 # Show hidden apps as dimmed.
 defaults write com.apple.dock showhidden -bool TRUE
 
