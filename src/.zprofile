@@ -12,6 +12,7 @@ export KUBECACHEDIR="$XDG_CACHE_HOME/kube"
 export B2_ACCOUNT_INFO="${XDG_CONFIG_HOME:-$HOME/.config}/b2_account_info"
 
 export LESSHISTFILE="-"
+export PODMAN_COMPOSE_WARNING_LOGS=false
 export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}/gnupg"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/aws/config"

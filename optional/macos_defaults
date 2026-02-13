@@ -92,3 +92,6 @@ defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool fa
 
 # cleanup dock
 defaults write com.apple.dock persistent-apps -array; killall Dock
+
+# Do not sleep on power connected
+sudo pmset -c sleep 0
