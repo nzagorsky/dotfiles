@@ -29,7 +29,8 @@ alias rclone="rclone -P"
 alias telepresence_reconnect="telepresence quit && sleep 2 && telepresence connect"
 alias tf="terraform"
 alias oc="opencode"
-alias ocweb="opencode web --hostname 0.0.0.0"
+alias oca="opencode attach localhost:4096"
+alias ocweb="opencode web --hostname 0.0.0.0 --port 4096"
 
 # K8s
 alias k='kubectl'
