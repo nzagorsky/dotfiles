@@ -94,7 +94,11 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 
 # cleanup dock
-defaults write com.apple.dock persistent-apps -array; killall Dock
+defaults write com.apple.dock persistent-apps -array
+killall Dock
 
 # Do not sleep on power connected
 sudo pmset -c sleep 0
+
+# Set trackpad speed
+defaults write -g com.apple.trackpad.scaling 1.0
