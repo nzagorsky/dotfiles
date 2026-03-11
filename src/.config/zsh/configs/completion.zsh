@@ -4,6 +4,8 @@ autoload -Uz compinit
 fpath=(/opt/homebrew/share/zsh-completions $HOME/.config/zsh/completion /usr/local/share/zsh/site-functions $fpath)
 compinit -C
 
+compdef _t t
+
 if type kubectl &>/dev/null; then
     source <(kubectl completion zsh)
 fi

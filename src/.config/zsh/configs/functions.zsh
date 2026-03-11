@@ -8,6 +8,12 @@ function t {
     fi
 }
 
+function _t {
+    local sessions
+    sessions=(${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"})
+    _describe 'tmux session' sessions
+}
+
 function limarecreate {
     limactl stop default
     limactl delete default
@@ -125,11 +131,52 @@ function setup_ssh_git_dotfiles() {
     git branch --set-upstream-to=origin/master master
 }
 
-
 function init_ssh() {
-    ssh-keygen -t ed25519 -a 64 -f ~/.ssh/id_ed25519 || true; cat ~/.ssh/id_ed25519.pub
+    ssh-keygen -t ed25519 -a 64 -f ~/.ssh/id_ed25519 || true
+    cat ~/.ssh/id_ed25519.pub
     git config --global gpg.format ssh
     git config --global user.signingkey ~/.ssh/id_ed25519.pub
     git config --global commit.gpgsign true
     git config --global tag.gpgSign true
+}
+
+function killsession() {
+    local branch="${1:-$(git branch --show-current)}"
+    local primary_folder=$(git worktree list | head -1 | cut -d ' ' -f 1)
+
+    if [[ -n "$1" ]]; then
+        dir="$(dirname "$(git rev-parse --show-toplevel)")/$branch"
+    else
+        dir="$(git rev-parse --show-toplevel)"
+    fi
+
+    [[ "$PWD" == "$dir"* ]] && cd "$primary_folder"
+
+    docker-compose -f "$dir/dev/docker-compose.yml" down
+    git worktree remove "$dir"
+    tmux kill-session -t "$branch" 2>/dev/null
+}
+
+function newsession() {
+    local branch="$1"
+    local offset="${2:-1}"
+    local root="$(git rev-parse --show-toplevel)"
+    local dir="$(dirname "$root")/$branch"
+    local base="$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's|^origin/||')"
+
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+        git worktree add "$dir" "$branch"
+    elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+        git worktree add --track -b "$branch" "$dir" "origin/$branch"
+    else
+        git worktree add -b "$branch" "$dir" "$base"
+    fi
+
+    cp .env "$dir/.env"
+    sed -i '' "s/^DB_PORT=.*/DB_PORT=$((5432 + offset))/" "$dir/.env"
+    sed -i '' "s/^REDIS_PORT=.*/REDIS_PORT=$((6379 + offset))/" "$dir/.env"
+
+    cd "$dir"
+    t "$branch"
+    cd "$root"
 }
