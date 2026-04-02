@@ -177,6 +177,11 @@ function newsession() {
     sed -i '' "s/^REDIS_PORT=.*/REDIS_PORT=$((6379 + offset))/" "$dir/.env"
 
     cd "$dir"
+
+    uv sync || true
+    ctags || true
+    make docker_up || true
+
     t "$branch"
     cd "$root"
 }
