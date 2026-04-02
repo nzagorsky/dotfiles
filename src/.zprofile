@@ -46,6 +46,7 @@ export EDITOR=nvim
 
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:/opt/homebrew/opt/postgresql@18/bin"
+export PATH="$PATH:/opt/homebrew/share/google-cloud-sdk/bin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 
 if type brew &>/dev/null; then
