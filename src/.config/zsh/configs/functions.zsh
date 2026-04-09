@@ -152,7 +152,8 @@ function killsession() {
 
     [[ "$PWD" == "$dir"* ]] && cd "$primary_folder"
 
-    docker-compose -f "$dir/dev/docker-compose.yml" down
+    make docker_down
+
     git worktree remove "$dir"
     tmux kill-session -t "$branch" 2>/dev/null
 }
@@ -178,9 +179,9 @@ function newsession() {
 
     cd "$dir"
 
-    uv sync || true
-    ctags || true
-    make docker_up || true
+    uv sync &!
+    ctags &!
+    make docker_up &!
 
     t "$branch"
     cd "$root"
