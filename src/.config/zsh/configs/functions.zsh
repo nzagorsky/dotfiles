@@ -179,9 +179,9 @@ function newsession() {
 
     cd "$dir"
 
-    uv sync &!
-    ctags &!
-    make docker_up &!
+    uv sync &>/dev/null &!
+    ctags &>/dev/null &!
+    make docker_up &>/dev/null &!
 
     t "$branch"
     cd "$root"
