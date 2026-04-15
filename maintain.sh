@@ -14,5 +14,5 @@ fi
 ./install.sh
 
 nvim --headless "+Lazy! restore" +qa
-nvim --headless "+TSUpdateSync" +qa
+nvim --headless "+TSUpdate" +qa
 nvim --headless "+MasonUpdate" +qa
