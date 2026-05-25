@@ -150,9 +150,9 @@ function killsession() {
         dir="$(git rev-parse --show-toplevel)"
     fi
 
-    [[ "$PWD" == "$dir"* ]] && cd "$primary_folder"
-
     make docker_down
+
+    [[ "$PWD" == "$dir"* ]] && cd "$primary_folder"
 
     git worktree remove "$dir"
     tmux kill-session -t "$branch" 2>/dev/null
