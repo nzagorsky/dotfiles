@@ -59,3 +59,7 @@ export UV_ENV_FILE=.env
 
 BW_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
 [[ -S "$BW_SOCK" ]] && export SSH_AUTH_SOCK="$BW_SOCK"
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
