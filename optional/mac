@@ -2,16 +2,4 @@
 set -ex
 
 brew bundle install
-
-nvim --headless "+Lazy! sync" +qa
-nvim --headless "+TSUpdate" +qa
-
-
-brew install --cask alacritty appcleaner bruno dbeaver-community font-hack-nerd-font font-jetbrains-mono-nerd-font hammerspoon iina rectangle the-unarchiver
-
-
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-
-
-mkdir -p ~/.docker/cli-plugins
-ln -sfn $HOMEBREW_PREFIX/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose

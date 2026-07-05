@@ -4,7 +4,7 @@ return {
     dependencies = {}, -- tree-sitter CLI must be installed system-wide
     config = function()
         require("tree-sitter-manager").setup {
-            auto_install = false, -- auto-install when a new filetype is encountered
+            ensure_installed = "all",
         }
     end,
 }
