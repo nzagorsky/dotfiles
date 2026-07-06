@@ -57,6 +57,7 @@ fi
 
 export UV_ENV_FILE=.env
 
+# App store version
 BW_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
 [[ -S "$BW_SOCK" ]] && export SSH_AUTH_SOCK="$BW_SOCK"
 
