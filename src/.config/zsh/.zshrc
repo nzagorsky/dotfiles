@@ -13,7 +13,7 @@ zsh-defer source "$HOME/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh"
 zsh-defer source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 if command -v mise &>/dev/null; then
-    zsh-defer eval "$(mise activate zsh)"
+    zsh-defer -c 'eval "$(mise activate zsh)"'
 fi
 
 # Debug startup speed with `watch -n 0.5 "time /bin/zsh -i -c exit"`
