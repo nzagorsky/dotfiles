@@ -1,5 +1,11 @@
+local alacritty = "/opt/homebrew/bin/alacritty"
+
 hs.hotkey.bind({ "alt" }, "return", function()
-	hs.execute("open -n /Applications/Alacritty.app")
+    hs.task.new(alacritty, function(exitCode)
+        if exitCode ~= 0 then
+            hs.application.launchOrFocus("Alacritty")
+        end
+    end, {"msg", "create-window"}):start()
 end)
 
 hs.hotkey.bind({ "alt" }, "e", function()
