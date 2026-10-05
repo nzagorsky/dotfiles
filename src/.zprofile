@@ -1,5 +1,4 @@
-export ZDOTDIR="$HOME/.config/zsh"
-export ZSHZ_DATA="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zdata"
+export EDITOR=nvim
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.local/cache"
@@ -7,60 +6,62 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="$HOME/.local/runtime"
 
-export KUBECONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/kube/config"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSHZ_DATA="$XDG_CONFIG_HOME/zsh/.zdata"
+export HISTFILE="$XDG_DATA_HOME/history"
+
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME/go"
+export UV_ENV_FILE=.env
+
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+
+export KUBECONFIG="$XDG_CONFIG_HOME/kube/config"
 export KUBECACHEDIR="$XDG_CACHE_HOME/kube"
-export B2_ACCOUNT_INFO="${XDG_CONFIG_HOME:-$HOME/.config}/b2_account_info"
-
-export LESSHISTFILE="-"
 export PODMAN_COMPOSE_WARNING_LOGS=false
-export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}/gnupg"
-export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export AWS_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/aws/config"
-export IPYTHONDIR="${XDG_CONFIG_HOME:-$HOME/.config}/ipython"
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
-export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
-export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
-export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+
+export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
+export B2_ACCOUNT_INFO="$XDG_CONFIG_HOME/b2_account_info"
+export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
+export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+export KODI_DATA="$XDG_DATA_HOME/kodi"
+export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
-export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
-export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
-export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
-export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
-export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
-export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
-export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
+export UNISON="$XDG_DATA_HOME/unison"
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/.krew/bin"
-
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.config/userscripts"
-export PATH="$PATH:$HOME/.rd/bin/"
+export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
+export LESSHISTFILE=-
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude=.git || fdfind --type f --hidden --exclude=.git'
 export FZF_DEFAULT_OPTS="--inline-info --preview 'bat {}'"
 
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-export EDITOR=nvim
+typeset -U path
+[[ -d /opt/homebrew/bin ]] &&
+    path=("/opt/homebrew/bin" $path)
 
-export PATH="$PATH:/opt/homebrew/bin"
-export PATH="$PATH:/opt/homebrew/opt/postgresql@18/bin"
-export PATH="$PATH:/opt/homebrew/share/google-cloud-sdk/bin"
-export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
+[[ -d /home/linuxbrew/.linuxbrew/bin ]] &&
+    path=("/home/linuxbrew/.linuxbrew/bin" $path)
 
-if type brew &>/dev/null; then
-    eval "$(brew shellenv)" 2>/dev/null || true
-    export HOMEBREW_CASK_OPTS="--no-quarantine"
-    export HOMEBREW_NO_ANALYTICS=1
-fi
+path=(
+    "$GOPATH/bin"
+    "$HOME/.local/bin"
+    "$HOME/.config/userscripts"
+    "$HOME/.rd/bin"
+    "/opt/homebrew/opt/postgresql@18/bin"
+    "/opt/homebrew/share/google-cloud-sdk/bin"
+    "$ANDROID_HOME/emulator"
+    "$ANDROID_HOME/platform-tools"
+    $path
+)
 
-export UV_ENV_FILE=.env
-
-# App store version
+# Bitwarden SSH agent (App Store)
 BW_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
 [[ -S "$BW_SOCK" ]] && export SSH_AUTH_SOCK="$BW_SOCK"
-
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+unset BW_SOCK
