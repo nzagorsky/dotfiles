@@ -66,8 +66,10 @@ configure_git() {
 require_cmd git
 require_cmd curl
 require_cmd stow
+require_cmd mise
 
 pull_submodules || echo "Failed to pull submodules"
 setup_dots
+mise install --locked
 setup_completions
 setup_shell_zsh
