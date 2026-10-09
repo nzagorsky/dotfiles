@@ -89,7 +89,6 @@ function aiwebui() {
     mkdir -p ~/.local/share/webui
     cd ~/.local/share/webui
     mise use python@3.11
-    pip3 install uv
     uvx open-webui serve
 }
 
